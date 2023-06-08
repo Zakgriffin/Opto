@@ -19,7 +19,7 @@ int main() {
 
     SetTargetFPS(60);
 
-    init_globals();
+    load_font();
 
     printf("Running!\n");
 
@@ -45,6 +45,8 @@ int main() {
 
     SetExitKey(0);
     while (!WindowShouldClose()) {
+//        debug_list_globals();
+
         tick_controls();
 
         BeginDrawing();

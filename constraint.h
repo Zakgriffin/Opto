@@ -48,4 +48,6 @@ void update_all_tracked();
 
 void constraint_testing();
 
+void debug_list_constraint();
+
 #endif //OPTO_CONSTRAINT_H

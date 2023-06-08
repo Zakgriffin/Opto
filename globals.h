@@ -29,12 +29,14 @@ extern float font_height;
 
 extern Font font;
 
-void init_globals();
+void load_font();
 
 float map_range(float n, float start1, float stop1, float start2, float stop2);
 
 function<bool(Vector2)> within_rectangle(Rectangle *rect);
 
 float center(float container_pos, float container_span, float span);
+
+void debug_list_globals();
 
 #endif //OPTO_GLOBALS_H

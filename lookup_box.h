@@ -24,7 +24,7 @@ public:
     F *click_on_listener;
     F *click_off_listener;
 
-    vector<KeyHandlerPair> key_handlers;
+    vector<KeyHandlerPair> key_handler_pairs;
     vector<KeyHandlerPair> super_key_handlers, alt_key_handlers;
     F *key_escape_handler, *key_right_handler, *key_left_handler, *key_backspace_handler, *key_left_super_handler, *key_left_alt_handler;
     F *super_key_a_handler;

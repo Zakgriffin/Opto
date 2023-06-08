@@ -63,20 +63,20 @@ LookupBox::LookupBox(string prompt) {
 
     // TODO stack/priority based modifier keys
     key_left_super_handler = new F([&]() {
-        remove_key_pressed_handlers(key_handlers);
+        remove_key_pressed_handlers(key_handler_pairs);
         add_key_pressed_handlers(super_key_handlers);
         add_key_released_handler(KEY_LEFT_SUPER, release_super);
     });
     handler_visual_infos[key_left_super_handler] = {GetColor(0xA020F0FF), "super hotkeys"};
 
     key_left_alt_handler = new F([&]() {
-        remove_key_pressed_handlers(key_handlers);
+        remove_key_pressed_handlers(key_handler_pairs);
         add_key_pressed_handlers(alt_key_handlers);
         add_key_released_handler(KEY_LEFT_ALT, release_alt);
     });
     handler_visual_infos[key_left_alt_handler] = {GetColor(0xA020F0FF), "alt hotkeys"};
 
-    key_handlers = {
+    key_handler_pairs = {
             {KEY_ESCAPE,     key_escape_handler},
             {KEY_RIGHT,      key_right_handler},
             {KEY_LEFT,       key_left_handler},
@@ -93,14 +93,14 @@ LookupBox::LookupBox(string prompt) {
 
             on_text_change();
         });
-        key_handlers.push_back({key, key_handler});
+        key_handler_pairs.push_back({key, key_handler});
 
 
         string description = "type character '";
         description += lower;
         description += "'";
 
-        handler_visual_infos[key_handler] = {GetColor(0xDD7700FF), description};
+        handler_visual_infos[key_handler] = {GetColor(0xDD7700FF), description};;
     }
 
     // super handlers
@@ -131,13 +131,13 @@ LookupBox::LookupBox(string prompt) {
 
     release_super = new F([&]() {
         remove_key_pressed_handlers(super_key_handlers);
-        add_key_pressed_handlers(key_handlers);
+        add_key_pressed_handlers(key_handler_pairs);
         remove_key_released_handler(KEY_LEFT_SUPER, release_super);
     });
 
     release_alt = new F([&]() {
         remove_key_pressed_handlers(alt_key_handlers);
-        add_key_pressed_handlers(key_handlers);
+        add_key_pressed_handlers(key_handler_pairs);
         remove_key_released_handler(KEY_LEFT_ALT, release_alt);
     });
 
@@ -165,10 +165,11 @@ LookupBox::LookupBox(string prompt) {
 }
 
 LookupBox::~LookupBox() {
-    owning_object_view->destroy_view();
-
     // key_handlers??
 
+    for (auto key_handler_pair: key_handler_pairs) {
+        handler_visual_infos.erase(key_handler_pair.key_handler);
+    }
     handler_visual_infos.erase(key_escape_handler);
     handler_visual_infos.erase(key_left_alt_handler);
     handler_visual_infos.erase(key_left_super_handler);
@@ -197,12 +198,12 @@ void LookupBox::select() {
             0.5f + map_range(GetMousePosition().x, text_x, text_x_end, 0, (float) text.size());
     character_index = (int) new_character_index;
 
-    add_key_pressed_handlers(key_handlers);
+    add_key_pressed_handlers(key_handler_pairs);
 }
 
 void LookupBox::unselect() {
     selected = false;
-    remove_key_pressed_handlers(key_handlers);
+    remove_key_pressed_handlers(key_handler_pairs);
 }
 
 void LookupBox::on_text_change() { // TODO ideally, use string template for constraint
@@ -212,7 +213,7 @@ void LookupBox::on_text_change() { // TODO ideally, use string template for cons
         owning_object_view = nullptr;
     }
 
-    if (text == "do-then") {
+    if (text == "d") {
         owning_object_view = new DoThenView(this);
     } else if (text == "c") {
         owning_object_view = new ControlsView(this);
@@ -222,9 +223,13 @@ void LookupBox::on_text_change() { // TODO ideally, use string template for cons
 void LookupBox::draw() {
     string drawn_text = text.empty() ? prompt : text;
 
-    update_listenable(&rect.width, font_width * (float) drawn_text.size() + pad_x * 2);
-    update_listenable(&rect.height, (float) font_height + pad_y * 2);
-    update_all_tracked();
+    float new_width = font_width * (float) drawn_text.size() + pad_x * 2;
+    float new_height = (float) font_height + pad_y * 2;
+    if (rect.width != new_width || rect.height != new_height) {
+        update_listenable(&rect.width, new_width);
+        update_listenable(&rect.height, new_height);
+        update_all_tracked();
+    }
 
     DrawRectangleRec(rect, SECONDARY_COLOR);
 

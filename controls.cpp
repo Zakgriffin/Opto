@@ -17,6 +17,26 @@ unordered_set<F *> double_click_handlers;
 
 map<F *, HandlerVisualInfo> handler_visual_infos;
 
+void debug_list_controls() {
+    int key_pressed_handlers_size = 0;
+    for (const auto &key_pressed_handlers: all_key_pressed_handlers) {
+        key_pressed_handlers_size += (int) key_pressed_handlers.second.size();
+    }
+    printf("key_pressed_handlers: %d\n", key_pressed_handlers_size);
+
+    int key_released_handlers_size = 0;
+    for (const auto &key_released_handlers: all_key_released_handlers) {
+        key_released_handlers_size += (int) key_released_handlers.second.size();
+    }
+    printf("key_released_handlers: %d\n", key_released_handlers_size);
+
+    printf("mouse_move_handlers: %d\n", (int) mouse_move_handlers.size());
+    printf("click_handlers: %d\n", (int) click_handlers.size());
+    printf("double_click_handlers: %d\n", (int) double_click_handlers.size());
+
+    printf("handler_visual_infos: %d\n", (int) handler_visual_infos.size());
+}
+
 struct HoverInfo {
     function<bool(Vector2)> is_within;
     function<void(void)> hover_enter;
@@ -112,6 +132,8 @@ void add_key_pressed_handlers(const vector<KeyHandlerPair> &key_pressed_handler_
 
 void remove_key_pressed_handlers(const vector<KeyHandlerPair> &key_pressed_handler_pairs) {
     for (auto key_pressed_handler_pair: key_pressed_handler_pairs) {
+        auto x = key_pressed_handler_pair.key;
+        auto y = key_pressed_handler_pair.key_handler;
         remove_key_pressed_handler(key_pressed_handler_pair.key, key_pressed_handler_pair.key_handler);
     }
 }
@@ -179,7 +201,9 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
         create_binding(&hover_rectangle->x, {&owned_lookup_box->rect.x},
                        [=]() { hover_rectangle->x = rect.x + owned_lookup_box->rect.x; });
         create_binding(&hover_rectangle->y, {&owned_lookup_box->rect.y, &owned_lookup_box->rect.width},
-                       [=]() {hover_rectangle->y = rect.y + owned_lookup_box->rect.y + owned_lookup_box->rect.width;});
+                       [=]() {
+                           hover_rectangle->y = rect.y + owned_lookup_box->rect.y + owned_lookup_box->rect.width;
+                       });
         hover_rectangle->width = rect.width;
         hover_rectangle->height = rect.height;
 

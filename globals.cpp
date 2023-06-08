@@ -2,7 +2,12 @@
 
 #include "raylib.h"
 
+#include "controls.h"
+#include "constraint.h"
+
 using namespace std;
+
+map<void*, string> debug_names;
 
 unordered_set<Visual *> visuals;
 
@@ -14,7 +19,7 @@ float font_height = 18;
 
 Font font;
 
-void init_globals() {
+void load_font() {
     font = LoadFontEx("resources/RobotoMono-Regular.ttf", font_height * 2, nullptr, 250);
 }
 
@@ -33,4 +38,10 @@ F::F(function<void(void)> f) {
 float center(float container_pos, float container_span, float span) {
     float container_center_pos = container_pos + container_span / 2;
     return container_center_pos - span / 2;
+}
+
+void debug_list_globals() {
+    debug_list_constraint();
+    debug_list_controls();
+    printf("\n");
 }

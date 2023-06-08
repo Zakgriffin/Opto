@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include "matrix_math.h"
 #include "priority_queue.h"
+#include "globals.h"
 
 #include <string>
 
@@ -25,6 +26,16 @@ string to_string(BindingInfo binding_info) {
 unordered_map<void *, vector<F *> *> listeners;
 unordered_map<void *, BindingInfo *> bindings;
 PriorityQueue<BindingInfo *, compare_binding_info> bindings_to_update;
+
+void debug_list_constraint() {
+    int listeners_size = 0;
+    for (auto x: listeners) {
+        listeners_size += (int) x.second->size();
+    }
+    printf("listeners: %d\n", listeners_size);
+
+    printf("bindings: %d\n", (int )bindings.size());
+}
 
 // structs
 
@@ -77,10 +88,6 @@ void create_binding(T *bound_data, vector<void *> dependencies, function<void(vo
 
 template<typename T>
 void destroy_binding(T *address) {
-    // remove dependencies on this
-    //   remove dependency listeners on this
-    // remove the binding
-
     BindingInfo *binding_info = bindings[address];
 
     for (void *dependency: binding_info->dependencies) {

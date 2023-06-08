@@ -65,4 +65,6 @@ void add_key_released_handlers(const vector<KeyHandlerPair>& key_handler_pairs);
 
 void remove_key_released_handlers(const vector<KeyHandlerPair>& key_handler_pairs);
 
+void debug_list_controls();
+
 #endif //OPTO_CONTROLS_H
