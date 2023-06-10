@@ -153,19 +153,28 @@ LookupBox::LookupBox(string prompt) {
 
     // hover handlers
 
-    add_hover_listener(within_rectangle(&rect), [&]() {
-        add_click_listener(click_on_listener);
-        remove_click_listener(click_off_listener);
-        SetMouseCursor(MOUSE_CURSOR_IBEAM);
-    }, [&]() {
-        remove_click_listener(click_on_listener);
-        add_click_listener(click_off_listener);
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-    });
+    hover_handler = new HoverInfo{
+            .is_within=within_rectangle(&rect),
+            .hover_enter=[&]() {
+                add_click_listener(click_on_listener);
+                remove_click_listener(click_off_listener);
+                SetMouseCursor(MOUSE_CURSOR_IBEAM);
+            },
+            .hover_exit=[&]() {
+                remove_click_listener(click_on_listener);
+                add_click_listener(click_off_listener);
+                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+            }
+    };
+
+    add_hover_listener(hover_handler);
 }
 
 LookupBox::~LookupBox() {
-    // key_handlers??
+    remove_hover_listener(hover_handler);
+
+    remove_click_listener(click_on_listener);
+    remove_click_listener(click_off_listener);
 
     for (auto key_handler_pair: key_handler_pairs) {
         handler_visual_infos.erase(key_handler_pair.key_handler);
@@ -203,13 +212,14 @@ void LookupBox::select() {
 
 void LookupBox::unselect() {
     selected = false;
+    printf("gump %d", (int) key_handler_pairs.size());
     remove_key_pressed_handlers(key_handler_pairs);
 }
 
 void LookupBox::on_text_change() { // TODO ideally, use string template for constraint
     if (owning_object_view != nullptr) {
         owning_object_view->destroy_view();
-        delete owning_object_view; // should return ownership of lookup_box visual constraints
+        delete owning_object_view;
         owning_object_view = nullptr;
     }
 

@@ -30,6 +30,7 @@ public:
     F *super_key_a_handler;
     F *alt_key_left_handler, *alt_key_right_handler;
     F *release_super, *release_alt;
+    HoverInfo *hover_handler;
 
     float pad_x, pad_y, text_x{}, text_y{}, text_x_end{};
 

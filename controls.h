@@ -6,6 +6,12 @@
 
 typedef struct LookupBox LookupBox; // linker sucks, need this line (for now, maybe not later)
 
+//struct HoverInfo {
+//    function<bool(Vector2)> is_within;
+//    function<void(void)> hover_enter;
+//    function<void(void)> hover_exit;
+//};
+
 struct KeyVisualInfo {
     int k;
     string key_name;
@@ -30,11 +36,8 @@ struct ControlsView : ObjectView, Visual {
     void draw();
 };
 
-void add_hover_listener(
-        function<bool(Vector2)> is_within,
-        function<void(void)> hover_enter,
-        function<void(void)> hover_exit
-);
+void add_hover_listener(HoverInfo* hover_info);
+void remove_hover_listener(HoverInfo* hover_info);
 
 extern vector<KeyVisualInfo*> key_visual_infos_mac;
 extern map<F*, HandlerVisualInfo> handler_visual_infos;

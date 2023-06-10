@@ -8,9 +8,18 @@
 
 using namespace std;
 
+// I don't want this here, but it doesn't compile in controls.h so... whatever
+struct HoverInfo {
+    function<bool(Vector2)> is_within;
+    function<void(void)> hover_enter;
+    function<void(void)> hover_exit;
+    bool was_hovered;
+};
+
 class F {
 public:
     function<void(void)> f;
+
     explicit F(function<void(void)> f);
 };
 

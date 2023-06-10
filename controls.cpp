@@ -14,6 +14,7 @@ map<int, unordered_set<F *>> all_key_released_handlers;
 unordered_set<F *> mouse_move_handlers;
 unordered_set<F *> click_handlers;
 unordered_set<F *> double_click_handlers;
+vector<HoverInfo *> hover_infos;
 
 map<F *, HandlerVisualInfo> handler_visual_infos;
 
@@ -33,18 +34,10 @@ void debug_list_controls() {
     printf("mouse_move_handlers: %d\n", (int) mouse_move_handlers.size());
     printf("click_handlers: %d\n", (int) click_handlers.size());
     printf("double_click_handlers: %d\n", (int) double_click_handlers.size());
+    printf("hover_infos: %d\n", (int) hover_infos.size());
 
     printf("handler_visual_infos: %d\n", (int) handler_visual_infos.size());
 }
-
-struct HoverInfo {
-    function<bool(Vector2)> is_within;
-    function<void(void)> hover_enter;
-    function<void(void)> hover_exit;
-    bool hovered;
-};
-
-vector<HoverInfo *> hover_infos;
 
 bool equals(Vector2 a, Vector2 b) {
     return a.x == b.x && a.y == b.y;
@@ -64,14 +57,14 @@ void tick_controls() {
 
         for (HoverInfo *hover_info: hover_infos) {
             if (hover_info->is_within(mouse_pos)) {
-                if (!hover_info->hovered) {
+                if (!hover_info->was_hovered) {
                     hover_info->hover_enter();
-                    hover_info->hovered = true;
+                    hover_info->was_hovered = true;
                 }
             } else {
-                if (hover_info->hovered) {
+                if (hover_info->was_hovered) {
                     hover_info->hover_exit();
-                    hover_info->hovered = false;
+                    hover_info->was_hovered = false;
                 }
             }
         }
@@ -95,7 +88,6 @@ void tick_controls() {
         }
     }
     for (const auto &key_released_handlers_entry: all_key_released_handlers) {
-
         auto key_released = key_released_handlers_entry.first;
         auto key_released_handlers = key_released_handlers_entry.second;
         if (IsKeyReleased(key_released)) {
@@ -132,8 +124,6 @@ void add_key_pressed_handlers(const vector<KeyHandlerPair> &key_pressed_handler_
 
 void remove_key_pressed_handlers(const vector<KeyHandlerPair> &key_pressed_handler_pairs) {
     for (auto key_pressed_handler_pair: key_pressed_handler_pairs) {
-        auto x = key_pressed_handler_pair.key;
-        auto y = key_pressed_handler_pair.key_handler;
         remove_key_pressed_handler(key_pressed_handler_pair.key, key_pressed_handler_pair.key_handler);
     }
 }
@@ -151,18 +141,20 @@ void remove_key_released_handlers(const vector<KeyHandlerPair> &key_released_han
 }
 
 
-void add_hover_listener(
-        function<bool(Vector2)> is_within,
-        function<void(void)> hover_enter,
-        function<void(void)> hover_exit
-) {
-    auto *h = new HoverInfo{
-            .is_within = is_within,
-            .hover_enter = hover_enter,
-            .hover_exit = hover_exit,
-            .hovered = false,
-    };
-    hover_infos.push_back(h);
+void add_hover_listener(HoverInfo *hover_info) {
+    if (hover_info->is_within(GetMousePosition())) {
+        hover_info->hover_enter();
+        hover_info->was_hovered = true;
+    } else {
+        hover_info->hover_exit();
+        hover_info->was_hovered = false;
+    }
+
+    hover_infos.push_back(hover_info);
+}
+
+void remove_hover_listener(HoverInfo *hover_info) {
+    hover_infos.erase(remove(hover_infos.begin(), hover_infos.end(), hover_info), hover_infos.end());
 }
 
 void add_click_listener(F *listener) {
@@ -207,21 +199,26 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
         hover_rectangle->width = rect.width;
         hover_rectangle->height = rect.height;
 
-        add_hover_listener(within_rectangle(hover_rectangle), [&, key_visual_info]() {
-            hovered_key_visual_info = key_visual_info;
-        }, [&, key_visual_info]() {
-            // TODO probably better stack/priority cleanup here
-            if (hovered_key_visual_info == key_visual_info) {
-                hovered_key_visual_info = nullptr;
-            }
-        });
+        HoverInfo* hover_handler = new HoverInfo{
+                .is_within=within_rectangle(hover_rectangle),
+                .hover_enter=[&, key_visual_info]() {
+                    hovered_key_visual_info = key_visual_info;
+                },
+                .hover_exit=[&, key_visual_info]() {
+                    // TODO probably better stack/priority cleanup here
+                    if (hovered_key_visual_info == key_visual_info) {
+                        hovered_key_visual_info = nullptr;
+                    }
+                }
+        };
+
+        add_hover_listener(hover_handler);
     }
 }
 
 void ControlsView::destroy_view() {
+    // TODO better cleanup
     visuals.erase(visuals.find(this));
-
-    // TODO cleanup good
 }
 
 void ControlsView::draw() {

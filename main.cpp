@@ -5,8 +5,21 @@
 #include "priority_queue.h"
 #include "controls.h"
 #include "constraint.h"
+#include "unknown.h"
+#include "do_then.h"
 
 using namespace std;
+
+DoThen test_root = {
+        .effect = nullptr,
+        .next = new DoThen{
+                .effect = nullptr,
+                .next = new DoThen{
+                        .effect = nullptr,
+                        .next = nullptr,
+                }
+        }
+};
 
 int main() {
 //    constraint_testing();
@@ -26,27 +39,29 @@ int main() {
     auto *whole_screen_rect = new Rectangle{.x=0, .y=0, .width=screen_width, .height=screen_height};
 
     F *create_lookup_box_listener = new F([]() {
-        auto *lookup_box = new LookupBox("opto");
+        auto *unknown_view = new UnknownView;
         Vector2 position = GetMousePosition();
 
-        update_listenable(&lookup_box->rect.x, position.x);
-        update_listenable(&lookup_box->rect.y, position.y);
-        lookup_box->select();
-
-        visuals.insert(lookup_box);
+        update_listenable(&unknown_view->primary_lookup_box->rect.x, position.x);
+        update_listenable(&unknown_view->primary_lookup_box->rect.y, position.y);
+        unknown_view->primary_lookup_box->select();
     });
 
-    add_hover_listener(within_rectangle(whole_screen_rect), [&]() {
-        add_double_click_listener(create_lookup_box_listener);
-    }, [&]() {
-        remove_double_click_listener(create_lookup_box_listener);
-    });
+    auto hover_listener = new HoverInfo{
+            .is_within=within_rectangle(whole_screen_rect),
+            .hover_enter=[&]() {
+                add_double_click_listener(create_lookup_box_listener);
+            },
+            .hover_exit=[&]() {
+                remove_double_click_listener(create_lookup_box_listener);
+            },
+    };
+    add_hover_listener(hover_listener);
 
 
     SetExitKey(0);
     while (!WindowShouldClose()) {
-//        debug_list_globals();
-
+        debug_list_globals();
         tick_controls();
 
         BeginDrawing();

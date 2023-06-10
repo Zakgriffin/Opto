@@ -112,6 +112,13 @@ build CMakeFiles/Opto.dir/priority_queue.cpp.o: CXX_COMPILER__Opto_Debug /Users/
   OBJECT_DIR = CMakeFiles/Opto.dir
   OBJECT_FILE_DIR = CMakeFiles/Opto.dir
 
+build CMakeFiles/Opto.dir/unknown.cpp.o: CXX_COMPILER__Opto_Debug /Users/zakgriffin/CLionProjects/Opto/unknown.cpp || cmake_object_order_depends_target_Opto
+  DEP_FILE = CMakeFiles/Opto.dir/unknown.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20
+  INCLUDES = -isystem /opt/homebrew/Cellar/raylib/4.5.0/include
+  OBJECT_DIR = CMakeFiles/Opto.dir
+  OBJECT_FILE_DIR = CMakeFiles/Opto.dir
+
 build CMakeFiles/Opto.dir/visual.cpp.o: CXX_COMPILER__Opto_Debug /Users/zakgriffin/CLionProjects/Opto/visual.cpp || cmake_object_order_depends_target_Opto
   DEP_FILE = CMakeFiles/Opto.dir/visual.cpp.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20
@@ -127,7 +134,7 @@ build CMakeFiles/Opto.dir/visual.cpp.o: CXX_COMPILER__Opto_Debug /Users/zakgriff
 #############################################
 # Link the executable Opto
 
-build Opto: CXX_EXECUTABLE_LINKER__Opto_Debug CMakeFiles/Opto.dir/main.cpp.o CMakeFiles/Opto.dir/constraint.cpp.o CMakeFiles/Opto.dir/do_then.cpp.o CMakeFiles/Opto.dir/globals.cpp.o CMakeFiles/Opto.dir/controls.cpp.o CMakeFiles/Opto.dir/lookup_box.cpp.o CMakeFiles/Opto.dir/matrix_math.cpp.o CMakeFiles/Opto.dir/object_view.cpp.o CMakeFiles/Opto.dir/priority_queue.cpp.o CMakeFiles/Opto.dir/visual.cpp.o | /opt/homebrew/Cellar/raylib/4.5.0/lib/libraylib.dylib
+build Opto: CXX_EXECUTABLE_LINKER__Opto_Debug CMakeFiles/Opto.dir/main.cpp.o CMakeFiles/Opto.dir/constraint.cpp.o CMakeFiles/Opto.dir/do_then.cpp.o CMakeFiles/Opto.dir/globals.cpp.o CMakeFiles/Opto.dir/controls.cpp.o CMakeFiles/Opto.dir/lookup_box.cpp.o CMakeFiles/Opto.dir/matrix_math.cpp.o CMakeFiles/Opto.dir/object_view.cpp.o CMakeFiles/Opto.dir/priority_queue.cpp.o CMakeFiles/Opto.dir/unknown.cpp.o CMakeFiles/Opto.dir/visual.cpp.o | /opt/homebrew/Cellar/raylib/4.5.0/lib/libraylib.dylib
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2
   LINK_LIBRARIES = /opt/homebrew/Cellar/raylib/4.5.0/lib/libraylib.dylib  -framework IOKit  -framework Cocoa  -framework OpenGL  -L/opt/homebrew/Cellar/raylib/4.5.0/lib -lraylib
   OBJECT_DIR = CMakeFiles/Opto.dir

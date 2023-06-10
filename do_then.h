@@ -9,8 +9,8 @@
 using namespace std;
 
 struct DoThen {
-    DoThen* next;
     void* effect;
+    DoThen* next;
 };
 
 struct DoThenView : ObjectView {
