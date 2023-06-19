@@ -87,6 +87,7 @@ void tick_controls() {
             for (auto key_pressed_handler: key_pressed_handlers) key_pressed_handler->f();
         }
     }
+
     for (const auto &key_released_handlers_entry: all_key_released_handlers) {
         auto key_released = key_released_handlers_entry.first;
         auto key_released_handlers = key_released_handlers_entry.second;
@@ -116,15 +117,15 @@ void remove_key_released_handler(int key, F *handler) {
     }
 }
 
-void add_key_pressed_handlers(const vector<KeyHandlerPair> &key_pressed_handler_pairs) {
+void add_key_pressed_handlers(const vector<KeyHandlerPair*> &key_pressed_handler_pairs) {
     for (auto key_pressed_handler_pair: key_pressed_handler_pairs) {
-        add_key_pressed_handler(key_pressed_handler_pair.key, key_pressed_handler_pair.key_handler);
+        add_key_pressed_handler(key_pressed_handler_pair->key, key_pressed_handler_pair->key_handler);
     }
 }
 
-void remove_key_pressed_handlers(const vector<KeyHandlerPair> &key_pressed_handler_pairs) {
+void remove_key_pressed_handlers(const vector<KeyHandlerPair*> &key_pressed_handler_pairs) {
     for (auto key_pressed_handler_pair: key_pressed_handler_pairs) {
-        remove_key_pressed_handler(key_pressed_handler_pair.key, key_pressed_handler_pair.key_handler);
+        remove_key_pressed_handler(key_pressed_handler_pair->key, key_pressed_handler_pair->key_handler);
     }
 }
 
@@ -187,12 +188,10 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
         Rectangle rect = key_visual_info->rect;
 
         auto *hover_rectangle = new Rectangle;
-        make_listenable(&hover_rectangle->x);
-        make_listenable(&hover_rectangle->y);
 
-        create_binding(&hover_rectangle->x, {&owned_lookup_box->rect.x},
+        c.make_binding(&hover_rectangle->x, {&owned_lookup_box->rect.x},
                        [=]() { hover_rectangle->x = rect.x + owned_lookup_box->rect.x; });
-        create_binding(&hover_rectangle->y, {&owned_lookup_box->rect.y, &owned_lookup_box->rect.width},
+        c.make_binding(&hover_rectangle->y, {&owned_lookup_box->rect.y, &owned_lookup_box->rect.width},
                        [=]() {
                            hover_rectangle->y = rect.y + owned_lookup_box->rect.y + owned_lookup_box->rect.width;
                        });
@@ -216,8 +215,10 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
     }
 }
 
-void ControlsView::destroy_view() {
+ControlsView::~ControlsView() {
     // TODO better cleanup
+    c.destroy_all();
+
     visuals.erase(visuals.find(this));
 }
 

@@ -3,6 +3,7 @@
 
 #include "object_view.h"
 #include "lookup_box.h"
+#include "constraint.h"
 
 typedef struct LookupBox LookupBox; // linker sucks, need this line (for now, maybe not later)
 
@@ -25,13 +26,13 @@ struct HandlerVisualInfo {
 
 struct ControlsView : ObjectView, Visual {
     ControlsView(LookupBox *owned_lookup_box);
+    ~ControlsView();
+    CleanupContext c;
 
     LookupBox *owned_lookup_box;
 
     vector<Rectangle *> hover_rectangles;
     KeyVisualInfo* hovered_key_visual_info;
-
-    void destroy_view();
 
     void draw();
 };
@@ -60,13 +61,13 @@ void add_key_released_handler(int key, F *handler);
 
 void remove_key_released_handler(int key, F *handler);
 
-void add_key_pressed_handlers(const vector<KeyHandlerPair>& key_handler_pairs);
+void add_key_pressed_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
 
-void remove_key_pressed_handlers(const vector<KeyHandlerPair>& key_handler_pairs);
+void remove_key_pressed_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
 
-void add_key_released_handlers(const vector<KeyHandlerPair>& key_handler_pairs);
+void add_key_released_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
 
-void remove_key_released_handlers(const vector<KeyHandlerPair>& key_handler_pairs);
+void remove_key_released_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
 
 void debug_list_controls();
 

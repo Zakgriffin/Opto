@@ -5,36 +5,35 @@
 #include <utility>
 #include <vector>
 #include "globals.h"
-#include "do_then.h"
 #include "constraint.h"
 #include "controls.h"
 
 using namespace std;
 
-LookupBox::LookupBox(string prompt) {
+LookupBox::LookupBox() {
+    on_lookup = nullptr;
     // state initialization
     text = "";
     character_index = 0;
-    owning_object_view = nullptr;
-    this->prompt = std::move(prompt);
+    prompt = "";
     selected = false;
 
     // constants and constraints
     pad_x = 5;
     pad_y = 3;
 
-    make_listenable(&rect.x);
-    make_listenable(&rect.y);
-    make_listenable(&rect.width);
-    make_listenable(&rect.height);
+    c.make_binding(&text_x, {&rect.x}, [&]() { text_x = rect.x + pad_x; });
+    c.make_binding(&text_y, {&rect.y}, [&]() { text_y = rect.y + pad_y; });
 
-    make_listenable(&text_x);
-    make_listenable(&text_y);
-    create_binding(&text_x, {&rect.x}, [&]() { text_x = rect.x + pad_x; });
-    create_binding(&text_y, {&rect.y}, [&]() { text_y = rect.y + pad_y; });
+    c.make_binding(&text_x_end, {&rect.x, &rect.width}, [&]() { text_x_end = rect.x + rect.width; });
 
-    make_listenable(&text_x_end);
-    create_binding(&text_x_end, {&rect.x, &rect.width}, [&]() { text_x_end = rect.x + rect.width; });
+    c.make_binding(&drawn_text, {&text, &prompt},
+                   [&]() { drawn_text = text.empty() ? prompt : text; });
+
+    c.make_binding(&rect.width, {&drawn_text},
+                   [&]() { rect.width = font_width * (float) drawn_text.size() + pad_x * 2; });
+    c.make_binding(&rect.height, {},
+                   [&]() { rect.height = (float) font_height + pad_y * 2; });
 
     // event handlers
     key_escape_handler = new F([&]() {
@@ -77,12 +76,12 @@ LookupBox::LookupBox(string prompt) {
     handler_visual_infos[key_left_alt_handler] = {GetColor(0xA020F0FF), "alt hotkeys"};
 
     key_handler_pairs = {
-            {KEY_ESCAPE,     key_escape_handler},
-            {KEY_RIGHT,      key_right_handler},
-            {KEY_LEFT,       key_left_handler},
-            {KEY_BACKSPACE,  key_backspace_handler},
-            {KEY_LEFT_SUPER, key_left_super_handler},
-            {KEY_LEFT_ALT,   key_left_alt_handler},
+            new KeyHandlerPair{KEY_ESCAPE, key_escape_handler},
+            new KeyHandlerPair{KEY_RIGHT, key_right_handler},
+            new KeyHandlerPair{KEY_LEFT, key_left_handler},
+            new KeyHandlerPair{KEY_BACKSPACE, key_backspace_handler},
+            new KeyHandlerPair{KEY_LEFT_SUPER, key_left_super_handler},
+            new KeyHandlerPair{KEY_LEFT_ALT, key_left_alt_handler},
     };
 
     for (int key = 0x20; key <= 0x7E; key++) {
@@ -91,9 +90,10 @@ LookupBox::LookupBox(string prompt) {
             text.insert(character_index, 1, (char) lower);
             character_index++;
 
+
             on_text_change();
         });
-        key_handler_pairs.push_back({key, key_handler});
+        key_handler_pairs.push_back(new KeyHandlerPair{key, key_handler});
 
 
         string description = "type character '";
@@ -109,7 +109,7 @@ LookupBox::LookupBox(string prompt) {
     });
 
     super_key_handlers = {
-            {'A', super_key_a_handler},
+            new KeyHandlerPair{'A', super_key_a_handler},
     };
 
     // alt handlers
@@ -123,8 +123,8 @@ LookupBox::LookupBox(string prompt) {
     });
 
     alt_key_handlers = {
-            {KEY_LEFT,  alt_key_left_handler},
-            {KEY_RIGHT, alt_key_right_handler},
+            new KeyHandlerPair{KEY_LEFT, alt_key_left_handler},
+            new KeyHandlerPair{KEY_RIGHT, alt_key_right_handler},
     };
 
     // release handlers
@@ -168,16 +168,24 @@ LookupBox::LookupBox(string prompt) {
     };
 
     add_hover_listener(hover_handler);
+
+    visuals.insert(this);
 }
 
 LookupBox::~LookupBox() {
+    visuals.erase(this);
+
     remove_hover_listener(hover_handler);
 
     remove_click_listener(click_on_listener);
     remove_click_listener(click_off_listener);
 
+    remove_key_pressed_handlers(key_handler_pairs);
+    remove_key_pressed_handlers(super_key_handlers);
+    remove_key_pressed_handlers(alt_key_handlers);
+
     for (auto key_handler_pair: key_handler_pairs) {
-        handler_visual_infos.erase(key_handler_pair.key_handler);
+        handler_visual_infos.erase(key_handler_pair->key_handler);
     }
     handler_visual_infos.erase(key_escape_handler);
     handler_visual_infos.erase(key_left_alt_handler);
@@ -186,18 +194,7 @@ LookupBox::~LookupBox() {
     handler_visual_infos.erase(key_left_handler);
     handler_visual_infos.erase(key_right_handler);
 
-    destroy_binding(&text_x_end);
-    unmake_listenable(&text_x_end);
-
-    destroy_binding(&text_y);
-    destroy_binding(&text_x);
-    make_listenable(&text_y);
-    make_listenable(&text_x);
-
-    unmake_listenable(&rect.height);
-    unmake_listenable(&rect.width);
-    unmake_listenable(&rect.y);
-    unmake_listenable(&rect.x);
+    c.destroy_all();
 }
 
 void LookupBox::select() {
@@ -212,35 +209,17 @@ void LookupBox::select() {
 
 void LookupBox::unselect() {
     selected = false;
-    printf("gump %d", (int) key_handler_pairs.size());
     remove_key_pressed_handlers(key_handler_pairs);
 }
 
-void LookupBox::on_text_change() { // TODO ideally, use string template for constraint
-    if (owning_object_view != nullptr) {
-        owning_object_view->destroy_view();
-        delete owning_object_view;
-        owning_object_view = nullptr;
-    }
+void LookupBox::on_text_change() {
+    update_listenable(&text, text);
+    update_all_tracked();
 
-    if (text == "d") {
-        owning_object_view = new DoThenView(this);
-    } else if (text == "c") {
-        owning_object_view = new ControlsView(this);
-    }
+    if (on_lookup) on_lookup(text);
 }
 
 void LookupBox::draw() {
-    string drawn_text = text.empty() ? prompt : text;
-
-    float new_width = font_width * (float) drawn_text.size() + pad_x * 2;
-    float new_height = (float) font_height + pad_y * 2;
-    if (rect.width != new_width || rect.height != new_height) {
-        update_listenable(&rect.width, new_width);
-        update_listenable(&rect.height, new_height);
-        update_all_tracked();
-    }
-
     DrawRectangleRec(rect, SECONDARY_COLOR);
 
     Color text_color = text.empty() ? GRAY : WHITE;

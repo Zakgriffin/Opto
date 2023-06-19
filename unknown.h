@@ -9,10 +9,7 @@ public:
     LookupBox *primary_lookup_box;
 
     UnknownView();
-
-    void destroy_view() {
-
-    }
+    ~UnknownView();
 };
 
 #endif //OPTO_UNKNOWN_H

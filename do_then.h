@@ -9,24 +9,28 @@
 using namespace std;
 
 struct DoThen {
-    void* effect;
-    DoThen* next;
+    void *effect;
+    DoThen *next;
 };
 
 struct DoThenView : ObjectView {
-
-    vector<float*> tracked_for_visuals; // internal visual constraints for all do_then
-
     // data
-    DoThen* do_then;
+    DoThen *do_then;
 
     // visual
-    LookupBox* owned_lookup_box;
-    LookupBox* effect_lookup_box;
-    LookupBox* next_lookup_box;
+    LookupBox *owned_lookup_box;
+//    LookupBox* effect_lookup_box;
+    LookupBox *next_lookup_box;
 
-    DoThenView(LookupBox* owned_lookup_box);
-    void destroy_view();
+//    ObjectView* effect_object_view;
+    DoThenView *next_object_view;
+
+    function<void(string)> next_on_lookup;
+    F* next_change_listener;
+
+    CleanupContext c;
+    DoThenView(DoThen* do_then);
+    ~DoThenView();
 };
 
 #endif //OPTO_DO_THEN_H

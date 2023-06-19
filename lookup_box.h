@@ -8,13 +8,12 @@
 #include "visual.h"
 #include "globals.h"
 #include "controls.h"
+#include "constraint.h"
 
 using namespace std;
 
 struct LookupBox : public Visual {
 public:
-    vector<float *> tracked_for_visuals;
-
     // logic
     string text;
     bool selected;
@@ -24,20 +23,22 @@ public:
     F *click_on_listener;
     F *click_off_listener;
 
-    vector<KeyHandlerPair> key_handler_pairs;
-    vector<KeyHandlerPair> super_key_handlers, alt_key_handlers;
+    vector<KeyHandlerPair*> key_handler_pairs;
+    vector<KeyHandlerPair*> super_key_handlers, alt_key_handlers;
     F *key_escape_handler, *key_right_handler, *key_left_handler, *key_backspace_handler, *key_left_super_handler, *key_left_alt_handler;
     F *super_key_a_handler;
     F *alt_key_left_handler, *alt_key_right_handler;
     F *release_super, *release_alt;
     HoverInfo *hover_handler;
 
-    float pad_x, pad_y, text_x{}, text_y{}, text_x_end{};
+    float pad_x, pad_y, text_x, text_y, text_x_end;
+    string drawn_text;
+
+    function<void(string)> on_lookup;
+    CleanupContext c;
 
     // visual
-    Rectangle rect{};
-
-    ObjectView *owning_object_view;
+    Rectangle rect;
 
     void on_text_change();
 
@@ -47,7 +48,7 @@ public:
 
     void draw() override;
 
-    explicit LookupBox(string prompt);
+    explicit LookupBox();
 
     ~LookupBox();
 };

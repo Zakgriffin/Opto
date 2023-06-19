@@ -44,7 +44,9 @@ int main() {
 
         update_listenable(&unknown_view->primary_lookup_box->rect.x, position.x);
         update_listenable(&unknown_view->primary_lookup_box->rect.y, position.y);
+        update_listenable(&unknown_view->primary_lookup_box->prompt, string("opto"));
         unknown_view->primary_lookup_box->select();
+        update_all_tracked();
     });
 
     auto hover_listener = new HoverInfo{
@@ -61,6 +63,10 @@ int main() {
 
     SetExitKey(0);
     while (!WindowShouldClose()) {
+        if(bindings_to_update.size() > 0) {
+            printf("stuff not updated");
+        }
+
         debug_list_globals();
         tick_controls();
 
