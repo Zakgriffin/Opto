@@ -23,13 +23,13 @@ public:
     F *click_on_listener;
     F *click_off_listener;
 
-    vector<KeyHandlerPair*> key_handler_pairs;
-    vector<KeyHandlerPair*> super_key_handlers, alt_key_handlers;
-    F *key_escape_handler, *key_right_handler, *key_left_handler, *key_backspace_handler, *key_left_super_handler, *key_left_alt_handler;
-    F *super_key_a_handler;
-    F *alt_key_left_handler, *alt_key_right_handler;
+    vector<KeyListenerPair> key_listener_pairs;
+    vector<KeyListenerPair> super_key_listeners, alt_key_listeners;
+    F *key_escape_listener, *key_right_listener, *key_left_listener, *key_backspace_listener, *key_left_super_listener, *key_left_alt_listener;
+    F *super_key_a_listener;
+    F *alt_key_left_listener, *alt_key_right_listener;
     F *release_super, *release_alt;
-    HoverInfo *hover_handler;
+    HoverInfo *hover_listener;
 
     float pad_x, pad_y, text_x, text_y, text_x_end;
     string drawn_text;

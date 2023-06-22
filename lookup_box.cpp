@@ -35,113 +35,113 @@ LookupBox::LookupBox() {
     c.make_binding(&rect.height, {},
                    [&]() { rect.height = (float) font_height + pad_y * 2; });
 
-    // event handlers
-    key_escape_handler = new F([&]() {
+    // event listeners
+    key_escape_listener = new F([&]() {
         unselect();
     });
-    handler_visual_infos[key_escape_handler] = {BLUE, "unselect lookup box"};
+    listener_visual_infos[key_escape_listener] = {BLUE, "unselect lookup box"};
 
-    key_right_handler = new F([&]() {
+    key_right_listener = new F([&]() {
         if (character_index < text.size()) character_index++;
     });
-    handler_visual_infos[key_right_handler] = {BLUE, "move to next character"};
+    listener_visual_infos[key_right_listener] = {BLUE, "move to next character"};
 
-    key_left_handler = new F([&]() {
+    key_left_listener = new F([&]() {
         if (character_index > 0) character_index--;
     });
-    handler_visual_infos[key_left_handler] = {BLUE, "move to previous character"};
+    listener_visual_infos[key_left_listener] = {BLUE, "move to previous character"};
 
-    key_backspace_handler = new F([&]() {
+    key_backspace_listener = new F([&]() {
         if (character_index > 0) {
             text.erase(character_index - 1, 1);
             character_index--;
             on_text_change();
         }
     });
-    handler_visual_infos[key_backspace_handler] = {BLUE, "delete character"};
+    listener_visual_infos[key_backspace_listener] = {BLUE, "delete character"};
 
     // TODO stack/priority based modifier keys
-    key_left_super_handler = new F([&]() {
-        remove_key_pressed_handlers(key_handler_pairs);
-        add_key_pressed_handlers(super_key_handlers);
-        add_key_released_handler(KEY_LEFT_SUPER, release_super);
+    key_left_super_listener = new F([&]() {
+        destroy_key_pressed_listeners(key_listener_pairs);
+        create_key_pressed_listeners(super_key_listeners);
+        create_key_released_listener(KEY_LEFT_SUPER, release_super);
     });
-    handler_visual_infos[key_left_super_handler] = {GetColor(0xA020F0FF), "super hotkeys"};
+    listener_visual_infos[key_left_super_listener] = {GetColor(0xA020F0FF), "super hotkeys"};
 
-    key_left_alt_handler = new F([&]() {
-        remove_key_pressed_handlers(key_handler_pairs);
-        add_key_pressed_handlers(alt_key_handlers);
-        add_key_released_handler(KEY_LEFT_ALT, release_alt);
+    key_left_alt_listener = new F([&]() {
+        destroy_key_pressed_listeners(key_listener_pairs);
+        create_key_pressed_listeners(alt_key_listeners);
+        create_key_released_listener(KEY_LEFT_ALT, release_alt);
     });
-    handler_visual_infos[key_left_alt_handler] = {GetColor(0xA020F0FF), "alt hotkeys"};
+    listener_visual_infos[key_left_alt_listener] = {GetColor(0xA020F0FF), "alt hotkeys"};
 
-    key_handler_pairs = {
-            new KeyHandlerPair{KEY_ESCAPE, key_escape_handler},
-            new KeyHandlerPair{KEY_RIGHT, key_right_handler},
-            new KeyHandlerPair{KEY_LEFT, key_left_handler},
-            new KeyHandlerPair{KEY_BACKSPACE, key_backspace_handler},
-            new KeyHandlerPair{KEY_LEFT_SUPER, key_left_super_handler},
-            new KeyHandlerPair{KEY_LEFT_ALT, key_left_alt_handler},
+    key_listener_pairs = {
+            {KEY_ESCAPE, key_escape_listener},
+            {KEY_RIGHT, key_right_listener},
+            {KEY_LEFT, key_left_listener},
+            {KEY_BACKSPACE, key_backspace_listener},
+            {KEY_LEFT_SUPER, key_left_super_listener},
+            {KEY_LEFT_ALT, key_left_alt_listener},
     };
 
     for (int key = 0x20; key <= 0x7E; key++) {
         char lower = (char) tolower(key);
-        auto key_handler = new F([&, lower]() {
+        auto key_listener = new F([&, lower]() {
             text.insert(character_index, 1, (char) lower);
             character_index++;
 
 
             on_text_change();
         });
-        key_handler_pairs.push_back(new KeyHandlerPair{key, key_handler});
+        key_listener_pairs.push_back({key, key_listener});
 
 
         string description = "type character '";
         description += lower;
         description += "'";
 
-        handler_visual_infos[key_handler] = {GetColor(0xDD7700FF), description};;
+        listener_visual_infos[key_listener] = {GetColor(0xDD7700FF), description};;
     }
 
-    // super handlers
-    super_key_a_handler = new F([&]() {
+    // super listeners
+    super_key_a_listener = new F([&]() {
 
     });
 
-    super_key_handlers = {
-            new KeyHandlerPair{'A', super_key_a_handler},
+    super_key_listeners = {
+            {'A', super_key_a_listener},
     };
 
-    // alt handlers
+    // alt listeners
 
-    alt_key_left_handler = new F([&]() {
+    alt_key_left_listener = new F([&]() {
         character_index = 0;
     });
 
-    alt_key_right_handler = new F([&]() {
+    alt_key_right_listener = new F([&]() {
         character_index = (int) text.size();
     });
 
-    alt_key_handlers = {
-            new KeyHandlerPair{KEY_LEFT, alt_key_left_handler},
-            new KeyHandlerPair{KEY_RIGHT, alt_key_right_handler},
+    alt_key_listeners = {
+            {KEY_LEFT, alt_key_left_listener},
+            {KEY_RIGHT, alt_key_right_listener},
     };
 
-    // release handlers
+    // release listeners
 
     release_super = new F([&]() {
-        remove_key_pressed_handlers(super_key_handlers);
-        add_key_pressed_handlers(key_handler_pairs);
-        remove_key_released_handler(KEY_LEFT_SUPER, release_super);
+        destroy_key_pressed_listeners(super_key_listeners);
+        create_key_pressed_listeners(key_listener_pairs);
+        destroy_key_released_listener(KEY_LEFT_SUPER, release_super);
     });
 
     release_alt = new F([&]() {
-        remove_key_pressed_handlers(alt_key_handlers);
-        add_key_pressed_handlers(key_handler_pairs);
-        remove_key_released_handler(KEY_LEFT_ALT, release_alt);
+        destroy_key_pressed_listeners(alt_key_listeners);
+        create_key_pressed_listeners(key_listener_pairs);
+        destroy_key_released_listener(KEY_LEFT_ALT, release_alt);
     });
 
-    // click handlers
+    // click listeners
 
     click_on_listener = new F([&]() {
         select();
@@ -151,23 +151,23 @@ LookupBox::LookupBox() {
         unselect();
     });
 
-    // hover handlers
+    // hover listeners
 
-    hover_handler = new HoverInfo{
+    hover_listener = new HoverInfo{
             .is_within=within_rectangle(&rect),
             .hover_enter=[&]() {
-                add_click_listener(click_on_listener);
-                remove_click_listener(click_off_listener);
+                create_click_listener(click_on_listener);
+                destroy_click_listener(click_off_listener);
                 SetMouseCursor(MOUSE_CURSOR_IBEAM);
             },
             .hover_exit=[&]() {
-                remove_click_listener(click_on_listener);
-                add_click_listener(click_off_listener);
+                destroy_click_listener(click_on_listener);
+                create_click_listener(click_off_listener);
                 SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
     };
 
-    add_hover_listener(hover_handler);
+    create_hover_listener(hover_listener);
 
     visuals.insert(this);
 }
@@ -175,24 +175,25 @@ LookupBox::LookupBox() {
 LookupBox::~LookupBox() {
     visuals.erase(this);
 
-    remove_hover_listener(hover_handler);
+    destroy_hover_listener(hover_listener);
 
-    remove_click_listener(click_on_listener);
-    remove_click_listener(click_off_listener);
+    destroy_click_listener(click_on_listener);
+    destroy_click_listener(click_off_listener);
 
-    remove_key_pressed_handlers(key_handler_pairs);
-    remove_key_pressed_handlers(super_key_handlers);
-    remove_key_pressed_handlers(alt_key_handlers);
+    destroy_key_pressed_listeners(key_listener_pairs);
+    destroy_key_pressed_listeners(super_key_listeners);
+    destroy_key_pressed_listeners(alt_key_listeners);
 
-    for (auto key_handler_pair: key_handler_pairs) {
-        handler_visual_infos.erase(key_handler_pair->key_handler);
+    for (auto key_listener_pair: key_listener_pairs) {
+        listener_visual_infos.erase(key_listener_pair.key_listener);
     }
-    handler_visual_infos.erase(key_escape_handler);
-    handler_visual_infos.erase(key_left_alt_handler);
-    handler_visual_infos.erase(key_left_super_handler);
-    handler_visual_infos.erase(key_backspace_handler);
-    handler_visual_infos.erase(key_left_handler);
-    handler_visual_infos.erase(key_right_handler);
+
+    listener_visual_infos.erase(key_escape_listener);
+    listener_visual_infos.erase(key_left_alt_listener);
+    listener_visual_infos.erase(key_left_super_listener);
+    listener_visual_infos.erase(key_backspace_listener);
+    listener_visual_infos.erase(key_left_listener);
+    listener_visual_infos.erase(key_right_listener);
 
     c.destroy_all();
 }
@@ -204,12 +205,12 @@ void LookupBox::select() {
             0.5f + map_range(GetMousePosition().x, text_x, text_x_end, 0, (float) text.size());
     character_index = (int) new_character_index;
 
-    add_key_pressed_handlers(key_handler_pairs);
+    create_key_pressed_listeners(key_listener_pairs);
 }
 
 void LookupBox::unselect() {
     selected = false;
-    remove_key_pressed_handlers(key_handler_pairs);
+    destroy_key_pressed_listeners(key_listener_pairs);
 }
 
 void LookupBox::on_text_change() {

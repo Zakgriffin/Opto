@@ -3,40 +3,37 @@
 #include <vector>
 #include "globals.h"
 #include "lookup_box.h"
-#include "constraint.h"
 
 using namespace std;
 
-// TODO handler or listener? choose one
-
-map<int, unordered_set<F *>> all_key_pressed_handlers;
-map<int, unordered_set<F *>> all_key_released_handlers;
-unordered_set<F *> mouse_move_handlers;
-unordered_set<F *> click_handlers;
-unordered_set<F *> double_click_handlers;
+map<int, unordered_set<F *>> all_key_pressed_listeners;
+map<int, unordered_set<F *>> all_key_released_listeners;
+unordered_set<F *> mouse_move_listeners;
+unordered_set<F *> click_listeners;
+unordered_set<F *> double_click_listeners;
 vector<HoverInfo *> hover_infos;
 
-map<F *, HandlerVisualInfo> handler_visual_infos;
+map<F *, ListenerVisualInfo> listener_visual_infos;
 
 void debug_list_controls() {
-    int key_pressed_handlers_size = 0;
-    for (const auto &key_pressed_handlers: all_key_pressed_handlers) {
-        key_pressed_handlers_size += (int) key_pressed_handlers.second.size();
+    int key_pressed_listeners_size = 0;
+    for (const auto &key_pressed_listeners: all_key_pressed_listeners) {
+        key_pressed_listeners_size += (int) key_pressed_listeners.second.size();
     }
-    printf("key_pressed_handlers: %d\n", key_pressed_handlers_size);
+    printf("key_pressed_listeners: %d\n", key_pressed_listeners_size);
 
-    int key_released_handlers_size = 0;
-    for (const auto &key_released_handlers: all_key_released_handlers) {
-        key_released_handlers_size += (int) key_released_handlers.second.size();
+    int key_released_listeners_size = 0;
+    for (const auto &key_released_listeners: all_key_released_listeners) {
+        key_released_listeners_size += (int) key_released_listeners.second.size();
     }
-    printf("key_released_handlers: %d\n", key_released_handlers_size);
+    printf("key_released_listeners: %d\n", key_released_listeners_size);
 
-    printf("mouse_move_handlers: %d\n", (int) mouse_move_handlers.size());
-    printf("click_handlers: %d\n", (int) click_handlers.size());
-    printf("double_click_handlers: %d\n", (int) double_click_handlers.size());
+    printf("mouse_move_listeners: %d\n", (int) mouse_move_listeners.size());
+    printf("click_listeners: %d\n", (int) click_listeners.size());
+    printf("double_click_listeners: %d\n", (int) double_click_listeners.size());
     printf("hover_infos: %d\n", (int) hover_infos.size());
 
-    printf("handler_visual_infos: %d\n", (int) handler_visual_infos.size());
+    printf("listener_visual_infos: %d\n", (int) listener_visual_infos.size());
 }
 
 bool equals(Vector2 a, Vector2 b) {
@@ -51,8 +48,8 @@ void tick_controls() {
     mouse_pos = GetMousePosition();
 
     if (!equals(mouse_pos, old_mouse_pos)) {
-        for (auto mouse_move_handler: mouse_move_handlers) {
-            mouse_move_handler->f();
+        for (auto mouse_move_listener: mouse_move_listeners) {
+            mouse_move_listener->f();
         }
 
         for (HoverInfo *hover_info: hover_infos) {
@@ -73,76 +70,76 @@ void tick_controls() {
     last_frame_clicked++;
     if (IsMouseButtonPressed(0)) {
         if (last_frame_clicked < 20) {
-            for (auto double_click_handler: double_click_handlers) double_click_handler->f();
+            for (auto double_click_listener: double_click_listeners) double_click_listener->f();
         } else {
-            for (auto click_handler: click_handlers) click_handler->f();
+            for (auto click_listener: click_listeners) click_listener->f();
         }
         last_frame_clicked = 0;
     }
 
-    for (const auto &key_pressed_handlers_entry: all_key_pressed_handlers) {
-        auto key_pressed = key_pressed_handlers_entry.first;
-        auto key_pressed_handlers = key_pressed_handlers_entry.second;
+    for (const auto &key_pressed_listeners_entry: all_key_pressed_listeners) {
+        auto key_pressed = key_pressed_listeners_entry.first;
+        auto key_pressed_listeners = key_pressed_listeners_entry.second;
         if (IsKeyPressed(key_pressed)) {
-            for (auto key_pressed_handler: key_pressed_handlers) key_pressed_handler->f();
+            for (auto key_pressed_listener: key_pressed_listeners) key_pressed_listener->f();
         }
     }
 
-    for (const auto &key_released_handlers_entry: all_key_released_handlers) {
-        auto key_released = key_released_handlers_entry.first;
-        auto key_released_handlers = key_released_handlers_entry.second;
+    for (const auto &key_released_listeners_entry: all_key_released_listeners) {
+        auto key_released = key_released_listeners_entry.first;
+        auto key_released_listeners = key_released_listeners_entry.second;
         if (IsKeyReleased(key_released)) {
-            for (auto key_released_handler: key_released_handlers) key_released_handler->f();
+            for (auto key_released_listener: key_released_listeners) key_released_listener->f();
         }
     }
 }
 
-void add_key_pressed_handler(int key, F *handler) {
-    all_key_pressed_handlers[key].insert(handler);
+void create_key_pressed_listener(int key, F *listener) {
+    all_key_pressed_listeners[key].insert(listener);
 }
 
-void remove_key_pressed_handler(int key, F *handler) {
-    if (all_key_pressed_handlers[key].contains(handler)) {
-        all_key_pressed_handlers[key].erase(all_key_pressed_handlers[key].find(handler));
+void destroy_key_pressed_listener(int key, F *listener) {
+    if (all_key_pressed_listeners[key].contains(listener)) {
+        all_key_pressed_listeners[key].erase(all_key_pressed_listeners[key].find(listener));
     }
 }
 
-void add_key_released_handler(int key, F *handler) {
-    all_key_released_handlers[key].insert(handler);
+void create_key_released_listener(int key, F *listener) {
+    all_key_released_listeners[key].insert(listener);
 }
 
-void remove_key_released_handler(int key, F *handler) {
-    if (all_key_released_handlers[key].contains(handler)) {
-        all_key_released_handlers[key].erase(all_key_released_handlers[key].find(handler));
+void destroy_key_released_listener(int key, F *listener) {
+    if (all_key_released_listeners[key].contains(listener)) {
+        all_key_released_listeners[key].erase(all_key_released_listeners[key].find(listener));
     }
 }
 
-void add_key_pressed_handlers(const vector<KeyHandlerPair*> &key_pressed_handler_pairs) {
-    for (auto key_pressed_handler_pair: key_pressed_handler_pairs) {
-        add_key_pressed_handler(key_pressed_handler_pair->key, key_pressed_handler_pair->key_handler);
+void create_key_pressed_listeners(const vector<KeyListenerPair> &key_pressed_listener_pairs) {
+    for (auto key_pressed_listener_pair: key_pressed_listener_pairs) {
+        create_key_pressed_listener(key_pressed_listener_pair.key, key_pressed_listener_pair.key_listener);
     }
 }
 
-void remove_key_pressed_handlers(const vector<KeyHandlerPair*> &key_pressed_handler_pairs) {
-    for (auto key_pressed_handler_pair: key_pressed_handler_pairs) {
-        remove_key_pressed_handler(key_pressed_handler_pair->key, key_pressed_handler_pair->key_handler);
+void destroy_key_pressed_listeners(const vector<KeyListenerPair> &key_pressed_listener_pairs) {
+    for (auto key_pressed_listener_pair: key_pressed_listener_pairs) {
+        destroy_key_pressed_listener(key_pressed_listener_pair.key, key_pressed_listener_pair.key_listener);
     }
 }
 
-void add_key_released_handlers(const vector<KeyHandlerPair> &key_released_handler_pairs) {
-    for (auto key_released_handler_pair: key_released_handler_pairs) {
-        add_key_released_handler(key_released_handler_pair.key, key_released_handler_pair.key_handler);
+void create_key_released_listeners(const vector<KeyListenerPair> &key_released_listener_pairs) {
+    for (auto key_released_listener_pair: key_released_listener_pairs) {
+        create_key_released_listener(key_released_listener_pair.key, key_released_listener_pair.key_listener);
     }
 }
 
-void remove_key_released_handlers(const vector<KeyHandlerPair> &key_released_handler_pairs) {
-    for (auto key_released_handler_pair: key_released_handler_pairs) {
-        remove_key_released_handler(key_released_handler_pair.key, key_released_handler_pair.key_handler);
+void destroy_key_released_listeners(const vector<KeyListenerPair> &key_released_listener_pairs) {
+    for (auto key_released_listener_pair: key_released_listener_pairs) {
+        destroy_key_released_listener(key_released_listener_pair.key, key_released_listener_pair.key_listener);
     }
 }
 
 
-void add_hover_listener(HoverInfo *hover_info) {
+void create_hover_listener(HoverInfo *hover_info) {
     if (hover_info->is_within(GetMousePosition())) {
         hover_info->hover_enter();
         hover_info->was_hovered = true;
@@ -154,27 +151,27 @@ void add_hover_listener(HoverInfo *hover_info) {
     hover_infos.push_back(hover_info);
 }
 
-void remove_hover_listener(HoverInfo *hover_info) {
+void destroy_hover_listener(HoverInfo *hover_info) {
     hover_infos.erase(remove(hover_infos.begin(), hover_infos.end(), hover_info), hover_infos.end());
 }
 
-void add_click_listener(F *listener) {
-    click_handlers.insert(listener);
+void create_click_listener(F *listener) {
+    click_listeners.insert(listener);
 }
 
-void remove_click_listener(F *listener) {
-    if (click_handlers.contains(listener)) {
-        click_handlers.erase(click_handlers.find(listener));
+void destroy_click_listener(F *listener) {
+    if (click_listeners.contains(listener)) {
+        click_listeners.erase(click_listeners.find(listener));
     }
 }
 
-void add_double_click_listener(F *listener) {
-    double_click_handlers.insert(listener);
+void create_double_click_listener(F *listener) {
+    double_click_listeners.insert(listener);
 }
 
-void remove_double_click_listener(F *listener) {
-    if (double_click_handlers.contains(listener)) {
-        double_click_handlers.erase(double_click_handlers.find(listener));
+void destroy_double_click_listener(F *listener) {
+    if (double_click_listeners.contains(listener)) {
+        double_click_listeners.erase(double_click_listeners.find(listener));
     }
 }
 
@@ -198,7 +195,7 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
         hover_rectangle->width = rect.width;
         hover_rectangle->height = rect.height;
 
-        HoverInfo* hover_handler = new HoverInfo{
+        HoverInfo* hover_listener = new HoverInfo{
                 .is_within=within_rectangle(hover_rectangle),
                 .hover_enter=[&, key_visual_info]() {
                     hovered_key_visual_info = key_visual_info;
@@ -211,7 +208,7 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
                 }
         };
 
-        add_hover_listener(hover_handler);
+        create_hover_listener(hover_listener);
     }
 }
 
@@ -234,12 +231,12 @@ void ControlsView::draw() {
         };
         DrawRectangleRec(padded_rect, SECONDARY_COLOR);
 
-        for (auto key_pressed_handler: all_key_pressed_handlers[key_visual_info->k]) {
-            if (!handler_visual_infos.contains(key_pressed_handler)) continue;
+        for (auto key_pressed_listener: all_key_pressed_listeners[key_visual_info->k]) {
+            if (!listener_visual_infos.contains(key_pressed_listener)) continue;
 
-            HandlerVisualInfo handler_visual_info = handler_visual_infos[key_pressed_handler];
+            ListenerVisualInfo listener_visual_info = listener_visual_infos[key_pressed_listener];
 
-            DrawRectangleRec(padded_rect, handler_visual_info.color);
+            DrawRectangleRec(padded_rect, listener_visual_info.color);
         }
 
         DrawTextEx(
@@ -256,11 +253,11 @@ void ControlsView::draw() {
         );
 
         if (hovered_key_visual_info) {
-            for (auto key_pressed_handler: all_key_pressed_handlers[hovered_key_visual_info->k]) {
+            for (auto key_pressed_listener: all_key_pressed_listeners[hovered_key_visual_info->k]) {
                 Vector2 mouse = GetMousePosition();
                 float offset = 10;
                 Vector2 eh = {mouse.x + offset, mouse.y + offset};
-                HandlerVisualInfo x = handler_visual_infos[key_pressed_handler];
+                ListenerVisualInfo x = listener_visual_infos[key_pressed_listener];
 
                 Rectangle rect_hover = {
                         .x = eh.x,

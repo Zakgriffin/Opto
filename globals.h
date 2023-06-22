@@ -23,9 +23,9 @@ public:
     explicit F(function<void(void)> f);
 };
 
-struct KeyHandlerPair {
+struct KeyListenerPair {
     int key;
-    F *key_handler;
+    F *key_listener;
 };
 
 extern unordered_set<Visual *> visuals;

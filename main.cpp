@@ -10,17 +10,6 @@
 
 using namespace std;
 
-DoThen test_root = {
-        .effect = nullptr,
-        .next = new DoThen{
-                .effect = nullptr,
-                .next = new DoThen{
-                        .effect = nullptr,
-                        .next = nullptr,
-                }
-        }
-};
-
 int main() {
 //    constraint_testing();
 
@@ -52,13 +41,13 @@ int main() {
     auto hover_listener = new HoverInfo{
             .is_within=within_rectangle(whole_screen_rect),
             .hover_enter=[&]() {
-                add_double_click_listener(create_lookup_box_listener);
+                create_double_click_listener(create_lookup_box_listener);
             },
             .hover_exit=[&]() {
-                remove_double_click_listener(create_lookup_box_listener);
+                create_double_click_listener(create_lookup_box_listener);
             },
     };
-    add_hover_listener(hover_listener);
+    create_hover_listener(hover_listener);
 
 
     SetExitKey(0);

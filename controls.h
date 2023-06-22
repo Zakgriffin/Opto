@@ -19,56 +19,61 @@ struct KeyVisualInfo {
     Rectangle rect;
 };
 
-struct HandlerVisualInfo {
+struct ListenerVisualInfo {
     Color color;
     string description;
 };
 
 struct ControlsView : ObjectView, Visual {
     ControlsView(LookupBox *owned_lookup_box);
+
     ~ControlsView();
+
     CleanupContext c;
 
     LookupBox *owned_lookup_box;
 
     vector<Rectangle *> hover_rectangles;
-    KeyVisualInfo* hovered_key_visual_info;
+    KeyVisualInfo *hovered_key_visual_info;
 
     void draw();
 };
 
-void add_hover_listener(HoverInfo* hover_info);
-void remove_hover_listener(HoverInfo* hover_info);
-
-extern vector<KeyVisualInfo*> key_visual_infos_mac;
-extern map<F*, HandlerVisualInfo> handler_visual_infos;
-
-void add_click_listener(F *handler);
-
-void remove_click_listener(F *handler);
-
-void add_double_click_listener(F *handler);
-
-void remove_double_click_listener(F *handler);
+extern vector<KeyVisualInfo *> key_visual_infos_mac;
+extern map<F *, ListenerVisualInfo> listener_visual_infos;
 
 void tick_controls();
 
-void add_key_pressed_handler(int key, F *handler);
-
-void remove_key_pressed_handler(int key, F *handler);
-
-void add_key_released_handler(int key, F *handler);
-
-void remove_key_released_handler(int key, F *handler);
-
-void add_key_pressed_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
-
-void remove_key_pressed_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
-
-void add_key_released_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
-
-void remove_key_released_handlers(const vector<KeyHandlerPair*>& key_handler_pairs);
-
 void debug_list_controls();
+
+// listeners
+
+void create_hover_listener(HoverInfo *hover_info);
+
+void destroy_hover_listener(HoverInfo *hover_info);
+
+void create_click_listener(F *listener);
+
+void destroy_click_listener(F *listener);
+
+void create_double_click_listener(F *listener);
+
+void destroy_double_click_listener(F *listener);
+
+void create_key_pressed_listener(int key, F *listener);
+
+void remove_key_pressed_listener(int key, F *listener);
+
+void create_key_released_listener(int key, F *listener);
+
+void destroy_key_released_listener(int key, F *listener);
+
+void create_key_pressed_listeners(const vector<KeyListenerPair> &key_listener_pairs);
+
+void destroy_key_pressed_listeners(const vector<KeyListenerPair> &key_listener_pairs);
+
+void create_key_released_listeners(const vector<KeyListenerPair> &key_listener_pairs);
+
+void destroy_key_released_listeners(const vector<KeyListenerPair> &key_listener_pairs);
 
 #endif //OPTO_CONTROLS_H

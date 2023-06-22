@@ -39,7 +39,7 @@ void update_listenable(T *listenable, T value) {
 }
 
 template<typename T>
-void create_listener(T *data, F *listener) {
+void create_data_listener(T *data, F *listener) {
     if (!listeners[data]) listeners[data] = new vector<F *>;
     listeners[data]->push_back(listener);
 
@@ -47,13 +47,13 @@ void create_listener(T *data, F *listener) {
 }
 
 template<typename T>
-void create_listener_wait(T *data, F *listener) {
+void create_data_listener_wait(T *data, F *listener) {
     if (!listeners[data]) listeners[data] = new vector<F *>;
     listeners[data]->push_back(listener);
 }
 
 template<typename T>
-void destroy_listener(T *data, F *listener) {
+void destroy_data_listener(T *data, F *listener) {
     if (!listeners[data]) return;
 
     auto x = listeners[data];
@@ -85,7 +85,7 @@ void create_binding(T *bound_data, vector<void *> dependencies, function<void(vo
             greatest_priority = max(dependency_binding_info->priority, greatest_priority);
         }
 
-        create_listener_wait(dependency, binding_info->to_trigger_me);
+        create_data_listener_wait(dependency, binding_info->to_trigger_me);
     }
 
     binding_info->priority = greatest_priority + 1;
@@ -130,6 +130,8 @@ void constraint_testing();
 
 void debug_list_constraint();
 
+// R G B
+
 
 class CleanupContext {
     vector<function<void(void)>> to_clean;
@@ -149,8 +151,8 @@ public:
 
     template<typename T>
     void make_listener(T *data, F *listener) {
-        create_listener(data, listener);
-        to_clean.push_back([=]() { destroy_listener(data, listener); });
+        create_data_listener(data, listener);
+        to_clean.push_back([=]() { destroy_data_listener(data, listener); });
     }
 };
 
