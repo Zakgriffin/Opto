@@ -28,16 +28,15 @@ endif ()
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        constraint.cpp
+        reactivity.cpp
         do_then.cpp
         globals.cpp
         controls.cpp
         lookup_box.cpp
         matrix_math.cpp
-        object_view.cpp
         priority_queue.cpp
-        unknown.cpp
         visual.cpp
+        debug.cpp
         )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)

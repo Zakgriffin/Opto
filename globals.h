@@ -9,23 +9,23 @@
 using namespace std;
 
 // I don't want this here, but it doesn't compile in controls.h so... whatever
-struct HoverInfo {
+struct HoverHandler {
     function<bool(Vector2)> is_within;
     function<void(void)> hover_enter;
     function<void(void)> hover_exit;
     bool was_hovered;
 };
 
-class F {
+class Fn {
 public:
     function<void(void)> f;
 
-    explicit F(function<void(void)> f);
+    explicit Fn(function<void(void)> f);
 };
 
 struct KeyListenerPair {
     int key;
-    F *key_listener;
+    Fn *key_listener;
 };
 
 extern unordered_set<Visual *> visuals;

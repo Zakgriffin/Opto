@@ -1,57 +1,52 @@
 [
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/main.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/main.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/main.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/main.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/main.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/constraint.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/constraint.cpp",
-  "file": "/Users/zakgriffin/CLionProjects/Opto/constraint.cpp"
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/reactivity.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/reactivity.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/reactivity.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/do_then.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/do_then.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/do_then.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/do_then.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/do_then.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/globals.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/globals.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/globals.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/globals.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/globals.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/controls.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/controls.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/controls.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/controls.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/controls.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/lookup_box.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/lookup_box.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/lookup_box.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/lookup_box.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/lookup_box.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/matrix_math.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/matrix_math.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/matrix_math.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/matrix_math.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/matrix_math.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/object_view.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/object_view.cpp",
-  "file": "/Users/zakgriffin/CLionProjects/Opto/object_view.cpp"
-},
-{
-  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/priority_queue.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/priority_queue.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/priority_queue.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/priority_queue.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/priority_queue.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/unknown.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/unknown.cpp",
-  "file": "/Users/zakgriffin/CLionProjects/Opto/unknown.cpp"
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/visual.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/visual.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/visual.cpp"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/visual.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/visual.cpp",
-  "file": "/Users/zakgriffin/CLionProjects/Opto/visual.cpp"
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/debug.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/debug.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/debug.cpp"
 }
 ]

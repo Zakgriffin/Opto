@@ -4,11 +4,10 @@
 #include <vector>
 #include <string>
 #include "raylib.h"
-#include "object_view.h"
 #include "visual.h"
 #include "globals.h"
 #include "controls.h"
-#include "constraint.h"
+#include "reactivity.h"
 
 using namespace std;
 
@@ -20,22 +19,21 @@ public:
     int character_index;
     string prompt;
 
-    F *click_on_listener;
-    F *click_off_listener;
+    Fn *click_on_listener;
+    Fn *click_off_listener;
 
     vector<KeyListenerPair> key_listener_pairs;
     vector<KeyListenerPair> super_key_listeners, alt_key_listeners;
-    F *key_escape_listener, *key_right_listener, *key_left_listener, *key_backspace_listener, *key_left_super_listener, *key_left_alt_listener;
-    F *super_key_a_listener;
-    F *alt_key_left_listener, *alt_key_right_listener;
-    F *release_super, *release_alt;
-    HoverInfo *hover_listener;
+    Fn *key_escape_listener, *key_right_listener, *key_left_listener, *key_backspace_listener, *key_left_super_listener, *key_left_alt_listener;
+    Fn *super_key_a_listener;
+    Fn *alt_key_left_listener, *alt_key_right_listener;
+    Fn *release_super, *release_alt;
+    HoverHandler *hover_handler;
 
     float pad_x, pad_y, text_x, text_y, text_x_end;
     string drawn_text;
 
     function<void(string)> on_lookup;
-    CleanupContext c;
 
     // visual
     Rectangle rect;

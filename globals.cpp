@@ -3,7 +3,7 @@
 #include "raylib.h"
 
 #include "controls.h"
-#include "constraint.h"
+#include "reactivity.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ function<bool(Vector2)> within_rectangle(Rectangle* rect) {
     return [=](Vector2 point){return CheckCollisionPointRec( point,  *rect); };
 }
 
-F::F(function<void(void)> f) {
+Fn::Fn(function<void(void)> f) {
     this->f = f;
 };
 
@@ -41,7 +41,6 @@ float center(float container_pos, float container_span, float span) {
 }
 
 void debug_list_globals() {
-    debug_list_constraint();
     debug_list_controls();
     printf("\n");
 }

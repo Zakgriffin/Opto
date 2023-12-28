@@ -6,14 +6,14 @@
 
 using namespace std;
 
-map<int, unordered_set<F *>> all_key_pressed_listeners;
-map<int, unordered_set<F *>> all_key_released_listeners;
-unordered_set<F *> mouse_move_listeners;
-unordered_set<F *> click_listeners;
-unordered_set<F *> double_click_listeners;
-vector<HoverInfo *> hover_infos;
+map<int, unordered_set<Fn *>> all_key_pressed_listeners;
+map<int, unordered_set<Fn *>> all_key_released_listeners;
+unordered_set<Fn *> mouse_move_listeners;
+unordered_set<Fn *> click_listeners;
+unordered_set<Fn *> double_click_listeners;
+vector<HoverHandler *> hover_handlers;
 
-map<F *, ListenerVisualInfo> listener_visual_infos;
+map<Fn *, ListenerVisualInfo> listener_visual_infos;
 
 void debug_list_controls() {
     int key_pressed_listeners_size = 0;
@@ -31,7 +31,7 @@ void debug_list_controls() {
     printf("mouse_move_listeners: %d\n", (int) mouse_move_listeners.size());
     printf("click_listeners: %d\n", (int) click_listeners.size());
     printf("double_click_listeners: %d\n", (int) double_click_listeners.size());
-    printf("hover_infos: %d\n", (int) hover_infos.size());
+    printf("hover_handlers: %d\n", (int) hover_handlers.size());
 
     printf("listener_visual_infos: %d\n", (int) listener_visual_infos.size());
 }
@@ -52,16 +52,16 @@ void tick_controls() {
             mouse_move_listener->f();
         }
 
-        for (HoverInfo *hover_info: hover_infos) {
-            if (hover_info->is_within(mouse_pos)) {
-                if (!hover_info->was_hovered) {
-                    hover_info->hover_enter();
-                    hover_info->was_hovered = true;
+        for (HoverHandler *hover_handler: hover_handlers) {
+            if (hover_handler->is_within(mouse_pos)) {
+                if (!hover_handler->was_hovered) {
+                    hover_handler->hover_enter();
+                    hover_handler->was_hovered = true;
                 }
             } else {
-                if (hover_info->was_hovered) {
-                    hover_info->hover_exit();
-                    hover_info->was_hovered = false;
+                if (hover_handler->was_hovered) {
+                    hover_handler->hover_exit();
+                    hover_handler->was_hovered = false;
                 }
             }
         }
@@ -94,21 +94,21 @@ void tick_controls() {
     }
 }
 
-void create_key_pressed_listener(int key, F *listener) {
+void create_key_pressed_listener(int key, Fn *listener) {
     all_key_pressed_listeners[key].insert(listener);
 }
 
-void destroy_key_pressed_listener(int key, F *listener) {
+void destroy_key_pressed_listener(int key, Fn *listener) {
     if (all_key_pressed_listeners[key].contains(listener)) {
         all_key_pressed_listeners[key].erase(all_key_pressed_listeners[key].find(listener));
     }
 }
 
-void create_key_released_listener(int key, F *listener) {
+void create_key_released_listener(int key, Fn *listener) {
     all_key_released_listeners[key].insert(listener);
 }
 
-void destroy_key_released_listener(int key, F *listener) {
+void destroy_key_released_listener(int key, Fn *listener) {
     if (all_key_released_listeners[key].contains(listener)) {
         all_key_released_listeners[key].erase(all_key_released_listeners[key].find(listener));
     }
@@ -139,37 +139,37 @@ void destroy_key_released_listeners(const vector<KeyListenerPair> &key_released_
 }
 
 
-void create_hover_listener(HoverInfo *hover_info) {
-    if (hover_info->is_within(GetMousePosition())) {
-        hover_info->hover_enter();
-        hover_info->was_hovered = true;
+void create_hover_handler(HoverHandler *hover_handler) {
+    if (hover_handler->is_within(GetMousePosition())) {
+        hover_handler->hover_enter();
+        hover_handler->was_hovered = true;
     } else {
-        hover_info->hover_exit();
-        hover_info->was_hovered = false;
+        hover_handler->hover_exit();
+        hover_handler->was_hovered = false;
     }
 
-    hover_infos.push_back(hover_info);
+    hover_handlers.push_back(hover_handler);
 }
 
-void destroy_hover_listener(HoverInfo *hover_info) {
-    hover_infos.erase(remove(hover_infos.begin(), hover_infos.end(), hover_info), hover_infos.end());
+void destroy_hover_handler(HoverHandler *hover_handler) {
+    hover_handlers.erase(remove(hover_handlers.begin(), hover_handlers.end(), hover_handler), hover_handlers.end());
 }
 
-void create_click_listener(F *listener) {
+void create_click_listener(Fn *listener) {
     click_listeners.insert(listener);
 }
 
-void destroy_click_listener(F *listener) {
+void destroy_click_listener(Fn *listener) {
     if (click_listeners.contains(listener)) {
         click_listeners.erase(click_listeners.find(listener));
     }
 }
 
-void create_double_click_listener(F *listener) {
+void create_double_click_listener(Fn *listener) {
     double_click_listeners.insert(listener);
 }
 
-void destroy_double_click_listener(F *listener) {
+void destroy_double_click_listener(Fn *listener) {
     if (double_click_listeners.contains(listener)) {
         double_click_listeners.erase(double_click_listeners.find(listener));
     }
@@ -186,16 +186,16 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
 
         auto *hover_rectangle = new Rectangle;
 
-        c.make_binding(&hover_rectangle->x, {&owned_lookup_box->rect.x},
+        create_binding(&hover_rectangle->x, {&owned_lookup_box->rect.x},
                        [=]() { hover_rectangle->x = rect.x + owned_lookup_box->rect.x; });
-        c.make_binding(&hover_rectangle->y, {&owned_lookup_box->rect.y, &owned_lookup_box->rect.width},
+        create_binding(&hover_rectangle->y, {&owned_lookup_box->rect.y, &owned_lookup_box->rect.width},
                        [=]() {
                            hover_rectangle->y = rect.y + owned_lookup_box->rect.y + owned_lookup_box->rect.width;
                        });
         hover_rectangle->width = rect.width;
         hover_rectangle->height = rect.height;
 
-        HoverInfo* hover_listener = new HoverInfo{
+        auto hover_handler = new HoverHandler{
                 .is_within=within_rectangle(hover_rectangle),
                 .hover_enter=[&, key_visual_info]() {
                     hovered_key_visual_info = key_visual_info;
@@ -208,13 +208,12 @@ ControlsView::ControlsView(LookupBox *owned_lookup_box) {
                 }
         };
 
-        create_hover_listener(hover_listener);
+        create_hover_handler(hover_handler);
     }
 }
 
 ControlsView::~ControlsView() {
     // TODO better cleanup
-    c.destroy_all();
 
     visuals.erase(visuals.find(this));
 }

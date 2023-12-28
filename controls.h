@@ -1,12 +1,12 @@
 #ifndef OPTO_CONTROLS_H
 #define OPTO_CONTROLS_H
 
-#include "object_view.h"
 #include "lookup_box.h"
-#include "constraint.h"
+#include "reactivity.h"
 
-typedef struct LookupBox LookupBox; // linker sucks, need this line (for now, maybe not later)
+typedef struct LookupBox LookupBox; // TODO linker sucks, need this line (for now, maybe not later)
 
+// TODO guess I wanted this here
 //struct HoverInfo {
 //    function<bool(Vector2)> is_within;
 //    function<void(void)> hover_enter;
@@ -24,12 +24,10 @@ struct ListenerVisualInfo {
     string description;
 };
 
-struct ControlsView : ObjectView, Visual {
+struct ControlsView : Visual {
     ControlsView(LookupBox *owned_lookup_box);
 
     ~ControlsView();
-
-    CleanupContext c;
 
     LookupBox *owned_lookup_box;
 
@@ -40,7 +38,7 @@ struct ControlsView : ObjectView, Visual {
 };
 
 extern vector<KeyVisualInfo *> key_visual_infos_mac;
-extern map<F *, ListenerVisualInfo> listener_visual_infos;
+extern map<Fn *, ListenerVisualInfo> listener_visual_infos;
 
 void tick_controls();
 
@@ -48,25 +46,25 @@ void debug_list_controls();
 
 // listeners
 
-void create_hover_listener(HoverInfo *hover_info);
+void create_hover_handler(HoverHandler *hover_handler);
 
-void destroy_hover_listener(HoverInfo *hover_info);
+void destroy_hover_handler(HoverHandler *hover_handler);
 
-void create_click_listener(F *listener);
+void create_click_listener(Fn *listener);
 
-void destroy_click_listener(F *listener);
+void destroy_click_listener(Fn *listener);
 
-void create_double_click_listener(F *listener);
+void create_double_click_listener(Fn *listener);
 
-void destroy_double_click_listener(F *listener);
+void destroy_double_click_listener(Fn *listener);
 
-void create_key_pressed_listener(int key, F *listener);
+void create_key_pressed_listener(int key, Fn *listener);
 
-void remove_key_pressed_listener(int key, F *listener);
+void destroy_key_pressed_listener(int key, Fn *listener);
 
-void create_key_released_listener(int key, F *listener);
+void create_key_released_listener(int key, Fn *listener);
 
-void destroy_key_released_listener(int key, F *listener);
+void destroy_key_released_listener(int key, Fn *listener);
 
 void create_key_pressed_listeners(const vector<KeyListenerPair> &key_listener_pairs);
 
