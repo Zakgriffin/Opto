@@ -3,6 +3,7 @@
 
 #include <unordered_set>
 #include <map>
+#include <functional>
 #include "visual.h"
 #include "raylib.h"
 

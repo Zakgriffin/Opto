@@ -37,7 +37,7 @@ add_executable(${PROJECT_NAME}
         priority_queue.cpp
         visual.cpp
         debug.cpp
-        )
+)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

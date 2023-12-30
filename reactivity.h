@@ -18,7 +18,13 @@ bool compare_binding(Binding *left, Binding *right);
 extern unordered_map<void *, unordered_set<Fn *> > data_listeners;
 extern unordered_map<void *, Binding *> bindings;
 extern PriorityQueue<Binding *, compare_binding> bindings_to_update;
-extern bool data_sync_active;
+extern int data_sync_active;
+
+template<typename T>
+void create_datum_listener_run_now(T *datum, Fn *datum_listener) {
+    create_datum_listener(datum, datum_listener);
+    datum_listener->f();
+}
 
 template<typename T>
 void create_datum_listener(T *datum, Fn *datum_listener) {
@@ -41,6 +47,7 @@ void trigger_listeners(void *datum);
 
 template<typename T>
 void update_listenable(T *listenable, T new_value) {
+    ensure_msg(data_sync_active, "can only call update_listenable in data_sync block");
     *listenable = new_value;
     trigger_listeners(listenable);
 }
@@ -54,7 +61,7 @@ void recalculate_priority(Binding *binding);
 
 template<typename T>
 void create_binding(T *bound_datum, unordered_set<void *> dependencies, function<void(void)> update) {
-    ensure(data_sync_active);
+    ensure_msg(data_sync_active, "not in a data_sync block");
     ensure_msg(!bindings.contains(bound_datum), "binding for this address already exists");
 
     auto queue_stale_listener = new Fn([=]() {
@@ -86,7 +93,7 @@ void create_binding(T *bound_datum, unordered_set<void *> dependencies, function
 
 template<typename T>
 void destroy_binding(T *bound_datum) {
-    ensure(data_sync_active);
+    ensure_msg(data_sync_active, "not in a data_sync block");
     ensure_msg(bindings.contains(bound_datum), "no binding for this address exists");
 
     Binding *binding = bindings[bound_datum];
@@ -94,8 +101,7 @@ void destroy_binding(T *bound_datum) {
         data_listeners[dependency].erase(binding->queue_stale_listener);
         if (!bindings.contains(dependency)) continue;
 
-        auto dependency_dependants = bindings[dependency]->dependants;
-        dependency_dependants.erase(dependency_dependants.find(bound_datum));
+        bindings[dependency]->dependants.erase(bound_datum);
     }
 
     bindings.erase(bound_datum);
@@ -110,5 +116,7 @@ void destroy_binding(T *bound_datum) {
 void begin_data_sync();
 
 void end_data_sync();
+
+void debug_list_reactivity();
 
 #endif //REACTIVITYTESTING_REACTIVITY_H

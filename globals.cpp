@@ -41,6 +41,7 @@ float center(float container_pos, float container_span, float span) {
 }
 
 void debug_list_globals() {
-    debug_list_controls();
+//    debug_list_controls();
+    debug_list_reactivity();
     printf("\n");
 }

@@ -12,20 +12,65 @@ struct DoThen {
     DoThen *next;
 };
 
+// i hate C++
+class DoThenEffectView;
+
+class DoThenNextView;
+
 struct DoThenView {
-    // data
     DoThen *do_then;
+    LookupBox *lookup_box; // on_lookup should be assigned by creator right after construction
 
-    // visual
-    LookupBox *owned_lookup_box;
+    DoThenEffectView *effect_view;
+    DoThenNextView *next_view;
 
-//    ObjectView *next_object_view;
-    function<void(string)> next_on_lookup;
-    Fn *next_change_listener;
-
-    DoThenView(DoThen *do_then_in, LookupBox* lookup_box_in);
+    explicit DoThenView(DoThen *do_then_in);
 
     ~DoThenView();
+};
+
+class DoThenNextView {
+public:
+    virtual ~DoThenNextView();
+};
+
+class DoThenNextAsNullView : public DoThenNextView {
+public:
+    LookupBox *lookup_box;
+
+    explicit DoThenNextAsNullView(DoThenView *parent);
+
+    ~DoThenNextAsNullView() override;
+};
+
+class DoThenNextAsDoThenView : public DoThenNextView {
+public:
+    DoThenView *do_then_view;
+
+    explicit DoThenNextAsDoThenView(DoThenView *parent);
+
+    ~DoThenNextAsDoThenView() override;
+};
+
+class DoThenEffectView {
+public:
+    virtual ~DoThenEffectView();
+};
+
+class DoThenEffectAsNullView : public DoThenEffectView {
+public:
+    LookupBox *lookup_box;
+
+    explicit DoThenEffectAsNullView(DoThenView *parent);
+
+    ~DoThenEffectAsNullView() override;
+};
+
+class DoThenEffectAsAnyView : public DoThenEffectView {
+public:
+    explicit DoThenEffectAsAnyView(DoThenView *parent);
+
+    ~DoThenEffectAsAnyView() override;
 };
 
 #endif //OPTO_DO_THEN_H
