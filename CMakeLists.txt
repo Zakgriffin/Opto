@@ -37,6 +37,16 @@ add_executable(${PROJECT_NAME}
         priority_queue.cpp
         visual.cpp
         debug.cpp
+        unknown.cpp
+        unknown.h
+        list.cpp
+        list.h
+        types.cpp
+        types.h
+        has_bounding_box.cpp
+        has_bounding_box.h
+        user_input.cpp
+        user_input.h
 )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)

@@ -3,6 +3,8 @@
 #include <vector>
 #include "lookup_box.h"
 #include "reactivity.h"
+#include "unknown.h"
+#include "types.h"
 
 using namespace std;
 
@@ -16,47 +18,59 @@ DoThenView::DoThenView(DoThen *do_then_in) {
     begin_data_sync();
     update_listenable(&lookup_box->text, string("do-then"));
 
-    create_datum_listener_run_now(&do_then->effect, new Fn([&]() {
+    effect_datum_listener = new Fn([&]() {
         delete effect_view;
         if (do_then->effect == nullptr) {
             effect_view = new DoThenEffectAsNullView(this);
         } else {
             effect_view = new DoThenEffectAsAnyView(this);
         }
-    }));
-    create_datum_listener_run_now(&do_then->next, new Fn([&]() {
+    });
+    create_datum_listener_run_now(&do_then->effect, effect_datum_listener);
+    next_datum_listener = new Fn([&]() {
         delete next_view;
-        if (do_then->next == nullptr) {
+        if (is_list(do_then->next)) {
+            next_view = new DoThenNextAsListView(this);
+        } else if (do_then->next == nullptr) {
             next_view = new DoThenNextAsNullView(this);
-        } else {
+        } else if (is_do_then(do_then->next)) {
             next_view = new DoThenNextAsDoThenView(this);
+        } else {
+            printf("VERY BAD DONT HAPPEN!!!!\n");
+            abort();
         }
-    }));
+    });
+    create_datum_listener_run_now(&do_then->next, next_datum_listener);
 
     end_data_sync();
 }
 
 DoThenView::~DoThenView() {
+    destroy_datum_listener(&do_then->effect, effect_datum_listener);
+    destroy_datum_listener(&do_then->next, next_datum_listener);
+
+    begin_data_sync();
     delete lookup_box;
     delete effect_view;
     delete next_view;
+    end_data_sync();
 }
 
-void attach_next(DoThenView *parent, LookupBox *next_lookup_box) {
-    create_binding(&next_lookup_box->rect.x, {&parent->lookup_box->rect.x}, [=]() {
-        next_lookup_box->rect.x = parent->lookup_box->rect.x;
+void attach_next(Rectangle *parent_rect, Rectangle *next_rect) {
+    create_binding(&next_rect->x, {&parent_rect->x}, [=]() {
+        next_rect->x = parent_rect->x;
     });
-    create_binding(&next_lookup_box->rect.y, {&parent->lookup_box->rect.y, &parent->lookup_box->rect.height}, [=]() {
-        next_lookup_box->rect.y = parent->lookup_box->rect.y + parent->lookup_box->rect.height;
+    create_binding(&next_rect->y, {&parent_rect->y, &parent_rect->height}, [=]() {
+        next_rect->y = parent_rect->y + parent_rect->height;
     });
 }
 
-void attach_effect(DoThenView *parent, LookupBox *effect_lookup_box) {
-    create_binding(&effect_lookup_box->rect.x, {&parent->lookup_box->rect.x, &parent->lookup_box->rect.width}, [=]() {
-        effect_lookup_box->rect.x = parent->lookup_box->rect.x + parent->lookup_box->rect.width;
+void attach_effect(Rectangle *parent_rect, Rectangle *effect_rect) {
+    create_binding(&effect_rect->x, {&parent_rect->x, &parent_rect->width}, [=]() {
+        effect_rect->x = parent_rect->x + parent_rect->width;
     });
-    create_binding(&effect_lookup_box->rect.y, {&parent->lookup_box->rect.y}, [=]() {
-        effect_lookup_box->rect.y = parent->lookup_box->rect.y;
+    create_binding(&effect_rect->y, {&parent_rect->y}, [=]() {
+        effect_rect->y = parent_rect->y;
     });
 }
 
@@ -65,17 +79,19 @@ DoThenNextAsNullView::DoThenNextAsNullView(DoThenView *parent) {
     lookup_box->on_lookup = [=](const string &s) {
         if (s == "do-then") {
             begin_data_sync();
-            update_listenable(&parent->do_then->next, new DoThen{
+            auto do_then = new DoThen{
                     .effect = nullptr,
                     .next = nullptr,
-            });
+            };
+            make_do_then(do_then);
+            update_listenable(&parent->do_then->next, do_then);
             end_data_sync();
         }
     };
 
     update_listenable(&lookup_box->prompt, string("next"));
 
-    attach_next(parent, lookup_box);
+    attach_next(&parent->lookup_box->rect, &lookup_box->rect);
 }
 
 DoThenNextAsNullView::~DoThenNextAsNullView() {
@@ -89,30 +105,43 @@ DoThenNextAsNullView::~DoThenNextAsNullView() {
 
 DoThenNextAsDoThenView::DoThenNextAsDoThenView(DoThenView *parent) {
     do_then_view = new DoThenView(parent->do_then->next);
-    do_then_view->lookup_box->on_lookup = [=](const string &s) {
-//        if (s != "do-then") {
+    do_then_view->lookup_box->on_lookup = [&, parent](const string &s) {
         begin_data_sync();
-        update_listenable(&parent->do_then->next, (DoThen *) nullptr);
+
+        auto parameters = new vector<void *>;
+        make_list(parameters);
+
+        auto unknown = new Unknown(do_then_view->lookup_box->text);
+        make_unknown(unknown);
+        parameters->push_back(unknown);
+        if (do_then_view->do_then->effect != nullptr) {
+            parameters->push_back(do_then_view->do_then->effect);
+        }
+        if (do_then_view->do_then->next != nullptr) {
+            parameters->push_back(do_then_view->do_then->next);
+        }
+
+        update_listenable(&parent->do_then->next, (DoThen *) (void *) parameters);
         end_data_sync();
-//        }
     };
 
-    attach_next(parent, do_then_view->lookup_box);
+    attach_next(&parent->lookup_box->rect, &do_then_view->lookup_box->rect);
 }
 
 DoThenNextAsDoThenView::~DoThenNextAsDoThenView() {
     destroy_binding(&do_then_view->lookup_box->rect.x);
     destroy_binding(&do_then_view->lookup_box->rect.y);
 
-    update_listenable(&do_then_view->lookup_box->rect.x, do_then_view->lookup_box->rect.x + 50);
-    update_listenable(&do_then_view->lookup_box->rect.y, do_then_view->lookup_box->rect.y + 50);
+    delete do_then_view;
+//    update_listenable(&do_then_view->lookup_box->rect.x, do_then_view->lookup_box->rect.x + 50);
+//    update_listenable(&do_then_view->lookup_box->rect.y, do_then_view->lookup_box->rect.y + 50);
 }
 
 DoThenEffectAsNullView::DoThenEffectAsNullView(DoThenView *parent) {
     lookup_box = new LookupBox;
 
     update_listenable(&lookup_box->prompt, string("effect"));
-    attach_effect(parent, lookup_box);
+    attach_effect(&parent->lookup_box->rect, &lookup_box->rect);
 }
 
 DoThenEffectAsNullView::~DoThenEffectAsNullView() {
@@ -132,3 +161,22 @@ DoThenEffectAsAnyView::~DoThenEffectAsAnyView() = default;
 DoThenNextView::~DoThenNextView() = default;
 
 DoThenEffectView::~DoThenEffectView() = default;
+
+// TODO uhhhh
+
+DoThenNextAsListView::DoThenNextAsListView(DoThenView *parent) {
+    list_view = new ListView((vector<void *> *) (void *) parent->do_then->next);
+
+//    list_view->lookup_box->on_lookup = [&, parent](const string &s) {
+//        begin_data_sync();
+//
+//        // TODO I HAVE NO IDEA
+//
+//        update_listenable(&parent->do_then->next, (DoThen *) (void *) parameters);
+//        end_data_sync();
+//    };
+
+    attach_next(&parent->lookup_box->rect, &list_view->rect);
+}
+
+DoThenNextAsListView::~DoThenNextAsListView() = default;

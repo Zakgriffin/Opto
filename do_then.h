@@ -4,6 +4,8 @@
 #include <vector>
 #include "do_then.h"
 #include "lookup_box.h"
+#include "has_bounding_box.h"
+#include "list.h"
 
 using namespace std;
 
@@ -17,16 +19,23 @@ class DoThenEffectView;
 
 class DoThenNextView;
 
-struct DoThenView {
+struct DoThenView : HasBoundingBox {
     DoThen *do_then;
     LookupBox *lookup_box; // on_lookup should be assigned by creator right after construction
 
     DoThenEffectView *effect_view;
     DoThenNextView *next_view;
 
+    Fn* effect_datum_listener;
+    Fn* next_datum_listener;
+
     explicit DoThenView(DoThen *do_then_in);
 
     ~DoThenView();
+
+    Rectangle *get_bounding_box() override {
+        return &lookup_box->rect;
+    }
 };
 
 class DoThenNextView {
@@ -50,6 +59,15 @@ public:
     explicit DoThenNextAsDoThenView(DoThenView *parent);
 
     ~DoThenNextAsDoThenView() override;
+};
+
+class DoThenNextAsListView : public DoThenNextView {
+public:
+    ListView *list_view;
+
+    explicit DoThenNextAsListView(DoThenView *parent);
+
+    ~DoThenNextAsListView() override;
 };
 
 class DoThenEffectView {

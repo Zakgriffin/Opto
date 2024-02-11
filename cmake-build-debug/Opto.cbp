@@ -439,6 +439,18 @@
 		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/globals.h">
 			<Option target="Opto"/>
 		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/has_bounding_box.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/has_bounding_box.h">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/list.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/list.h">
+			<Option target="Opto"/>
+		</Unit>
 		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/lookup_box.cpp">
 			<Option target="Opto"/>
 		</Unit>
@@ -464,6 +476,24 @@
 			<Option target="Opto"/>
 		</Unit>
 		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/reactivity.h">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/types.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/types.h">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/unknown.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/unknown.h">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/user_input.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/user_input.h">
 			<Option target="Opto"/>
 		</Unit>
 		<Unit filename="C:/Users/zakgr/CLionProjects/Opto/visual.cpp">

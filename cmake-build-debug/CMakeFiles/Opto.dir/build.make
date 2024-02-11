@@ -218,6 +218,81 @@ CMakeFiles/Opto.dir/debug.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/debug.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\zakgr\CLionProjects\Opto\debug.cpp -o CMakeFiles\Opto.dir\debug.cpp.s
 
+CMakeFiles/Opto.dir/unknown.cpp.obj: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/unknown.cpp.obj: CMakeFiles/Opto.dir/includes_CXX.rsp
+CMakeFiles/Opto.dir/unknown.cpp.obj: C:/Users/zakgr/CLionProjects/Opto/unknown.cpp
+CMakeFiles/Opto.dir/unknown.cpp.obj: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Opto.dir/unknown.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/unknown.cpp.obj -MF CMakeFiles\Opto.dir\unknown.cpp.obj.d -o CMakeFiles\Opto.dir\unknown.cpp.obj -c C:\Users\zakgr\CLionProjects\Opto\unknown.cpp
+
+CMakeFiles/Opto.dir/unknown.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/unknown.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\zakgr\CLionProjects\Opto\unknown.cpp > CMakeFiles\Opto.dir\unknown.cpp.i
+
+CMakeFiles/Opto.dir/unknown.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/unknown.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\zakgr\CLionProjects\Opto\unknown.cpp -o CMakeFiles\Opto.dir\unknown.cpp.s
+
+CMakeFiles/Opto.dir/list.cpp.obj: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/list.cpp.obj: CMakeFiles/Opto.dir/includes_CXX.rsp
+CMakeFiles/Opto.dir/list.cpp.obj: C:/Users/zakgr/CLionProjects/Opto/list.cpp
+CMakeFiles/Opto.dir/list.cpp.obj: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Opto.dir/list.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/list.cpp.obj -MF CMakeFiles\Opto.dir\list.cpp.obj.d -o CMakeFiles\Opto.dir\list.cpp.obj -c C:\Users\zakgr\CLionProjects\Opto\list.cpp
+
+CMakeFiles/Opto.dir/list.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/list.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\zakgr\CLionProjects\Opto\list.cpp > CMakeFiles\Opto.dir\list.cpp.i
+
+CMakeFiles/Opto.dir/list.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/list.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\zakgr\CLionProjects\Opto\list.cpp -o CMakeFiles\Opto.dir\list.cpp.s
+
+CMakeFiles/Opto.dir/types.cpp.obj: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/types.cpp.obj: CMakeFiles/Opto.dir/includes_CXX.rsp
+CMakeFiles/Opto.dir/types.cpp.obj: C:/Users/zakgr/CLionProjects/Opto/types.cpp
+CMakeFiles/Opto.dir/types.cpp.obj: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Opto.dir/types.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/types.cpp.obj -MF CMakeFiles\Opto.dir\types.cpp.obj.d -o CMakeFiles\Opto.dir\types.cpp.obj -c C:\Users\zakgr\CLionProjects\Opto\types.cpp
+
+CMakeFiles/Opto.dir/types.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/types.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\zakgr\CLionProjects\Opto\types.cpp > CMakeFiles\Opto.dir\types.cpp.i
+
+CMakeFiles/Opto.dir/types.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/types.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\zakgr\CLionProjects\Opto\types.cpp -o CMakeFiles\Opto.dir\types.cpp.s
+
+CMakeFiles/Opto.dir/has_bounding_box.cpp.obj: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/has_bounding_box.cpp.obj: CMakeFiles/Opto.dir/includes_CXX.rsp
+CMakeFiles/Opto.dir/has_bounding_box.cpp.obj: C:/Users/zakgr/CLionProjects/Opto/has_bounding_box.cpp
+CMakeFiles/Opto.dir/has_bounding_box.cpp.obj: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Opto.dir/has_bounding_box.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/has_bounding_box.cpp.obj -MF CMakeFiles\Opto.dir\has_bounding_box.cpp.obj.d -o CMakeFiles\Opto.dir\has_bounding_box.cpp.obj -c C:\Users\zakgr\CLionProjects\Opto\has_bounding_box.cpp
+
+CMakeFiles/Opto.dir/has_bounding_box.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/has_bounding_box.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\zakgr\CLionProjects\Opto\has_bounding_box.cpp > CMakeFiles\Opto.dir\has_bounding_box.cpp.i
+
+CMakeFiles/Opto.dir/has_bounding_box.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/has_bounding_box.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\zakgr\CLionProjects\Opto\has_bounding_box.cpp -o CMakeFiles\Opto.dir\has_bounding_box.cpp.s
+
+CMakeFiles/Opto.dir/user_input.cpp.obj: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/user_input.cpp.obj: CMakeFiles/Opto.dir/includes_CXX.rsp
+CMakeFiles/Opto.dir/user_input.cpp.obj: C:/Users/zakgr/CLionProjects/Opto/user_input.cpp
+CMakeFiles/Opto.dir/user_input.cpp.obj: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Opto.dir/user_input.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/user_input.cpp.obj -MF CMakeFiles\Opto.dir\user_input.cpp.obj.d -o CMakeFiles\Opto.dir\user_input.cpp.obj -c C:\Users\zakgr\CLionProjects\Opto\user_input.cpp
+
+CMakeFiles/Opto.dir/user_input.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/user_input.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\zakgr\CLionProjects\Opto\user_input.cpp > CMakeFiles\Opto.dir\user_input.cpp.i
+
+CMakeFiles/Opto.dir/user_input.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/user_input.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\zakgr\CLionProjects\Opto\user_input.cpp -o CMakeFiles\Opto.dir\user_input.cpp.s
+
 # Object files for target Opto
 Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/main.cpp.obj" \
@@ -229,7 +304,12 @@ Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/matrix_math.cpp.obj" \
 "CMakeFiles/Opto.dir/priority_queue.cpp.obj" \
 "CMakeFiles/Opto.dir/visual.cpp.obj" \
-"CMakeFiles/Opto.dir/debug.cpp.obj"
+"CMakeFiles/Opto.dir/debug.cpp.obj" \
+"CMakeFiles/Opto.dir/unknown.cpp.obj" \
+"CMakeFiles/Opto.dir/list.cpp.obj" \
+"CMakeFiles/Opto.dir/types.cpp.obj" \
+"CMakeFiles/Opto.dir/has_bounding_box.cpp.obj" \
+"CMakeFiles/Opto.dir/user_input.cpp.obj"
 
 # External object files for target Opto
 Opto_EXTERNAL_OBJECTS =
@@ -244,13 +324,18 @@ Opto.exe: CMakeFiles/Opto.dir/matrix_math.cpp.obj
 Opto.exe: CMakeFiles/Opto.dir/priority_queue.cpp.obj
 Opto.exe: CMakeFiles/Opto.dir/visual.cpp.obj
 Opto.exe: CMakeFiles/Opto.dir/debug.cpp.obj
+Opto.exe: CMakeFiles/Opto.dir/unknown.cpp.obj
+Opto.exe: CMakeFiles/Opto.dir/list.cpp.obj
+Opto.exe: CMakeFiles/Opto.dir/types.cpp.obj
+Opto.exe: CMakeFiles/Opto.dir/has_bounding_box.cpp.obj
+Opto.exe: CMakeFiles/Opto.dir/user_input.cpp.obj
 Opto.exe: CMakeFiles/Opto.dir/build.make
 Opto.exe: _deps/raylib-build/raylib/libraylib.a
 Opto.exe: _deps/raylib-build/raylib/external/glfw/src/libglfw3.a
 Opto.exe: CMakeFiles/Opto.dir/linkLibs.rsp
 Opto.exe: CMakeFiles/Opto.dir/objects1.rsp
 Opto.exe: CMakeFiles/Opto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable Opto.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\zakgr\CLionProjects\Opto\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Opto.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Opto.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

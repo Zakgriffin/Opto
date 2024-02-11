@@ -4,12 +4,15 @@
 #include <unordered_set>
 #include <map>
 #include <functional>
+#include <string>
 #include "visual.h"
 #include "raylib.h"
 
+// TODO remove visual.h include
+
 using namespace std;
 
-// I don't want this here, but it doesn't compile in controls.h so... whatever
+// TODO I don't want this here, but it doesn't compile in controls.h so... whatever
 struct HoverHandler {
     function<bool(Vector2)> is_within;
     function<void(void)> hover_enter;
@@ -48,5 +51,7 @@ function<bool(Vector2)> within_rectangle(Rectangle *rect);
 float center(float container_pos, float container_span, float span);
 
 void debug_list_globals();
+
+bool is_number(const std::string &s);
 
 #endif //OPTO_GLOBALS_H

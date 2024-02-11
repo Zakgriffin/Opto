@@ -1,5 +1,5 @@
-#ifndef REACTIVITYTESTING_REACTIVITY_H
-#define REACTIVITYTESTING_REACTIVITY_H
+#ifndef OPTO_REACTIVITY_H
+#define OPTO_REACTIVITY_H
 
 #include "debug.h"
 #include "priority_queue.h"
@@ -37,7 +37,7 @@ void create_datum_listener(T *datum, Fn *datum_listener) {
 
 template<typename T>
 void destroy_datum_listener(T *datum, Fn *datum_listener) {
-//    assertm(datum_listeners, "datum is not listenable\n");
+//    ensure_msg(datum_listeners, "datum is not listenable\n");
     ensure_msg(data_listeners[datum].contains(datum_listener), "datum_listeners does not contain datum_listener\n");
 
     data_listeners[datum].erase(datum_listener);
@@ -60,7 +60,7 @@ void queue_dependant_stale(T *dependant) {
 void recalculate_priority(Binding *binding);
 
 template<typename T>
-void create_binding(T *bound_datum, unordered_set<void *> dependencies, function<void(void)> update) {
+void create_binding(T *bound_datum, const unordered_set<void *>& dependencies, const function<void(void)> &update) {
     ensure_msg(data_sync_active, "not in a data_sync block");
     ensure_msg(!bindings.contains(bound_datum), "binding for this address already exists");
 
@@ -119,4 +119,4 @@ void end_data_sync();
 
 void debug_list_reactivity();
 
-#endif //REACTIVITYTESTING_REACTIVITY_H
+#endif OPTO_REACTIVITY_H

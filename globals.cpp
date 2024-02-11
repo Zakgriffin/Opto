@@ -7,7 +7,7 @@
 
 using namespace std;
 
-map<void*, string> debug_names;
+map<void *, string> debug_names;
 
 unordered_set<Visual *> visuals;
 
@@ -27,8 +27,8 @@ float map_range(float n, float start1, float stop1, float start2, float stop2) {
     return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
 }
 
-function<bool(Vector2)> within_rectangle(Rectangle* rect) {
-    return [=](Vector2 point){return CheckCollisionPointRec( point,  *rect); };
+function<bool(Vector2)> within_rectangle(Rectangle *rect) {
+    return [=](Vector2 point) { return CheckCollisionPointRec(point, *rect); };
 }
 
 Fn::Fn(function<void(void)> f) {
@@ -44,4 +44,10 @@ void debug_list_globals() {
 //    debug_list_controls();
     debug_list_reactivity();
     printf("\n");
+}
+
+bool is_number(const std::string &s) {
+    string::const_iterator it = s.begin();
+    while (it != s.end() && isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
 }

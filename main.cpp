@@ -6,6 +6,8 @@
 #include "controls.h"
 #include "reactivity.h"
 #include "do_then.h"
+#include "types.h"
+#include "user_input.h"
 
 using namespace std;
 
@@ -31,6 +33,7 @@ int main() {
                         .effect = nullptr,
                         .next = nullptr,
                 };
+                make_do_then(do_then);
                 auto do_then_view = new DoThenView(do_then);
                 do_then_view->lookup_box->on_lookup = [=](const string &s) {
                     delete do_then_view;
@@ -42,6 +45,8 @@ int main() {
                 end_data_sync();
 
                 delete lookup_box;
+            } else if (is_number(text)) {
+                printf("aight\n");
             }
         };
 

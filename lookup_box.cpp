@@ -1,13 +1,7 @@
 #include "lookup_box.h"
-
-#include <raylib.h>
-#include <string>
-#include <vector>
 #include "globals.h"
-#include "reactivity.h"
+#include "user_input.h"
 #include "controls.h"
-
-using namespace std;
 
 LookupBox::LookupBox() {
     on_lookup = nullptr;
@@ -102,7 +96,7 @@ LookupBox::LookupBox() {
         description += lower;
         description += "'";
 
-        listener_visual_infos[key_listener] = {GetColor(0xDD7700FF), description};;
+        listener_visual_infos[key_listener] = {GetColor(0xDD7700FF), description};
     }
 
     // super listeners
@@ -235,6 +229,8 @@ void LookupBox::draw() {
 
     Color text_color = text.empty() ? GRAY : WHITE;
     DrawTextEx(font, drawn_text.c_str(), Vector2{text_x, text_y}, (float) font.baseSize / 2, 0, text_color);
+
+//    DrawLineV(Vector2{rect.x, rect.y + rect.height}, Vector2{rect.x + rect.width, rect.y+ rect.height}, YELLOW);
 
     if (selected) {
         float selector_line_x = text_x + font_width * (float) character_index;

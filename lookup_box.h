@@ -6,7 +6,6 @@
 #include "raylib.h"
 #include "visual.h"
 #include "globals.h"
-#include "controls.h"
 #include "reactivity.h"
 
 using namespace std;

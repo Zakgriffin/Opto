@@ -60,6 +60,36 @@
   "output": "CMakeFiles/Opto.dir/debug.cpp.obj"
 },
 {
+  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\unknown.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\unknown.cpp",
+  "file": "C:/Users/zakgr/CLionProjects/Opto/unknown.cpp",
+  "output": "CMakeFiles/Opto.dir/unknown.cpp.obj"
+},
+{
+  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\list.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\list.cpp",
+  "file": "C:/Users/zakgr/CLionProjects/Opto/list.cpp",
+  "output": "CMakeFiles/Opto.dir/list.cpp.obj"
+},
+{
+  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\types.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\types.cpp",
+  "file": "C:/Users/zakgr/CLionProjects/Opto/types.cpp",
+  "output": "CMakeFiles/Opto.dir/types.cpp.obj"
+},
+{
+  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\has_bounding_box.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\has_bounding_box.cpp",
+  "file": "C:/Users/zakgr/CLionProjects/Opto/has_bounding_box.cpp",
+  "output": "CMakeFiles/Opto.dir/has_bounding_box.cpp.obj"
+},
+{
+  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\user_input.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\user_input.cpp",
+  "file": "C:/Users/zakgr/CLionProjects/Opto/user_input.cpp",
+  "output": "CMakeFiles/Opto.dir/user_input.cpp.obj"
+},
+{
   "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
   "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\rcore.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\rcore.c",
   "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/rcore.c",
