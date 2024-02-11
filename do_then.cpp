@@ -162,8 +162,6 @@ DoThenNextView::~DoThenNextView() = default;
 
 DoThenEffectView::~DoThenEffectView() = default;
 
-// TODO uhhhh
-
 DoThenNextAsListView::DoThenNextAsListView(DoThenView *parent) {
     list_view = new ListView((vector<void *> *) (void *) parent->do_then->next);
 

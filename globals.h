@@ -7,12 +7,10 @@
 #include <string>
 #include "visual.h"
 #include "raylib.h"
-
 // TODO remove visual.h include
 
 using namespace std;
 
-// TODO I don't want this here, but it doesn't compile in controls.h so... whatever
 struct HoverHandler {
     function<bool(Vector2)> is_within;
     function<void(void)> hover_enter;
