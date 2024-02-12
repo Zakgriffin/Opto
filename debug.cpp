@@ -1,12 +1,14 @@
 #include "debug.h"
 
+#include <utility>
+
 using namespace std;
 
 unordered_map<void *, string *> object_to_name;
 unordered_set<void *> allocated_objects;
 
 void name(void *object, string name) {
-    object_to_name[object] = new string(name);
+    object_to_name[object] = new string(std::move(name));
 }
 
 void print_allocated_objects() {

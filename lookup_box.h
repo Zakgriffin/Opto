@@ -1,12 +1,8 @@
 #ifndef OPTO_LOOKUP_BOX_H
 #define OPTO_LOOKUP_BOX_H
 
-#include <vector>
-#include <string>
-#include "raylib.h"
-#include "visual.h"
 #include "globals.h"
-#include "reactivity.h"
+#include "user_input.h"
 
 using namespace std;
 

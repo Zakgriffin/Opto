@@ -1,12 +1,8 @@
 #include "do_then.h"
-
-#include <vector>
 #include "lookup_box.h"
 #include "reactivity.h"
 #include "unknown.h"
 #include "types.h"
-
-using namespace std;
 
 DoThenView::DoThenView(DoThen *do_then_in) {
     do_then = do_then_in;
@@ -84,6 +80,7 @@ DoThenNextAsNullView::DoThenNextAsNullView(DoThenView *parent) {
                     .next = nullptr,
             };
             make_do_then(do_then);
+
             update_listenable(&parent->do_then->next, do_then);
             end_data_sync();
         }
@@ -165,14 +162,10 @@ DoThenEffectView::~DoThenEffectView() = default;
 DoThenNextAsListView::DoThenNextAsListView(DoThenView *parent) {
     list_view = new ListView((vector<void *> *) (void *) parent->do_then->next);
 
-//    list_view->lookup_box->on_lookup = [&, parent](const string &s) {
-//        begin_data_sync();
-//
-//        // TODO I HAVE NO IDEA
-//
-//        update_listenable(&parent->do_then->next, (DoThen *) (void *) parameters);
-//        end_data_sync();
-//    };
+    // TODO should be per child listening
+    for(auto x : *list_view->item_views) {
+
+    }
 
     attach_next(&parent->lookup_box->rect, &list_view->rect);
 }

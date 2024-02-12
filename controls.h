@@ -28,7 +28,7 @@ struct ControlsView : Visual {
     vector<Rectangle *> hover_rectangles;
     KeyVisualInfo *hovered_key_visual_info;
 
-    void draw();
+    void draw() override;
 };
 
 #endif //OPTO_CONTROLS_H

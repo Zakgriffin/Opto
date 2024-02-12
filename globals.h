@@ -11,13 +11,6 @@
 
 using namespace std;
 
-struct HoverHandler {
-    function<bool(Vector2)> is_within;
-    function<void(void)> hover_enter;
-    function<void(void)> hover_exit;
-    bool was_hovered;
-};
-
 class Fn {
 public:
     function<void(void)> f;

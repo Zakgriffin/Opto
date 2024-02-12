@@ -3,6 +3,13 @@
 
 #include "globals.h"
 
+struct HoverHandler {
+    function<bool(Vector2)> is_within;
+    function<void(void)> hover_enter;
+    function<void(void)> hover_exit;
+    bool was_hovered;
+};
+
 extern map<int, unordered_set<Fn *>> all_key_pressed_listeners;
 
 void tick_controls();

@@ -26,8 +26,8 @@ struct DoThenView : HasBoundingBox {
     DoThenEffectView *effect_view;
     DoThenNextView *next_view;
 
-    Fn* effect_datum_listener;
-    Fn* next_datum_listener;
+    Fn *effect_datum_listener;
+    Fn *next_datum_listener;
 
     explicit DoThenView(DoThen *do_then_in);
 

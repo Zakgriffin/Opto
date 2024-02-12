@@ -34,6 +34,7 @@ int main() {
                         .next = nullptr,
                 };
                 make_do_then(do_then);
+
                 auto do_then_view = new DoThenView(do_then);
                 do_then_view->lookup_box->on_lookup = [=](const string &s) {
                     delete do_then_view;

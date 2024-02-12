@@ -7,7 +7,7 @@ class ListView {
 public:
     vector<void *> *list;
 
-    vector<HasBoundingBox *> *list_views; // on_lookup should be assigned by creator right after construction
+    vector<HasBoundingBox *> *item_views; // on_lookup should be assigned by creator right after construction
 
     Fn *list_datum_listener;
 

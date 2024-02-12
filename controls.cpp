@@ -1,6 +1,7 @@
 #include "controls.h"
 #include "globals.h"
 #include "user_input.h"
+#include "reactivity.h"
 
 map<Fn *, ListenerVisualInfo> listener_visual_infos;
 

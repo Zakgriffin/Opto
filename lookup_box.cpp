@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "user_input.h"
 #include "controls.h"
+#include "reactivity.h"
 
 LookupBox::LookupBox() {
     on_lookup = nullptr;
