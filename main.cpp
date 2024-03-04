@@ -3,7 +3,6 @@
 #include "globals.h"
 #include "lookup_box.h"
 #include "priority_queue.h"
-#include "controls.h"
 #include "reactivity.h"
 #include "do_then.h"
 #include "types.h"
@@ -40,7 +39,6 @@ int main() {
                     delete do_then_view;
                 };
 
-                begin_data_sync();
                 update_listenable(&do_then_view->lookup_box->rect.x, lookup_box->rect.x);
                 update_listenable(&do_then_view->lookup_box->rect.y, lookup_box->rect.y);
                 end_data_sync();
@@ -51,7 +49,6 @@ int main() {
             }
         };
 
-        begin_data_sync();
         Vector2 position = GetMousePosition();
         update_listenable(&lookup_box->rect.x, position.x);
         update_listenable(&lookup_box->rect.y, position.y);

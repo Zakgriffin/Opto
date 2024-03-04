@@ -113,10 +113,13 @@ void destroy_binding(T *bound_datum) {
     delete binding;
 }
 
-void begin_data_sync();
-
 void end_data_sync();
 
 void debug_list_reactivity();
+
+template<typename T>
+T at(vector<T> vec, int index) {
+    return vec.at(index);
+}
 
 #endif

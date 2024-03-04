@@ -1,224 +1,82 @@
 [
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\main.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\main.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/main.cpp",
-  "output": "CMakeFiles/Opto.dir/main.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/main.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/main.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/main.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\reactivity.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\reactivity.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/reactivity.cpp",
-  "output": "CMakeFiles/Opto.dir/reactivity.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/reactivity.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/reactivity.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/reactivity.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\do_then.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\do_then.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/do_then.cpp",
-  "output": "CMakeFiles/Opto.dir/do_then.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/do_then.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/do_then.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/do_then.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\globals.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\globals.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/globals.cpp",
-  "output": "CMakeFiles/Opto.dir/globals.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/globals.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/globals.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/globals.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\controls.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\controls.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/controls.cpp",
-  "output": "CMakeFiles/Opto.dir/controls.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/controls.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/controls.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/controls.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\lookup_box.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\lookup_box.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/lookup_box.cpp",
-  "output": "CMakeFiles/Opto.dir/lookup_box.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/lookup_box.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/lookup_box.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/lookup_box.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\matrix_math.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\matrix_math.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/matrix_math.cpp",
-  "output": "CMakeFiles/Opto.dir/matrix_math.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/matrix_math.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/matrix_math.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/matrix_math.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\priority_queue.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\priority_queue.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/priority_queue.cpp",
-  "output": "CMakeFiles/Opto.dir/priority_queue.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/priority_queue.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/priority_queue.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/priority_queue.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\visual.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\visual.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/visual.cpp",
-  "output": "CMakeFiles/Opto.dir/visual.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/visual.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/visual.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/visual.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\debug.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\debug.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/debug.cpp",
-  "output": "CMakeFiles/Opto.dir/debug.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/debug.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/debug.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/debug.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\unknown.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\unknown.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/unknown.cpp",
-  "output": "CMakeFiles/Opto.dir/unknown.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/unknown.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/unknown.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/unknown.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\list.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\list.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/list.cpp",
-  "output": "CMakeFiles/Opto.dir/list.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/list.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/list.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/list.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\types.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\types.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/types.cpp",
-  "output": "CMakeFiles/Opto.dir/types.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/types.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/types.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/types.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\has_bounding_box.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\has_bounding_box.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/has_bounding_box.cpp",
-  "output": "CMakeFiles/Opto.dir/has_bounding_box.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/has_bounding_box.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/has_bounding_box.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/has_bounding_box.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Opto.dir/includes_CXX.rsp -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles\\Opto.dir\\user_input.cpp.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\user_input.cpp",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/user_input.cpp",
-  "output": "CMakeFiles/Opto.dir/user_input.cpp.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/user_input.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/user_input.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/user_input.cpp"
 },
 {
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\rcore.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\rcore.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/rcore.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\rmodels.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\rmodels.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/rmodels.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\rshapes.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\rshapes.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/rshapes.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\rtext.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\rtext.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/rtext.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\rtextures.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\rtextures.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/rtextures.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\utils.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\utils.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/utils.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/utils.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles\\raylib.dir\\raudio.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\raudio.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/raudio.c",
-  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/raudio.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\context.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\context.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/context.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/context.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\init.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\init.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/init.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/init.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\input.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\input.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/input.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\monitor.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\monitor.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/monitor.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/monitor.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\vulkan.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\vulkan.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/vulkan.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/vulkan.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\window.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\window.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/window.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/window.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\win32_init.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_init.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/win32_init.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_init.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\win32_joystick.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_joystick.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/win32_joystick.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_joystick.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\win32_monitor.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_monitor.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/win32_monitor.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_monitor.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\win32_time.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_time.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/win32_time.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_time.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\win32_thread.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_thread.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/win32_thread.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_thread.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\win32_window.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_window.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/win32_window.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_window.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\wgl_context.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\wgl_context.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/wgl_context.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/wgl_context.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\egl_context.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\egl_context.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/egl_context.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.obj"
-},
-{
-  "directory": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-build/raylib/external/glfw/src",
-  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=c99 -fdiagnostics-color=always -Wall -Wdeclaration-after-statement -o CMakeFiles\\glfw.dir\\osmesa_context.c.obj -c C:\\Users\\zakgr\\CLionProjects\\Opto\\cmake-build-debug\\_deps\\raylib-src\\src\\external\\glfw\\src\\osmesa_context.c",
-  "file": "C:/Users/zakgr/CLionProjects/Opto/cmake-build-debug/_deps/raylib-src/src/external/glfw/src/osmesa_context.c",
-  "output": "_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.obj"
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/4.5.0/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/4.5.0/include -std=gnu++20 -o CMakeFiles/Opto.dir/edit_flow.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/edit_flow.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/edit_flow.cpp"
 }
 ]

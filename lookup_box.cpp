@@ -16,8 +16,6 @@ LookupBox::LookupBox() {
     pad_x = 5;
     pad_y = 3;
 
-    begin_data_sync();
-
     create_binding(&text_x, {&rect.x}, [&]() { text_x = rect.x + pad_x; });
     create_binding(&text_y, {&rect.y}, [&]() { text_y = rect.y + pad_y; });
 
@@ -192,7 +190,6 @@ LookupBox::~LookupBox() {
     listener_visual_infos.erase(key_left_listener);
     listener_visual_infos.erase(key_right_listener);
 
-    begin_data_sync();
     destroy_binding(&rect.height);
     destroy_binding(&rect.width);
     destroy_binding(&drawn_text);
@@ -218,7 +215,6 @@ void LookupBox::unselect() {
 }
 
 void LookupBox::on_text_change() {
-    begin_data_sync();
     update_listenable(&text, text);
     end_data_sync();
 

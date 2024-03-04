@@ -11,4 +11,10 @@ public:
     }
 };
 
+void align_below(Rectangle *base, Rectangle *below);
+
+void align_right(Rectangle *base, Rectangle *right);
+
+void detach_aligned(Rectangle *rect);
+
 #endif //OPTO_HAS_BOUNDING_BOX_H

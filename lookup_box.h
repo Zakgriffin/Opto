@@ -3,10 +3,9 @@
 
 #include "globals.h"
 #include "user_input.h"
+#include "has_bounding_box.h"
 
-using namespace std;
-
-struct LookupBox : public Visual {
+struct LookupBox : public Visual, HasBoundingBox {
 public:
     // logic
     string text;
@@ -40,6 +39,10 @@ public:
     void unselect();
 
     void draw() override;
+
+    Rectangle *get_bounding_box() override {
+        return &rect;
+    }
 
     explicit LookupBox();
 

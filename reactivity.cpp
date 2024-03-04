@@ -9,7 +9,6 @@ bool compare_binding(Binding *left, Binding *right) {
 unordered_map<void *, unordered_set<Fn *> > data_listeners;
 unordered_map<void *, Binding *> bindings;
 PriorityQueue<Binding *, compare_binding> bindings_to_update;
-int data_sync_active = 0;
 
 void recalculate_priority(Binding *binding) {
     int greatest_priority = 0;
@@ -36,15 +35,7 @@ void trigger_listeners(void *datum) {
     }
 }
 
-void begin_data_sync() {
-//    ensure_msg(!data_sync_active, "already in data_sync block at begin_data_sync invocation");
-
-    data_sync_active++;
-}
-
 void end_data_sync() {
-    ensure(data_sync_active);
-
     while (!bindings_to_update.is_empty()) {
         Binding *binding = bindings_to_update.pop();
 
@@ -53,7 +44,6 @@ void end_data_sync() {
             trigger_listeners(binding->bound_datum);
         }
     }
-    data_sync_active--;
 }
 
 void debug_list_reactivity() {

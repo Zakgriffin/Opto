@@ -47,7 +47,7 @@ add_executable(${PROJECT_NAME}
         has_bounding_box.h
         user_input.cpp
         user_input.h
-)
+        edit_flow.cpp)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

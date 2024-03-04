@@ -7,8 +7,6 @@
 #include "has_bounding_box.h"
 #include "list.h"
 
-using namespace std;
-
 struct DoThen {
     void *effect;
     DoThen *next;
@@ -33,14 +31,16 @@ struct DoThenView : HasBoundingBox {
 
     ~DoThenView();
 
+    Rectangle bounding_box;
     Rectangle *get_bounding_box() override {
-        return &lookup_box->rect;
+        // TODO constrain bounding box
+        return &bounding_box;
     }
 };
 
-class DoThenNextView {
+class DoThenNextView : public HasBoundingBox{
 public:
-    virtual ~DoThenNextView();
+    virtual ~DoThenNextView() = default;
 };
 
 class DoThenNextAsNullView : public DoThenNextView {
@@ -48,6 +48,10 @@ public:
     LookupBox *lookup_box;
 
     explicit DoThenNextAsNullView(DoThenView *parent);
+
+    Rectangle * get_bounding_box() override {
+        return lookup_box->get_bounding_box();
+    }
 
     ~DoThenNextAsNullView() override;
 };
@@ -57,6 +61,10 @@ public:
     DoThenView *do_then_view;
 
     explicit DoThenNextAsDoThenView(DoThenView *parent);
+
+    Rectangle * get_bounding_box() override {
+        return do_then_view->get_bounding_box();
+    }
 
     ~DoThenNextAsDoThenView() override;
 };
@@ -70,9 +78,9 @@ public:
     ~DoThenNextAsListView() override;
 };
 
-class DoThenEffectView {
+class DoThenEffectView : public HasBoundingBox {
 public:
-    virtual ~DoThenEffectView();
+    virtual ~DoThenEffectView() = default;
 };
 
 class DoThenEffectAsNullView : public DoThenEffectView {
@@ -81,12 +89,20 @@ public:
 
     explicit DoThenEffectAsNullView(DoThenView *parent);
 
+    Rectangle * get_bounding_box() override {
+        return lookup_box->get_bounding_box();
+    }
+
     ~DoThenEffectAsNullView() override;
 };
 
 class DoThenEffectAsAnyView : public DoThenEffectView {
 public:
     explicit DoThenEffectAsAnyView(DoThenView *parent);
+
+    Rectangle * get_bounding_box() override {
+        return nullptr;
+    }
 
     ~DoThenEffectAsAnyView() override;
 };
