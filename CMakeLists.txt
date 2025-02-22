@@ -28,26 +28,26 @@ endif ()
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        reactivity.cpp
-        do_then.cpp
-        globals.cpp
-        controls.cpp
-        lookup_box.cpp
-        matrix_math.cpp
-        priority_queue.cpp
-        visual.cpp
-        debug.cpp
-        unknown.cpp
-        unknown.h
-        list.cpp
-        list.h
-        types.cpp
-        types.h
-        has_bounding_box.cpp
-        has_bounding_box.h
+        main.h
+        object_view.cpp
+        object_view.h
         user_input.cpp
         user_input.h
-        edit_flow.cpp)
+        object.cpp
+        object.h
+        do_then.cpp
+        do_then.h
+        stds.h
+        globals.h
+        event.cpp
+        event.h
+        unknown.cpp
+        unknown.h
+        type.cpp
+        type.h
+        editable_text.cpp
+        editable_text.h
+)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

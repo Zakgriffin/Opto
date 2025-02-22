@@ -1,14 +1,10 @@
-#include <raylib.h>
-#include <cstdio>
-#include "globals.h"
-#include "lookup_box.h"
-#include "priority_queue.h"
-#include "reactivity.h"
-#include "do_then.h"
-#include "types.h"
-#include "user_input.h"
+#include "main.h"
 
-using namespace std;
+Font font;
+int FONT_HEIGHT = 18;
+
+Color BACKGROUND_COLOR = GetColor(0x111111FF);
+Color BOX_COLOR = GetColor(0x222222FF);
 
 int main() {
     const int screen_width = 1400;
@@ -17,80 +13,30 @@ int main() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
     InitWindow(screen_width, screen_height, "Opto");
     SetTargetFPS(60);
-    load_font();
 
-    printf("Running!\n");
+    font = LoadFontEx("resources/RobotoMono-Regular.ttf", FONT_HEIGHT * 2, nullptr, 250);
 
-    auto *whole_screen_rect = new Rectangle{.x=0, .y=0, .width=screen_width, .height=screen_height};
-
-    Fn *create_lookup_box = new Fn([]() {
-        auto lookup_box = new LookupBox;
-
-        lookup_box->on_lookup = [=](const string &text) {
-            if (text == "do-then") {
-                auto do_then = new DoThen{
-                        .effect = nullptr,
-                        .next = nullptr,
-                };
-                make_do_then(do_then);
-
-                auto do_then_view = new DoThenView(do_then);
-                do_then_view->lookup_box->on_lookup = [=](const string &s) {
-                    delete do_then_view;
-                };
-
-                update_listenable(&do_then_view->lookup_box->rect.x, lookup_box->rect.x);
-                update_listenable(&do_then_view->lookup_box->rect.y, lookup_box->rect.y);
-                end_data_sync();
-
-                delete lookup_box;
-            } else if (is_number(text)) {
-                printf("aight\n");
-            }
-        };
-
-        Vector2 position = GetMousePosition();
-        update_listenable(&lookup_box->rect.x, position.x);
-        update_listenable(&lookup_box->rect.y, position.y);
-        update_listenable(&lookup_box->prompt, string("opto"));
-        lookup_box->select();
-        end_data_sync();
-    });
-
-    auto hover_handler = new HoverHandler{
-            .is_within=within_rectangle(whole_screen_rect),
-            .hover_enter=[&]() {
-                create_double_click_listener(create_lookup_box);
-            },
-            .hover_exit=[&]() {
-                destroy_double_click_listener(create_lookup_box);
-            },
-    };
-    create_hover_handler(hover_handler);
-
+    double_click_listeners.insert(new Event([]() {
+        auto unknown = new Unknown();
+        make_top_level_object(unknown);
+    }));
 
     SetExitKey(0);
+    ugh_test();
     while (!WindowShouldClose()) {
-        if (bindings_to_update.size() > 0) {
-            printf("stuff not updated\n");
-        }
-
-        if (IsKeyPressed('`')) debug_list_globals();
-
-        tick_controls();
-
         BeginDrawing();
+
+//        tick_user_input();
 
         ClearBackground(BACKGROUND_COLOR);
 
-        for (Visual *visual: visuals) {
-            visual->draw();
+        for (auto visual: visuals) {
+//            visual->draw();
         }
 
         EndDrawing();
     }
 
-    UnloadFont(font);
     CloseWindow();
 
     return 0;

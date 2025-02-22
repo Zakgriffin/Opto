@@ -1,49 +1,15 @@
 #ifndef OPTO_USER_INPUT_H
 #define OPTO_USER_INPUT_H
 
+#include "stds.h"
 #include "globals.h"
+#include "event.h"
 
-struct HoverHandler {
-    function<bool(Vector2)> is_within;
-    function<void(void)> hover_enter;
-    function<void(void)> hover_exit;
-    bool was_hovered;
-};
+extern unordered_set<Event*> click_listeners;
+extern unordered_set<Event*> double_click_listeners;
 
-extern map<int, unordered_set<Fn *>> all_key_pressed_listeners;
+void tick_user_input();
 
-void tick_controls();
-
-//void debug_list_controls();
-
-// listeners
-
-void create_hover_handler(HoverHandler *hover_handler);
-
-void destroy_hover_handler(HoverHandler *hover_handler);
-
-void create_click_listener(Fn *listener);
-
-void destroy_click_listener(Fn *listener);
-
-void create_double_click_listener(Fn *listener);
-
-void destroy_double_click_listener(Fn *listener);
-
-void create_key_pressed_listener(int key, Fn *listener);
-
-void destroy_key_pressed_listener(int key, Fn *listener);
-
-void create_key_released_listener(int key, Fn *listener);
-
-void destroy_key_released_listener(int key, Fn *listener);
-
-void create_key_pressed_listeners(const vector<KeyListenerPair> &key_listener_pairs);
-
-void destroy_key_pressed_listeners(const vector<KeyListenerPair> &key_listener_pairs);
-
-//void create_key_released_listeners(const vector<KeyListenerPair> &key_listener_pairs);
-
-//void destroy_key_released_listeners(const vector<KeyListenerPair> &key_listener_pairs);
+void create_key_pressed_listener(int key, Event *listener);
 
 #endif //OPTO_USER_INPUT_H
