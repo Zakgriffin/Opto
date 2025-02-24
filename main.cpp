@@ -10,6 +10,7 @@ int main() {
     const int screen_width = 1400;
     const int screen_height = 800;
 
+    SetTraceLogLevel(LOG_ERROR);
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
     InitWindow(screen_width, screen_height, "Opto");
     SetTargetFPS(60);

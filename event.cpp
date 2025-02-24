@@ -6,21 +6,13 @@ int debug_scope = 0;
 
 map<void *, string> object_names;
 
-struct PropagatedEvent {
-    Event *event;
-    unordered_set<PropagatedEvent *> before;
-    unordered_set<PropagatedEvent *> after;
-    int order;
-};
-
 SequencedEvent *finished_event = new SequencedEvent;
-
-
 SequencedEvent *current_sequenced_event = finished_event;
+
+map<Event *, PropagatedEvent *> event_to_propagated_event;
 
 map<int *, PropagatedEvent *> datum_to_update_propagated_event;
 map<void *, PropagatedEvent *> datum_to_destroy_propagated_event;
-
 
 string name_of(void *object) {
     if (object_names.contains(object)) {
@@ -34,7 +26,18 @@ void print_sequenced_events() {
     auto s = start;
 
     do {
-        printf(" -> %s", name_of(s).c_str());
+        printf("-> %s\n", name_of(s).c_str());
+//        printf("      prev: %s\n", name_of(s->prev).c_str());
+//        printf("      next: %s\n", name_of(s->next).c_str());
+
+        if (event_to_propagated_event.contains(s->event)) {
+            auto k = event_to_propagated_event.at(s->event);
+            for (auto a: k->after) {
+                printf("    THEN: %s\n", name_of(a).c_str());
+            }
+            printf("     PROP_AKA: %s\n", name_of(k).c_str());
+        }
+
         s = s->next;
     } while (s != start);
 
@@ -60,13 +63,17 @@ void end_scope() {
     debug_scope--;
 }
 
-Event *do_nothing = new Event([]() {
-    debug_print("do_nothing", {});
-    end_scope();
-});
+Event *create_do_nothing() {
+    auto do_nothing = new Event([]() {
+        debug_print("do_nothing", {});
+        end_scope();
+    });
+    give_name(do_nothing, "do_nothing");
+    return do_nothing;
+}
 
 void initialize_garbo() {
-    finished_event->event = do_nothing;
+    finished_event->event = create_do_nothing();
     finished_event->next = finished_event;
     finished_event->prev = finished_event;
 
@@ -74,31 +81,35 @@ void initialize_garbo() {
 }
 
 PropagatedEvent *new_default_propagated_event(Event *event) {
-    return new PropagatedEvent{
-            .event = event,
+    auto propagated_event = new PropagatedEvent{
             .before = {},
             .after = {},
-            .order = 0
+            .order = 0,
+            .event = event
     };
+    event_to_propagated_event.insert({event, propagated_event});
+    return propagated_event;
 }
 
 void run_all_events() {
     debug_print("run_all_events", {});
 
-    printf("Events to run: ");
+    printf("Events to run: \n");
     print_sequenced_events();
 
-    while (true) {
-        current_sequenced_event = current_sequenced_event->next;
-        if (current_sequenced_event == finished_event) break;
+    do {
+//        printf("--- Events BEFORE: ");
+//        print_sequenced_events();
 
-        printf("Running event seq: %s\n", name_of(current_sequenced_event).c_str());
-//        printf("Running event: %s\n", name_of(current_sequenced_event->event).c_str());
+//        printf("Running event seq: %s\n", name_of(current_sequenced_event).c_str());
+        printf("Running event: %s\n", name_of(current_sequenced_event->event).c_str());
         (*current_sequenced_event->event)();
 
-//        printf("Events remaining: ");
+//        printf("--- Events AFTER: ");
 //        print_sequenced_events();
-    }
+
+        current_sequenced_event = current_sequenced_event->next;
+    } while (current_sequenced_event != finished_event);
 
     end_scope();
 }
@@ -125,7 +136,7 @@ void unschedule_event(Event *event) {
 
         if (candidate == current_sequenced_event) {
             // unscheduling current event requires move to next event
-            current_sequenced_event = current_sequenced_event->next;
+            current_sequenced_event = current_sequenced_event->next->prev; // prev on purpose
         }
 
         delete event;
@@ -133,49 +144,61 @@ void unschedule_event(Event *event) {
         break;
     }
 
-    printf("Events after: ");
+    printf("Events after: \n");
     print_sequenced_events();
 
     end_scope();
 }
 
-void schedule_recurring_event_next(Event *event) {
-    debug_print("schedule_recurring_event_next", {event});
+void schedule_recurring_event_after(SequencedEvent *reference, Event *event) {
+    debug_print("schedule_recurring_event_after", {reference, event});
 
 //    printf("Before schedule: ");
 //    print_sequenced_events();
 
     auto sequenced_event = new SequencedEvent{
-            .event = event,
-            .prev = current_sequenced_event,
-            .next = current_sequenced_event->next
+            .prev = reference,
+            .next = reference->next,
+            .event = event
     };
     give_name(sequenced_event, name_of(event) + "_seq");
 
-    current_sequenced_event->next->prev = sequenced_event;
-    current_sequenced_event->next = sequenced_event;
+    reference->next->prev = sequenced_event;
+    reference->next = sequenced_event;
 
-//    printf("After schedule: ");
-//    print_sequenced_events();
+    printf("After schedule:\n");
+    print_sequenced_events();
 
     end_scope();
 }
+
+void schedule_recurring_event_before(SequencedEvent *reference, Event *event) {
+    schedule_recurring_event_after(reference->prev, event);
+}
+
+//void schedule_recurring_event_next(Event *event) {
+//    schedule_recurring_event_after(current_sequenced_event, event);
+//}
 
 void schedule_recurring_event_last(Event *event) {
-    debug_print("schedule_recurring_event_last", {event});
-
-    auto sequenced_event = new SequencedEvent{
-            .event = event,
-            .prev = current_sequenced_event->prev,
-            .next = current_sequenced_event
-    };
-    give_name(sequenced_event, name_of(event) + "_seq");
-
-    current_sequenced_event->prev->next = sequenced_event;
-    current_sequenced_event->prev = sequenced_event;
-
-    end_scope();
+    schedule_recurring_event_before(finished_event, event);
 }
+
+//void schedule_recurring_event_last(Event *event) {
+//    debug_print("schedule_recurring_event_last", {event});
+//
+//    auto sequenced_event = new SequencedEvent{
+//            .event = event,
+//            .prev = current_sequenced_event->prev,
+//            .next = current_sequenced_event
+//    };
+//    give_name(sequenced_event, name_of(event) + "_seq");
+//
+//    current_sequenced_event->prev->next = sequenced_event;
+//    current_sequenced_event->prev = sequenced_event;
+//
+//    end_scope();
+//}
 
 Event *as_once(Event *event) {
     // TODO this is the most wack shit i have ever written
@@ -193,12 +216,29 @@ Event *as_once(Event *event) {
 
         unschedule_event(event_as_once_internal);
 
-        delete event_as_once_handle;
+        // TODO this has to be freed, crashes rn
+//        delete event_as_once_handle;
     });
 
     *event_as_once_handle = event_as_once;
 
     return event_as_once;
+}
+
+void schedule_recurring_event_using_order(int order, Event *event) {
+    debug_print("schedule_recurring_event_using_order", {event});
+    auto c = current_sequenced_event->next;
+    while (true) {
+        if (!event_to_propagated_event.contains(c->event)) break;
+
+        auto propagated_c = event_to_propagated_event.at(c->event);
+        if (order < propagated_c->order) break;
+
+        c = c->next;
+    }
+
+    schedule_recurring_event_before(c, event);
+    end_scope();
 }
 
 void increase_propagated_event_order(PropagatedEvent *propagated_event) {
@@ -217,12 +257,8 @@ void increase_propagated_event_order(PropagatedEvent *propagated_event) {
 
     propagated_event->order = new_order;
     for (auto after: propagated_event->after) {
-        schedule_recurring_event_last(as_once(new Event([=]() {
-            debug_print("ANON2", {});
-
+        schedule_recurring_event_using_order(after->order, as_once(new Event([=]() {
             increase_propagated_event_order(after);
-
-            end_scope();
         })));
     }
 
@@ -245,12 +281,8 @@ void decrease_propagated_event_order(PropagatedEvent *propagated_event) {
 
     propagated_event->order = new_order;
     for (auto after: propagated_event->after) {
-        schedule_recurring_event_last(as_once(new Event([=]() {
-            debug_print("ANON3", {});
-
-            increase_propagated_event_order(after);
-
-            end_scope();
+        schedule_recurring_event_using_order(after->order, as_once(new Event([=]() {
+            decrease_propagated_event_order(after);
         })));
     }
 
@@ -309,22 +341,22 @@ void unregister_propagated_event(PropagatedEvent *propagated_event) {
     end_scope();
 }
 
-void schedule_propagated_event_next(PropagatedEvent *propagated_event) {
-    debug_print("schedule_propagated_event_next", {propagated_event});
+void schedule_propagated_event(PropagatedEvent *propagated_event) {
+    debug_print("schedule_propagated_event", {propagated_event});
 
-    auto trigger_and_schedule_next = as_once(new Event([=]() {
-        debug_print("trigger_and_schedule_next", {});
+    auto trigger_and_schedule = as_once(new Event([=]() {
+        debug_print("trigger_and_schedule", {propagated_event});
 
         (*propagated_event->event)();
         for (auto propagated_event_after: propagated_event->after) {
-            schedule_propagated_event_next(propagated_event_after);
+            schedule_propagated_event(propagated_event_after);
         }
 
         end_scope();
     }));
-    give_name(trigger_and_schedule_next, name_of(propagated_event) + "_trig");
+    give_name(trigger_and_schedule, name_of(propagated_event) + "_trig");
 
-    schedule_recurring_event_last(trigger_and_schedule_next);
+    schedule_recurring_event_using_order(propagated_event->order, trigger_and_schedule);
 
     end_scope();
 }
@@ -333,7 +365,7 @@ void destroy_object(int *object) {
     debug_print("destroy_object", {object});
 
     auto destroy_propagated_event = datum_to_destroy_propagated_event.at(object);
-    schedule_propagated_event_next(destroy_propagated_event);
+    schedule_propagated_event(destroy_propagated_event);
 
     run_all_events();
 
@@ -355,16 +387,20 @@ void provide_lifetime(void *object, Event *destroyer) {
     give_name(destroyer, name_of(object) + "_destroyer");
     debug_print("provide_lifetime", {object, destroyer});
 
-    PropagatedEvent *destroy_propagated_event = new_default_propagated_event(new Event([=]() {
-        debug_print("ANON7", {});
+    auto destroy_propagated_event_handle = new PropagatedEvent *;
+    auto destroy_propagated_event = new_default_propagated_event(new Event([=]() {
+        auto destroy_propagated_event_internal = *destroy_propagated_event_handle;
+
+        debug_print("destroy_propagated_event", {object});
 
         (*destroyer)();
         delete destroyer;
 
-        unregister_propagated_event(destroy_propagated_event);
+        unregister_propagated_event(destroy_propagated_event_internal);
 
         end_scope();
     }));
+    *destroy_propagated_event_handle = destroy_propagated_event;
     give_name(destroy_propagated_event, name_of(object) + "_destroy_propagated_event");
 
     datum_to_destroy_propagated_event.insert({object, destroy_propagated_event});
@@ -388,7 +424,7 @@ create_datum_update_propagated_event(int *datum, Event *datum_update_event, cons
         register_propagated_event_order(dependency_update_propagated_event, update_propagated_event);
     }
 
-    schedule_propagated_event_next(update_propagated_event);
+    schedule_propagated_event(update_propagated_event);
 
     run_all_events();
 
@@ -400,7 +436,9 @@ void assign_datum(int *datum, int value) {
     debug_print("assign_datum", {datum});
 
     *datum = value;
-    schedule_propagated_event_next(datum_to_update_propagated_event.at(datum));
+    schedule_propagated_event(datum_to_update_propagated_event.at(datum));
+
+    run_all_events();
 
     end_scope();
 }
@@ -410,7 +448,7 @@ void make_observed_datum(int *datum) {
 
     DEFAULT_LIFETIME(datum);
 
-    auto update_propagated_event = new_default_propagated_event(do_nothing);
+    auto update_propagated_event = new_default_propagated_event(create_do_nothing());
     give_name(update_propagated_event, name_of(datum) + "_update_propagated_event");
     DEFAULT_LIFETIME(update_propagated_event); // got a feeling this should not be default lifetime (unregister?)
 
@@ -441,13 +479,17 @@ void ugh_test() {
         end_scope();
     }), {a, b});
 
+
     // datum_prop_event made for a and b
     // c datum_prop_event subsumes a and b
     // binding lifetime subsumes c datum_prop_event
     // first trigger of update event made
 
+    printf("C: %d\n", *c);
     assign_datum(a, 2);
+    printf("C: %d\n", *c);
     assign_datum(b, 4);
+    printf("C: %d\n", *c);
 
     destroy_object(a);
 
