@@ -1,12 +1,10 @@
 #include "event.h"
 
-#define DEFAULT_LIFETIME(x) provide_lifetime(x, new Event([=]() { delete x; }))
-
 int debug_scope = 0;
 
 map<void *, string> object_names;
 
-SequencedEvent *finished_event = new SequencedEvent;
+SequencedEvent *finished_event = create(C SequencedEvent, "finished_event");
 SequencedEvent *current_sequenced_event = finished_event;
 
 map<Event *, PropagatedEvent *> event_to_propagated_event;
@@ -63,30 +61,28 @@ void end_scope() {
     debug_scope--;
 }
 
-Event *create_do_nothing() {
-    auto do_nothing = new Event([]() {
-        debug_print("do_nothing", {});
-        end_scope();
-    });
-    give_name(do_nothing, "do_nothing");
-    return do_nothing;
-}
+//Event *create_do_nothing() {
+//    auto do_nothing = create(C Event([]() {
+//        debug_print("do_nothing", {});
+//        end_scope();
+//    }), "do_nothing");
+//
+//    return do_nothing;
+//}
 
 void initialize_garbo() {
-    finished_event->event = create_do_nothing();
+    finished_event->event = create(C Event([]() {}), "finished_event_internal");
     finished_event->next = finished_event;
     finished_event->prev = finished_event;
-
-    give_name(finished_event, "finished_event");
 }
 
 PropagatedEvent *new_default_propagated_event(Event *event) {
-    auto propagated_event = new PropagatedEvent{
+    auto propagated_event = create(C PropagatedEvent{
             .before = {},
             .after = {},
             .order = 0,
             .event = event
-    };
+    }, name_of(event) + "_propagated_event");
     event_to_propagated_event.insert({event, propagated_event});
     return propagated_event;
 }
@@ -139,8 +135,8 @@ void unschedule_event(Event *event) {
             current_sequenced_event = current_sequenced_event->next->prev; // prev on purpose
         }
 
-        delete event;
-        delete candidate;
+        destroy(event);
+        destroy(candidate);
         break;
     }
 
@@ -156,12 +152,11 @@ void schedule_recurring_event_after(SequencedEvent *reference, Event *event) {
 //    printf("Before schedule: ");
 //    print_sequenced_events();
 
-    auto sequenced_event = new SequencedEvent{
+    auto sequenced_event = create(C SequencedEvent{
             .prev = reference,
             .next = reference->next,
             .event = event
-    };
-    give_name(sequenced_event, name_of(event) + "_seq");
+    }, name_of(event) + "_seq");
 
     reference->next->prev = sequenced_event;
     reference->next = sequenced_event;
@@ -184,41 +179,25 @@ void schedule_recurring_event_last(Event *event) {
     schedule_recurring_event_before(finished_event, event);
 }
 
-//void schedule_recurring_event_last(Event *event) {
-//    debug_print("schedule_recurring_event_last", {event});
-//
-//    auto sequenced_event = new SequencedEvent{
-//            .event = event,
-//            .prev = current_sequenced_event->prev,
-//            .next = current_sequenced_event
-//    };
-//    give_name(sequenced_event, name_of(event) + "_seq");
-//
-//    current_sequenced_event->prev->next = sequenced_event;
-//    current_sequenced_event->prev = sequenced_event;
-//
-//    end_scope();
-//}
-
 Event *as_once(Event *event) {
     // TODO this is the most wack shit i have ever written
 
     // lambdas do not like deleting themselves
     // instead, create handle, assign after defining body, and delete deref of handle
 
-    auto event_as_once_handle = new (Event *);
+    auto event_as_once_handle = create(C (Event *), name_of(event) + "_as_once_handle");
 
-    auto event_as_once = new Event([=]() {
+    auto event_as_once = create(C Event([=]() {
         auto event_as_once_internal = *event_as_once_handle;
 
         (*event)();
-        delete event;
+        destroy(event);
 
         unschedule_event(event_as_once_internal);
 
         // TODO this has to be freed, crashes rn
-//        delete event_as_once_handle;
-    });
+//        destroy(event_as_once_handle);
+    }), name_of(event) + "_once");
 
     *event_as_once_handle = event_as_once;
 
@@ -257,9 +236,9 @@ void increase_propagated_event_order(PropagatedEvent *propagated_event) {
 
     propagated_event->order = new_order;
     for (auto after: propagated_event->after) {
-        schedule_recurring_event_using_order(after->order, as_once(new Event([=]() {
+        schedule_recurring_event_using_order(after->order, as_once(create(C Event([=]() {
             increase_propagated_event_order(after);
-        })));
+        }), "idk")));
     }
 
     end_scope();
@@ -281,9 +260,9 @@ void decrease_propagated_event_order(PropagatedEvent *propagated_event) {
 
     propagated_event->order = new_order;
     for (auto after: propagated_event->after) {
-        schedule_recurring_event_using_order(after->order, as_once(new Event([=]() {
+        schedule_recurring_event_using_order(after->order, as_once(create(C Event([=]() {
             decrease_propagated_event_order(after);
-        })));
+        }), "TEMP 3")));
     }
 
     end_scope();
@@ -296,14 +275,13 @@ register_propagated_event_order(PropagatedEvent *propagated_event_before, Propag
     propagated_event_before->after.insert(propagated_event_after);
     propagated_event_after->before.insert(propagated_event_before);
 
-    auto increase_order_event = as_once(new Event([=]() {
+    auto increase_order_event = as_once(create(C Event([=]() {
         debug_print("increase_order_event", {propagated_event_before, propagated_event_after});
 
         increase_propagated_event_order(propagated_event_after);
 
         end_scope();
-    }));
-    give_name(increase_order_event, name_of(propagated_event_before) + "_leads_" + name_of(propagated_event_after));
+    }), name_of(propagated_event_before) + "_leads_" + name_of(propagated_event_after)));
 
     schedule_recurring_event_last(increase_order_event);
 
@@ -317,13 +295,13 @@ unregister_propagated_event_order(PropagatedEvent *propagated_event_before, Prop
     propagated_event_before->after.erase(propagated_event_after);
     propagated_event_after->before.erase(propagated_event_before);
 
-    schedule_recurring_event_last(as_once(new Event([=]() {
+    schedule_recurring_event_last(as_once(create(C Event([=]() {
         debug_print("ANON5", {});
 
         decrease_propagated_event_order(propagated_event_after);
 
         end_scope();
-    })));
+    }), "TEMP 2")));
 
     end_scope();
 }
@@ -344,7 +322,7 @@ void unregister_propagated_event(PropagatedEvent *propagated_event) {
 void schedule_propagated_event(PropagatedEvent *propagated_event) {
     debug_print("schedule_propagated_event", {propagated_event});
 
-    auto trigger_and_schedule = as_once(new Event([=]() {
+    auto trigger_and_schedule = as_once(create(C Event([=]() {
         debug_print("trigger_and_schedule", {propagated_event});
 
         (*propagated_event->event)();
@@ -353,8 +331,7 @@ void schedule_propagated_event(PropagatedEvent *propagated_event) {
         }
 
         end_scope();
-    }));
-    give_name(trigger_and_schedule, name_of(propagated_event) + "_trig");
+    }), name_of(propagated_event) + "_trig"));
 
     schedule_recurring_event_using_order(propagated_event->order, trigger_and_schedule);
 
@@ -384,44 +361,50 @@ void subsume_lifetime_under_lifetime(void *subsumed, void *dominant) {
 }
 
 void provide_lifetime(void *object, Event *destroyer) {
-    give_name(destroyer, name_of(object) + "_destroyer");
     debug_print("provide_lifetime", {object, destroyer});
 
-    auto destroy_propagated_event_handle = new PropagatedEvent *;
-    auto destroy_propagated_event = new_default_propagated_event(new Event([=]() {
+    auto destroy_propagated_event_handle = create(C PropagatedEvent *,
+                                                  name_of(object) + "_destroy_propagated_event_handle");
+    auto destroy_propagated_event = new_default_propagated_event(create(C Event([=]() {
         auto destroy_propagated_event_internal = *destroy_propagated_event_handle;
 
         debug_print("destroy_propagated_event", {object});
 
         (*destroyer)();
-        delete destroyer;
+        destroy(destroyer);
 
         unregister_propagated_event(destroy_propagated_event_internal);
 
         end_scope();
-    }));
+    }), name_of(object) + "_destroy"));
     *destroy_propagated_event_handle = destroy_propagated_event;
-    give_name(destroy_propagated_event, name_of(object) + "_destroy_propagated_event");
 
     datum_to_destroy_propagated_event.insert({object, destroy_propagated_event});
 
     end_scope();
 }
 
+template<typename T>
+void default_lifetime(T *object) {
+    provide_lifetime(object, create(C Event([=]() {
+        destroy(object);
+    }), name_of(object) + "_destroyer"));
+}
+
 PropagatedEvent *
 create_datum_update_propagated_event(int *datum, Event *datum_update_event, const unordered_set<int *> &dependencies) {
-    give_name(datum_update_event, name_of(datum) + "_datum_update_event");
     debug_print("create_datum_update_propagated_event", {datum, datum_update_event});
 
     auto update_propagated_event = new_default_propagated_event(datum_update_event);
-    give_name(update_propagated_event, name_of(datum) + "_update_propagated_event");
-    DEFAULT_LIFETIME(update_propagated_event);
+    default_lifetime(update_propagated_event);
 
     subsume_lifetime_under_lifetime(update_propagated_event, datum);
 
     for (auto dependency: dependencies) {
         auto dependency_update_propagated_event = datum_to_update_propagated_event.at(dependency);
         register_propagated_event_order(dependency_update_propagated_event, update_propagated_event);
+
+        subsume_lifetime_under_lifetime(update_propagated_event, dependency);
     }
 
     schedule_propagated_event(update_propagated_event);
@@ -446,11 +429,11 @@ void assign_datum(int *datum, int value) {
 void make_observed_datum(int *datum) {
     debug_print("make_observed_datum", {datum});
 
-    DEFAULT_LIFETIME(datum);
+    default_lifetime(datum);
 
-    auto update_propagated_event = new_default_propagated_event(create_do_nothing());
-    give_name(update_propagated_event, name_of(datum) + "_update_propagated_event");
-    DEFAULT_LIFETIME(update_propagated_event); // got a feeling this should not be default lifetime (unregister?)
+    auto update_propagated_event = new_default_propagated_event(
+            create(C Event([]() {}), name_of(datum) + "_update"));
+    default_lifetime(update_propagated_event); // got a feeling this should not be default lifetime (unregister?)
 
     datum_to_update_propagated_event.insert({datum, update_propagated_event});
 
@@ -462,22 +445,19 @@ void ugh_test() {
 
     initialize_garbo();
 
-    int *a = new int;
-    give_name(a, "a");
-    int *b = new int;
-    give_name(b, "b");
-    int *c = new int;
-    give_name(c, "c");
+    int *a = create(C int, "a");
+    int *b = create(C int, "b");
+    int *c = create(C int, "c");
 
     make_observed_datum(a);
     make_observed_datum(b);
     make_observed_datum(c);
 
-    create_datum_update_propagated_event(c, new Event([=]() {
-        debug_print("update_c", {});
+    create_datum_update_propagated_event(c, create(C Event([=]() {
+        debug_print("c_datum_update_event", {});
         *c = *a + *b;
         end_scope();
-    }), {a, b});
+    }), "c_update"), {a, b});
 
 
     // datum_prop_event made for a and b

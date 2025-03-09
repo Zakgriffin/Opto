@@ -19,9 +19,11 @@ struct PropagatedEvent {
 
 extern map<void *, string> object_names;
 
+#define C new
+
 template<typename T>
 T *create(T *object, string name) {
-    object_names.insert(object, name);
+    object_names.insert({object, name});
     return object;
 }
 
