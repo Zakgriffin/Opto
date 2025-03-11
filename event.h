@@ -21,6 +21,9 @@ extern map<void *, string> object_names;
 
 #define C new
 
+void debug_print(const string &s, const vector<void *> &stuff);
+void end_scope();
+
 template<typename T>
 T *create(T *object, string name) {
     object_names.insert({object, name});
@@ -29,8 +32,26 @@ T *create(T *object, string name) {
 
 template<typename T>
 void destroy(T *object) {
+    debug_print("destroy", {object});
+
+    if(!object_names.contains(object)) {
+        printf("Object does not exist or was already freed\n");
+        abort();
+    }
     object_names.erase(object);
     delete object;
+
+    end_scope();
+}
+
+void provide_lifetime(void *object, Event *destroyer);
+string name_of(void *object);
+
+template<typename T>
+void default_lifetime(T *object) {
+    provide_lifetime(object, create(C Event([=]() {
+        destroy(object);
+    }), "[" + name_of(object) + "]_destroyer"));
 }
 
 void ugh_test();
