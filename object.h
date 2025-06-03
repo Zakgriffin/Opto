@@ -1,8 +1,9 @@
+#pragma once
+
 #ifndef OPTO_OBJECT_H
 #define OPTO_OBJECT_H
 
 #include "stds.h"
-#include "object_view.h"
 
 typedef enum {
     UNKNOWN,

@@ -1,20 +1,25 @@
+#pragma once
 
 #ifndef OPTO_EDITABLE_TEXT_H
 #define OPTO_EDITABLE_TEXT_H
 
 #include "stds.h"
 #include "globals.h"
+#include "event.h"
+#include "user_input.h"
 
-class EditableText {
-public:
+typedef struct {
     string text;
     int character_index;
-    bool selected;
     Rectangle box;
+    Color color;
 
-    EditableText();
+    Signal text_sig;
+    Signal size_sig;
+} EditableText;
 
-    void draw();
-};
+extern EditableText* selected_editable_text;
+
+void init_editable_text(EditableText *e);
 
 #endif //OPTO_EDITABLE_TEXT_H

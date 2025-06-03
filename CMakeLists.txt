@@ -47,7 +47,7 @@ add_executable(${PROJECT_NAME}
         type.h
         editable_text.cpp
         editable_text.h
-)
+        declare_cell.h declare_cell.cpp string_.h string_.cpp)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

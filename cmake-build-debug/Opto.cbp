@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/declare_cell.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/declare_cell.h">
+			<Option target="Opto"/>
+		</Unit>
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/do_then.cpp">
 			<Option target="Opto"/>
 		</Unit>
@@ -120,6 +126,12 @@
 			<Option target="Opto"/>
 		</Unit>
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/stds.h">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/string_.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/string_.h">
 			<Option target="Opto"/>
 		</Unit>
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/type.cpp">

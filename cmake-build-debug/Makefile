@@ -129,6 +129,30 @@ Opto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/build
 .PHONY : Opto/fast
 
+declare_cell.o: declare_cell.cpp.o
+.PHONY : declare_cell.o
+
+# target to build an object file
+declare_cell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/declare_cell.cpp.o
+.PHONY : declare_cell.cpp.o
+
+declare_cell.i: declare_cell.cpp.i
+.PHONY : declare_cell.i
+
+# target to preprocess a source file
+declare_cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/declare_cell.cpp.i
+.PHONY : declare_cell.cpp.i
+
+declare_cell.s: declare_cell.cpp.s
+.PHONY : declare_cell.s
+
+# target to generate assembly for a file
+declare_cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/declare_cell.cpp.s
+.PHONY : declare_cell.cpp.s
+
 do_then.o: do_then.cpp.o
 .PHONY : do_then.o
 
@@ -273,6 +297,30 @@ object_view.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/object_view.cpp.s
 .PHONY : object_view.cpp.s
 
+string_.o: string_.cpp.o
+.PHONY : string_.o
+
+# target to build an object file
+string_.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/string_.cpp.o
+.PHONY : string_.cpp.o
+
+string_.i: string_.cpp.i
+.PHONY : string_.i
+
+# target to preprocess a source file
+string_.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/string_.cpp.i
+.PHONY : string_.cpp.i
+
+string_.s: string_.cpp.s
+.PHONY : string_.s
+
+# target to generate assembly for a file
+string_.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/string_.cpp.s
+.PHONY : string_.cpp.s
+
 type.o: type.cpp.o
 .PHONY : type.o
 
@@ -354,6 +402,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Opto"
+	@echo "... declare_cell.o"
+	@echo "... declare_cell.i"
+	@echo "... declare_cell.s"
 	@echo "... do_then.o"
 	@echo "... do_then.i"
 	@echo "... do_then.s"
@@ -372,6 +423,9 @@ help:
 	@echo "... object_view.o"
 	@echo "... object_view.i"
 	@echo "... object_view.s"
+	@echo "... string_.o"
+	@echo "... string_.i"
+	@echo "... string_.s"
 	@echo "... type.o"
 	@echo "... type.i"
 	@echo "... type.s"
