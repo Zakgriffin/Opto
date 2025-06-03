@@ -29,6 +29,9 @@ void do_then_destroy_sub_object_views(ObjectView *do_then_view) {
     }
     for (auto sub: do_then_view->sub_object_views) {
         destroy_object_view(sub);
+        // maybe rather than destroy object view controlling data
+        // thats now being used for something else,
+        // transfer sub objects to new object view
     }
     delete *do_then_handle;
 

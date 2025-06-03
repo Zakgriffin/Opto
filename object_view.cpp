@@ -31,6 +31,7 @@ void destroy_object_view(ObjectView *object_view) {
     for (const auto& x: object_view->internal_constraints) {
         destroy_listener(x);
     }
+    finalize_editable_text(&object_view->editable_text);
     // ZZZ not done
 
     delete object_view;
@@ -43,7 +44,7 @@ ObjectView *new_object_view(void **object_handle, ObjectType object_type) {
     auto o = new ObjectView;
     o->object_type = object_type;
     o->object_handle = object_handle;
-    init_editable_text(&o->editable_text);
+    initialize_editable_text(&o->editable_text);
     selected_editable_text = &o->editable_text;
     edit_mode = EDITABLE_TEXT;
     o->box = Rectangle{};

@@ -16,10 +16,12 @@ typedef struct {
 
     Signal text_sig;
     Signal size_sig;
+    vector<Listener> internal_listeners;
 } EditableText;
 
-extern EditableText* selected_editable_text;
+extern EditableText *selected_editable_text;
 
-void init_editable_text(EditableText *e);
+void initialize_editable_text(EditableText *e);
+void finalize_editable_text(EditableText *e);
 
 #endif //OPTO_EDITABLE_TEXT_H

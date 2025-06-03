@@ -32,6 +32,8 @@ typedef struct ObjectView {
     vector<Listener> internal_constraints;
 
     void (*previous_destroy_sub_object_views)(ObjectView *object_view);
+
+    void* context;
 } ObjectView;
 
 typedef struct {

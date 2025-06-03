@@ -18,19 +18,25 @@ void draw_editable_text(EditableText *e) {
     }
 }
 
-void init_editable_text(EditableText *e) {
+void finalize_editable_text(EditableText *e) {
+    for(const auto& l : e->internal_listeners) {
+        destroy_listener(l);
+    }
+}
+
+void initialize_editable_text(EditableText *e) {
     e->text = "";
     e->character_index = 0;
     e->box = Rectangle{};
     e->color = BOX_COLOR;
 
-    create_listener({&e->text_sig}, new function<void(void)>([=]() {
+    e->internal_listeners.push_back(create_listener({&e->text_sig}, new function<void(void)>([=]() {
         e->box.width = bunk(e->text.size()) + 2 * PAD_X;
         e->box.height = (float) font.baseSize / 2 + 2 * PAD_Y;
         signal_update(&e->size_sig);
-    }));
+    })));
 
-    create_listener({&input_listeners}, new function<void(void)>([=]() {
+    e->internal_listeners.push_back(create_listener({&input_listeners}, new function<void(void)>([=]() {
         if (edit_mode != EDITABLE_TEXT) return;
 
         Vector2 mouse = GetMousePosition();
@@ -66,7 +72,7 @@ void init_editable_text(EditableText *e) {
                 signal_update(&e->text_sig);
             }
         }
-    }));
+    })));
 
 
 //    create_binding({text}, new Event([&](){
@@ -90,7 +96,7 @@ void init_editable_text(EditableText *e) {
 //        }
 //    }, {selected}));
 
-    create_listener({&draw_visuals}, new function<void(void)>([=]() {
+    e->internal_listeners.push_back(create_listener({&draw_visuals}, new function<void(void)>([=]() {
         draw_editable_text(e);
-    }));
+    })));
 }
