@@ -11,12 +11,16 @@
 typedef struct {
     string text;
     int character_index;
-    Rectangle box;
+    Box box;
     Color color;
 
     Signal text_sig;
-    Signal size_sig;
+    Signal box_sig;
+//    Signal position_sig;
+//    Signal size_sig;
     vector<Listener> internal_listeners;
+
+    Signal key_pressed_sig;
 } EditableText;
 
 extern EditableText *selected_editable_text;

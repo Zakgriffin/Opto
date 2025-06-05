@@ -43,21 +43,27 @@ int main() {
         signal_update(&input_listeners);
         SetMouseCursor(mouse_cursor);
 
+        void **recent_root;
         auto click_streak = check_clicked_n_times(&multi_click, 2);
         if (!mouse_clicked_during_input && click_streak == 2) {
-            auto root = new void*;
             auto unknown = new Unknown;
-            *root = unknown;
-            *unknown = {.items={}};
-            auto object_view = new_object_view(root, UNKNOWN);
+            recent_root = new void *;
+            *recent_root = unknown;
+            auto object_view = new_object_view(recent_root);
+            selected_editable_text = &object_view->editable_text;
+            edit_mode = EDITABLE_TEXT;
 
             Vector2 mouse = GetMousePosition();
-            object_view->box.x = mouse.x;
-            object_view->box.y = mouse.y;
-            signal_update(&object_view->position_sig);
+            move_box_x(&object_view->editable_text.box, mouse.x);
+            move_box_y(&object_view->editable_text.box, mouse.y);
+            signal_update(&object_view->editable_text.box_sig);
         }
 
         signal_update(&draw_visuals);
+
+        if (key_pressed == KEY_SEMICOLON) {
+            cout << do_then_as_str(*(DoThen **) recent_root);
+        }
 
         EndDrawing();
     }

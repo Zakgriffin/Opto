@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Opto.dir/add.cpp.o"
+  "CMakeFiles/Opto.dir/add.cpp.o.d"
   "CMakeFiles/Opto.dir/declare_cell.cpp.o"
   "CMakeFiles/Opto.dir/declare_cell.cpp.o.d"
   "CMakeFiles/Opto.dir/do_then.cpp.o"
@@ -7,6 +9,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/Opto.dir/editable_text.cpp.o.d"
   "CMakeFiles/Opto.dir/event.cpp.o"
   "CMakeFiles/Opto.dir/event.cpp.o.d"
+  "CMakeFiles/Opto.dir/globals.cpp.o"
+  "CMakeFiles/Opto.dir/globals.cpp.o.d"
+  "CMakeFiles/Opto.dir/integer.cpp.o"
+  "CMakeFiles/Opto.dir/integer.cpp.o.d"
   "CMakeFiles/Opto.dir/main.cpp.o"
   "CMakeFiles/Opto.dir/main.cpp.o.d"
   "CMakeFiles/Opto.dir/object.cpp.o"

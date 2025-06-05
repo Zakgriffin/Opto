@@ -21,4 +21,6 @@ void *do_then_from_unknown(Unknown *unknown);
 
 Unknown *do_then_to_unknown(void *object);
 
+string do_then_as_str(DoThen *do_then);
+
 #endif //OPTO_DO_THEN_H

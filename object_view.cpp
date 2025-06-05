@@ -2,33 +2,19 @@
 
 ObjectView *selected_object_view = nullptr;
 
-void box_touch_left_right(Rectangle *left_box, Rectangle *right_box) {
-    right_box->x = left_box->x + left_box->width;
-}
-
-void box_touch_up_down(Rectangle *up_box, Rectangle *down_box) {
-    down_box->y = up_box->y + up_box->height;
-}
-
-void box_align_left(Rectangle *box_1, Rectangle *box_2) {
-    box_2->x = box_1->x;
-}
-
-void box_align_up(Rectangle *box_1, Rectangle *box_2) {
-    box_2->y = box_1->y;
-}
-
 map<string, UnknownConverter> unknown_converters;
 
 void init_unknown_converters() {
-    unknown_converters.insert({"do-then", UnknownConverter{DO_THEN, do_then_to_unknown, do_then_from_unknown, do_then_create_sub_object_views, do_then_destroy_sub_object_views}});
-    unknown_converters.insert({"string", UnknownConverter{STRING, string_to_unknown, string_from_unknown, string_create_sub_object_views, string_destroy_sub_object_views}});
+    unknown_converters.insert({"do-then", UnknownConverter{do_then_create_sub_object_views, do_then_destroy_sub_object_views}});
+    unknown_converters.insert({"string", UnknownConverter{string_create_sub_object_views, string_destroy_sub_object_views}});
+    unknown_converters.insert({"integer", UnknownConverter{integer_create_sub_object_views, integer_destroy_sub_object_views}});
+    unknown_converters.insert({"add", UnknownConverter{add_create_sub_object_views, add_destroy_sub_object_views}});
 }
 
 Vector2 mouse_offset;
 
 void destroy_object_view(ObjectView *object_view) {
-    for (const auto& x: object_view->internal_constraints) {
+    for (const auto &x: object_view->internal_constraints) {
         destroy_listener(x);
     }
     finalize_editable_text(&object_view->editable_text);
@@ -40,25 +26,27 @@ void destroy_object_view(ObjectView *object_view) {
 void nothing_destroy_sub_object_views(ObjectView *object_view) {
 }
 
-ObjectView *new_object_view(void **object_handle, ObjectType object_type) {
+void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view) {
+    object_view->sub_object_views.push_back(sub_object_view);
+    object_view->bounding_box_signals.push_back(&sub_object_view->box_sig);
+}
+
+ObjectView *new_object_view(void **object_handle) {
     auto o = new ObjectView;
-    o->object_type = object_type;
     o->object_handle = object_handle;
     initialize_editable_text(&o->editable_text);
-    selected_editable_text = &o->editable_text;
-    edit_mode = EDITABLE_TEXT;
-    o->box = Rectangle{};
+    o->box = Box{};
     o->previous_destroy_sub_object_views = nothing_destroy_sub_object_views;
 
-    o->internal_constraints.push_back(create_listener({&o->position_sig}, new function<void(void)>([=]() {
-        o->editable_text.box.x = o->box.x;
-        o->editable_text.box.y = o->box.y;
-    })));
-
-    o->internal_constraints.push_back(create_listener({&o->editable_text.size_sig}, new function<void(void)>([=]() {
-        o->box.width = o->editable_text.box.width;
-        o->box.height = o->editable_text.box.height;
-        signal_update(&o->size_sig);
+    o->bounding_box_signals.push_back(&o->editable_text.box_sig);
+    o->internal_constraints.push_back(create_listener(o->bounding_box_signals, new function<void(void)>([=]() {
+        auto b = &o->editable_text.box;
+        Box large_box = {b->x_min, b->x_max, b->y_min, b->y_max};
+        for (auto k: o->sub_object_views) {
+            large_box = enclosing_box(large_box, k->box);
+        }
+        o->box = large_box;
+        signal_update(&o->box_sig);
     })));
 
     o->internal_constraints.push_back(create_listener({&o->editable_text.text_sig}, new function<void(void)>([=]() {
@@ -96,12 +84,12 @@ ObjectView *new_object_view(void **object_handle, ObjectType object_type) {
         if (edit_mode != OBJECT_VIEW) return;
 
         auto mouse = GetMousePosition();
-        if (is_within_rect(mouse, &o->box)) {
+        if (is_within_box(mouse, o->box)) {
             if (IsMouseButtonPressed(0)) {
                 selected_object_view = o;
                 mouse_clicked_during_input = true;
-                mouse_offset.x = mouse.x - o->box.x;
-                mouse_offset.y = mouse.y - o->box.y;
+                mouse_offset.x = mouse.x - o->editable_text.box.x_min;
+                mouse_offset.y = mouse.y - o->editable_text.box.y_min;
             }
 
             auto click_streak = check_clicked_n_times(&o->multi_click, 2);
@@ -117,9 +105,9 @@ ObjectView *new_object_view(void **object_handle, ObjectType object_type) {
             if (IsMouseButtonReleased(0)) {
                 selected_object_view = nullptr;
             } else {
-                o->box.x = mouse.x - mouse_offset.x;
-                o->box.y = mouse.y - mouse_offset.y;
-                signal_update(&o->position_sig);
+                move_box_x(&o->editable_text.box, mouse.x - mouse_offset.x);
+                move_box_y(&o->editable_text.box, mouse.y - mouse_offset.y);
+                signal_update(&o->editable_text.box_sig);
             }
         }
     })));
@@ -127,18 +115,19 @@ ObjectView *new_object_view(void **object_handle, ObjectType object_type) {
     o->internal_constraints.push_back(create_listener({&draw_visuals}, new function<void(void)>([=]() {
         if (o == selected_object_view) {
             float PAD = 6;
-            auto surround = Rectangle{
-                    .x=o->box.x - PAD,
-                    .y=o->box.y - PAD,
-                    .width=o->box.width + PAD * 2,
-                    .height=o->box.height + PAD * 2
+            auto surround_box = Box{
+                    .x_min=o->box.x_min - PAD,
+                    .x_max=o->box.x_max + PAD,
+                    .y_min=o->box.y_min - PAD,
+                    .y_max=o->box.y_max + PAD,
             };
-            DrawRectangleRec(surround, Color(255, 255, 255, 80));
+            auto surround_rect = box_to_rectangle(surround_box);
+            DrawRectangleRec(surround_rect, Color(255, 255, 255, 80));
         }
 
         for (auto i = 0; i < o->potential_lookup.size(); i++) {
             auto p = o->potential_lookup.at(i);
-            DrawTextEx(font, p.c_str(), Vector2{o->box.x, o->box.y + o->box.height + 12 * i}, font.baseSize / 2, 0, GRAY);
+            DrawTextEx(font, p.c_str(), Vector2{o->box.x_min, o->box.y_max + 12 * i}, font.baseSize / 2, 0, GRAY);
         }
     })));
 
@@ -160,3 +149,7 @@ ObjectView *new_object_view(void **object_handle, ObjectType object_type) {
 // error if change occurs to datum not listed in second arg during update
     return o;
 }
+
+// position text box 1 wherever
+// react to text box position 1 and text box size 1, drives view box 2
+//

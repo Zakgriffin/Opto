@@ -11,7 +11,6 @@ typedef struct {
     int click_streak;
 } MultiClick;
 
-bool is_within_rect(Vector2 point, Rectangle *rect);
 void init_multi_click(MultiClick* m);
 int check_clicked_n_times(MultiClick *m, int max_clicks);
 //

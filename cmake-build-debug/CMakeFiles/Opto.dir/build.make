@@ -223,6 +223,48 @@ CMakeFiles/Opto.dir/string_.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/string_.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/string_.cpp -o CMakeFiles/Opto.dir/string_.cpp.s
 
+CMakeFiles/Opto.dir/integer.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/integer.cpp.o: /Users/zakgriffin/CLionProjects/Opto/integer.cpp
+CMakeFiles/Opto.dir/integer.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Opto.dir/integer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/integer.cpp.o -MF CMakeFiles/Opto.dir/integer.cpp.o.d -o CMakeFiles/Opto.dir/integer.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/integer.cpp
+
+CMakeFiles/Opto.dir/integer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Opto.dir/integer.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/integer.cpp > CMakeFiles/Opto.dir/integer.cpp.i
+
+CMakeFiles/Opto.dir/integer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/integer.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/integer.cpp -o CMakeFiles/Opto.dir/integer.cpp.s
+
+CMakeFiles/Opto.dir/add.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/add.cpp.o: /Users/zakgriffin/CLionProjects/Opto/add.cpp
+CMakeFiles/Opto.dir/add.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Opto.dir/add.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/add.cpp.o -MF CMakeFiles/Opto.dir/add.cpp.o.d -o CMakeFiles/Opto.dir/add.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/add.cpp
+
+CMakeFiles/Opto.dir/add.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Opto.dir/add.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/add.cpp > CMakeFiles/Opto.dir/add.cpp.i
+
+CMakeFiles/Opto.dir/add.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/add.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/add.cpp -o CMakeFiles/Opto.dir/add.cpp.s
+
+CMakeFiles/Opto.dir/globals.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/globals.cpp.o: /Users/zakgriffin/CLionProjects/Opto/globals.cpp
+CMakeFiles/Opto.dir/globals.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Opto.dir/globals.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/globals.cpp.o -MF CMakeFiles/Opto.dir/globals.cpp.o.d -o CMakeFiles/Opto.dir/globals.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/globals.cpp
+
+CMakeFiles/Opto.dir/globals.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Opto.dir/globals.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/globals.cpp > CMakeFiles/Opto.dir/globals.cpp.i
+
+CMakeFiles/Opto.dir/globals.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/globals.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/globals.cpp -o CMakeFiles/Opto.dir/globals.cpp.s
+
 # Object files for target Opto
 Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/main.cpp.o" \
@@ -235,7 +277,10 @@ Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/type.cpp.o" \
 "CMakeFiles/Opto.dir/editable_text.cpp.o" \
 "CMakeFiles/Opto.dir/declare_cell.cpp.o" \
-"CMakeFiles/Opto.dir/string_.cpp.o"
+"CMakeFiles/Opto.dir/string_.cpp.o" \
+"CMakeFiles/Opto.dir/integer.cpp.o" \
+"CMakeFiles/Opto.dir/add.cpp.o" \
+"CMakeFiles/Opto.dir/globals.cpp.o"
 
 # External object files for target Opto
 Opto_EXTERNAL_OBJECTS =
@@ -251,10 +296,13 @@ Opto: CMakeFiles/Opto.dir/type.cpp.o
 Opto: CMakeFiles/Opto.dir/editable_text.cpp.o
 Opto: CMakeFiles/Opto.dir/declare_cell.cpp.o
 Opto: CMakeFiles/Opto.dir/string_.cpp.o
+Opto: CMakeFiles/Opto.dir/integer.cpp.o
+Opto: CMakeFiles/Opto.dir/add.cpp.o
+Opto: CMakeFiles/Opto.dir/globals.cpp.o
 Opto: CMakeFiles/Opto.dir/build.make
 Opto: /opt/homebrew/Cellar/raylib/5.0/lib/libraylib.dylib
 Opto: CMakeFiles/Opto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Opto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Opto"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Opto.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -129,6 +129,30 @@ Opto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/build
 .PHONY : Opto/fast
 
+add.o: add.cpp.o
+.PHONY : add.o
+
+# target to build an object file
+add.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/add.cpp.o
+.PHONY : add.cpp.o
+
+add.i: add.cpp.i
+.PHONY : add.i
+
+# target to preprocess a source file
+add.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/add.cpp.i
+.PHONY : add.cpp.i
+
+add.s: add.cpp.s
+.PHONY : add.s
+
+# target to generate assembly for a file
+add.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/add.cpp.s
+.PHONY : add.cpp.s
+
 declare_cell.o: declare_cell.cpp.o
 .PHONY : declare_cell.o
 
@@ -224,6 +248,54 @@ event.s: event.cpp.s
 event.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/event.cpp.s
 .PHONY : event.cpp.s
+
+globals.o: globals.cpp.o
+.PHONY : globals.o
+
+# target to build an object file
+globals.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/globals.cpp.o
+.PHONY : globals.cpp.o
+
+globals.i: globals.cpp.i
+.PHONY : globals.i
+
+# target to preprocess a source file
+globals.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/globals.cpp.i
+.PHONY : globals.cpp.i
+
+globals.s: globals.cpp.s
+.PHONY : globals.s
+
+# target to generate assembly for a file
+globals.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/globals.cpp.s
+.PHONY : globals.cpp.s
+
+integer.o: integer.cpp.o
+.PHONY : integer.o
+
+# target to build an object file
+integer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/integer.cpp.o
+.PHONY : integer.cpp.o
+
+integer.i: integer.cpp.i
+.PHONY : integer.i
+
+# target to preprocess a source file
+integer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/integer.cpp.i
+.PHONY : integer.cpp.i
+
+integer.s: integer.cpp.s
+.PHONY : integer.s
+
+# target to generate assembly for a file
+integer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/integer.cpp.s
+.PHONY : integer.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -402,6 +474,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Opto"
+	@echo "... add.o"
+	@echo "... add.i"
+	@echo "... add.s"
 	@echo "... declare_cell.o"
 	@echo "... declare_cell.i"
 	@echo "... declare_cell.s"
@@ -414,6 +489,12 @@ help:
 	@echo "... event.o"
 	@echo "... event.i"
 	@echo "... event.s"
+	@echo "... globals.o"
+	@echo "... globals.i"
+	@echo "... globals.s"
+	@echo "... integer.o"
+	@echo "... integer.i"
+	@echo "... integer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
