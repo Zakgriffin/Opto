@@ -27,13 +27,23 @@ Box enclosing_box(Box b1, Box b2) {
     return Box{x_min, x_max, y_min, y_max};
 }
 
-void box_layout_right(Box *super, Box *sub, float temp_nudge) {
+void box_layout_right(Box *super, Box *sub) {
     auto x_size = sub->x_max - sub->x_min;
     sub->x_min = super->x_max;
     sub->x_max = sub->x_min + x_size;
 
     auto y_size = sub->y_max - sub->y_min;
-    sub->y_min = super->y_min + temp_nudge;
+    sub->y_min = super->y_min;
+    sub->y_max = sub->y_min + y_size;
+}
+
+void box_layout_under(Box *super, Box *sub) {
+    auto x_size = sub->x_max - sub->x_min;
+    sub->x_min = super->x_min;
+    sub->x_max = sub->x_min + x_size;
+
+    auto y_size = sub->y_max - sub->y_min;
+    sub->y_min = super->y_max;
     sub->y_max = sub->y_min + y_size;
 }
 

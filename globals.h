@@ -25,6 +25,8 @@ extern unordered_map<void *, string> tracked_objects;
     tracked_objects.insert({obj, log_entry}); \
 }
 
+extern int ZZZZ_debug_color;
+
 extern Color BACKGROUND_COLOR;
 extern Color BOX_COLOR;
 
@@ -37,8 +39,8 @@ extern EditMode edit_mode;
 
 bool is_within_box(Vector2 point, Box box);
 
-//void box_layout_right(Box *super, Box *sub);
-void box_layout_right(Box *super, Box *sub, float temp_nudge);
+void box_layout_right(Box *super, Box *sub);
+void box_layout_under(Box *super, Box *sub);
 
 Box enclosing_box(Box b1, Box b2);
 

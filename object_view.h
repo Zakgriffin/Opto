@@ -30,17 +30,19 @@ typedef struct ObjectView {
     vector<string> potential_lookup;
     ObjectType object_type;
 
-    vector<Box *> inner_boxes;
     vector<Listener> sub_object_constraints;
     vector<ObjectView *> sub_object_views;
+//    Listener bounding_listener;
 
     vector<Listener> internal_constraints;
 
     void (*previous_destroy_sub_object_views)(ObjectView *object_view);
 
-    vector<Signal *> bounding_box_signals;
+
+    Color ZZZZ_color;
 
     void *context;
+
 } ObjectView;
 
 typedef struct {

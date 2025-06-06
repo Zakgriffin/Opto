@@ -10,6 +10,7 @@
 #include <utility>
 #include <ctime>
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 using namespace chrono;
