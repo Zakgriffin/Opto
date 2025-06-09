@@ -2,16 +2,15 @@
 
 ObjectView *selected_object_view = nullptr;
 
-map<string, UnknownConverter> unknown_converters;
+vector<ObjectViewBuilder> object_view_builders;
 
-#define init_unknown_converter_yuck(name, s) unknown_converters.insert({#s, UnknownConverter{name##_create_sub_object_views, name##_destroy_sub_object_views}})
-#define init_unknown_converter(name) init_unknown_converter_yuck(name, name)
+map<void *, ObjectType> object_to_type;
+map<void *, Signal *> object_to_signal;
 
-void init_unknown_converters() {
-    init_unknown_converter_yuck(do_then, do-then);
-    init_unknown_converter(string);
-    init_unknown_converter(integer);
-    init_unknown_converter(add);
+void init_object_view_builders() {
+    object_view_builders.push_back(none_object_view_builder);
+    object_view_builders.push_back(do_then_object_view_builder);
+    object_view_builders.push_back(add_object_view_builder);
 }
 
 Vector2 mouse_offset;
@@ -21,7 +20,7 @@ void destroy_object_view(ObjectView *object_view) {
         destroy_listener(x);
     }
     finalize_editable_text(&object_view->editable_text);
-    // ZZZ not done
+    // ZZZZ not done?
 
     delete object_view;
 }
@@ -29,7 +28,7 @@ void destroy_object_view(ObjectView *object_view) {
 void nothing_destroy_sub_object_views(ObjectView *object_view) {
 }
 
-void j(ObjectView *o, Signal *sub_sig) {
+void include_sub_box(ObjectView *o, Signal *sub_sig) {
     o->internal_constraints.push_back(create_listener({sub_sig}, new function<void(void)>([=]() {
         auto b = &o->editable_text.box; // known first element in collection
         Box large_box = {b->x_min, b->x_max, b->y_min, b->y_max};
@@ -43,8 +42,39 @@ void j(ObjectView *o, Signal *sub_sig) {
 
 void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view) {
     object_view->sub_object_views.push_back(sub_object_view);
-//    object_view->bounding_listener.signals.push_back(&sub_object_view->box_sig);
-    j(object_view, &sub_object_view->box_sig);
+    include_sub_box(object_view, &sub_object_view->box_sig);
+}
+
+void redo_sub_objects(ObjectView *o, const ObjectViewBuilder &object_view_builder) {
+    o->previous_destroy_sub_object_views = object_view_builder.destroy_sub_object_views;
+    o->editable_text.text = object_view_builder.s;
+    signal_update(&o->editable_text.text_sig);
+    object_view_builder.create_sub_object_views(o);
+}
+
+ObjectViewBuilder find_object_view_builder(void *object) {
+    auto type = object_to_type.at(object);
+    for (auto object_view_builder: object_view_builders) {
+        if (object_view_builder.object_type == type) {
+            return object_view_builder;
+        }
+    }
+
+    cout << "ZZZZ DONT KNOW WHAT TO DO HERE YET" << endl;
+    return ObjectViewBuilder{};
+}
+
+Signal *lift_object_signal(void *object) {
+    if (!object_to_signal.contains(object)) {
+        object_to_signal.insert({object, new Signal});
+    }
+    return object_to_signal.at(object);
+}
+
+void drop_object_signal(void *object) {
+    if (object_to_signal.contains(object)) {
+        object_to_signal.erase(new Signal);
+    }
 }
 
 ObjectView *new_object_view(void **object_handle) {
@@ -54,40 +84,21 @@ ObjectView *new_object_view(void **object_handle) {
     o->box = Box{};
     o->previous_destroy_sub_object_views = nothing_destroy_sub_object_views;
 
-    o->ZZZZ_color = Color(255, 255, 255, 50);
+    include_sub_box(o, &o->editable_text.box_sig);
 
-    // ZZZZ (used to be) more will be added to internal vector
-    j(o, &o->editable_text.box_sig);
+    o->internal_constraints.push_back(create_listener({lift_object_signal(o->object_handle)}, new function<void(void)>([=]() {
+        redo_sub_objects(o, find_object_view_builder(*o->object_handle));
+    })));
 
-    o->internal_constraints.push_back(create_listener({&o->editable_text.text_sig}, new function<void(void)>([=]() {
-//        o->potential_lookup.clear();
-//        if (!o->editable_text.text.empty()) {
-//            for (const auto &x: unknown_converters) {
-//                auto name = x.first;
-//                if (name.starts_with(o->editable_text.text)) {
-//                    o->potential_lookup.push_back(name);
-//                }
-//            }
-//        }
-
-
-        if (!unknown_converters.contains(o->editable_text.text)) return;
-        auto unknown_converter = unknown_converters.at(o->editable_text.text);
-
-
-        o->previous_destroy_sub_object_views(o);
-        o->previous_destroy_sub_object_views = unknown_converter.destroy_sub_object_views;
-        unknown_converter.create_sub_object_views(o);
-
-//        if (o->editable_text.text == "do-then") {
-//            o->object = new DoThen{.effect=nullptr, .next = nullptr};
-//            do_then_create_sub_object_views(o);
-//            printf("make new do-then\n");
-//        } else if (o->editable_text.text == "string") {
-//            o->object = new String_{.s=""};
-//            string_create_sub_object_views(o);
-//            printf("make new string\n");
-//        }
+    o->internal_constraints.push_back(create_listener_lazy({&o->editable_text.text_input_sig}, new function<void(void)>([=]() {
+        for (const auto &object_view_builder: object_view_builders) {
+            if (object_view_builder.s == o->editable_text.text) {
+                o->previous_destroy_sub_object_views(o);
+                *o->object_handle = object_view_builder.create_simple();
+                signal_update(lift_object_signal(o->object_handle));
+                break;
+            }
+        }
     })));
 
     o->internal_constraints.push_back(create_listener({&input_listeners}, new function<void(void)>([=]() {
@@ -153,11 +164,11 @@ ObjectView *new_object_view(void **object_handle) {
 //
 //    create_datum_update_propagated_event(new Event([=]() {
 //        string text = o->editable_text->text;
-//        if (unknown_converters.contains(text)) {
-//            auto unknown_converter = unknown_converters.at(text);
-//            Unknown *unknown = unknown_converter.to_unknown(object);
+//        if (object_view_builders.contains(text)) {
+//            auto object_view_builder = object_view_builders.at(text);
+//            Unknown *unknown = object_view_builder.to_unknown(object);
 //
-//            assign_datum(&o->object, unknown_converter.from_unknown(unknown));
+//            assign_datum(&o->object, object_view_builder.from_unknown(unknown));
 //        }
 //    }), {&o->editable_text->text}, {&o->object});
 // do lazy

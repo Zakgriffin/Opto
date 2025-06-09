@@ -28,12 +28,12 @@ void integer_create_sub_object_views(ObjectView *integer_view) {
 }
 
 void integer_destroy_sub_object_views(ObjectView *integer_view) {
-    auto integer_handle = (Integer **) integer_view->object_handle;
-    auto integer_object_view_handle = (IntegerObjectView **) &integer_view->context;
-    auto integer_object_view = *integer_object_view_handle;
-
-    generic_destroy_sub_object_views(integer_view, integer_handle);
-    finalize_editable_text(&integer_object_view->integer_editable_text);
-
-    delete integer_object_view;
+//    auto integer_handle = (Integer **) integer_view->object_handle;
+//    auto integer_object_view_handle = (IntegerObjectView **) &integer_view->context;
+//    auto integer_object_view = *integer_object_view_handle;
+//
+//    generic_destroy_sub_object_views(integer_view, integer_handle);
+//    finalize_editable_text(&integer_object_view->integer_editable_text);
+//
+//    delete integer_object_view;
 }

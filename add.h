@@ -14,6 +14,11 @@ typedef struct {
 } Add;
 
 typedef struct ObjectView ObjectView;
+typedef struct ObjectViewBuilder ObjectViewBuilder;
+
+extern ObjectViewBuilder add_object_view_builder;
+
+void* add_create_simple();
 
 void add_create_sub_object_views(ObjectView *add_view);
 

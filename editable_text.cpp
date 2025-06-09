@@ -43,6 +43,10 @@ void initialize_editable_text(EditableText *e) {
         signal_update(&e->key_pressed_sig);
     })));
 
+    e->internal_listeners.push_back(create_listener({&e->text_input_sig}, new function<void(void)>([=]() {
+        signal_update(&e->text_sig);
+    })));
+
     e->internal_listeners.push_back(create_listener({&e->key_pressed_sig}, new function<void(void)>([=]() {
         if (edit_mode != EDITABLE_TEXT) return;
 
@@ -66,7 +70,7 @@ void initialize_editable_text(EditableText *e) {
                 if (e->text.length() > 0 && e->character_index > 0) {
                     e->character_index--;
                     e->text.erase(e->character_index, 1);
-                    signal_update(&e->text_sig);
+                    signal_update(&e->text_input_sig);
                 }
             } else if (key_pressed == KEY_LEFT) {
                 if (e->character_index > 0) e->character_index--;
@@ -79,7 +83,7 @@ void initialize_editable_text(EditableText *e) {
                 auto c = (char) tolower(key_pressed);
                 e->text.insert(e->character_index, 1, c);
                 e->character_index++;
-                signal_update(&e->text_sig);
+                signal_update(&e->text_input_sig);
             }
         }
     })));

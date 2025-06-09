@@ -14,6 +14,7 @@ typedef struct {
     Box box;
     Color color;
 
+    Signal text_input_sig;
     Signal text_sig;
     Signal box_sig;
 //    Signal position_sig;

@@ -12,6 +12,13 @@ Listener create_listener(const vector<Signal*>& signals, function<void(void)> *f
     return Listener{.f = f, .signals=signals};
 }
 
+Listener create_listener_lazy(const vector<Signal*>& signals, function<void(void)> *f) {
+    for (auto signal: signals) {
+        signal->on_change.insert(f);
+    }
+    return Listener{.f = f, .signals=signals};
+}
+
 void destroy_listener(const Listener& listener) {
     for (auto signal: listener.signals) {
         signal->on_change.erase(listener.f);

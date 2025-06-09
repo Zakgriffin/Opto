@@ -25,8 +25,6 @@ extern unordered_map<void *, string> tracked_objects;
     tracked_objects.insert({obj, log_entry}); \
 }
 
-extern int ZZZZ_debug_color;
-
 extern Color BACKGROUND_COLOR;
 extern Color BOX_COLOR;
 

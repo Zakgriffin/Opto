@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/zakgriffin/CLionProjects/Opto/globals.cpp" "CMakeFiles/Opto.dir/globals.cpp.o" "gcc" "CMakeFiles/Opto.dir/globals.cpp.o.d"
   "/Users/zakgriffin/CLionProjects/Opto/integer.cpp" "CMakeFiles/Opto.dir/integer.cpp.o" "gcc" "CMakeFiles/Opto.dir/integer.cpp.o.d"
   "/Users/zakgriffin/CLionProjects/Opto/main.cpp" "CMakeFiles/Opto.dir/main.cpp.o" "gcc" "CMakeFiles/Opto.dir/main.cpp.o.d"
+  "/Users/zakgriffin/CLionProjects/Opto/none.cpp" "CMakeFiles/Opto.dir/none.cpp.o" "gcc" "CMakeFiles/Opto.dir/none.cpp.o.d"
   "/Users/zakgriffin/CLionProjects/Opto/object.cpp" "CMakeFiles/Opto.dir/object.cpp.o" "gcc" "CMakeFiles/Opto.dir/object.cpp.o.d"
   "/Users/zakgriffin/CLionProjects/Opto/object_view.cpp" "CMakeFiles/Opto.dir/object_view.cpp.o" "gcc" "CMakeFiles/Opto.dir/object_view.cpp.o.d"
   "/Users/zakgriffin/CLionProjects/Opto/string_.cpp" "CMakeFiles/Opto.dir/string_.cpp.o" "gcc" "CMakeFiles/Opto.dir/string_.cpp.o.d"

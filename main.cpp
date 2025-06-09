@@ -16,8 +16,6 @@ int key_pressed = 0;
 
 unordered_map<void *, string> tracked_objects;
 
-int ZZZZ_debug_color = 0;
-
 int main() {
     const int screen_width = 900;
     const int screen_height = 500;
@@ -31,9 +29,19 @@ int main() {
 
     SetExitKey(0);
 
+    auto x = typed(DO_THEN, new DoThen{
+            .effect = nullptr,
+            .next = typed(DO_THEN, new DoThen{
+                    .effect = nullptr,
+                    .next = nullptr
+            })
+    });
+
     MultiClick multi_click;
     init_multi_click(&multi_click);
-    init_unknown_converters();
+    init_object_view_builders();
+
+    object_to_type.insert({nullptr, NONE});
 
     void **recent_root;
 
@@ -46,7 +54,6 @@ int main() {
         mouse_clicked_during_input = false;
         if (key_pressed == KEY_SEMICOLON) {
             //cout << do_then_as_str(*(DoThen **) recent_root);
-            ZZZZ_debug_color = 0;
         } else {
             signal_update(&input_listeners);
         }
@@ -54,9 +61,8 @@ int main() {
 
         auto click_streak = check_clicked_n_times(&multi_click, 2);
         if (!mouse_clicked_during_input && click_streak == 2) {
-            auto unknown = new Unknown;
             recent_root = new void *;
-            *recent_root = unknown;
+            *recent_root = x;
             auto object_view = new_object_view(recent_root);
             selected_editable_text = &object_view->editable_text;
             edit_mode = EDITABLE_TEXT;

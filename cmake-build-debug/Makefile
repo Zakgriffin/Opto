@@ -321,6 +321,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+none.o: none.cpp.o
+.PHONY : none.o
+
+# target to build an object file
+none.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/none.cpp.o
+.PHONY : none.cpp.o
+
+none.i: none.cpp.i
+.PHONY : none.i
+
+# target to preprocess a source file
+none.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/none.cpp.i
+.PHONY : none.cpp.i
+
+none.s: none.cpp.s
+.PHONY : none.s
+
+# target to generate assembly for a file
+none.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/none.cpp.s
+.PHONY : none.cpp.s
+
 object.o: object.cpp.o
 .PHONY : object.o
 
@@ -498,6 +522,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... none.o"
+	@echo "... none.i"
+	@echo "... none.s"
 	@echo "... object.o"
 	@echo "... object.i"
 	@echo "... object.s"

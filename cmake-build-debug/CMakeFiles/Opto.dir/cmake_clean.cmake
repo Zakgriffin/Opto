@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Opto.dir/integer.cpp.o.d"
   "CMakeFiles/Opto.dir/main.cpp.o"
   "CMakeFiles/Opto.dir/main.cpp.o.d"
+  "CMakeFiles/Opto.dir/none.cpp.o"
+  "CMakeFiles/Opto.dir/none.cpp.o.d"
   "CMakeFiles/Opto.dir/object.cpp.o"
   "CMakeFiles/Opto.dir/object.cpp.o.d"
   "CMakeFiles/Opto.dir/object_view.cpp.o"

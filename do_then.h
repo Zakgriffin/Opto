@@ -12,12 +12,17 @@ struct DoThen {
 };
 
 typedef struct ObjectView ObjectView;
+typedef struct ObjectViewBuilder ObjectViewBuilder;
+
+extern ObjectViewBuilder do_then_object_view_builder;
 
 void do_then_create_sub_object_views(ObjectView *do_then_view);
 
 void do_then_destroy_sub_object_views(ObjectView *do_then_view);
 
 void *do_then_from_unknown(Unknown *unknown);
+
+void* do_then_create_simple();
 
 Unknown *do_then_to_unknown(void *object);
 

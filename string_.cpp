@@ -28,12 +28,12 @@ void string_create_sub_object_views(ObjectView *string_view) {
 }
 
 void string_destroy_sub_object_views(ObjectView *string_view) {
-    auto string_handle = (String_ **) string_view->object_handle;
-    auto string_object_view_handle = (StringObjectView **) &string_view->context;
-    auto string_object_view = *string_object_view_handle;
-
-    generic_destroy_sub_object_views(string_view, string_object_view_handle);
-    finalize_editable_text(&string_object_view->string_editable_text);
-
-    delete string_object_view;
+//    auto string_handle = (String_ **) string_view->object_handle;
+//    auto string_object_view_handle = (StringObjectView **) &string_view->context;
+//    auto string_object_view = *string_object_view_handle;
+//
+//    generic_destroy_sub_object_views(string_view, string_object_view_handle);
+//    finalize_editable_text(&string_object_view->string_editable_text);
+//
+//    delete string_object_view;
 }

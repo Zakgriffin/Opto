@@ -6,6 +6,7 @@
 #include "stds.h"
 #include "editable_text.h"
 #include "unknown.h"
+#include "none.h"
 #include "do_then.h"
 #include "string_.h"
 #include "add.h"
@@ -13,13 +14,13 @@
 #include "event.h"
 
 typedef enum {
-    UNKNOWN,
+    NONE,
     DO_THEN,
-    STRING
+    ADD,
 } ObjectType;
 
 typedef struct ObjectView {
-    void *object_handle;
+    void **object_handle;
     EditableText editable_text;
     Box box;
     Signal box_sig;
@@ -38,37 +39,53 @@ typedef struct ObjectView {
 
     void (*previous_destroy_sub_object_views)(ObjectView *object_view);
 
-
-    Color ZZZZ_color;
-
     void *context;
 
 } ObjectView;
 
-typedef struct {
-//    ObjectType object_type;
+typedef struct ObjectViewBuilder {
+    ObjectType object_type;
 
 //    Unknown *(*to_unknown)(void *);
 //
 //    void *(*from_unknown)(Unknown *);
 
+    string s;
+
+    void *(*create_simple)();
+
     void (*create_sub_object_views)(ObjectView *object_view);
 
     void (*destroy_sub_object_views)(ObjectView *object_view);
 
-} UnknownConverter;
+} ObjectViewBuilder;
 
 extern ObjectView *selected_object_view;
+
+extern map<void *, ObjectType> object_to_type;
+extern map<void *, Signal *> object_to_signal;
+
+template<typename T>
+T *typed(ObjectType type, T *object) {
+    object_to_type.insert({object, type});
+    return object;
+}
 
 ObjectView *new_object_view(void **object_handle);
 
 void destroy_object_view(ObjectView *object_view);
 
-void init_unknown_converters();
+void redo_sub_objects(ObjectView *o, const ObjectViewBuilder &object_view_builder);
+
+void init_object_view_builders();
 
 void make_top_level_object(void *object);
 
 void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view);
+
+Signal* lift_object_signal(void* object);
+
+void drop_object_signal(void* object);
 
 // maybe rather than destroy object view controlling data
 // thats now being used for something else,
@@ -80,7 +97,10 @@ void generic_destroy_sub_object_views(ObjectView *object_view, T **handle) {
     }
     for (auto sub: object_view->sub_object_views) {
         destroy_object_view(sub);
+        drop_object_signal(sub->object_handle);
     }
+
+    object_to_type.erase(*handle);
     delete *handle;
 
     object_view->sub_object_constraints.clear();
