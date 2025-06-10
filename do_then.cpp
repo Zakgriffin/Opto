@@ -30,8 +30,7 @@ void do_then_create_sub_object_views(ObjectView *do_then_view) {
 }
 
 void do_then_destroy_sub_object_views(ObjectView *do_then_view) {
-    auto do_then_handle = (DoThen **) do_then_view->object_handle;
-    generic_destroy_sub_object_views(do_then_view, do_then_handle);
+    generic_destroy_sub_object_views(do_then_view);
 }
 
 string do_then_as_str(DoThen *do_then) {

@@ -28,7 +28,5 @@ void add_create_sub_object_views(ObjectView *add_view) {
 }
 
 void add_destroy_sub_object_views(ObjectView *add_view) {
-    auto add_handle = (Add **) add_view->object_handle;
-    auto add = *add_handle;
-    generic_destroy_sub_object_views(add_view, add_handle);
+    generic_destroy_sub_object_views(add_view);
 }

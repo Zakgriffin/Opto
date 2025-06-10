@@ -5,7 +5,7 @@ ObjectView *selected_object_view = nullptr;
 vector<ObjectViewBuilder> object_view_builders;
 
 map<void *, ObjectType> object_to_type;
-map<void *, Signal *> object_to_signal;
+map<void *, Shared<Signal> *> object_to_signal;
 
 void init_object_view_builders() {
     object_view_builders.push_back(none_object_view_builder);
@@ -15,17 +15,37 @@ void init_object_view_builders() {
 
 Vector2 mouse_offset;
 
+Signal *lift_reference(void *object) {
+    if (!object_to_signal.contains(object)) {
+        object_to_signal.insert({object, new Shared<Signal>});
+    }
+    auto r = object_to_signal.at(object);
+    r->count++;
+    return &r->o;
+}
+
+void drop_reference(void *object) {
+    if (!object_to_signal.contains(object)) {
+        cout << "ZZZZ this is not good" << endl;
+        return;
+    }
+    auto r = object_to_signal.at(object);
+    r->count--;
+
+    if (r->count == 0) {
+        object_to_signal.erase(object);
+        delete r;
+    }
+}
+
 void destroy_object_view(ObjectView *object_view) {
     for (const auto &x: object_view->internal_constraints) {
         destroy_listener(x);
     }
     finalize_editable_text(&object_view->editable_text);
-    // ZZZZ not done?
+    drop_reference(object_view->object_handle);
 
     delete object_view;
-}
-
-void nothing_destroy_sub_object_views(ObjectView *object_view) {
 }
 
 void include_sub_box(ObjectView *o, Signal *sub_sig) {
@@ -46,6 +66,7 @@ void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_vie
 }
 
 void redo_sub_objects(ObjectView *o, const ObjectViewBuilder &object_view_builder) {
+    o->previous_destroy_sub_object_views(o);
     o->previous_destroy_sub_object_views = object_view_builder.destroy_sub_object_views;
     o->editable_text.text = object_view_builder.s;
     signal_update(&o->editable_text.text_sig);
@@ -60,42 +81,42 @@ ObjectViewBuilder find_object_view_builder(void *object) {
         }
     }
 
-    cout << "ZZZZ DONT KNOW WHAT TO DO HERE YET" << endl;
-    return ObjectViewBuilder{};
+    cout << "ZZZZ shouldn't be possible" << endl;
+    return {};
 }
 
-Signal *lift_object_signal(void *object) {
-    if (!object_to_signal.contains(object)) {
-        object_to_signal.insert({object, new Signal});
-    }
-    return object_to_signal.at(object);
-}
+void generic_destroy_sub_object_views(ObjectView *object_view) {
+    for (const auto &sub_object_view: object_view->sub_object_views) {
+        destroy_object_view(sub_object_view);
 
-void drop_object_signal(void *object) {
-    if (object_to_signal.contains(object)) {
-        object_to_signal.erase(new Signal);
+        generic_destroy_sub_object_views(sub_object_view);
     }
+
+    for (const auto &sub_object_constraint: object_view->sub_object_constraints) {
+        destroy_listener(sub_object_constraint);
+    }
+
+    object_view->sub_object_constraints.clear();
+    object_view->sub_object_views.clear();
 }
 
 ObjectView *new_object_view(void **object_handle) {
     auto o = new ObjectView;
     o->object_handle = object_handle;
     initialize_editable_text(&o->editable_text);
-    o->box = Box{};
-    o->previous_destroy_sub_object_views = nothing_destroy_sub_object_views;
+    o->previous_destroy_sub_object_views = find_object_view_builder(*o->object_handle).destroy_sub_object_views;
 
     include_sub_box(o, &o->editable_text.box_sig);
 
-    o->internal_constraints.push_back(create_listener({lift_object_signal(o->object_handle)}, new function<void(void)>([=]() {
+    o->internal_constraints.push_back(create_listener({lift_reference(o->object_handle)}, new function<void(void)>([=]() {
         redo_sub_objects(o, find_object_view_builder(*o->object_handle));
     })));
 
     o->internal_constraints.push_back(create_listener_lazy({&o->editable_text.text_input_sig}, new function<void(void)>([=]() {
         for (const auto &object_view_builder: object_view_builders) {
             if (object_view_builder.s == o->editable_text.text) {
-                o->previous_destroy_sub_object_views(o);
                 *o->object_handle = object_view_builder.create_simple();
-                signal_update(lift_object_signal(o->object_handle));
+                signal_update(&object_to_signal.at(o->object_handle)->o);
                 break;
             }
         }

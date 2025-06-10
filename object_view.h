@@ -25,15 +25,12 @@ typedef struct ObjectView {
     Box box;
     Signal box_sig;
 
-//    Signal position_sig;
-//    Signal size_sig;
     MultiClick multi_click;
     vector<string> potential_lookup;
-    ObjectType object_type;
+//    ObjectType object_type;
 
     vector<Listener> sub_object_constraints;
     vector<ObjectView *> sub_object_views;
-//    Listener bounding_listener;
 
     vector<Listener> internal_constraints;
 
@@ -62,8 +59,14 @@ typedef struct ObjectViewBuilder {
 
 extern ObjectView *selected_object_view;
 
+template<typename T>
+struct Shared {
+    T o;
+    int count;
+};
+
 extern map<void *, ObjectType> object_to_type;
-extern map<void *, Signal *> object_to_signal;
+extern map<void *, Shared<Signal> *> object_to_signal;
 
 template<typename T>
 T *typed(ObjectType type, T *object) {
@@ -83,28 +86,9 @@ void make_top_level_object(void *object);
 
 void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view);
 
-Signal* lift_object_signal(void* object);
-
-void drop_object_signal(void* object);
-
 // maybe rather than destroy object view controlling data
 // thats now being used for something else,
 // transfer sub objects to new object view
-template<typename T>
-void generic_destroy_sub_object_views(ObjectView *object_view, T **handle) {
-    for (const auto &sub_object_constraint: object_view->sub_object_constraints) {
-        destroy_listener(sub_object_constraint);
-    }
-    for (auto sub: object_view->sub_object_views) {
-        destroy_object_view(sub);
-        drop_object_signal(sub->object_handle);
-    }
-
-    object_to_type.erase(*handle);
-    delete *handle;
-
-    object_view->sub_object_constraints.clear();
-    object_view->sub_object_views.clear();
-}
+void generic_destroy_sub_object_views(ObjectView *object_view);
 
 #endif //OPTO_OBJECT_VIEW_H
