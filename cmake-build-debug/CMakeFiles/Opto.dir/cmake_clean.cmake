@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Opto.dir/add.cpp.o"
   "CMakeFiles/Opto.dir/add.cpp.o.d"
+  "CMakeFiles/Opto.dir/assign.cpp.o"
+  "CMakeFiles/Opto.dir/assign.cpp.o.d"
   "CMakeFiles/Opto.dir/declare_cell.cpp.o"
   "CMakeFiles/Opto.dir/declare_cell.cpp.o.d"
   "CMakeFiles/Opto.dir/do_then.cpp.o"

@@ -86,6 +86,12 @@
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/add.h">
 			<Option target="Opto"/>
 		</Unit>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/assign.cpp">
+			<Option target="Opto"/>
+		</Unit>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/assign.h">
+			<Option target="Opto"/>
+		</Unit>
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/declare_cell.cpp">
 			<Option target="Opto"/>
 		</Unit>

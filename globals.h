@@ -19,11 +19,13 @@ typedef struct {
 
 Rectangle box_to_rectangle(Box box);
 
-extern unordered_map<void *, string> tracked_objects;
-#define track(obj) { \
-    string log_entry = string(__FILE__) + ":" + to_string(__LINE__); \
-    tracked_objects.insert({obj, log_entry}); \
-}
+#define VIEW_DECLARATIONS(obj) \
+    typedef struct ObjectView ObjectView; \
+    typedef struct ObjectViewBuilder ObjectViewBuilder; \
+    extern ObjectViewBuilder obj##_object_view_builder; \
+    void obj##_create_sub_object_views(ObjectView *obj##_view); \
+    void obj##_destroy_sub_object_views(ObjectView *obj##_view); \
+    void* obj##_create_simple();
 
 extern Color BACKGROUND_COLOR;
 extern Color BOX_COLOR;

@@ -33,7 +33,10 @@ int main() {
             .effect = nullptr,
             .next = typed(DO_THEN, new DoThen{
                     .effect = nullptr,
-                    .next = nullptr
+                    .next = typed(DO_THEN, new DoThen{
+                            .effect = nullptr,
+                            .next = nullptr
+                    })
             })
     });
 
@@ -58,8 +61,8 @@ int main() {
         auto click_streak = check_clicked_n_times(&multi_click, 2);
         if (!mouse_clicked_during_input && click_streak == 2) {
             recent_root = new void *;
-            *recent_root = x;
-//            *recent_root = nullptr;
+//            *recent_root = x;
+            *recent_root = nullptr;
             auto object_view = new_object_view(recent_root);
             selected_editable_text = &object_view->editable_text;
             edit_mode = EDITABLE_TEXT;

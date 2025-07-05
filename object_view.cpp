@@ -11,6 +11,7 @@ void init_object_view_builders() {
     object_view_builders.push_back(none_object_view_builder);
     object_view_builders.push_back(do_then_object_view_builder);
     object_view_builders.push_back(add_object_view_builder);
+    object_view_builders.push_back(assign_object_view_builder);
 }
 
 Vector2 mouse_offset;
@@ -201,3 +202,11 @@ ObjectView *new_object_view(void **object_handle) {
 // position text box 1 wherever
 // react to text box position 1 and text box size 1, drives view box 2
 //
+
+void quick_layout_right(ObjectView *p, ObjectView* o, Box *o_box, Signal *o_box_sig, Box *s_editable_text_box, Signal *s_editable_text_box_sig) {
+    p->sub_object_constraints.push_back(create_listener({o_box_sig}, new function<void(void)>([=]() {
+        box_layout_right(o_box, s_editable_text_box);
+        signal_update(s_editable_text_box_sig);
+    })));
+    include_sub_object_view(p, o);
+}

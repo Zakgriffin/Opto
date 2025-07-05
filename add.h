@@ -13,15 +13,6 @@ typedef struct {
     Integer *addend;
 } Add;
 
-typedef struct ObjectView ObjectView;
-typedef struct ObjectViewBuilder ObjectViewBuilder;
-
-extern ObjectViewBuilder add_object_view_builder;
-
-void* add_create_simple();
-
-void add_create_sub_object_views(ObjectView *add_view);
-
-void add_destroy_sub_object_views(ObjectView *add_view);
+VIEW_DECLARATIONS(add)
 
 #endif //OPTO_ADD_H

@@ -10,6 +10,7 @@
 #include "do_then.h"
 #include "string_.h"
 #include "add.h"
+#include "assign.h"
 #include "integer.h"
 #include "event.h"
 
@@ -17,6 +18,7 @@ typedef enum {
     NONE,
     DO_THEN,
     ADD,
+    ASSIGN,
 } ObjectType;
 
 typedef struct ObjectView {
@@ -36,17 +38,12 @@ typedef struct ObjectView {
 
     void (*previous_destroy_sub_object_views)(ObjectView *object_view);
 
-    void *context;
+    void *context; // ZZZZ don't remove! using space with *magic* pseudo inheritance
 
 } ObjectView;
 
 typedef struct ObjectViewBuilder {
     ObjectType object_type;
-
-//    Unknown *(*to_unknown)(void *);
-//
-//    void *(*from_unknown)(Unknown *);
-
     string s;
 
     void *(*create_simple)();
@@ -54,7 +51,6 @@ typedef struct ObjectViewBuilder {
     void (*create_sub_object_views)(ObjectView *object_view);
 
     void (*destroy_sub_object_views)(ObjectView *object_view);
-
 } ObjectViewBuilder;
 
 extern ObjectView *selected_object_view;
@@ -82,13 +78,10 @@ void redo_sub_objects(ObjectView *o, const ObjectViewBuilder &object_view_builde
 
 void init_object_view_builders();
 
-void make_top_level_object(void *object);
-
 void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view);
 
-// maybe rather than destroy object view controlling data
-// thats now being used for something else,
-// transfer sub objects to new object view
 void generic_destroy_sub_object_views(ObjectView *object_view);
+
+void quick_layout_right(ObjectView *p, ObjectView* o, Box *o_box, Signal *o_box_sig, Box *s_editable_text_box, Signal *s_editable_text_box_sig);
 
 #endif //OPTO_OBJECT_VIEW_H

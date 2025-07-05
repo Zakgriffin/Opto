@@ -153,6 +153,30 @@ add.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/add.cpp.s
 .PHONY : add.cpp.s
 
+assign.o: assign.cpp.o
+.PHONY : assign.o
+
+# target to build an object file
+assign.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/assign.cpp.o
+.PHONY : assign.cpp.o
+
+assign.i: assign.cpp.i
+.PHONY : assign.i
+
+# target to preprocess a source file
+assign.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/assign.cpp.i
+.PHONY : assign.cpp.i
+
+assign.s: assign.cpp.s
+.PHONY : assign.s
+
+# target to generate assembly for a file
+assign.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/assign.cpp.s
+.PHONY : assign.cpp.s
+
 declare_cell.o: declare_cell.cpp.o
 .PHONY : declare_cell.o
 
@@ -501,6 +525,9 @@ help:
 	@echo "... add.o"
 	@echo "... add.i"
 	@echo "... add.s"
+	@echo "... assign.o"
+	@echo "... assign.i"
+	@echo "... assign.s"
 	@echo "... declare_cell.o"
 	@echo "... declare_cell.i"
 	@echo "... declare_cell.s"
