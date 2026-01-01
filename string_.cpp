@@ -14,7 +14,7 @@ void *string_create_simple() {
 
 void string_create_sub_object_views(ObjectView *string_view) {
     auto string_handle = (string **) string_view->object_handle;
-    auto string = *string_handle;
+    auto string_ = *string_handle;
 
     auto string_object_view = new StringObjectView;
     string_view->context = string_object_view;
@@ -28,16 +28,20 @@ void string_create_sub_object_views(ObjectView *string_view) {
     })));
     include_sub_box(string_view, &e->box, &e->box_sig);
 
+    e->text = *string_; // ZZZZ eh
     string_view->sub_object_constraints.push_back(create_listener({&e->text_input_sig}, new function<void(void)>([=]() {
-        *string = e->text;
+        *string_ = e->text;
         e->color = Color(150,120,0,255);
     })));
+    signal_update(&e->text_input_sig); // ZZZZ eh
 }
 
 void string_destroy_sub_object_views(ObjectView *string_view) {
     auto context = (StringObjectView*)string_view->context;
-    finalize_editable_text(&context->string_editable_text);
-    delete context;
+    if (context) {
+        finalize_editable_text(&context->string_editable_text);
+        delete context;
+    }
 
     generic_destroy_sub_object_views(string_view);
 }

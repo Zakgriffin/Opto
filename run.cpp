@@ -10,12 +10,13 @@ int evaluate_expression(void* expression) {
         auto integer = (int*) expression;
         return *integer;
     }
+    if (type == GREATER_THAN) {
+        auto greater_than = (GreaterThan*) expression;
+        return evaluate_expression(greater_than->left) > evaluate_expression(greater_than->right);
+    }
     if (type == DECLARE) {
         auto declare = (Declare*) expression;
         auto handle = name_to_object_handle.at(*declare->name);
-        cout << "guy type: " << object_to_type.at(*handle);
-        cout << "value: " << *(int*)*handle;
-
         return evaluate_expression(*handle);
     }
 
@@ -76,6 +77,14 @@ void click_step(Run *run) {
             run->scope_stack.push(if_->finally);
         } else {
             run->current = if_->finally;
+        }
+    } else if (control_type == WHILE) {
+        auto while_ = (While*) run->current;
+        if (evaluate_expression(while_->condition)) {
+            run->current = while_->then;
+            run->scope_stack.push(while_);
+        } else {
+            run->current = while_->finally;
         }
     }
 }

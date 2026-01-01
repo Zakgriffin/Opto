@@ -297,6 +297,30 @@ globals.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/globals.cpp.s
 .PHONY : globals.cpp.s
 
+greater_than.o: greater_than.cpp.o
+.PHONY : greater_than.o
+
+# target to build an object file
+greater_than.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than.cpp.o
+.PHONY : greater_than.cpp.o
+
+greater_than.i: greater_than.cpp.i
+.PHONY : greater_than.i
+
+# target to preprocess a source file
+greater_than.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than.cpp.i
+.PHONY : greater_than.cpp.i
+
+greater_than.s: greater_than.cpp.s
+.PHONY : greater_than.s
+
+# target to generate assembly for a file
+greater_than.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than.cpp.s
+.PHONY : greater_than.cpp.s
+
 if.o: if.cpp.o
 .PHONY : if.o
 
@@ -561,6 +585,30 @@ user_input.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/user_input.cpp.s
 .PHONY : user_input.cpp.s
 
+while.o: while.cpp.o
+.PHONY : while.o
+
+# target to build an object file
+while.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/while.cpp.o
+.PHONY : while.cpp.o
+
+while.i: while.cpp.i
+.PHONY : while.i
+
+# target to preprocess a source file
+while.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/while.cpp.i
+.PHONY : while.cpp.i
+
+while.s: while.cpp.s
+.PHONY : while.s
+
+# target to generate assembly for a file
+while.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/while.cpp.s
+.PHONY : while.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -591,6 +639,9 @@ help:
 	@echo "... globals.o"
 	@echo "... globals.i"
 	@echo "... globals.s"
+	@echo "... greater_than.o"
+	@echo "... greater_than.i"
+	@echo "... greater_than.s"
 	@echo "... if.o"
 	@echo "... if.i"
 	@echo "... if.s"
@@ -624,6 +675,9 @@ help:
 	@echo "... user_input.o"
 	@echo "... user_input.i"
 	@echo "... user_input.s"
+	@echo "... while.o"
+	@echo "... while.i"
+	@echo "... while.s"
 .PHONY : help
 
 

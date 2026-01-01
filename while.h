@@ -1,19 +1,19 @@
 #pragma once
 
-#ifndef OPTO_IF_H
-#define OPTO_IF_H
+#ifndef OPTO_WHILE_H
+#define OPTO_WHILE_H
 
 #include "stds.h"
 #include "object_view.h"
 
 typedef struct ObjectView ObjectView;
 
-struct If {
+struct While {
     void *condition;
     void *then;
     DoThen *finally;
 };
 
-VIEW_DECLARATIONS(if)
+VIEW_DECLARATIONS(while)
 
-#endif //OPTO_IF_H
+#endif //OPTO_WHILE_H

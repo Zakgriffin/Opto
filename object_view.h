@@ -15,6 +15,8 @@
 #include "run.h"
 #include "declare.h"
 #include "if.h"
+#include "while.h"
+#include "greater_than.h"
 #include "event.h"
 
 extern unordered_map<void *, ObjectView *> object_to_view;
@@ -29,7 +31,9 @@ typedef enum {
     INTEGER,
     STRING,
     DECLARE,
-    IF
+    IF,
+    WHILE,
+    GREATER_THAN
 } ObjectType;
 
 typedef struct ObjectView {

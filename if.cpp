@@ -19,7 +19,6 @@ void if_create_sub_object_views(ObjectView *if_view) {
     })));
     include_sub_object_view(if_view, condition_view);
 
-
     auto then_view = new_object_view((void **) &if_->then);
     if_view->sub_object_constraints.push_back(create_listener({&if_view->editable_text.box_sig}, new function<void(void)>([=]() {
         box_layout_right_under(&if_view->editable_text.box, &then_view->editable_text.box);

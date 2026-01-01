@@ -34,6 +34,7 @@ void integer_create_sub_object_views(ObjectView *integer_view) {
     })));
     include_sub_box(integer_view, &e->box, &e->box_sig);
 
+    e->text = to_string(*integer); // ZZZZ eh
     integer_view->sub_object_constraints.push_back(create_listener({&e->text_input_sig}, new function<void(void)>([=]() {
         int i;
         if (to_int(e->text, i)) {
@@ -43,15 +44,15 @@ void integer_create_sub_object_views(ObjectView *integer_view) {
             e->color = RED;
         }
     })));
-
-    e->text = to_string(*integer);
-    signal_update(&e->text_input_sig);
+    signal_update(&e->text_input_sig); // ZZZZ eh
 }
 
 void integer_destroy_sub_object_views(ObjectView *integer_view) {
     auto context = (IntegerObjectView*)integer_view->context;
-    finalize_editable_text(&context->integer_editable_text);
-    delete context;
+    if (context) {
+        finalize_editable_text(&context->integer_editable_text);
+        delete context;
+    }
 
     generic_destroy_sub_object_views(integer_view);
 }

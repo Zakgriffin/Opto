@@ -106,5 +106,17 @@
   "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/if.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/if.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/if.cpp",
   "output": "CMakeFiles/Opto.dir/if.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/while.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/while.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/while.cpp",
+  "output": "CMakeFiles/Opto.dir/while.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/greater_than.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/greater_than.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/greater_than.cpp",
+  "output": "CMakeFiles/Opto.dir/greater_than.cpp.o"
 }
 ]

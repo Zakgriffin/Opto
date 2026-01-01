@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Opto.dir/event.cpp.o.d"
   "CMakeFiles/Opto.dir/globals.cpp.o"
   "CMakeFiles/Opto.dir/globals.cpp.o.d"
+  "CMakeFiles/Opto.dir/greater_than.cpp.o"
+  "CMakeFiles/Opto.dir/greater_than.cpp.o.d"
   "CMakeFiles/Opto.dir/if.cpp.o"
   "CMakeFiles/Opto.dir/if.cpp.o.d"
   "CMakeFiles/Opto.dir/integer.cpp.o"
@@ -35,6 +37,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Opto.dir/unknown.cpp.o.d"
   "CMakeFiles/Opto.dir/user_input.cpp.o"
   "CMakeFiles/Opto.dir/user_input.cpp.o.d"
+  "CMakeFiles/Opto.dir/while.cpp.o"
+  "CMakeFiles/Opto.dir/while.cpp.o.d"
   "Opto"
   "Opto.pdb"
 )

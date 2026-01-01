@@ -6,8 +6,8 @@
 #include "object_view.h"
 
 typedef struct {
-    int *augend;
-    int *addend;
+    void *augend;
+    void *addend;
 } Add;
 
 VIEW_DECLARATIONS(add)

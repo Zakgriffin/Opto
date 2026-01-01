@@ -29,17 +29,6 @@ int main() {
 
     SetExitKey(0);
 
-    auto x = typed(DO_THEN, new DoThen{
-            .effect = nullptr,
-            .next = typed(DO_THEN, new DoThen{
-                    .effect = nullptr,
-                    .next = typed(DO_THEN, new DoThen{
-                            .effect = nullptr,
-                            .next = nullptr
-                    })
-            })
-    });
-
     MultiClick multi_click;
     init_multi_click(&multi_click);
     init_object_view_builders();
@@ -61,7 +50,7 @@ int main() {
         auto click_streak = check_clicked_n_times(&multi_click, 2);
         if (!mouse_clicked_during_input && click_streak == 2) {
             recent_root = new void *;
-//            *recent_root = x;
+            // *recent_root = x;
             *recent_root = nullptr;
             auto object_view = new_object_view(recent_root);
             selected_editable_text = &object_view->editable_text;
