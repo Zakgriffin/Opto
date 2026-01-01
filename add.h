@@ -3,14 +3,11 @@
 #ifndef OPTO_ADD_H
 #define OPTO_ADD_H
 
-#include "stds.h"
 #include "object_view.h"
-#include "integer.h"
 
-typedef struct Integer Integer;
 typedef struct {
-    Integer *augend;
-    Integer *addend;
+    int *augend;
+    int *addend;
 } Add;
 
 VIEW_DECLARATIONS(add)

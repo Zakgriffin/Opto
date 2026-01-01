@@ -1,39 +1,57 @@
 #include "integer.h"
+#include <charconv>
+
+bool to_int(const string& s, int& out) {
+    auto [p, ec] = from_chars(s.data(), s.data() + s.size(), out);
+    return ec == errc() && p == s.data() + s.size();
+}
 
 struct IntegerObjectView {
     EditableText integer_editable_text;
 };
 
+ObjectViewBuilder integer_object_view_builder = ObjectViewBuilder{INTEGER, "integer", integer_create_simple, integer_create_sub_object_views, integer_destroy_sub_object_views};
+
+void *integer_create_simple() {
+    auto integer = new int{0};
+    object_to_type.insert({integer, INTEGER});
+    return integer;
+}
+
 void integer_create_sub_object_views(ObjectView *integer_view) {
-//    auto integer_handle = (Integer **) integer_view->object_handle;
-//    auto integer = new Integer{.i = 0};
-//    *integer_handle = integer;
-//
-//    auto integer_object_view_handle = (IntegerObjectView **) &integer_view->context;
-//    auto integer_object_view = new IntegerObjectView;
-//    *integer_object_view_handle = integer_object_view;
-//
-//    auto e = &integer_object_view->integer_editable_text;
-//    initialize_editable_text(e);
-//    e->color = PURPLE;
-//
-//    integer_view->sub_object_constraints.push_back(create_listener({&integer_view->position_sig, &integer_view->size_sig}, new function<void(void)>([=]() {
-//        box_touch_left_right(&integer_view->box, &e->box);
-//        box_align_up(&integer_view->box, &e->box);
-//    })));
-//
-//    integer_view->sub_object_constraints.push_back(create_listener({&e->text_sig}, new function<void(void)>([=]() {
-//        integer->i = 69;
-//    })));
+    auto integer_handle = (int **) integer_view->object_handle;
+    auto integer = *integer_handle;
+
+    auto integer_object_view = new IntegerObjectView;
+    integer_view->context = integer_object_view;
+
+    auto e = &integer_object_view->integer_editable_text;
+    initialize_editable_text(e);
+
+    integer_view->sub_object_constraints.push_back(create_listener({&integer_view->editable_text.box_sig}, new function<void(void)>([=]() {
+        box_layout_right(&integer_view->editable_text.box, &e->box);
+        signal_update(&e->box_sig);
+    })));
+    include_sub_box(integer_view, &e->box, &e->box_sig);
+
+    integer_view->sub_object_constraints.push_back(create_listener({&e->text_input_sig}, new function<void(void)>([=]() {
+        int i;
+        if (to_int(e->text, i)) {
+            *integer = i;
+            e->color = BLUE;
+        } else {
+            e->color = RED;
+        }
+    })));
+
+    e->text = to_string(*integer);
+    signal_update(&e->text_input_sig);
 }
 
 void integer_destroy_sub_object_views(ObjectView *integer_view) {
-//    auto integer_handle = (Integer **) integer_view->object_handle;
-//    auto integer_object_view_handle = (IntegerObjectView **) &integer_view->context;
-//    auto integer_object_view = *integer_object_view_handle;
-//
-//    generic_destroy_sub_object_views(integer_view, integer_handle);
-//    finalize_editable_text(&integer_object_view->integer_editable_text);
-//
-//    delete integer_object_view;
+    auto context = (IntegerObjectView*)integer_view->context;
+    finalize_editable_text(&context->integer_editable_text);
+    delete context;
+
+    generic_destroy_sub_object_views(integer_view);
 }

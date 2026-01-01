@@ -39,10 +39,17 @@ extern EditMode edit_mode;
 
 bool is_within_box(Vector2 point, Box box);
 
+void box_layout_right_x(Box *super, Box *sub);
+void box_layout_flush_min_y(Box *super, Box *sub);
 void box_layout_right(Box *super, Box *sub);
+void box_layout_flush_min_x(Box *super, Box *sub);
+void box_layout_under_y(Box *super, Box *sub);
 void box_layout_under(Box *super, Box *sub);
+void box_layout_right_under(Box *super, Box *sub);
 
 Box enclosing_box(Box b1, Box b2);
+bool boxes_overlap(Box b1, Box b2);
+Box rotate_box(Box b, int count);
 
 void move_box_x(Box* box, float x_min);
 

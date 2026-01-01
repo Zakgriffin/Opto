@@ -1,6 +1,7 @@
 #include "editable_text.h"
 
 EditableText *selected_editable_text = nullptr;
+unordered_set<EditableText*> editable_texts;
 
 int PAD_X = 5;
 int PAD_Y = 3;
@@ -25,6 +26,36 @@ void finalize_editable_text(EditableText *e) {
     for (const auto &l: e->internal_listeners) {
         destroy_listener(l);
     }
+    editable_texts.erase(e);
+}
+
+int x_to_character_index(EditableText *e, float x) {
+    auto end = (int) e->text.size();
+    auto mapped = map_range<float>(x, b(e, 0), b(e, end), 0.5, end + 0.5);
+    return clamp((int) round(mapped), 0, end);
+}
+
+int character_index_to_x(EditableText *e, int i) {
+    auto end = (int) e->text.size();
+    auto mapped = map_range<float>(i,0.5, end + 0.5, b(e, 0), b(e, end));
+    return mapped;
+}
+
+void jump_editable_text(EditableText *e, float Box::* low, float Box::* high, float flip) {
+    EditableText* best = nullptr;
+    auto b = e->box;
+    b.*low = b.*high;
+    b.*high = MAXFLOAT * flip;
+
+    for (auto et : editable_texts) {
+        if (!boxes_overlap(et->box, b)) continue;
+        if (best == nullptr || (et->box.*low - best->box.*low)*flip < 0) best = et;
+    }
+    if (!best) return;
+
+    selected_editable_text = best;
+    auto x = character_index_to_x(e, e->character_index);
+    best->character_index = x_to_character_index(best, x);
 }
 
 void initialize_editable_text(EditableText *e) {
@@ -56,7 +87,7 @@ void initialize_editable_text(EditableText *e) {
             if (IsMouseButtonPressed(0)) {
                 selected_editable_text = e;
                 auto end = e->text.size();
-                auto clicked_character_index= (int) map_range<float>(mouse.x, b(e, 0), b(e, end), 0.5, end + 0.5);
+                auto clicked_character_index = x_to_character_index(e, mouse.x);
                 if(clicked_character_index > end) clicked_character_index = end;
                 e->character_index = clicked_character_index;
                 mouse_clicked_during_input = true;
@@ -74,8 +105,16 @@ void initialize_editable_text(EditableText *e) {
                 }
             } else if (key_pressed == KEY_LEFT) {
                 if (e->character_index > 0) e->character_index--;
+                else jump_editable_text(e, &Box::x_max, &Box::x_min, -1);
             } else if (key_pressed == KEY_RIGHT) {
                 if (e->character_index < e->text.size()) e->character_index++;
+                else jump_editable_text(e, &Box::x_min, &Box::x_max, 1);
+            } else if (key_pressed == KEY_UP) {
+                jump_editable_text(e, &Box::y_max, &Box::y_min, -1);
+            } else if (key_pressed == KEY_DOWN) {
+                jump_editable_text(e, &Box::y_min, &Box::y_max, 1);
+            } else if (key_pressed == KEY_SPACE) {
+                jump_editable_text(e, &Box::x_min, &Box::x_max, 1);
             } else if (key_pressed == KEY_ESCAPE) {
                 edit_mode = OBJECT_VIEW;
                 selected_editable_text = nullptr;
@@ -88,29 +127,9 @@ void initialize_editable_text(EditableText *e) {
         }
     })));
 
-
-//    create_binding({text}, new Event([&](){
-//        box.width = 123;
-//        box.height = 321;
-//    }));
-//
-//    auto bool_is_true_lifetime = x;
-//    create_datum_update_propagated_event(new Event([]() {
-//        if(selected) {
-//            for (char key = ' '; key <= '~'; key++) {
-//                char lower = (char) tolower(key);
-//                auto listener = create_key_pressed_listener(key, new Event([&, lower]() {
-//                    text.insert(character_index, 1, lower);
-//                    character_index++;
-//                }));
-//                lifetime_subsumes(listener, bool_is_true_lifetime);
-//            }
-//        } else {
-//            destroy_object(bool_is_true_lifetime);
-//        }
-//    }, {selected}));
-
     e->internal_listeners.push_back(create_listener({&draw_visuals}, new function<void(void)>([=]() {
         draw_editable_text(e);
     })));
+
+    editable_texts.insert(e);
 }

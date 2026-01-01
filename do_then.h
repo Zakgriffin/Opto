@@ -6,9 +6,11 @@
 #include "stds.h"
 #include "object_view.h"
 
+typedef struct ObjectView ObjectView;
+
 struct DoThen {
     void *effect;
-    DoThen *next;
+    void *next;
 };
 
 VIEW_DECLARATIONS(do_then)

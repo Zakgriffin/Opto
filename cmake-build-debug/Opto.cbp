@@ -152,6 +152,9 @@
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/object_view.h">
 			<Option target="Opto"/>
 		</Unit>
+		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/run.cpp">
+			<Option target="Opto"/>
+		</Unit>
 		<Unit filename="/Users/zakgriffin/CLionProjects/Opto/stds.h">
 			<Option target="Opto"/>
 		</Unit>

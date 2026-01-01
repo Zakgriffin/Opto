@@ -8,7 +8,7 @@
 #include "event.h"
 #include "user_input.h"
 
-typedef struct {
+typedef struct EditableText {
     string text;
     int character_index;
     Box box;
@@ -17,8 +17,7 @@ typedef struct {
     Signal text_input_sig;
     Signal text_sig;
     Signal box_sig;
-//    Signal position_sig;
-//    Signal size_sig;
+
     vector<Listener> internal_listeners;
 
     Signal key_pressed_sig;

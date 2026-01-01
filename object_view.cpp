@@ -7,11 +7,19 @@ vector<ObjectViewBuilder> object_view_builders;
 map<void *, ObjectType> object_to_type;
 map<void *, Shared<Signal> *> object_to_signal;
 
+unordered_map<void *, ObjectView *> object_to_view;
+unordered_map<string, void **> name_to_object_handle;
+
 void init_object_view_builders() {
     object_view_builders.push_back(none_object_view_builder);
     object_view_builders.push_back(do_then_object_view_builder);
     object_view_builders.push_back(add_object_view_builder);
     object_view_builders.push_back(assign_object_view_builder);
+    object_view_builders.push_back(run_object_view_builder);
+    object_view_builders.push_back(integer_object_view_builder);
+    object_view_builders.push_back(string_object_view_builder);
+    object_view_builders.push_back(declare_object_view_builder);
+    object_view_builders.push_back(if_object_view_builder);
 }
 
 Vector2 mouse_offset;
@@ -49,12 +57,13 @@ void destroy_object_view(ObjectView *object_view) {
     delete object_view;
 }
 
-void include_sub_box(ObjectView *o, Signal *sub_sig) {
-    o->internal_constraints.push_back(create_listener({sub_sig}, new function<void(void)>([=]() {
-        auto b = &o->editable_text.box; // known first element in collection
-        Box large_box = {b->x_min, b->x_max, b->y_min, b->y_max};
-        for (auto k: o->sub_object_views) {
-            large_box = enclosing_box(large_box, k->box);
+void include_sub_box(ObjectView *o, Box* sub_box, Signal *sub_box_sig) {
+    o->sub_boxes.push_back(sub_box);
+
+    o->internal_constraints.push_back(create_listener({sub_box_sig}, new function<void(void)>([=]() {
+        Box large_box = {FLT_MAX, -FLT_MAX, FLT_MAX, -FLT_MAX};
+        for (auto s: o->sub_boxes) {
+            large_box = enclosing_box(large_box, *s);
         }
         o->box = large_box;
         signal_update(&o->box_sig);
@@ -63,15 +72,21 @@ void include_sub_box(ObjectView *o, Signal *sub_sig) {
 
 void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view) {
     object_view->sub_object_views.push_back(sub_object_view);
-    include_sub_box(object_view, &sub_object_view->box_sig);
+    include_sub_box(object_view, &sub_object_view->box, &sub_object_view->box_sig);
 }
 
 void redo_sub_objects(ObjectView *o, const ObjectViewBuilder &object_view_builder) {
     o->previous_destroy_sub_object_views(o);
+    object_to_view.erase({ *o->object_handle});
+
     o->previous_destroy_sub_object_views = object_view_builder.destroy_sub_object_views;
     o->editable_text.text = object_view_builder.s;
     signal_update(&o->editable_text.text_sig);
+
     object_view_builder.create_sub_object_views(o);
+    if (*o->object_handle != nullptr) {
+        object_to_view.insert({ *o->object_handle, o});
+    }
 }
 
 ObjectViewBuilder find_object_view_builder(void *object) {
@@ -99,6 +114,7 @@ void generic_destroy_sub_object_views(ObjectView *object_view) {
 
     object_view->sub_object_constraints.clear();
     object_view->sub_object_views.clear();
+    object_view->sub_boxes.clear();
 }
 
 ObjectView *new_object_view(void **object_handle) {
@@ -107,7 +123,7 @@ ObjectView *new_object_view(void **object_handle) {
     initialize_editable_text(&o->editable_text);
     o->previous_destroy_sub_object_views = find_object_view_builder(*o->object_handle).destroy_sub_object_views;
 
-    include_sub_box(o, &o->editable_text.box_sig);
+    include_sub_box(o, &o->editable_text.box, &o->editable_text.box_sig);
 
     o->internal_constraints.push_back(create_listener({lift_reference(o->object_handle)}, new function<void(void)>([=]() {
         redo_sub_objects(o, find_object_view_builder(*o->object_handle));
@@ -180,33 +196,13 @@ ObjectView *new_object_view(void **object_handle) {
         }
     })));
 
-//    create_datum_update_propagated_event(new Event([=]() {
-//        create_sub_object_views(o);
-//    }), {&o->object}, {&o->box.group});
-//
-//    create_datum_update_propagated_event(new Event([=]() {
-//        string text = o->editable_text->text;
-//        if (object_view_builders.contains(text)) {
-//            auto object_view_builder = object_view_builders.at(text);
-//            Unknown *unknown = object_view_builder.to_unknown(object);
-//
-//            assign_datum(&o->object, object_view_builder.from_unknown(unknown));
-//        }
-//    }), {&o->editable_text->text}, {&o->object});
-// do lazy
-// need to know whats affected second arg? not necessarily
-// error if change occurs to datum not listed in second arg during update
     return o;
 }
 
-// position text box 1 wherever
-// react to text box position 1 and text box size 1, drives view box 2
-//
-
-void quick_layout_right(ObjectView *p, ObjectView* o, Box *o_box, Signal *o_box_sig, Box *s_editable_text_box, Signal *s_editable_text_box_sig) {
-    p->sub_object_constraints.push_back(create_listener({o_box_sig}, new function<void(void)>([=]() {
+void quick_layout_right(ObjectView *left, ObjectView* right, Box *o_box, Signal *o_box_sig, Box *s_editable_text_box, Signal *s_editable_text_box_sig) {
+    left->sub_object_constraints.push_back(create_listener({o_box_sig}, new function<void(void)>([=]() {
         box_layout_right(o_box, s_editable_text_box);
         signal_update(s_editable_text_box_sig);
     })));
-    include_sub_object_view(p, o);
+    include_sub_object_view(left, right);
 }

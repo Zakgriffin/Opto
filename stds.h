@@ -11,6 +11,7 @@
 #include <ctime>
 #include <iostream>
 #include <cstdlib>
+#include <float.h>
 
 using namespace std;
 using namespace chrono;

@@ -1,6 +1,6 @@
 #include "do_then.h"
 
-ObjectViewBuilder do_then_object_view_builder = ObjectViewBuilder{DO_THEN, "do-then", do_then_create_simple, do_then_create_sub_object_views, do_then_destroy_sub_object_views};
+ObjectViewBuilder do_then_object_view_builder = ObjectViewBuilder{DO_THEN, ",", do_then_create_simple, do_then_create_sub_object_views, do_then_destroy_sub_object_views};
 
 void *do_then_create_simple() {
     auto do_then = new DoThen{.effect = nullptr, .next = nullptr};
@@ -25,14 +25,18 @@ void do_then_create_sub_object_views(ObjectView *do_then_view) {
         signal_update(&next_view->editable_text.box_sig);
     })));
     include_sub_object_view(do_then_view, next_view);
+
+    // do_then_to_view.insert({do_then, do_then_view});
 }
 
 void do_then_destroy_sub_object_views(ObjectView *do_then_view) {
+    // do_then_to_view.erase({(DoThen *) *do_then_view->object_handle});
+
     generic_destroy_sub_object_views(do_then_view);
 }
 
 string do_then_as_str(DoThen *do_then) {
     string effect_str = do_then->effect ? "something" : "null";
-    string next_str = do_then->next ? do_then_as_str(do_then->next) : "null";
+    string next_str = do_then->next ? do_then_as_str((DoThen*)do_then->next) : "null";
     return "do_then(" + effect_str + "," + next_str + ")";
 }
