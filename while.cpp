@@ -20,8 +20,9 @@ void while_create_sub_object_views(ObjectView *while_view) {
     include_sub_object_view(while_view, condition_view);
 
     auto then_view = new_object_view((void **) &while_->then);
-    while_view->sub_object_constraints.push_back(create_listener({&while_view->editable_text.box_sig}, new function<void(void)>([=]() {
-        box_layout_right_under(&while_view->editable_text.box, &then_view->editable_text.box);
+    while_view->sub_object_constraints.push_back(create_listener({&condition_view->box_sig}, new function<void(void)>([=]() {
+        box_layout_indent_x(&while_view->editable_text.box, &then_view->editable_text.box);
+        box_layout_under_y(&condition_view->box, &then_view->editable_text.box);
         signal_update(&then_view->editable_text.box_sig);
     })));
     include_sub_object_view(while_view, then_view);

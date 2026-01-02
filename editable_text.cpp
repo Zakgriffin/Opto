@@ -6,8 +6,6 @@ unordered_set<EditableText*> editable_texts;
 int PAD_X = 5;
 int PAD_Y = 3;
 
-float CHARACTER_WIDTH = 8;
-
 float b(EditableText *e, int character_index) {
     return e->box.x_min + CHARACTER_WIDTH * character_index + PAD_X;
 }
@@ -118,6 +116,8 @@ void initialize_editable_text(EditableText *e) {
             } else if (key_pressed == KEY_ESCAPE) {
                 edit_mode = OBJECT_VIEW;
                 selected_editable_text = nullptr;
+            } else if (key_pressed == KEY_BACKSPACE) {
+                // collapse_object_view(o);
             } else {
                 auto c = (char) tolower(key_pressed);
                 e->text.insert(e->character_index, 1, c);

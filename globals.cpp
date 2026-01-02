@@ -1,5 +1,7 @@
 #include "globals.h"
 
+float CHARACTER_WIDTH = 8;
+
 Rectangle box_to_rectangle(Box box) {
     return Rectangle{
             box.x_min,
@@ -83,6 +85,12 @@ void box_layout_under(Box *super, Box *sub) {
 void box_layout_right_under(Box *super, Box *sub) {
     box_layout_right_x(super, sub);
     box_layout_under_y(super, sub);
+}
+
+void box_layout_indent_x(Box *super, Box *sub) {
+    auto x_size = sub->x_max - sub->x_min;
+    sub->x_min = super->x_min + CHARACTER_WIDTH * 4;
+    sub->x_max = sub->x_min + x_size;
 }
 
 

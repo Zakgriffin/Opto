@@ -70,7 +70,8 @@ void click_step(Run *run) {
         }
 
         run->current = do_then->next;
-    } else if (control_type == IF) {
+    } else if (control_type == IF)
+    {
         auto if_ = (If*) run->current;
         if (evaluate_expression(if_->condition)) {
             run->current = if_->then;
@@ -78,6 +79,10 @@ void click_step(Run *run) {
         } else {
             run->current = if_->finally;
         }
+    } else if (control_type == LOOP) {
+        auto loop = (Loop*) run->current;
+        run->current = loop->body;
+        run->scope_stack.push(loop);
     } else if (control_type == WHILE) {
         auto while_ = (While*) run->current;
         if (evaluate_expression(while_->condition)) {
@@ -86,6 +91,14 @@ void click_step(Run *run) {
         } else {
             run->current = while_->finally;
         }
+    } else if (control_type == REPEAT) {
+        // auto repeat = (Repeat*) run->current;
+        // if (evaluate_expression(repeat->condition)) {
+        //     run->current = repeat->then;
+        //     run->scope_stack.push(repeat);
+        // } else {
+        //     run->current = repeat->finally;
+        // }
     }
 }
 
@@ -139,6 +152,15 @@ void run_create_sub_object_views(ObjectView *run_view) {
         if(!object_to_view.contains(run->current)) return;
 
         auto current_view = object_to_view.at(run->current);
+        // auto obj = *current_view->object_handle;
+        // auto type = object_to_type.at(obj);
+        // if (type == DO_THEN) {
+        //     auto do_then = (DoThen*) obj;
+        // DrawLine(current_view->box.x_min, current_view->box.y_min, current_view->box.x_max, current_view->box.y_min, RED);
+        //
+        // } else if (type == WHILE) {
+        //
+        // }
         DrawLine(current_view->box.x_min, current_view->box.y_min, current_view->box.x_max, current_view->box.y_min, RED);
     })));
 

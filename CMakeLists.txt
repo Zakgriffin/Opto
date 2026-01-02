@@ -53,7 +53,14 @@ add_executable(${PROJECT_NAME}
         while.cpp
         while.h
         greater_than.cpp
-        greater_than.h)
+        greater_than.h
+        arm_compile.cpp
+        arm_compile.h
+        repeat.cpp
+        repeat.h
+        loop.cpp
+        loop.h
+)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

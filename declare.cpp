@@ -9,11 +9,7 @@ void *declare_create_simple() {
 }
 
 void declare_create_sub_object_views(ObjectView *declare_view) {
-    auto declare_handle = (Declare **) declare_view->object_handle;
-    auto declare = *declare_handle;
-
-    auto augend_view = new_object_view((void **) &declare->name);
-    quick_layout_right(declare_view, augend_view, &declare_view->editable_text.box, &declare_view->editable_text.box_sig, &augend_view->editable_text.box, &augend_view->editable_text.box_sig);
+    generic_linear_create_views(declare_view, &Declare::name);
 }
 
 void declare_destroy_sub_object_views(ObjectView *declare_view) {

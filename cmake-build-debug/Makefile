@@ -153,6 +153,30 @@ add.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/add.cpp.s
 .PHONY : add.cpp.s
 
+arm_compile.o: arm_compile.cpp.o
+.PHONY : arm_compile.o
+
+# target to build an object file
+arm_compile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/arm_compile.cpp.o
+.PHONY : arm_compile.cpp.o
+
+arm_compile.i: arm_compile.cpp.i
+.PHONY : arm_compile.i
+
+# target to preprocess a source file
+arm_compile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/arm_compile.cpp.i
+.PHONY : arm_compile.cpp.i
+
+arm_compile.s: arm_compile.cpp.s
+.PHONY : arm_compile.s
+
+# target to generate assembly for a file
+arm_compile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/arm_compile.cpp.s
+.PHONY : arm_compile.cpp.s
+
 assign.o: assign.cpp.o
 .PHONY : assign.o
 
@@ -369,6 +393,30 @@ integer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/integer.cpp.s
 .PHONY : integer.cpp.s
 
+loop.o: loop.cpp.o
+.PHONY : loop.o
+
+# target to build an object file
+loop.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/loop.cpp.o
+.PHONY : loop.cpp.o
+
+loop.i: loop.cpp.i
+.PHONY : loop.i
+
+# target to preprocess a source file
+loop.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/loop.cpp.i
+.PHONY : loop.cpp.i
+
+loop.s: loop.cpp.s
+.PHONY : loop.s
+
+# target to generate assembly for a file
+loop.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/loop.cpp.s
+.PHONY : loop.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -464,6 +512,30 @@ object_view.s: object_view.cpp.s
 object_view.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/object_view.cpp.s
 .PHONY : object_view.cpp.s
+
+repeat.o: repeat.cpp.o
+.PHONY : repeat.o
+
+# target to build an object file
+repeat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/repeat.cpp.o
+.PHONY : repeat.cpp.o
+
+repeat.i: repeat.cpp.i
+.PHONY : repeat.i
+
+# target to preprocess a source file
+repeat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/repeat.cpp.i
+.PHONY : repeat.cpp.i
+
+repeat.s: repeat.cpp.s
+.PHONY : repeat.s
+
+# target to generate assembly for a file
+repeat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/repeat.cpp.s
+.PHONY : repeat.cpp.s
 
 run.o: run.cpp.o
 .PHONY : run.o
@@ -621,6 +693,9 @@ help:
 	@echo "... add.o"
 	@echo "... add.i"
 	@echo "... add.s"
+	@echo "... arm_compile.o"
+	@echo "... arm_compile.i"
+	@echo "... arm_compile.s"
 	@echo "... assign.o"
 	@echo "... assign.i"
 	@echo "... assign.s"
@@ -648,6 +723,9 @@ help:
 	@echo "... integer.o"
 	@echo "... integer.i"
 	@echo "... integer.s"
+	@echo "... loop.o"
+	@echo "... loop.i"
+	@echo "... loop.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -660,6 +738,9 @@ help:
 	@echo "... object_view.o"
 	@echo "... object_view.i"
 	@echo "... object_view.s"
+	@echo "... repeat.o"
+	@echo "... repeat.i"
+	@echo "... repeat.s"
 	@echo "... run.o"
 	@echo "... run.i"
 	@echo "... run.s"

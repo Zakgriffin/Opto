@@ -31,6 +31,7 @@ extern Color BACKGROUND_COLOR;
 extern Color BOX_COLOR;
 
 extern Font font;
+extern float CHARACTER_WIDTH;
 
 extern int key_pressed;
 extern int mouse_cursor;
@@ -46,6 +47,7 @@ void box_layout_flush_min_x(Box *super, Box *sub);
 void box_layout_under_y(Box *super, Box *sub);
 void box_layout_under(Box *super, Box *sub);
 void box_layout_right_under(Box *super, Box *sub);
+void box_layout_indent_x(Box *super, Box *sub);
 
 Box enclosing_box(Box b1, Box b2);
 bool boxes_overlap(Box b1, Box b2);

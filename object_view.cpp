@@ -11,40 +11,44 @@ unordered_map<void *, ObjectView *> object_to_view;
 unordered_map<string, void **> name_to_object_handle;
 
 void* create_fib() {
-    return typed(DO_THEN, new DoThen{.effect = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
-        .next = typed(DO_THEN, new DoThen{.effect = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
-        .next = typed(DO_THEN, new DoThen{.effect = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
 
-        .next = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
-            .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
-            .grantor = typed(INTEGER, new int(0))
-        }),
-        .next = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
-            .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
-            .grantor = typed(INTEGER, new int(1))
-        }),
-        .next = typed(WHILE, new While{.condition = typed(GREATER_THAN, new GreaterThan{
-                    .left = typed(INTEGER, new int(20)),
-                    .right = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
-                }),
-            .then = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
-                .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
-                .grantor = typed(ADD, new Add{
-                    .augend = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
-                    .addend = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
-                })
-            }),
+    return typed(LOOP, new Loop{.body =
+        typed(DO_THEN, new DoThen{.effect = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
+            .next = typed(DO_THEN, new DoThen{.effect = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
+            .next = typed(DO_THEN, new DoThen{.effect = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
+
             .next = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
                 .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
-                .grantor = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
+                .grantor = typed(INTEGER, new int(0))
             }),
             .next = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
                 .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
-                .grantor = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
-            })})})}),
-        .finally = nullptr
-        })
-    })})})})});
+                .grantor = typed(INTEGER, new int(1))
+            }),
+            .next = typed(REPEAT, new Repeat{
+                .then = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
+                    .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
+                    .grantor = typed(ADD, new Add{
+                        .augend = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
+                        .addend = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
+                    })
+                }),
+                .next = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
+                    .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("x"))}),
+                    .grantor = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
+                }),
+                .next = typed(DO_THEN, new DoThen{.effect = typed(ASSIGN, new Assign{
+                    .grantee = typed(DECLARE, new Declare{.name = typed(STRING, new string("y"))}),
+                    .grantor = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
+                })})})}),
+            .finally = nullptr,
+            .condition = typed(GREATER_THAN, new GreaterThan{
+                    .left = typed(INTEGER, new int(20)),
+                    .right = typed(DECLARE, new Declare{.name = typed(STRING, new string("z"))}),
+                })
+            })
+        })})})})})
+    });
 }
 
 void init_object_view_builders() {
@@ -57,8 +61,13 @@ void init_object_view_builders() {
     object_view_builders.push_back(string_object_view_builder);
     object_view_builders.push_back(declare_object_view_builder);
     object_view_builders.push_back(if_object_view_builder);
+    object_view_builders.push_back(loop_object_view_builder);
     object_view_builders.push_back(while_object_view_builder);
+    object_view_builders.push_back(repeat_object_view_builder);
     object_view_builders.push_back(greater_than_object_view_builder);
+
+    object_view_builders.push_back(conditional_jump_object_view_builder);
+    object_view_builders.push_back(jump_object_view_builder);
 }
 
 Vector2 mouse_offset;
@@ -175,6 +184,11 @@ ObjectView *new_object_view(void **object_handle) {
             signal_update(&object_to_signal.at(o->object_handle)->o);
             return;
         }
+        if (o->editable_text.text == "guh") {
+            *o->object_handle = removed_scope_flow(create_fib());
+            signal_update(&object_to_signal.at(o->object_handle)->o);
+            return;
+        }
 
         for (const auto &object_view_builder: object_view_builders) {
             if (object_view_builder.s == o->editable_text.text) {
@@ -251,4 +265,11 @@ void quick_layout_right(ObjectView *left, ObjectView* right, Box *o_box, Signal 
         signal_update(s_editable_text_box_sig);
     })));
     include_sub_object_view(left, right);
+}
+
+void collapse_object_view(ObjectView *o) {
+    for (auto sub_o : o->sub_object_views) {
+        collapse_object_view(sub_o);
+        redo_sub_objects(sub_o, find_object_view_builder(*sub_o->object_handle));
+    }
 }

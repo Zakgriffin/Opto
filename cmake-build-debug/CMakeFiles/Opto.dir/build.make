@@ -352,6 +352,48 @@ CMakeFiles/Opto.dir/greater_than.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/greater_than.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/greater_than.cpp -o CMakeFiles/Opto.dir/greater_than.cpp.s
 
+CMakeFiles/Opto.dir/arm_compile.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/arm_compile.cpp.o: /Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp
+CMakeFiles/Opto.dir/arm_compile.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/Opto.dir/arm_compile.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/arm_compile.cpp.o -MF CMakeFiles/Opto.dir/arm_compile.cpp.o.d -o CMakeFiles/Opto.dir/arm_compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp
+
+CMakeFiles/Opto.dir/arm_compile.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/arm_compile.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp > CMakeFiles/Opto.dir/arm_compile.cpp.i
+
+CMakeFiles/Opto.dir/arm_compile.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/arm_compile.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp -o CMakeFiles/Opto.dir/arm_compile.cpp.s
+
+CMakeFiles/Opto.dir/repeat.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/repeat.cpp.o: /Users/zakgriffin/CLionProjects/Opto/repeat.cpp
+CMakeFiles/Opto.dir/repeat.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/Opto.dir/repeat.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/repeat.cpp.o -MF CMakeFiles/Opto.dir/repeat.cpp.o.d -o CMakeFiles/Opto.dir/repeat.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/repeat.cpp
+
+CMakeFiles/Opto.dir/repeat.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/repeat.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/repeat.cpp > CMakeFiles/Opto.dir/repeat.cpp.i
+
+CMakeFiles/Opto.dir/repeat.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/repeat.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/repeat.cpp -o CMakeFiles/Opto.dir/repeat.cpp.s
+
+CMakeFiles/Opto.dir/loop.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/loop.cpp.o: /Users/zakgriffin/CLionProjects/Opto/loop.cpp
+CMakeFiles/Opto.dir/loop.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/Opto.dir/loop.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/loop.cpp.o -MF CMakeFiles/Opto.dir/loop.cpp.o.d -o CMakeFiles/Opto.dir/loop.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/loop.cpp
+
+CMakeFiles/Opto.dir/loop.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/loop.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/loop.cpp > CMakeFiles/Opto.dir/loop.cpp.i
+
+CMakeFiles/Opto.dir/loop.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/loop.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/loop.cpp -o CMakeFiles/Opto.dir/loop.cpp.s
+
 # Object files for target Opto
 Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/main.cpp.o" \
@@ -373,7 +415,10 @@ Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/run.cpp.o" \
 "CMakeFiles/Opto.dir/if.cpp.o" \
 "CMakeFiles/Opto.dir/while.cpp.o" \
-"CMakeFiles/Opto.dir/greater_than.cpp.o"
+"CMakeFiles/Opto.dir/greater_than.cpp.o" \
+"CMakeFiles/Opto.dir/arm_compile.cpp.o" \
+"CMakeFiles/Opto.dir/repeat.cpp.o" \
+"CMakeFiles/Opto.dir/loop.cpp.o"
 
 # External object files for target Opto
 Opto_EXTERNAL_OBJECTS =
@@ -398,10 +443,13 @@ Opto: CMakeFiles/Opto.dir/run.cpp.o
 Opto: CMakeFiles/Opto.dir/if.cpp.o
 Opto: CMakeFiles/Opto.dir/while.cpp.o
 Opto: CMakeFiles/Opto.dir/greater_than.cpp.o
+Opto: CMakeFiles/Opto.dir/arm_compile.cpp.o
+Opto: CMakeFiles/Opto.dir/repeat.cpp.o
+Opto: CMakeFiles/Opto.dir/loop.cpp.o
 Opto: CMakeFiles/Opto.dir/build.make
 Opto: /opt/homebrew/Cellar/raylib/5.0/lib/libraylib.dylib
 Opto: CMakeFiles/Opto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable Opto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable Opto"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Opto.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
