@@ -3,7 +3,7 @@
 ObjectViewBuilder while_object_view_builder = ObjectViewBuilder{WHILE, "while", while_create_simple, while_create_sub_object_views, while_destroy_sub_object_views};
 
 void *while_create_simple() {
-    auto while_ = new While{.then = nullptr, .finally = nullptr};
+    auto while_ = new While{.condition = nullptr, .then = nullptr, .finally = nullptr};
     object_to_type.insert({while_, WHILE});
     return while_;
 }

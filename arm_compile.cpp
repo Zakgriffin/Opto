@@ -22,37 +22,86 @@ void append(void** root_handle, void* effect) {
     *root_handle = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
 }
 
-void* removed_scope_flow(void* flow) {
-    auto root = typed(DO_THEN, new DoThen{.effect = nullptr, .next = nullptr});
-    auto c_generated = root;
+void traverse_over_scopes(void* flow, function<void(void*, ObjectType)> on_open, function<void(void*, ObjectType)> on_close) {
+    auto current = flow;
+    stack<void*> scopes;
+    stack<void*> scope_nexts;
 
-    auto c = flow;
     while (1) {
-        if (c == nullptr) {
-            break;
-        }
+        auto type = object_to_type.at(current);
+        on_open(current, type);
+        if (type == NONE) {
+            if (scopes.empty()) break;
 
-        auto type = object_to_type.at(c);
-        if (type == DO_THEN) {
-            auto do_then = (DoThen*) c;
+            auto scope = scopes.top();
+            on_close(scope, object_to_type.at(scope));
+            scopes.pop();
 
-            c_generated->effect = do_then->effect;
-
-            auto next = typed(DO_THEN, new DoThen{.effect = nullptr, .next = nullptr});
-            c_generated->next = next;
-
-            c = do_then->next;
+            current = scope_nexts.top();
+            scope_nexts.pop();
+        } else if (type == DO_THEN) {
+            auto do_then = (DoThen*) current;
+            current = do_then->next;
+        } else if (type == LOOP) {
+            auto loop = (Loop*) current;
+            current = loop->body;
+            scopes.push(loop);
+            scope_nexts.push(nullptr);
         } else if (type == WHILE) {
-            auto while_ = (While*) c;
-
-            // c_generated->effect = typed(CONDITIONAL_JUMP, new ConditionalJump{.condition = while_->condition, .jump = nullptr});;
-
-        } else {
-            cout << "BAD SCOPY" << endl;
-            break;
+            auto while_ = (While*) current;
+            current = while_->then;
+            scopes.push(while_);
+            scope_nexts.push(while_->finally);
+        } else if (type == REPEAT) {
+            auto repeat = (Repeat*) current;
+            current = repeat->then;
+            scopes.push(repeat);
+            scope_nexts.push(repeat->finally);
         }
+    }
+}
 
+void* bungus_open(void* each, ObjectType type) {
+    if (type == DO_THEN) {
+        auto do_then = (DoThen*) each;
+        return do_then->effect;
     }
 
-    return root;
+    return nullptr;
+}
+
+void* bungus_close(void* each, ObjectType type) {
+    cout<< type << endl;
+    if (type == LOOP) {
+        return typed(JUMP, new Jump{.jump = nullptr});
+    }
+    if (type == REPEAT) {
+        auto repeat = (Repeat*) each;
+        return typed(CONDITIONAL_JUMP, new ConditionalJump{.condition = repeat->condition, .jump = nullptr});
+    }
+
+    return nullptr;
+}
+
+void* removed_scope_flow(void* flow) {
+    void* current;
+    void** current_handle = &current;
+    auto result = &current;
+
+    traverse_over_scopes(flow, [&](void* each, ObjectType type){
+        void* effect = bungus_open(each, type);
+        if (effect == nullptr) return;
+
+        auto k = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
+        *current_handle = k;
+        current_handle = &k->next;
+    },[&](void* each, ObjectType type){
+        void* effect = bungus_close(each, type);
+        if (effect == nullptr) return;
+
+        auto k = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
+        *current_handle = k;
+        current_handle = &k->next;
+    });
+    return *result;
 }

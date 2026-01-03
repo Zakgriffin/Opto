@@ -11,7 +11,7 @@ typedef struct ObjectView ObjectView;
 struct While {
     void *condition;
     void *then;
-    DoThen *finally;
+    void *finally;
 };
 
 VIEW_DECLARATIONS(while)

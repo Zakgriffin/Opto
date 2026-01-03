@@ -52,7 +52,6 @@ typedef struct ObjectView {
 
     MultiClick multi_click;
     vector<string> potential_lookup;
-//    ObjectType object_type;
 
     vector<Listener> sub_object_constraints;
     vector<ObjectView *> sub_object_views;

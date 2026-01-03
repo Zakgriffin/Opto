@@ -3,7 +3,7 @@
 ObjectViewBuilder repeat_object_view_builder = ObjectViewBuilder{REPEAT, "repeat", repeat_create_simple, repeat_create_sub_object_views, repeat_destroy_sub_object_views};
 
 void *repeat_create_simple() {
-    auto repeat = new Repeat{.then = nullptr, .finally = nullptr};
+    auto repeat = new Repeat{.then = nullptr, .finally = nullptr, .condition = nullptr};
     object_to_type.insert({repeat, REPEAT});
     return repeat;
 }

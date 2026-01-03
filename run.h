@@ -11,8 +11,8 @@ typedef struct DoThen DoThen;
 
 typedef struct {
     void *start;
-    void *current;
-    stack<void*> scope_stack;
+    DoThen *current;
+    stack<function<void()>> scope_stack;
 } Run;
 
 VIEW_DECLARATIONS(run)

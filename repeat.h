@@ -10,7 +10,7 @@ typedef struct ObjectView ObjectView;
 
 struct Repeat {
     void *then;
-    DoThen *finally;
+    void *finally;
     void *condition;
 };
 
