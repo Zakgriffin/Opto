@@ -1,5 +1,7 @@
 #include "run.h"
 
+unordered_map<Declare*, void**> declare_to_handle;
+
 int evaluate_expression(void* expression) {
     auto type = object_to_type.at(expression);
     if (type == ADD) {
@@ -16,7 +18,7 @@ int evaluate_expression(void* expression) {
     }
     if (type == DECLARE) {
         auto declare = (Declare*) expression;
-        auto handle = name_to_object_handle.at(*declare->name);
+        auto handle = declare_to_handle.at(declare);
         return evaluate_expression(*handle);
     }
 
@@ -65,6 +67,26 @@ void onto_next(Run* run, void* next) {
         };
         run->scope_stack.push(repeat_end_scope);
         onto_next(run, repeat->then);
+    } else if (next_type == CALL) {
+        auto call = (Call*) next;
+        if (object_to_type.at(call->procedure) != PROCEDURE) {
+            cout << "not a procedure" << endl;
+        }
+        auto procedure = (Procedure*) call->procedure;
+
+        run->vars.insert({(Declare*) procedure->param, (Declare*) call->param});
+
+        auto call_end_scope = [=]{
+            onto_next(run, run->start);
+
+            run->vars.erase((Declare*) call->param);
+
+            run->scope_stack.pop();
+        };
+        run->scope_stack.push(call_end_scope);
+
+        cout << "|||" << object_to_type.at(procedure->body) << endl;
+        onto_next(run, procedure->body);
     }
 }
 
@@ -79,11 +101,11 @@ void click_step(Run* run) {
     if (type == DECLARE) {
         auto declare = (Declare*) effect;
 
-        if (!name_to_object_handle.contains(*declare->name)) {
+        if (!declare_to_handle.contains(declare)) {
             auto recent_root = new void *;
             *recent_root = nullptr;
             auto object_view = new_object_view(recent_root);
-            name_to_object_handle.insert({*declare->name, object_view->object_handle});
+            declare_to_handle.insert({declare, object_view->object_handle});
 
             auto view = object_to_view.at(run->current);
             move_box_x(&object_view->editable_text.box, view->box.x_max + 100);
@@ -93,9 +115,16 @@ void click_step(Run* run) {
     } else if (type == ASSIGN) {
         auto assign = (Assign*) effect;
         auto grantee = (Declare*) assign->grantee;
-        auto grantor = (void*) assign->grantor;
 
-        auto object_handle = name_to_object_handle.at(*grantee->name);
+        // ZZZZ this is ugly
+        if (run->vars.contains(grantee)) {
+            cout << "mapped variable" << endl;
+            grantee = run->vars.at(grantee);
+        }
+
+        auto grantor = assign->grantor;
+
+        auto object_handle = declare_to_handle.at(grantee);
         auto assigned = evaluate_expression(grantor);
         *object_handle = integer_create_simple();
         *(int*) *object_handle = assigned;

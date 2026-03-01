@@ -6,7 +6,6 @@
 #include "stds.h"
 #include "object_view.h"
 
-typedef struct Integer Integer;
 typedef struct {
     void *grantee;
     void *grantor;

@@ -5,6 +5,16 @@ project(Opto)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
 
+# ---- LLVM ----
+set(LLVM_DIR "/opt/homebrew/opt/llvm/lib/cmake/llvm")
+find_package(LLVM REQUIRED CONFIG)
+
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+
+include_directories(${LLVM_INCLUDE_DIRS})
+add_definitions(${LLVM_DEFINITIONS})
+
 # Dependencies
 set(RAYLIB_VERSION 4.2.0)
 find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
@@ -60,9 +70,35 @@ add_executable(${PROJECT_NAME}
         repeat.h
         loop.cpp
         loop.h
+        procedure.cpp
+        procedure.h
+        call.cpp
+        call.h
+        llvm_compile.cpp
+        llvm_compile.h
+        test_flows.cpp
+        test_flows.h
+        compile.cpp
+        compile.h
 )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
+
+# Map LLVM components to libraries
+llvm_map_components_to_libnames(LLVM_LIBS
+        Core
+        IRReader
+        Support
+        Target
+        TargetParser
+        MC
+        Object
+        native            # This automatically maps to AArch64 on your Mac
+        nativecodegen     # Required for object file emission
+        AsmPrinter        # Required for InitializeNativeTargetAsmPrinter
+        AsmParser         # Required for InitializeNativeTargetAsmParser
+)
+target_link_libraries(${PROJECT_NAME} raylib ${LLVM_LIBS})
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

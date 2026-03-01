@@ -117,6 +117,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named intrinsics_gen
+
+# Build rule for target.
+intrinsics_gen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 intrinsics_gen
+.PHONY : intrinsics_gen
+
+# fast build rule for target.
+intrinsics_gen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/intrinsics_gen.dir/build.make CMakeFiles/intrinsics_gen.dir/build
+.PHONY : intrinsics_gen/fast
+
+#=============================================================================
+# Target rules for targets named vt_gen
+
+# Build rule for target.
+vt_gen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vt_gen
+.PHONY : vt_gen
+
+# fast build rule for target.
+vt_gen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vt_gen.dir/build.make CMakeFiles/vt_gen.dir/build
+.PHONY : vt_gen/fast
+
+#=============================================================================
+# Target rules for targets named omp_gen
+
+# Build rule for target.
+omp_gen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 omp_gen
+.PHONY : omp_gen
+
+# fast build rule for target.
+omp_gen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/omp_gen.dir/build.make CMakeFiles/omp_gen.dir/build
+.PHONY : omp_gen/fast
+
+#=============================================================================
+# Target rules for targets named acc_gen
+
+# Build rule for target.
+acc_gen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 acc_gen
+.PHONY : acc_gen
+
+# fast build rule for target.
+acc_gen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_gen.dir/build.make CMakeFiles/acc_gen.dir/build
+.PHONY : acc_gen/fast
+
+#=============================================================================
+# Target rules for targets named target_parser_gen
+
+# Build rule for target.
+target_parser_gen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 target_parser_gen
+.PHONY : target_parser_gen
+
+# fast build rule for target.
+target_parser_gen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/target_parser_gen.dir/build.make CMakeFiles/target_parser_gen.dir/build
+.PHONY : target_parser_gen/fast
+
+#=============================================================================
 # Target rules for targets named Opto
 
 # Build rule for target.
@@ -200,6 +265,54 @@ assign.s: assign.cpp.s
 assign.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/assign.cpp.s
 .PHONY : assign.cpp.s
+
+call.o: call.cpp.o
+.PHONY : call.o
+
+# target to build an object file
+call.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/call.cpp.o
+.PHONY : call.cpp.o
+
+call.i: call.cpp.i
+.PHONY : call.i
+
+# target to preprocess a source file
+call.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/call.cpp.i
+.PHONY : call.cpp.i
+
+call.s: call.cpp.s
+.PHONY : call.s
+
+# target to generate assembly for a file
+call.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/call.cpp.s
+.PHONY : call.cpp.s
+
+compile.o: compile.cpp.o
+.PHONY : compile.o
+
+# target to build an object file
+compile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/compile.cpp.o
+.PHONY : compile.cpp.o
+
+compile.i: compile.cpp.i
+.PHONY : compile.i
+
+# target to preprocess a source file
+compile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/compile.cpp.i
+.PHONY : compile.cpp.i
+
+compile.s: compile.cpp.s
+.PHONY : compile.s
+
+# target to generate assembly for a file
+compile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/compile.cpp.s
+.PHONY : compile.cpp.s
 
 declare.o: declare.cpp.o
 .PHONY : declare.o
@@ -393,6 +506,30 @@ integer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/integer.cpp.s
 .PHONY : integer.cpp.s
 
+llvm_compile.o: llvm_compile.cpp.o
+.PHONY : llvm_compile.o
+
+# target to build an object file
+llvm_compile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_compile.cpp.o
+.PHONY : llvm_compile.cpp.o
+
+llvm_compile.i: llvm_compile.cpp.i
+.PHONY : llvm_compile.i
+
+# target to preprocess a source file
+llvm_compile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_compile.cpp.i
+.PHONY : llvm_compile.cpp.i
+
+llvm_compile.s: llvm_compile.cpp.s
+.PHONY : llvm_compile.s
+
+# target to generate assembly for a file
+llvm_compile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_compile.cpp.s
+.PHONY : llvm_compile.cpp.s
+
 loop.o: loop.cpp.o
 .PHONY : loop.o
 
@@ -513,6 +650,30 @@ object_view.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/object_view.cpp.s
 .PHONY : object_view.cpp.s
 
+procedure.o: procedure.cpp.o
+.PHONY : procedure.o
+
+# target to build an object file
+procedure.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/procedure.cpp.o
+.PHONY : procedure.cpp.o
+
+procedure.i: procedure.cpp.i
+.PHONY : procedure.i
+
+# target to preprocess a source file
+procedure.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/procedure.cpp.i
+.PHONY : procedure.cpp.i
+
+procedure.s: procedure.cpp.s
+.PHONY : procedure.s
+
+# target to generate assembly for a file
+procedure.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/procedure.cpp.s
+.PHONY : procedure.cpp.s
+
 repeat.o: repeat.cpp.o
 .PHONY : repeat.o
 
@@ -584,6 +745,30 @@ string_.s: string_.cpp.s
 string_.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/string_.cpp.s
 .PHONY : string_.cpp.s
+
+test_flows.o: test_flows.cpp.o
+.PHONY : test_flows.o
+
+# target to build an object file
+test_flows.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/test_flows.cpp.o
+.PHONY : test_flows.cpp.o
+
+test_flows.i: test_flows.cpp.i
+.PHONY : test_flows.i
+
+# target to preprocess a source file
+test_flows.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/test_flows.cpp.i
+.PHONY : test_flows.cpp.i
+
+test_flows.s: test_flows.cpp.s
+.PHONY : test_flows.s
+
+# target to generate assembly for a file
+test_flows.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/test_flows.cpp.s
+.PHONY : test_flows.cpp.s
 
 type.o: type.cpp.o
 .PHONY : type.o
@@ -689,6 +874,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... acc_gen"
+	@echo "... intrinsics_gen"
+	@echo "... omp_gen"
+	@echo "... target_parser_gen"
+	@echo "... vt_gen"
 	@echo "... Opto"
 	@echo "... add.o"
 	@echo "... add.i"
@@ -699,6 +889,12 @@ help:
 	@echo "... assign.o"
 	@echo "... assign.i"
 	@echo "... assign.s"
+	@echo "... call.o"
+	@echo "... call.i"
+	@echo "... call.s"
+	@echo "... compile.o"
+	@echo "... compile.i"
+	@echo "... compile.s"
 	@echo "... declare.o"
 	@echo "... declare.i"
 	@echo "... declare.s"
@@ -723,6 +919,9 @@ help:
 	@echo "... integer.o"
 	@echo "... integer.i"
 	@echo "... integer.s"
+	@echo "... llvm_compile.o"
+	@echo "... llvm_compile.i"
+	@echo "... llvm_compile.s"
 	@echo "... loop.o"
 	@echo "... loop.i"
 	@echo "... loop.s"
@@ -738,6 +937,9 @@ help:
 	@echo "... object_view.o"
 	@echo "... object_view.i"
 	@echo "... object_view.s"
+	@echo "... procedure.o"
+	@echo "... procedure.i"
+	@echo "... procedure.s"
 	@echo "... repeat.o"
 	@echo "... repeat.i"
 	@echo "... repeat.s"
@@ -747,6 +949,9 @@ help:
 	@echo "... string_.o"
 	@echo "... string_.i"
 	@echo "... string_.s"
+	@echo "... test_flows.o"
+	@echo "... test_flows.i"
+	@echo "... test_flows.s"
 	@echo "... type.o"
 	@echo "... type.i"
 	@echo "... type.s"

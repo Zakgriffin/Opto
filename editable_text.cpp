@@ -47,6 +47,7 @@ void jump_editable_text(EditableText *e, float Box::* low, float Box::* high, fl
 
     for (auto et : editable_texts) {
         if (!boxes_overlap(et->box, b)) continue;
+
         if (best == nullptr || (et->box.*low - best->box.*low)*flip < 0) best = et;
     }
     if (!best) return;
@@ -94,7 +95,7 @@ void initialize_editable_text(EditableText *e) {
 
         if (selected_editable_text != e) return;
 
-        if (key_pressed != 0) {
+        if (key_pressed != 0 && !key_consumed) {
             if (key_pressed == KEY_BACKSPACE) {
                 if (e->text.length() > 0 && e->character_index > 0) {
                     e->character_index--;
@@ -116,14 +117,13 @@ void initialize_editable_text(EditableText *e) {
             } else if (key_pressed == KEY_ESCAPE) {
                 edit_mode = OBJECT_VIEW;
                 selected_editable_text = nullptr;
-            } else if (key_pressed == KEY_BACKSPACE) {
-                // collapse_object_view(o);
             } else {
                 auto c = (char) tolower(key_pressed);
                 e->text.insert(e->character_index, 1, c);
                 e->character_index++;
                 signal_update(&e->text_input_sig);
             }
+            key_consumed = true;
         }
     })));
 

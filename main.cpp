@@ -1,15 +1,19 @@
 #include "main.h"
 
+#include "llvm_compile.h"
+
 Font font;
 int FONT_HEIGHT = 18;
 
 Color BACKGROUND_COLOR = GetColor(0x111111FF);
 Color BOX_COLOR = GetColor(0x222222FF);
+Color COLLAPSED_COLOR = GetColor(0x332233FF);
 
 Signal draw_visuals;
 Signal input_listeners;
 int mouse_cursor;
 bool mouse_clicked_during_input;
+bool key_consumed;
 EditMode edit_mode = OBJECT_VIEW;
 
 int key_pressed = 0;
@@ -31,11 +35,13 @@ int main() {
 
     MultiClick multi_click;
     init_multi_click(&multi_click);
-    init_object_view_builders();
 
     object_to_type.insert({nullptr, NONE});
+    init_object_view_builders();
 
     void **recent_root;
+
+    // build_llvm();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -44,6 +50,7 @@ int main() {
         key_pressed = GetKeyPressed();
         mouse_cursor = 0;
         mouse_clicked_during_input = false;
+        key_consumed = false;
         signal_update(&input_listeners);
         SetMouseCursor(mouse_cursor);
 

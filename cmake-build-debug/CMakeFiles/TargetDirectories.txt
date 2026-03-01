@@ -1,3 +1,8 @@
+/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/intrinsics_gen.dir
+/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/vt_gen.dir
+/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/omp_gen.dir
+/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/acc_gen.dir
+/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/target_parser_gen.dir
 /Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/Opto.dir
 /Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles/rebuild_cache.dir

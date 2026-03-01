@@ -8,11 +8,13 @@
 #include "do_then.h"
 
 typedef struct DoThen DoThen;
+typedef struct Declare Declare;
 
 typedef struct {
     void *start;
     DoThen *current;
     stack<function<void()>> scope_stack;
+    unordered_map<Declare*, Declare*> vars;
 } Run;
 
 VIEW_DECLARATIONS(run)

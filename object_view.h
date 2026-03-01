@@ -4,6 +4,7 @@
 #define OPTO_OBJECT_VIEW_H
 
 #include "stds.h"
+#include "object.h"
 #include "editable_text.h"
 #include "unknown.h"
 #include "none.h"
@@ -19,30 +20,14 @@
 #include "while.h"
 #include "repeat.h"
 #include "greater_than.h"
+#include "procedure.h"
+#include "call.h"
 #include "arm_compile.h"
+#include "compile.h"
 #include "event.h"
+#include "test_flows.h"
 
 extern unordered_map<void *, ObjectView *> object_to_view;
-extern unordered_map<string, void **> name_to_object_handle;
-
-typedef enum {
-    NONE,
-    DO_THEN,
-    ADD,
-    ASSIGN,
-    RUN,
-    INTEGER,
-    STRING,
-    DECLARE,
-    IF,
-    LOOP,
-    WHILE,
-    REPEAT,
-    GREATER_THAN,
-
-    CONDITIONAL_JUMP,
-    JUMP,
-} ObjectType;
 
 typedef struct ObjectView {
     void **object_handle;
@@ -56,6 +41,8 @@ typedef struct ObjectView {
     vector<Listener> sub_object_constraints;
     vector<ObjectView *> sub_object_views;
     vector<Box*> sub_boxes;
+
+    bool collapsed;
 
     vector<Listener> internal_constraints;
 
@@ -86,6 +73,7 @@ struct Shared {
 
 extern map<void *, ObjectType> object_to_type;
 extern map<void *, Shared<Signal> *> object_to_signal;
+extern unordered_map<void*, string> object_to_name;
 
 template<typename T>
 T *typed(ObjectType type, T *object) {
@@ -133,6 +121,7 @@ void generic_linear_create_views(ObjectView *view, FieldTypes T::*... fields) {
     Box* prev_box = &view->editable_text.box;
     auto prev_sig = &view->editable_text.box_sig;
 
+
     auto process_field = [&](auto field_ptr) {
         auto current_view = new_object_view((void**) &(obj->*field_ptr));
         quick_layout_right(view, current_view, prev_box, prev_sig, &current_view->editable_text.box, &current_view->editable_text.box_sig);
@@ -143,5 +132,53 @@ void generic_linear_create_views(ObjectView *view, FieldTypes T::*... fields) {
 
     (process_field(fields), ...);
 }
+
+#define VIEW_DEFINITIONS_SIMPLE(name_snake, TYPE_MACRO, TYPE_PASCAL, TYPE_STR, ...) \
+    ObjectViewBuilder name_snake##_object_view_builder = ObjectViewBuilder{ \
+        TYPE_MACRO, \
+        TYPE_STR, \
+        name_snake##_create_simple, \
+        name_snake##_create_sub_object_views, \
+        name_snake##_destroy_sub_object_views \
+    }; \
+    \
+    void *name_snake##_create_simple() { \
+        auto obj = new TYPE_PASCAL{}; \
+        memset(obj, 0, sizeof(TYPE_PASCAL)); \
+        object_to_type.insert({obj, TYPE_MACRO}); \
+        return obj; \
+    } \
+    \
+    void name_snake##_create_sub_object_views(ObjectView *view) { \
+        generic_linear_create_views(view, __VA_ARGS__); \
+    } \
+    \
+    void name_snake##_destroy_sub_object_views(ObjectView *view) { \
+        generic_destroy_sub_object_views(view); \
+    }
+
+#define VIEW_DEFINITIONS_SINGLE(name_snake, TYPE_MACRO, TYPE_PASCAL, TYPE_STR) \
+    ObjectViewBuilder name_snake##_object_view_builder = ObjectViewBuilder{ \
+        TYPE_MACRO, \
+        TYPE_STR, \
+        name_snake##_create_simple, \
+        name_snake##_create_sub_object_views, \
+        name_snake##_destroy_sub_object_views \
+    }; \
+    \
+    void *name_snake##_create_simple() { \
+        auto obj = new TYPE_PASCAL{}; \
+        memset(obj, 0, sizeof(TYPE_PASCAL)); \
+        object_to_type.insert({obj, TYPE_MACRO}); \
+        return obj; \
+    } \
+    \
+    void name_snake##_create_sub_object_views(ObjectView *view) { \
+        \
+    } \
+    \
+    void name_snake##_destroy_sub_object_views(ObjectView *view) { \
+        \
+    }
 
 #endif //OPTO_OBJECT_VIEW_H

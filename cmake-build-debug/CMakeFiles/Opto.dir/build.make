@@ -394,6 +394,76 @@ CMakeFiles/Opto.dir/loop.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/loop.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/loop.cpp -o CMakeFiles/Opto.dir/loop.cpp.s
 
+CMakeFiles/Opto.dir/procedure.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/procedure.cpp.o: /Users/zakgriffin/CLionProjects/Opto/procedure.cpp
+CMakeFiles/Opto.dir/procedure.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/Opto.dir/procedure.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/procedure.cpp.o -MF CMakeFiles/Opto.dir/procedure.cpp.o.d -o CMakeFiles/Opto.dir/procedure.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/procedure.cpp
+
+CMakeFiles/Opto.dir/procedure.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/procedure.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/procedure.cpp > CMakeFiles/Opto.dir/procedure.cpp.i
+
+CMakeFiles/Opto.dir/procedure.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/procedure.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/procedure.cpp -o CMakeFiles/Opto.dir/procedure.cpp.s
+
+CMakeFiles/Opto.dir/call.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/call.cpp.o: /Users/zakgriffin/CLionProjects/Opto/call.cpp
+CMakeFiles/Opto.dir/call.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/Opto.dir/call.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/call.cpp.o -MF CMakeFiles/Opto.dir/call.cpp.o.d -o CMakeFiles/Opto.dir/call.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/call.cpp
+
+CMakeFiles/Opto.dir/call.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/call.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/call.cpp > CMakeFiles/Opto.dir/call.cpp.i
+
+CMakeFiles/Opto.dir/call.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/call.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/call.cpp -o CMakeFiles/Opto.dir/call.cpp.s
+
+CMakeFiles/Opto.dir/llvm_compile.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/llvm_compile.cpp.o: /Users/zakgriffin/CLionProjects/Opto/llvm_compile.cpp
+CMakeFiles/Opto.dir/llvm_compile.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/Opto.dir/llvm_compile.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/llvm_compile.cpp.o -MF CMakeFiles/Opto.dir/llvm_compile.cpp.o.d -o CMakeFiles/Opto.dir/llvm_compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/llvm_compile.cpp
+
+CMakeFiles/Opto.dir/llvm_compile.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/llvm_compile.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/llvm_compile.cpp > CMakeFiles/Opto.dir/llvm_compile.cpp.i
+
+CMakeFiles/Opto.dir/llvm_compile.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/llvm_compile.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/llvm_compile.cpp -o CMakeFiles/Opto.dir/llvm_compile.cpp.s
+
+CMakeFiles/Opto.dir/test_flows.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/test_flows.cpp.o: /Users/zakgriffin/CLionProjects/Opto/test_flows.cpp
+CMakeFiles/Opto.dir/test_flows.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/Opto.dir/test_flows.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/test_flows.cpp.o -MF CMakeFiles/Opto.dir/test_flows.cpp.o.d -o CMakeFiles/Opto.dir/test_flows.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/test_flows.cpp
+
+CMakeFiles/Opto.dir/test_flows.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/test_flows.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/test_flows.cpp > CMakeFiles/Opto.dir/test_flows.cpp.i
+
+CMakeFiles/Opto.dir/test_flows.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/test_flows.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/test_flows.cpp -o CMakeFiles/Opto.dir/test_flows.cpp.s
+
+CMakeFiles/Opto.dir/compile.cpp.o: CMakeFiles/Opto.dir/flags.make
+CMakeFiles/Opto.dir/compile.cpp.o: /Users/zakgriffin/CLionProjects/Opto/compile.cpp
+CMakeFiles/Opto.dir/compile.cpp.o: CMakeFiles/Opto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/Opto.dir/compile.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Opto.dir/compile.cpp.o -MF CMakeFiles/Opto.dir/compile.cpp.o.d -o CMakeFiles/Opto.dir/compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/compile.cpp
+
+CMakeFiles/Opto.dir/compile.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Opto.dir/compile.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zakgriffin/CLionProjects/Opto/compile.cpp > CMakeFiles/Opto.dir/compile.cpp.i
+
+CMakeFiles/Opto.dir/compile.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Opto.dir/compile.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zakgriffin/CLionProjects/Opto/compile.cpp -o CMakeFiles/Opto.dir/compile.cpp.s
+
 # Object files for target Opto
 Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/main.cpp.o" \
@@ -418,7 +488,12 @@ Opto_OBJECTS = \
 "CMakeFiles/Opto.dir/greater_than.cpp.o" \
 "CMakeFiles/Opto.dir/arm_compile.cpp.o" \
 "CMakeFiles/Opto.dir/repeat.cpp.o" \
-"CMakeFiles/Opto.dir/loop.cpp.o"
+"CMakeFiles/Opto.dir/loop.cpp.o" \
+"CMakeFiles/Opto.dir/procedure.cpp.o" \
+"CMakeFiles/Opto.dir/call.cpp.o" \
+"CMakeFiles/Opto.dir/llvm_compile.cpp.o" \
+"CMakeFiles/Opto.dir/test_flows.cpp.o" \
+"CMakeFiles/Opto.dir/compile.cpp.o"
 
 # External object files for target Opto
 Opto_EXTERNAL_OBJECTS =
@@ -446,10 +521,80 @@ Opto: CMakeFiles/Opto.dir/greater_than.cpp.o
 Opto: CMakeFiles/Opto.dir/arm_compile.cpp.o
 Opto: CMakeFiles/Opto.dir/repeat.cpp.o
 Opto: CMakeFiles/Opto.dir/loop.cpp.o
+Opto: CMakeFiles/Opto.dir/procedure.cpp.o
+Opto: CMakeFiles/Opto.dir/call.cpp.o
+Opto: CMakeFiles/Opto.dir/llvm_compile.cpp.o
+Opto: CMakeFiles/Opto.dir/test_flows.cpp.o
+Opto: CMakeFiles/Opto.dir/compile.cpp.o
 Opto: CMakeFiles/Opto.dir/build.make
 Opto: /opt/homebrew/Cellar/raylib/5.0/lib/libraylib.dylib
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMCore.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMIRReader.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMSupport.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMTarget.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMTargetParser.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMMC.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMObject.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64CodeGen.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Desc.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Info.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAsmPrinter.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAsmParser.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64CodeGen.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64AsmParser.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Desc.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Disassembler.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Info.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Utils.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAsmPrinter.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMCFGuard.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMGlobalISel.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMSelectionDAG.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMCodeGen.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMTarget.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMScalarOpts.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAggressiveInstCombine.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMInstCombine.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMCGData.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMBitWriter.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMObjCARCOpts.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMVectorize.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMTransformUtils.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMSandboxIR.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAnalysis.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMProfileData.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMSymbolize.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoGSYM.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoDWARF.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoDWARFLowLevel.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoPDB.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMObject.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMIRReader.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAsmParser.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMBitReader.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMTextAPI.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoCodeView.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoMSF.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDebugInfoBTF.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMMCParser.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Desc.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMCodeGenTypes.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Info.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMAArch64Utils.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMCore.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMRemarks.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMBitstreamReader.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMMCDisassembler.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMMC.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMBinaryFormat.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMTargetParser.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMSupport.a
+Opto: /opt/homebrew/Cellar/llvm/21.1.8_1/lib/libLLVMDemangle.a
+Opto: /opt/homebrew/lib/libz3.dylib
+Opto: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libz.tbd
+Opto: /opt/homebrew/lib/libzstd.dylib
 Opto: CMakeFiles/Opto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable Opto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Linking CXX executable Opto"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Opto.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

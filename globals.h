@@ -29,6 +29,7 @@ Rectangle box_to_rectangle(Box box);
 
 extern Color BACKGROUND_COLOR;
 extern Color BOX_COLOR;
+extern Color COLLAPSED_COLOR;
 
 extern Font font;
 extern float CHARACTER_WIDTH;
@@ -36,6 +37,7 @@ extern float CHARACTER_WIDTH;
 extern int key_pressed;
 extern int mouse_cursor;
 extern bool mouse_clicked_during_input;
+extern bool key_consumed;
 extern EditMode edit_mode;
 
 bool is_within_box(Vector2 point, Box box);

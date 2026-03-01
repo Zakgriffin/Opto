@@ -1,140 +1,170 @@
 [
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/main.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/main.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/main.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/main.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/main.cpp",
   "output": "CMakeFiles/Opto.dir/main.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/object_view.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/object_view.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/object_view.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/object_view.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/object_view.cpp",
   "output": "CMakeFiles/Opto.dir/object_view.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/user_input.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/user_input.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/user_input.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/user_input.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/user_input.cpp",
   "output": "CMakeFiles/Opto.dir/user_input.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/object.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/object.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/object.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/object.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/object.cpp",
   "output": "CMakeFiles/Opto.dir/object.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/do_then.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/do_then.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/do_then.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/do_then.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/do_then.cpp",
   "output": "CMakeFiles/Opto.dir/do_then.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/event.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/event.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/event.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/event.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/event.cpp",
   "output": "CMakeFiles/Opto.dir/event.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/unknown.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/unknown.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/unknown.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/unknown.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/unknown.cpp",
   "output": "CMakeFiles/Opto.dir/unknown.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/type.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/type.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/type.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/type.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/type.cpp",
   "output": "CMakeFiles/Opto.dir/type.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/editable_text.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/editable_text.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/editable_text.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/editable_text.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/editable_text.cpp",
   "output": "CMakeFiles/Opto.dir/editable_text.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/declare.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/declare.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/declare.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/declare.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/declare.cpp",
   "output": "CMakeFiles/Opto.dir/declare.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/string_.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/string_.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/string_.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/string_.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/string_.cpp",
   "output": "CMakeFiles/Opto.dir/string_.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/integer.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/integer.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/integer.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/integer.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/integer.cpp",
   "output": "CMakeFiles/Opto.dir/integer.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/add.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/add.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/add.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/add.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/add.cpp",
   "output": "CMakeFiles/Opto.dir/add.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/globals.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/globals.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/globals.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/globals.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/globals.cpp",
   "output": "CMakeFiles/Opto.dir/globals.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/none.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/none.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/none.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/none.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/none.cpp",
   "output": "CMakeFiles/Opto.dir/none.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/assign.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/assign.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/assign.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/assign.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/assign.cpp",
   "output": "CMakeFiles/Opto.dir/assign.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/run.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/run.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/run.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/run.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/run.cpp",
   "output": "CMakeFiles/Opto.dir/run.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/if.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/if.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/if.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/if.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/if.cpp",
   "output": "CMakeFiles/Opto.dir/if.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/while.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/while.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/while.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/while.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/while.cpp",
   "output": "CMakeFiles/Opto.dir/while.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/greater_than.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/greater_than.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/greater_than.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/greater_than.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/greater_than.cpp",
   "output": "CMakeFiles/Opto.dir/greater_than.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/arm_compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/arm_compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/arm_compile.cpp",
   "output": "CMakeFiles/Opto.dir/arm_compile.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/repeat.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/repeat.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/repeat.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/repeat.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/repeat.cpp",
   "output": "CMakeFiles/Opto.dir/repeat.cpp.o"
 },
 {
   "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
-  "command": "/usr/bin/c++  -isystem /opt/homebrew/Cellar/raylib/5.0/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/loop.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/loop.cpp",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/loop.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/loop.cpp",
   "file": "/Users/zakgriffin/CLionProjects/Opto/loop.cpp",
   "output": "CMakeFiles/Opto.dir/loop.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/procedure.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/procedure.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/procedure.cpp",
+  "output": "CMakeFiles/Opto.dir/procedure.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/call.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/call.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/call.cpp",
+  "output": "CMakeFiles/Opto.dir/call.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/llvm_compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/llvm_compile.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/llvm_compile.cpp",
+  "output": "CMakeFiles/Opto.dir/llvm_compile.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/test_flows.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/test_flows.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/test_flows.cpp",
+  "output": "CMakeFiles/Opto.dir/test_flows.cpp.o"
+},
+{
+  "directory": "/Users/zakgriffin/CLionProjects/Opto/cmake-build-debug",
+  "command": "/usr/bin/c++  -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include -o CMakeFiles/Opto.dir/compile.cpp.o -c /Users/zakgriffin/CLionProjects/Opto/compile.cpp",
+  "file": "/Users/zakgriffin/CLionProjects/Opto/compile.cpp",
+  "output": "CMakeFiles/Opto.dir/compile.cpp.o"
 }
 ]

@@ -4,9 +4,9 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /opt/homebrew/Cellar/raylib/5.0/include
+CXX_INCLUDES = -I/opt/homebrew/Cellar/llvm/21.1.8_1/include -isystem /opt/homebrew/Cellar/raylib/5.0/include -isystem /opt/homebrew/include
 
-CXX_FLAGSarm64 = -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include
+CXX_FLAGSarm64 = -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include
 
-CXX_FLAGS = -g -std=gnu++20 -arch arm64 -fcolor-diagnostics -I/opt/homebrew/Cellar/raylib/5.0/include
+CXX_FLAGS = -g -std=gnu++20 -arch arm64 -fcolor-diagnostics   -DEXPERIMENTAL_KEY_INSTRUCTIONS -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/opt/homebrew/Cellar/raylib/5.0/include
 

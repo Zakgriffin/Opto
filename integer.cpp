@@ -48,7 +48,7 @@ void integer_create_sub_object_views(ObjectView *integer_view) {
 }
 
 void integer_destroy_sub_object_views(ObjectView *integer_view) {
-    auto context = (IntegerObjectView*)integer_view->context;
+    auto context = (IntegerObjectView*) integer_view->context;
     if (context) {
         finalize_editable_text(&context->integer_editable_text);
         delete context;
