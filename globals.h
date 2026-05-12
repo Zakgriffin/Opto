@@ -17,7 +17,7 @@ typedef struct {
     float y_max;
 } Box;
 
-Rectangle box_to_rectangle(Box box);
+ray::Rectangle box_to_rectangle(Box box);
 
 #define VIEW_DECLARATIONS(obj) \
     typedef struct ObjectView ObjectView; \
@@ -27,11 +27,11 @@ Rectangle box_to_rectangle(Box box);
     void obj##_destroy_sub_object_views(ObjectView *obj##_view); \
     void* obj##_create_simple();
 
-extern Color BACKGROUND_COLOR;
-extern Color BOX_COLOR;
-extern Color COLLAPSED_COLOR;
+extern ray::Color BACKGROUND_COLOR;
+extern ray::Color BOX_COLOR;
+extern ray::Color COLLAPSED_COLOR;
 
-extern Font font;
+extern ray::Font font;
 extern float CHARACTER_WIDTH;
 
 extern int key_pressed;
@@ -40,7 +40,7 @@ extern bool mouse_clicked_during_input;
 extern bool key_consumed;
 extern EditMode edit_mode;
 
-bool is_within_box(Vector2 point, Box box);
+bool is_within_box(ray::Vector2 point, Box box);
 
 void box_layout_right_x(Box *super, Box *sub);
 void box_layout_flush_min_y(Box *super, Box *sub);

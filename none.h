@@ -15,7 +15,6 @@ void none_create_sub_object_views(ObjectView *none_view);
 
 void none_destroy_sub_object_views(ObjectView *none_view);
 
-
 void* none_create_simple();
 
 #endif //OPTO_NONE_H

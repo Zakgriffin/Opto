@@ -17,6 +17,8 @@ typedef struct {
     unordered_map<Declare*, Declare*> vars;
 } Run;
 
+void* evaluate_expression(void* expression);
+
 VIEW_DECLARATIONS(run)
 
 #endif //OPTO_RUN_H

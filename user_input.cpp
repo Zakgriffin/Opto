@@ -15,7 +15,7 @@ int check_clicked_n_times(MultiClick *m, int max_clicks) {
     long long current_millis = millis();
 
     auto dif = current_millis - m->last_click_millis;
-    if (IsMouseButtonPressed(0)) {
+    if (ray::IsMouseButtonPressed(0)) {
         if (m->click_streak == 0 || dif < BETWEEN_MULTI_CLICK_TIME) m->click_streak++;
         m->last_click_millis = current_millis;
     } else {

@@ -6,11 +6,15 @@
 #include "stds.h"
 #include "object.h"
 #include "editable_text.h"
+#include "type.h"
 #include "unknown.h"
 #include "none.h"
 #include "do_then.h"
 #include "string_.h"
 #include "add.h"
+#include "sub.h"
+#include "mul.h"
+#include "and.h"
 #include "assign.h"
 #include "integer.h"
 #include "run.h"
@@ -20,9 +24,18 @@
 #include "while.h"
 #include "repeat.h"
 #include "greater_than.h"
+#include "greater_than_or_equal.h"
+#include "less_than.h"
 #include "procedure.h"
 #include "call.h"
+#include "vector.h"
+#include "index.h"
+#include "optimize.h"
 #include "arm_compile.h"
+#include "llvm_compile.h"
+#include "llvm_module.h"
+#include "llvm_function.h"
+#include "llvm_basic_block.h"
 #include "compile.h"
 #include "event.h"
 #include "test_flows.h"
@@ -45,8 +58,9 @@ typedef struct ObjectView {
     bool collapsed;
 
     vector<Listener> internal_constraints;
+    Listener sub_box_listener;
 
-    void (*previous_destroy_sub_object_views)(ObjectView *object_view);
+    void (*destroy_sub_object_views_previous)(ObjectView *object_view);
 
     void *context; // ZZZZ don't remove! using space with *magic* pseudo inheritance
 
@@ -94,6 +108,7 @@ void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_vie
 void generic_destroy_sub_object_views(ObjectView *object_view);
 
 void quick_layout_right(ObjectView *p, ObjectView* o, Box *o_box, Signal *o_box_sig, Box *s_editable_text_box, Signal *s_editable_text_box_sig);
+void quick_layout_under(ObjectView *p, ObjectView* o, Box *o_box, Signal *o_box_sig, Box *s_editable_text_box, Signal *s_editable_text_box_sig);
 
 void include_sub_box(ObjectView *o, Box* sub_box, Signal *sub_box_sig);
 
@@ -121,7 +136,6 @@ void generic_linear_create_views(ObjectView *view, FieldTypes T::*... fields) {
     Box* prev_box = &view->editable_text.box;
     auto prev_sig = &view->editable_text.box_sig;
 
-
     auto process_field = [&](auto field_ptr) {
         auto current_view = new_object_view((void**) &(obj->*field_ptr));
         quick_layout_right(view, current_view, prev_box, prev_sig, &current_view->editable_text.box, &current_view->editable_text.box_sig);
@@ -131,6 +145,42 @@ void generic_linear_create_views(ObjectView *view, FieldTypes T::*... fields) {
     };
 
     (process_field(fields), ...);
+}
+
+template<typename T, typename... FieldTypes>
+void generic_linear_under_create_views(ObjectView *view, FieldTypes T::*... fields) {
+    auto handle = (T**) view->object_handle;
+    T* obj = *handle;
+
+    Box* prev_box = &view->editable_text.box;
+    auto prev_sig = &view->editable_text.box_sig;
+
+    auto process_field = [&](auto field_ptr) {
+        auto current_view = new_object_view((void**) &(obj->*field_ptr));
+        quick_layout_under(view, current_view, prev_box, prev_sig, &current_view->editable_text.box, &current_view->editable_text.box_sig);
+
+        prev_box = &current_view->box;
+        prev_sig = &current_view->box_sig;
+    };
+
+    (process_field(fields), ...);
+}
+
+template<typename T>
+void create_sub_object_views_getter_list(ObjectView *view, vector<function<void**(T*)>> getters) {
+    auto handle = (T**) view->object_handle;
+    T* obj = *handle;
+
+    Box* prev_box = &view->editable_text.box;
+    auto prev_sig = &view->editable_text.box_sig;
+
+    for (auto getter : getters) {
+        auto current_view = new_object_view(getter(obj));
+        quick_layout_right(view, current_view, prev_box, prev_sig, &current_view->editable_text.box, &current_view->editable_text.box_sig);
+
+        prev_box = &current_view->box;
+        prev_sig = &current_view->box_sig;
+    }
 }
 
 #define VIEW_DEFINITIONS_SIMPLE(name_snake, TYPE_MACRO, TYPE_PASCAL, TYPE_STR, ...) \
@@ -179,6 +229,27 @@ void generic_linear_create_views(ObjectView *view, FieldTypes T::*... fields) {
     \
     void name_snake##_destroy_sub_object_views(ObjectView *view) { \
         \
+    }
+
+#define VIEW_DEFINITIONS_GETTERS(name_snake, TYPE_MACRO, TYPE_PASCAL, TYPE_STR, getters) \
+    ObjectViewBuilder name_snake##_object_view_builder = ObjectViewBuilder{ \
+        TYPE_MACRO, \
+        TYPE_STR, \
+        name_snake##_create_simple, \
+        name_snake##_create_sub_object_views, \
+        name_snake##_destroy_sub_object_views \
+    }; \
+    \
+    void *name_snake##_create_simple() { \
+\
+    } \
+    \
+    void name_snake##_create_sub_object_views(ObjectView *view) { \
+        create_sub_object_views_getter_list<TYPE_PASCAL>(view, getters); \
+    } \
+    \
+    void name_snake##_destroy_sub_object_views(ObjectView *view) { \
+        generic_destroy_sub_object_views(view); \
     }
 
 #endif //OPTO_OBJECT_VIEW_H

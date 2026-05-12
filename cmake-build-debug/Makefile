@@ -218,6 +218,30 @@ add.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/add.cpp.s
 .PHONY : add.cpp.s
 
+and.o: and.cpp.o
+.PHONY : and.o
+
+# target to build an object file
+and.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/and.cpp.o
+.PHONY : and.cpp.o
+
+and.i: and.cpp.i
+.PHONY : and.i
+
+# target to preprocess a source file
+and.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/and.cpp.i
+.PHONY : and.cpp.i
+
+and.s: and.cpp.s
+.PHONY : and.s
+
+# target to generate assembly for a file
+and.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/and.cpp.s
+.PHONY : and.cpp.s
+
 arm_compile.o: arm_compile.cpp.o
 .PHONY : arm_compile.o
 
@@ -458,6 +482,30 @@ greater_than.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than.cpp.s
 .PHONY : greater_than.cpp.s
 
+greater_than_or_equal.o: greater_than_or_equal.cpp.o
+.PHONY : greater_than_or_equal.o
+
+# target to build an object file
+greater_than_or_equal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than_or_equal.cpp.o
+.PHONY : greater_than_or_equal.cpp.o
+
+greater_than_or_equal.i: greater_than_or_equal.cpp.i
+.PHONY : greater_than_or_equal.i
+
+# target to preprocess a source file
+greater_than_or_equal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than_or_equal.cpp.i
+.PHONY : greater_than_or_equal.cpp.i
+
+greater_than_or_equal.s: greater_than_or_equal.cpp.s
+.PHONY : greater_than_or_equal.s
+
+# target to generate assembly for a file
+greater_than_or_equal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/greater_than_or_equal.cpp.s
+.PHONY : greater_than_or_equal.cpp.s
+
 if.o: if.cpp.o
 .PHONY : if.o
 
@@ -481,6 +529,30 @@ if.s: if.cpp.s
 if.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/if.cpp.s
 .PHONY : if.cpp.s
+
+index.o: index.cpp.o
+.PHONY : index.o
+
+# target to build an object file
+index.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/index.cpp.o
+.PHONY : index.cpp.o
+
+index.i: index.cpp.i
+.PHONY : index.i
+
+# target to preprocess a source file
+index.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/index.cpp.i
+.PHONY : index.cpp.i
+
+index.s: index.cpp.s
+.PHONY : index.s
+
+# target to generate assembly for a file
+index.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/index.cpp.s
+.PHONY : index.cpp.s
 
 integer.o: integer.cpp.o
 .PHONY : integer.o
@@ -506,6 +578,54 @@ integer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/integer.cpp.s
 .PHONY : integer.cpp.s
 
+less_than.o: less_than.cpp.o
+.PHONY : less_than.o
+
+# target to build an object file
+less_than.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/less_than.cpp.o
+.PHONY : less_than.cpp.o
+
+less_than.i: less_than.cpp.i
+.PHONY : less_than.i
+
+# target to preprocess a source file
+less_than.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/less_than.cpp.i
+.PHONY : less_than.cpp.i
+
+less_than.s: less_than.cpp.s
+.PHONY : less_than.s
+
+# target to generate assembly for a file
+less_than.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/less_than.cpp.s
+.PHONY : less_than.cpp.s
+
+llvm_basic_block.o: llvm_basic_block.cpp.o
+.PHONY : llvm_basic_block.o
+
+# target to build an object file
+llvm_basic_block.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_basic_block.cpp.o
+.PHONY : llvm_basic_block.cpp.o
+
+llvm_basic_block.i: llvm_basic_block.cpp.i
+.PHONY : llvm_basic_block.i
+
+# target to preprocess a source file
+llvm_basic_block.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_basic_block.cpp.i
+.PHONY : llvm_basic_block.cpp.i
+
+llvm_basic_block.s: llvm_basic_block.cpp.s
+.PHONY : llvm_basic_block.s
+
+# target to generate assembly for a file
+llvm_basic_block.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_basic_block.cpp.s
+.PHONY : llvm_basic_block.cpp.s
+
 llvm_compile.o: llvm_compile.cpp.o
 .PHONY : llvm_compile.o
 
@@ -529,6 +649,54 @@ llvm_compile.s: llvm_compile.cpp.s
 llvm_compile.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_compile.cpp.s
 .PHONY : llvm_compile.cpp.s
+
+llvm_function.o: llvm_function.cpp.o
+.PHONY : llvm_function.o
+
+# target to build an object file
+llvm_function.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_function.cpp.o
+.PHONY : llvm_function.cpp.o
+
+llvm_function.i: llvm_function.cpp.i
+.PHONY : llvm_function.i
+
+# target to preprocess a source file
+llvm_function.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_function.cpp.i
+.PHONY : llvm_function.cpp.i
+
+llvm_function.s: llvm_function.cpp.s
+.PHONY : llvm_function.s
+
+# target to generate assembly for a file
+llvm_function.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_function.cpp.s
+.PHONY : llvm_function.cpp.s
+
+llvm_module.o: llvm_module.cpp.o
+.PHONY : llvm_module.o
+
+# target to build an object file
+llvm_module.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_module.cpp.o
+.PHONY : llvm_module.cpp.o
+
+llvm_module.i: llvm_module.cpp.i
+.PHONY : llvm_module.i
+
+# target to preprocess a source file
+llvm_module.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_module.cpp.i
+.PHONY : llvm_module.cpp.i
+
+llvm_module.s: llvm_module.cpp.s
+.PHONY : llvm_module.s
+
+# target to generate assembly for a file
+llvm_module.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/llvm_module.cpp.s
+.PHONY : llvm_module.cpp.s
 
 loop.o: loop.cpp.o
 .PHONY : loop.o
@@ -577,6 +745,30 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+mul.o: mul.cpp.o
+.PHONY : mul.o
+
+# target to build an object file
+mul.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/mul.cpp.o
+.PHONY : mul.cpp.o
+
+mul.i: mul.cpp.i
+.PHONY : mul.i
+
+# target to preprocess a source file
+mul.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/mul.cpp.i
+.PHONY : mul.cpp.i
+
+mul.s: mul.cpp.s
+.PHONY : mul.s
+
+# target to generate assembly for a file
+mul.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/mul.cpp.s
+.PHONY : mul.cpp.s
 
 none.o: none.cpp.o
 .PHONY : none.o
@@ -650,6 +842,30 @@ object_view.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/object_view.cpp.s
 .PHONY : object_view.cpp.s
 
+optimize.o: optimize.cpp.o
+.PHONY : optimize.o
+
+# target to build an object file
+optimize.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/optimize.cpp.o
+.PHONY : optimize.cpp.o
+
+optimize.i: optimize.cpp.i
+.PHONY : optimize.i
+
+# target to preprocess a source file
+optimize.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/optimize.cpp.i
+.PHONY : optimize.cpp.i
+
+optimize.s: optimize.cpp.s
+.PHONY : optimize.s
+
+# target to generate assembly for a file
+optimize.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/optimize.cpp.s
+.PHONY : optimize.cpp.s
+
 procedure.o: procedure.cpp.o
 .PHONY : procedure.o
 
@@ -722,6 +938,30 @@ run.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/run.cpp.s
 .PHONY : run.cpp.s
 
+serialize.o: serialize.cpp.o
+.PHONY : serialize.o
+
+# target to build an object file
+serialize.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/serialize.cpp.o
+.PHONY : serialize.cpp.o
+
+serialize.i: serialize.cpp.i
+.PHONY : serialize.i
+
+# target to preprocess a source file
+serialize.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/serialize.cpp.i
+.PHONY : serialize.cpp.i
+
+serialize.s: serialize.cpp.s
+.PHONY : serialize.s
+
+# target to generate assembly for a file
+serialize.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/serialize.cpp.s
+.PHONY : serialize.cpp.s
+
 string_.o: string_.cpp.o
 .PHONY : string_.o
 
@@ -745,6 +985,30 @@ string_.s: string_.cpp.s
 string_.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/string_.cpp.s
 .PHONY : string_.cpp.s
+
+sub.o: sub.cpp.o
+.PHONY : sub.o
+
+# target to build an object file
+sub.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/sub.cpp.o
+.PHONY : sub.cpp.o
+
+sub.i: sub.cpp.i
+.PHONY : sub.i
+
+# target to preprocess a source file
+sub.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/sub.cpp.i
+.PHONY : sub.cpp.i
+
+sub.s: sub.cpp.s
+.PHONY : sub.s
+
+# target to generate assembly for a file
+sub.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/sub.cpp.s
+.PHONY : sub.cpp.s
 
 test_flows.o: test_flows.cpp.o
 .PHONY : test_flows.o
@@ -842,6 +1106,30 @@ user_input.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/user_input.cpp.s
 .PHONY : user_input.cpp.s
 
+vector.o: vector.cpp.o
+.PHONY : vector.o
+
+# target to build an object file
+vector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/vector.cpp.o
+.PHONY : vector.cpp.o
+
+vector.i: vector.cpp.i
+.PHONY : vector.i
+
+# target to preprocess a source file
+vector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/vector.cpp.i
+.PHONY : vector.cpp.i
+
+vector.s: vector.cpp.s
+.PHONY : vector.s
+
+# target to generate assembly for a file
+vector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Opto.dir/build.make CMakeFiles/Opto.dir/vector.cpp.s
+.PHONY : vector.cpp.s
+
 while.o: while.cpp.o
 .PHONY : while.o
 
@@ -883,6 +1171,9 @@ help:
 	@echo "... add.o"
 	@echo "... add.i"
 	@echo "... add.s"
+	@echo "... and.o"
+	@echo "... and.i"
+	@echo "... and.s"
 	@echo "... arm_compile.o"
 	@echo "... arm_compile.i"
 	@echo "... arm_compile.s"
@@ -913,21 +1204,42 @@ help:
 	@echo "... greater_than.o"
 	@echo "... greater_than.i"
 	@echo "... greater_than.s"
+	@echo "... greater_than_or_equal.o"
+	@echo "... greater_than_or_equal.i"
+	@echo "... greater_than_or_equal.s"
 	@echo "... if.o"
 	@echo "... if.i"
 	@echo "... if.s"
+	@echo "... index.o"
+	@echo "... index.i"
+	@echo "... index.s"
 	@echo "... integer.o"
 	@echo "... integer.i"
 	@echo "... integer.s"
+	@echo "... less_than.o"
+	@echo "... less_than.i"
+	@echo "... less_than.s"
+	@echo "... llvm_basic_block.o"
+	@echo "... llvm_basic_block.i"
+	@echo "... llvm_basic_block.s"
 	@echo "... llvm_compile.o"
 	@echo "... llvm_compile.i"
 	@echo "... llvm_compile.s"
+	@echo "... llvm_function.o"
+	@echo "... llvm_function.i"
+	@echo "... llvm_function.s"
+	@echo "... llvm_module.o"
+	@echo "... llvm_module.i"
+	@echo "... llvm_module.s"
 	@echo "... loop.o"
 	@echo "... loop.i"
 	@echo "... loop.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mul.o"
+	@echo "... mul.i"
+	@echo "... mul.s"
 	@echo "... none.o"
 	@echo "... none.i"
 	@echo "... none.s"
@@ -937,6 +1249,9 @@ help:
 	@echo "... object_view.o"
 	@echo "... object_view.i"
 	@echo "... object_view.s"
+	@echo "... optimize.o"
+	@echo "... optimize.i"
+	@echo "... optimize.s"
 	@echo "... procedure.o"
 	@echo "... procedure.i"
 	@echo "... procedure.s"
@@ -946,9 +1261,15 @@ help:
 	@echo "... run.o"
 	@echo "... run.i"
 	@echo "... run.s"
+	@echo "... serialize.o"
+	@echo "... serialize.i"
+	@echo "... serialize.s"
 	@echo "... string_.o"
 	@echo "... string_.i"
 	@echo "... string_.s"
+	@echo "... sub.o"
+	@echo "... sub.i"
+	@echo "... sub.s"
 	@echo "... test_flows.o"
 	@echo "... test_flows.i"
 	@echo "... test_flows.s"
@@ -961,6 +1282,9 @@ help:
 	@echo "... user_input.o"
 	@echo "... user_input.i"
 	@echo "... user_input.s"
+	@echo "... vector.o"
+	@echo "... vector.i"
+	@echo "... vector.s"
 	@echo "... while.o"
 	@echo "... while.i"
 	@echo "... while.s"

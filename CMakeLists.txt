@@ -80,6 +80,31 @@ add_executable(${PROJECT_NAME}
         test_flows.h
         compile.cpp
         compile.h
+        vector.cpp
+        vector.h
+        compile.cpp
+        compile.h
+        llvm_module.cpp
+        llvm_module.h
+        llvm_function.cpp
+        llvm_function.h
+        llvm_basic_block.cpp
+        llvm_basic_block.h
+        optimize.cpp
+        sub.cpp
+        sub.h
+        index.cpp
+        index.h
+        and.cpp
+        and.h
+        less_than.cpp
+        less_than.h
+        greater_than_or_equal.cpp
+        greater_than_or_equal.h
+        mul.cpp
+        mul.h
+        serialize.cpp
+        serialize.h
 )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
@@ -97,6 +122,12 @@ llvm_map_components_to_libnames(LLVM_LIBS
         nativecodegen     # Required for object file emission
         AsmPrinter        # Required for InitializeNativeTargetAsmPrinter
         AsmParser         # Required for InitializeNativeTargetAsmParser
+
+        Passes
+        Analysis
+        ScalarOpts
+        TransformUtils
+        IPO
 )
 target_link_libraries(${PROJECT_NAME} raylib ${LLVM_LIBS})
 

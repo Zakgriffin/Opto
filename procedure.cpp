@@ -21,7 +21,8 @@ void procedure_create_sub_object_views(ObjectView *procedure_view) {
 
     auto body_view = new_object_view((void **) &procedure->body);
     procedure_view->sub_object_constraints.push_back(create_listener({&procedure_view->editable_text.box_sig}, new function<void(void)>([=]() {
-        box_layout_right_under(&procedure_view->editable_text.box, &body_view->editable_text.box);
+        box_layout_indent_x(&procedure_view->editable_text.box, &body_view->editable_text.box);
+        box_layout_under_y(&procedure_view->editable_text.box, &body_view->editable_text.box);
         signal_update(&body_view->editable_text.box_sig);
     })));
     include_sub_object_view(procedure_view, body_view);

@@ -1,5 +1,7 @@
 #include "editable_text.h"
 
+#include "object_view.h"
+
 EditableText *selected_editable_text = nullptr;
 unordered_set<EditableText*> editable_texts;
 
@@ -11,13 +13,15 @@ float b(EditableText *e, int character_index) {
 }
 
 void draw_editable_text(EditableText *e) {
-    Rectangle rect = box_to_rectangle(e->box);
+    ray::Rectangle rect = box_to_rectangle(e->box);
     DrawRectangleRec(rect, e->color);
-    DrawTextEx(font, e->text.c_str(), Vector2{e->box.x_min + PAD_X, e->box.y_min + PAD_Y}, (float) font.baseSize / 2, 0, WHITE);
+    DrawTextEx(font, e->text.c_str(), ray::Vector2{e->box.x_min + PAD_X, e->box.y_min + PAD_Y}, (float) font.baseSize / 2, 0, ray::Color{ 255, 255, 255, 255 });
     if (selected_editable_text == e) {
         float k = b(e, e->character_index);
-        DrawLine(k, e->box.y_min, k, e->box.y_max, WHITE);
+        ray::DrawLine(k, e->box.y_min+1, k, e->box.y_max, ray::Color{ 255, 255, 255, 255 });
     }
+
+    DrawLine(e->box.x_min, e->box.y_max, e->box.x_max, e->box.y_max, e->underline_color);
 }
 
 void finalize_editable_text(EditableText *e) {
@@ -80,10 +84,10 @@ void initialize_editable_text(EditableText *e) {
     e->internal_listeners.push_back(create_listener({&e->key_pressed_sig}, new function<void(void)>([=]() {
         if (edit_mode != EDITABLE_TEXT) return;
 
-        Vector2 mouse = GetMousePosition();
+        ray::Vector2 mouse = ray::GetMousePosition();
         if (is_within_box(mouse, e->box)) {
             mouse_cursor = 2;
-            if (IsMouseButtonPressed(0)) {
+            if (ray::IsMouseButtonPressed(0)) {
                 selected_editable_text = e;
                 auto end = e->text.size();
                 auto clicked_character_index = x_to_character_index(e, mouse.x);
@@ -96,33 +100,47 @@ void initialize_editable_text(EditableText *e) {
         if (selected_editable_text != e) return;
 
         if (key_pressed != 0 && !key_consumed) {
-            if (key_pressed == KEY_BACKSPACE) {
+            if (key_pressed == ray::KEY_BACKSPACE) {
                 if (e->text.length() > 0 && e->character_index > 0) {
                     e->character_index--;
                     e->text.erase(e->character_index, 1);
                     signal_update(&e->text_input_sig);
                 }
-            } else if (key_pressed == KEY_LEFT) {
+            } else if (key_pressed == ray::KEY_LEFT) {
                 if (e->character_index > 0) e->character_index--;
                 else jump_editable_text(e, &Box::x_max, &Box::x_min, -1);
-            } else if (key_pressed == KEY_RIGHT) {
+            } else if (key_pressed == ray::KEY_RIGHT) {
                 if (e->character_index < e->text.size()) e->character_index++;
                 else jump_editable_text(e, &Box::x_min, &Box::x_max, 1);
-            } else if (key_pressed == KEY_UP) {
+            } else if (key_pressed == ray::KEY_UP) {
                 jump_editable_text(e, &Box::y_max, &Box::y_min, -1);
-            } else if (key_pressed == KEY_DOWN) {
+            } else if (key_pressed == ray::KEY_DOWN) {
                 jump_editable_text(e, &Box::y_min, &Box::y_max, 1);
-            } else if (key_pressed == KEY_SPACE) {
+            } else if (key_pressed == ray::KEY_SPACE) {
                 jump_editable_text(e, &Box::x_min, &Box::x_max, 1);
-            } else if (key_pressed == KEY_ESCAPE) {
+            } else if (key_pressed == ray::KEY_ESCAPE)
+            {
                 edit_mode = OBJECT_VIEW;
                 selected_editable_text = nullptr;
-            } else {
-                auto c = (char) tolower(key_pressed);
-                e->text.insert(e->character_index, 1, c);
-                e->character_index++;
+            } else if (key_pressed == ray::KEY_LEFT_ALT) {
+                // its all over
                 signal_update(&e->text_input_sig);
+            } else {
+                bool any_ran = false;
+                for (auto on_key : e->on_keys) {
+                    if (on_key()) {
+                        any_ran = true;
+                        break;
+                    }
+                }
+                if (!any_ran) {
+                    auto c = (char) tolower(key_pressed);
+                    e->text.insert(e->character_index, 1, c);
+                    e->character_index++;
+                    signal_update(&e->text_input_sig);
+                }
             }
+
             key_consumed = true;
         }
     })));

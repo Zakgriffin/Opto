@@ -31,7 +31,7 @@ void string_create_sub_object_views(ObjectView *string_view) {
     e->text = *string_; // ZZZZ eh
     string_view->sub_object_constraints.push_back(create_listener({&e->text_input_sig}, new function<void(void)>([=]() {
         *string_ = e->text;
-        e->color = Color(150,120,0,255);
+        e->color = ray::Color(150,120,0,255);
     })));
     signal_update(&e->text_input_sig); // ZZZZ eh
 }

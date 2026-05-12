@@ -2,8 +2,8 @@
 
 float CHARACTER_WIDTH = 8;
 
-Rectangle box_to_rectangle(Box box) {
-    return Rectangle{
+ray::Rectangle box_to_rectangle(Box box) {
+    return ray::Rectangle{
             box.x_min,
             box.y_min,
             box.x_max - box.x_min,
@@ -11,7 +11,7 @@ Rectangle box_to_rectangle(Box box) {
     };
 }
 
-bool is_within_box(Vector2 point, Box box) {
+bool is_within_box(ray::Vector2 point, Box box) {
     return (
             point.x > box.x_min &&
             point.x < box.x_max &&

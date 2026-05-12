@@ -1,21 +1,5 @@
 #include "compile.h"
 
-void* remove_scope_on_open(void* each, ObjectType type) {
-
-}
-
-void* remove_scope_on_close(void* each, ObjectType type) {
-    if (type == LOOP) {
-        return typed(JUMP, new Jump{.jump = nullptr});
-    }
-    if (type == REPEAT) {
-        auto repeat = (Repeat*) each;
-        return typed(CONDITIONAL_JUMP, new ConditionalJump{.condition = repeat->condition, .jump = nullptr});
-    }
-
-    return nullptr;
-}
-
 // void traverse_over_scopes(void* flow, function<void(void*, ObjectType)> on_open, function<void(void*, ObjectType)> on_close) {
 //     auto current = flow;
 //     stack<void*> scopes;
@@ -98,12 +82,29 @@ void* removed_scope_flow(void* flow) {
     void** current_handle = &current;
     auto result = &current;
 
+    unordered_map<void*, void*> scoped_to_flat_jump;
+
     traverse_over_scopes(flow, [&](DoThen* each){
         append_do_then(&current_handle, each->effect);
-    }, [&](void* each, ObjectType type){
+    }, [&](void* opened, ObjectType type){
+        if (type == LOOP) {
+            scoped_to_flat_jump.insert({opened, current});
+        } else if (type == REPEAT) {
+            scoped_to_flat_jump.insert({opened, current});
+        }
+    }, [&](void* closed, ObjectType type){
+        void* effect = nullptr;
 
-    }, [&](void* each, ObjectType type){
-        append_do_then(&current_handle, remove_scope_on_close(each, type));
+        if (type == LOOP) {
+            auto loop = (Loop*) closed;
+            // effect = typed(JUMP, new Jump{.jump = scoped_to_flat_jump.at(loop)});
+            effect = typed(JUMP, new Jump{.jump = nullptr});
+        } else if (type == REPEAT) {
+            auto repeat = (Repeat*) closed;
+            effect = typed(CONDITIONAL_JUMP, new ConditionalJump{.condition = repeat->condition, .jump = nullptr});
+        }
+
+        append_do_then(&current_handle, effect);
     });
     return *result;
 }

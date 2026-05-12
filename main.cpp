@@ -2,12 +2,12 @@
 
 #include "llvm_compile.h"
 
-Font font;
+ray::Font font;
 int FONT_HEIGHT = 18;
 
-Color BACKGROUND_COLOR = GetColor(0x111111FF);
-Color BOX_COLOR = GetColor(0x222222FF);
-Color COLLAPSED_COLOR = GetColor(0x332233FF);
+ray::Color BACKGROUND_COLOR = ray::GetColor(0x111111FF);
+ray::Color BOX_COLOR = ray::GetColor(0x222222FF);
+ray::Color COLLAPSED_COLOR = ray::GetColor(0x332233FF);
 
 Signal draw_visuals;
 Signal input_listeners;
@@ -24,14 +24,14 @@ int main() {
     const int screen_width = 900;
     const int screen_height = 500;
 
-    SetTraceLogLevel(LOG_ERROR);
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIGHDPI);
-    InitWindow(screen_width, screen_height, "Opto");
-    SetTargetFPS(60);
+    ray::SetTraceLogLevel(ray::LOG_ERROR);
+    ray::SetConfigFlags(ray::FLAG_WINDOW_RESIZABLE | ray::FLAG_WINDOW_HIGHDPI);
+    ray::InitWindow(screen_width, screen_height, "Opto");
+    ray::SetTargetFPS(60);
 
-    font = LoadFontEx("resources/RobotoMono-Regular.ttf", FONT_HEIGHT * 2, nullptr, 250);
+    font = ray::LoadFontEx("resources/RobotoMono-Regular.ttf", FONT_HEIGHT * 2, nullptr, 250);
 
-    SetExitKey(0);
+    ray::SetExitKey(0);
 
     MultiClick multi_click;
     init_multi_click(&multi_click);
@@ -41,18 +41,16 @@ int main() {
 
     void **recent_root;
 
-    // build_llvm();
-
-    while (!WindowShouldClose()) {
-        BeginDrawing();
+    while (!ray::WindowShouldClose()) {
+        ray::BeginDrawing();
         ClearBackground(BACKGROUND_COLOR);
 
-        key_pressed = GetKeyPressed();
+        key_pressed = ray::GetKeyPressed();
         mouse_cursor = 0;
         mouse_clicked_during_input = false;
         key_consumed = false;
         signal_update(&input_listeners);
-        SetMouseCursor(mouse_cursor);
+        ray::SetMouseCursor(mouse_cursor);
 
         auto click_streak = check_clicked_n_times(&multi_click, 2);
         if (!mouse_clicked_during_input && click_streak == 2) {
@@ -63,7 +61,7 @@ int main() {
             selected_editable_text = &object_view->editable_text;
             edit_mode = EDITABLE_TEXT;
 
-            Vector2 mouse = GetMousePosition();
+            ray::Vector2 mouse = ray::GetMousePosition();
             move_box_x(&object_view->editable_text.box, mouse.x);
             move_box_y(&object_view->editable_text.box, mouse.y);
             signal_update(&object_view->editable_text.box_sig);
@@ -71,10 +69,10 @@ int main() {
 
         signal_update(&draw_visuals);
 
-        EndDrawing();
+        ray::EndDrawing();
     }
 
-    CloseWindow();
+    ray::CloseWindow();
 
     return 0;
 }

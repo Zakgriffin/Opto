@@ -136,7 +136,8 @@ void* stackify_variables(void* flow) {
 
             release_register(reg);
         } else if (type == JUMP) {
-            auto arm_branch = typed(ARM_BRANCH, new ArmBranch{.label = nullptr});
+            auto jump = (Jump*) each->effect;
+            auto arm_branch = typed(ARM_BRANCH, new ArmBranch{.label = jump->jump});
             append_do_then(&current_handle, arm_branch);
         } else if (type == CONDITIONAL_JUMP) {
             auto conditional_jump = (ConditionalJump*) each->effect;

@@ -2,11 +2,19 @@
 
 unordered_map<Declare*, void**> declare_to_handle;
 
-int evaluate_expression(void* expression) {
+int evaluate_num_expression(void* expression) {
     auto type = object_to_type.at(expression);
     if (type == ADD) {
         auto add = (Add*) expression;
-        return evaluate_expression(add->addend) + evaluate_expression(add->augend);
+        return evaluate_num_expression(add->addend) + evaluate_num_expression(add->augend);
+    }
+    if (type == SUB) {
+        auto sub = (Sub*) expression;
+        return evaluate_num_expression(sub->minuend) - evaluate_num_expression(sub->subtrahend);
+    }
+    if (type == AND) {
+        auto and_ = (And*) expression;
+        return evaluate_num_expression(and_->conjunct_1) && evaluate_num_expression(and_->conjunct_2);
     }
     if (type == INTEGER) {
         auto integer = (int*) expression;
@@ -14,15 +22,48 @@ int evaluate_expression(void* expression) {
     }
     if (type == GREATER_THAN) {
         auto greater_than = (GreaterThan*) expression;
-        return evaluate_expression(greater_than->left) > evaluate_expression(greater_than->right);
+        return evaluate_num_expression(greater_than->left) > evaluate_num_expression(greater_than->right);
+    }
+    if (type == LESS_THAN) {
+        auto less_than = (LessThan*) expression;
+        return evaluate_num_expression(less_than->left) < evaluate_num_expression(less_than->right);
+    }
+    if (type == GREATER_THAN_OR_EQUAL) {
+        auto greater_than_or_equal = (GreaterThanOrEqual*) expression;
+        return evaluate_num_expression(greater_than_or_equal->left) >= evaluate_num_expression(greater_than_or_equal->right);
     }
     if (type == DECLARE) {
         auto declare = (Declare*) expression;
         auto handle = declare_to_handle.at(declare);
-        return evaluate_expression(*handle);
+        return evaluate_num_expression(*handle);
+    }
+    if (type == INDEX) {
+        auto index = (Index*) expression;
+        auto v = (vector<void*>*) evaluate_expression(index->array);
+        auto at = evaluate_num_expression(index->at);
+        return *(int*)v->at(at);
     }
 
-    return 0;
+    cout << "bad expresion" << endl;
+
+    return -1;
+}
+
+void* evaluate_expression(void* expression) {
+    auto type = object_to_type.at(expression);
+    if (type == DECLARE) {
+        auto declare = (Declare*) expression;
+        auto handle = declare_to_handle.at(declare);
+        return *handle;
+    }
+    if (type == VECTOR) {
+        return expression; // ZZZZ maybe copy and such
+    }
+
+    auto evaluated = evaluate_num_expression(expression);
+    auto i = (int*) integer_create_simple();
+    *i = evaluated;
+    return i;
 }
 
 void onto_next(Run* run, void* next) {
@@ -31,7 +72,9 @@ void onto_next(Run* run, void* next) {
         if (run->scope_stack.empty()) {
             onto_next(run, run->start); // restart ZZZZ move out!
         } else {
-            run->scope_stack.top()();
+            auto callback = run->scope_stack.top();
+            run->scope_stack.pop();
+            callback();
         }
     } else if (next_type == DO_THEN) {
         auto do_then = (DoThen*) next;
@@ -46,11 +89,11 @@ void onto_next(Run* run, void* next) {
     } else if (next_type == WHILE) {
         auto while_ = (While*) next;
         auto while_end_scope = [=]{
-            if (evaluate_expression(while_->condition)) {
+            if (evaluate_num_expression(while_->condition)) {
                 onto_next(run, while_->then);
             } else {
-                onto_next(run, while_->finally);
                 run->scope_stack.pop();
+                onto_next(run, while_->finally);
             }
         };
         run->scope_stack.push(while_end_scope);
@@ -58,35 +101,15 @@ void onto_next(Run* run, void* next) {
     } else if (next_type == REPEAT) {
         auto repeat = (Repeat*) next;
         auto repeat_end_scope = [=]{
-            if (evaluate_expression(repeat->condition)) {
+            if (evaluate_num_expression(repeat->condition)) {
                 onto_next(run, repeat->then);
             } else {
-                onto_next(run, repeat->finally);
                 run->scope_stack.pop();
+                onto_next(run, repeat->finally);
             }
         };
         run->scope_stack.push(repeat_end_scope);
         onto_next(run, repeat->then);
-    } else if (next_type == CALL) {
-        auto call = (Call*) next;
-        if (object_to_type.at(call->procedure) != PROCEDURE) {
-            cout << "not a procedure" << endl;
-        }
-        auto procedure = (Procedure*) call->procedure;
-
-        run->vars.insert({(Declare*) procedure->param, (Declare*) call->param});
-
-        auto call_end_scope = [=]{
-            onto_next(run, run->start);
-
-            run->vars.erase((Declare*) call->param);
-
-            run->scope_stack.pop();
-        };
-        run->scope_stack.push(call_end_scope);
-
-        cout << "|||" << object_to_type.at(procedure->body) << endl;
-        onto_next(run, procedure->body);
     }
 }
 
@@ -107,28 +130,59 @@ void click_step(Run* run) {
             auto object_view = new_object_view(recent_root);
             declare_to_handle.insert({declare, object_view->object_handle});
 
-            auto view = object_to_view.at(run->current);
-            move_box_x(&object_view->editable_text.box, view->box.x_max + 100);
-            move_box_y(&object_view->editable_text.box, view->box.y_min);
-            signal_update(&object_view->editable_text.box_sig);
+            if (object_to_view.contains(run->current)) {
+                auto view = object_to_view.at(run->current);
+                move_box_x(&object_view->editable_text.box, view->box.x_max + 100);
+                move_box_y(&object_view->editable_text.box, view->box.y_min);
+                signal_update(&object_view->editable_text.box_sig);
+            }
         }
     } else if (type == ASSIGN) {
         auto assign = (Assign*) effect;
-        auto grantee = (Declare*) assign->grantee;
-
-        // ZZZZ this is ugly
-        if (run->vars.contains(grantee)) {
-            cout << "mapped variable" << endl;
-            grantee = run->vars.at(grantee);
-        }
-
+        auto grantee = assign->grantee;
         auto grantor = assign->grantor;
 
-        auto object_handle = declare_to_handle.at(grantee);
-        auto assigned = evaluate_expression(grantor);
-        *object_handle = integer_create_simple();
-        *(int*) *object_handle = assigned;
-        signal_update(&object_to_signal.at(object_handle)->o);
+        auto grantee_type = object_to_type.at(grantee);
+        if (grantee_type == INDEX) {
+            auto index = (Index*) grantee;
+            auto v = (vector<void*>*) evaluate_expression(index->array);
+            auto at = evaluate_num_expression(index->at);
+
+            auto grantor_evaluated = evaluate_expression(grantor);
+            v->at(at) = grantor_evaluated;
+        } else {
+            auto grantee_var = (Declare*) grantee;
+
+            // ZZZZ this is ugly
+            if (run->vars.contains(grantee_var)) {
+                cout << "mapped variable" << endl;
+                grantee_var = run->vars.at(grantee_var);
+            }
+
+            auto object_handle = declare_to_handle.at(grantee_var);
+            auto grantor_evaluated = evaluate_expression(grantor);
+            *object_handle = grantor_evaluated;
+            signal_update(&object_to_signal.at(object_handle)->o);
+        }
+    } else if (type == CALL) {
+        cout << "CALL" << endl;
+        auto call = (Call*) effect;
+        if (object_to_type.at(call->procedure) != PROCEDURE) {
+            cout << "not a procedure" << endl;
+            return;
+        }
+        auto procedure = (Procedure*) call->procedure;
+        auto return_instruction = run->current->next;
+
+        run->vars.insert({(Declare*) procedure->param, (Declare*) call->param});
+
+        auto call_end_scope = [=]{
+            run->vars.erase((Declare*) procedure->param);
+            onto_next(run, return_instruction);
+        };
+
+        run->scope_stack.push(call_end_scope);
+        onto_next(run, procedure->body);
     } else if (type == NONE) {
         cout << "ZZZZ no effect" << endl;
     } else {
@@ -149,6 +203,7 @@ void *run_create_simple() {
 
 struct RunObjectViewContext {
     Box step_button_box;
+    Box type_check_button_box;
 };
 
 void run_create_sub_object_views(ObjectView *run_view) {
@@ -164,15 +219,22 @@ void run_create_sub_object_views(ObjectView *run_view) {
         context->step_button_box.y_max = run_view->editable_text.box.y_max - 30;
     })));
 
+    run_view->internal_constraints.push_back(create_listener({&run_view->editable_text.box_sig}, new function<void(void)>([=]() {
+        context->type_check_button_box.x_min = run_view->editable_text.box.x_min;
+        context->type_check_button_box.x_max = run_view->editable_text.box.x_max;
+        context->type_check_button_box.y_min = run_view->editable_text.box.y_min - 60;
+        context->type_check_button_box.y_max = run_view->editable_text.box.y_max - 60;
+    })));
+
 
     auto start_view = new_object_view((void **) &run->start);
     quick_layout_right(run_view, start_view, &run_view->editable_text.box, &run_view->editable_text.box_sig, &start_view->editable_text.box, &start_view->editable_text.box_sig);
 
     run_view->internal_constraints.push_back(create_listener({&input_listeners}, new function<void(void)>([=]() {
-        auto mouse = GetMousePosition();
+        auto mouse = ray::GetMousePosition();
         if (is_within_box(mouse, context->step_button_box)) {
-            mouse_cursor = MOUSE_CURSOR_POINTING_HAND;
-            if (IsMouseButtonPressed(0)) {
+            mouse_cursor = ray::MOUSE_CURSOR_POINTING_HAND;
+            if (ray::IsMouseButtonPressed(0)) {
                 auto x = (DoThen **) start_view->object_handle;
                 auto start = *x;
                 if (start == nullptr) return;
@@ -180,16 +242,23 @@ void run_create_sub_object_views(ObjectView *run_view) {
                 run->start = start;
                 click_step(run);
             }
+        } else if (is_within_box(mouse, context->type_check_button_box)) {
+            mouse_cursor = ray::MOUSE_CURSOR_POINTING_HAND;
+            if (ray::IsMouseButtonPressed(0)) {
+                map<void*, ObjectType> env;
+                type_check(run->start, &env);
+            }
         }
     })));
 
     run_view->internal_constraints.push_back(create_listener({&draw_visuals}, new function<void(void)>([=]() {
-        DrawRectangleRec(box_to_rectangle(context->step_button_box), RED);
+        DrawRectangleRec(box_to_rectangle(context->step_button_box), (ray::Color){ 230, 41, 55, 255 });
+        DrawRectangleRec(box_to_rectangle(context->type_check_button_box), (ray::Color){ 0, 0, 255, 255 });
 
         if(!object_to_view.contains(run->current)) return;
 
         auto current_view = object_to_view.at(run->current);
-        DrawLine(current_view->box.x_min, current_view->box.y_min, current_view->box.x_max, current_view->box.y_min, RED);
+        ray::DrawLine(current_view->box.x_min, current_view->box.y_min, current_view->box.x_max, current_view->box.y_min, (ray::Color){ 230, 41, 55, 255 });
 
         // if (object_to_view->next_box != nullptr) {
         //     DrawRectangleRec(box_to_rectangle(object_to_view->next_box), Color{255,0,0,50});

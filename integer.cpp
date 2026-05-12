@@ -39,9 +39,9 @@ void integer_create_sub_object_views(ObjectView *integer_view) {
         int i;
         if (to_int(e->text, i)) {
             *integer = i;
-            e->color = BLUE;
+            e->color = (ray::Color){ 0, 121, 241, 255 };
         } else {
-            e->color = RED;
+            e->color = (ray::Color){ 230, 41, 55, 255 };
         }
     })));
     signal_update(&e->text_input_sig); // ZZZZ eh
