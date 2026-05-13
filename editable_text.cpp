@@ -47,7 +47,7 @@ void jump_editable_text(EditableText *e, float Box::* low, float Box::* high, fl
     EditableText* best = nullptr;
     auto b = e->box;
     b.*low = b.*high;
-    b.*high = MAXFLOAT * flip;
+    b.*high = FLT_MAX * flip;
 
     for (auto et : editable_texts) {
         if (!boxes_overlap(et->box, b)) continue;
