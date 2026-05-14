@@ -3,7 +3,7 @@
 #ifndef OPTO_CALL_H
 #define OPTO_CALL_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *procedure;

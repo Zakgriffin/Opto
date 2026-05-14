@@ -3,7 +3,7 @@
 #ifndef OPTO_MUL_H
 #define OPTO_MUL_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *multiplicand;

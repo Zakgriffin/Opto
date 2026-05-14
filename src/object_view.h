@@ -4,41 +4,10 @@
 #define OPTO_OBJECT_VIEW_H
 
 #include "stds.h"
+#include "globals.h"
 #include "object.h"
-#include "editable_text.h"
-#include "type.h"
-#include "unknown.h"
-#include "none.h"
-#include "do_then.h"
-#include "string_.h"
-#include "add.h"
-#include "sub.h"
-#include "mul.h"
-#include "and.h"
-#include "assign.h"
-#include "integer.h"
-#include "run.h"
-#include "declare.h"
-#include "if.h"
-#include "loop.h"
-#include "while.h"
-#include "repeat.h"
-#include "greater_than.h"
-#include "greater_than_or_equal.h"
-#include "less_than.h"
-#include "procedure.h"
-#include "call.h"
-#include "vector.h"
-#include "index.h"
-#include "optimize.h"
-#include "arm_compile.h"
-#include "llvm_compile.h"
-#include "llvm_module.h"
-#include "llvm_function.h"
-#include "llvm_basic_block.h"
-#include "compile.h"
 #include "event.h"
-#include "test_flows.h"
+#include "editable_text.h"
 
 extern unordered_map<void *, ObjectView *> object_to_view;
 
@@ -78,6 +47,7 @@ typedef struct ObjectViewBuilder {
 } ObjectViewBuilder;
 
 extern ObjectView *selected_object_view;
+extern vector<ObjectViewBuilder> object_view_builders;
 
 template<typename T>
 struct Shared {
@@ -85,23 +55,13 @@ struct Shared {
     int count;
 };
 
-extern map<void *, ObjectType> object_to_type;
 extern map<void *, Shared<Signal> *> object_to_signal;
-extern unordered_map<void*, string> object_to_name;
-
-template<typename T>
-T *typed(ObjectType type, T *object) {
-    object_to_type.insert({object, type});
-    return object;
-}
 
 ObjectView *new_object_view(void **object_handle);
 
 void destroy_object_view(ObjectView *object_view);
 
 void redo_sub_objects(ObjectView *o, const ObjectViewBuilder &object_view_builder);
-
-void init_object_view_builders();
 
 void include_sub_object_view(ObjectView *object_view, ObjectView *sub_object_view);
 

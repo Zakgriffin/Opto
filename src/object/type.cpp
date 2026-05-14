@@ -1,4 +1,9 @@
+#include "object_view.h"
 #include "type.h"
+#include "expressions.h"
+#include "control_flow.h"
+#include "data.h"
+#include "procedures.h"
 
 bool is_num_exp(ObjectType type) {
     auto exps = unordered_set {

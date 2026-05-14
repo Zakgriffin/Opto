@@ -3,13 +3,7 @@
 #ifndef OPTO_STRING_H
 #define OPTO_STRING_H
 
-#include "object_view.h"
-
-typedef struct ObjectView ObjectView;
-
-void string_create_sub_object_views(ObjectView *string_view);
-
-void string_destroy_sub_object_views(ObjectView *string_view);
+#include "globals.h"
 
 VIEW_DECLARATIONS(string)
 

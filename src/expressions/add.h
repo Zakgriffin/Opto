@@ -3,7 +3,7 @@
 #ifndef OPTO_ADD_H
 #define OPTO_ADD_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *augend;

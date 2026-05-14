@@ -19,9 +19,10 @@ typedef struct {
 
 ray::Rectangle box_to_rectangle(Box box);
 
+typedef struct ObjectView ObjectView;
+typedef struct ObjectViewBuilder ObjectViewBuilder;
+
 #define VIEW_DECLARATIONS(obj) \
-    typedef struct ObjectView ObjectView; \
-    typedef struct ObjectViewBuilder ObjectViewBuilder; \
     extern ObjectViewBuilder obj##_object_view_builder; \
     void obj##_create_sub_object_views(ObjectView *obj##_view); \
     void obj##_destroy_sub_object_views(ObjectView *obj##_view); \

@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "string_.h"
 
 struct StringObjectView {

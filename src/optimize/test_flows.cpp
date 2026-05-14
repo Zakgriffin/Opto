@@ -1,4 +1,23 @@
+#include "object_view.h"
 #include "test_flows.h"
+#include "arm_compile.h"
+#include "expressions.h"
+#include "control_flow.h"
+#include "data.h"
+#include "procedures.h"
+
+
+void append(void** root_handle, void* effect) {
+    *root_handle = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
+}
+
+void append_do_then(void*** current_handle, void* effect) {
+    if (effect == nullptr) return;
+
+    auto k = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
+    **current_handle = k;
+    *current_handle = &k->next;
+}
 
 void* sequence(std::vector<void*> statements) {
     void* head = nullptr;
@@ -306,4 +325,28 @@ void* create_matrix_multiplication() {
             .next = i_while
         })})})})})})})})
     });
+}
+
+void* create_big_expression() {
+    void* current;
+    void** current_handle = &current;
+    auto result = &current;
+
+    auto x = typed(DECLARE, new Declare);
+    auto a= typed(DECLARE, new Declare);
+
+    append_do_then(&current_handle, typed(INTEGER, new int(0)));
+    append_do_then(&current_handle, typed(ASSIGN, new Assign{
+        .grantee = x,
+        .grantor = typed(ADD, new Add{
+            .augend = typed(ADD, new Add{
+                .augend = typed(INTEGER, new int(1)),
+                .addend = a
+            }),
+            .addend = typed(INTEGER, new int(5))
+        })
+    }));
+    append_do_then(&current_handle, typed(INTEGER, new int(0)));
+
+    return *result;
 }

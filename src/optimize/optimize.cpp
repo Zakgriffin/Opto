@@ -1,4 +1,6 @@
+#include "object_view.h"
 #include "optimize.h"
+#include "llvm_compile.h"
 
 ObjectViewBuilder optimize_object_view_builder = ObjectViewBuilder{OPTIMIZE, "compile", optimize_create_simple, optimize_create_sub_object_views, optimize_destroy_sub_object_views};
 

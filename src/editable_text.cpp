@@ -1,7 +1,5 @@
 #include "editable_text.h"
 
-#include "object_view.h"
-
 EditableText *selected_editable_text = nullptr;
 unordered_set<EditableText*> editable_texts;
 

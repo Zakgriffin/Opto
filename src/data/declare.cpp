@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "declare.h"
 
 ObjectViewBuilder declare_object_view_builder = ObjectViewBuilder{DECLARE, "var", declare_create_simple, declare_create_sub_object_views, declare_destroy_sub_object_views};

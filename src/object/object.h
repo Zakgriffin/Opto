@@ -66,6 +66,15 @@ typedef enum {
     LLVM_VALUE
 } ObjectType;
 
+extern map<void *, ObjectType> object_to_type;
+extern unordered_map<void *, string> object_to_name;
+
+template<typename T>
+T *typed(ObjectType type, T *object) {
+    object_to_type.insert({object, type});
+    return object;
+}
+
 void create_object(ObjectType type, ray::Vector2 position);
 
 #endif //OPTO_OBJECT_H

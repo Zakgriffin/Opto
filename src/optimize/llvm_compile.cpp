@@ -1,4 +1,11 @@
+#include "object_view.h"
 #include "llvm_compile.h"
+#include "expressions.h"
+#include "while.h"
+#include "repeat.h"
+#include "data.h"
+#include "procedures.h"
+#include "type.h"
 
 int temp_name = 0;
 string best_name(llvm::Value* value) {
@@ -639,4 +646,9 @@ llvm::Module *build_llvm(void* proc_) {
     supplement_llvm_module(module);
 
     return module;
+}
+
+void registerPass(const std::string& name, std::function<void(llvm::Function&, llvm::FunctionAnalysisManager&)> passLogic) {
+    auto funcObj = new function(passLogic);
+    object_to_name.insert({ typed(LLVM_PASS, funcObj), name });
 }

@@ -1,7 +1,21 @@
 #ifndef OPTO_COMPILE_H
 #define OPTO_COMPILE_H
 
-#include "object_view.h"
+#include "object.h"
+#include "do_then.h"
+
+typedef struct {
+    void *condition;
+    void *jump;
+} ConditionalJump;
+VIEW_DECLARATIONS(conditional_jump)
+
+typedef struct {
+    void *jump;
+} Jump;
+VIEW_DECLARATIONS(jump)
+
+void append_do_then(void*** current_handle, void* effect);
 
 void traverse_over_scopes(void* current, function<void(DoThen*)> on_each, function<void(void*, ObjectType)> on_open, function<void(void*, ObjectType)> on_close);
 void* removed_scope_flow(void* flow);

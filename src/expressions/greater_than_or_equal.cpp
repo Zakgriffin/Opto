@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "greater_than_or_equal.h"
 
 ObjectViewBuilder greater_than_or_equal_object_view_builder = ObjectViewBuilder{GREATER_THAN_OR_EQUAL, "gte", greater_than_or_equal_create_simple, greater_than_or_equal_create_sub_object_views, greater_than_or_equal_destroy_sub_object_views};

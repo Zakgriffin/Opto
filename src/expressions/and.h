@@ -3,7 +3,7 @@
 #ifndef OPTO_AND_H
 #define OPTO_AND_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *conjunct_1;

@@ -1,4 +1,5 @@
 add_rules("mode.debug", "mode.release")
+add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 set_defaultmode("release")
 
 add_requires("llvm")
@@ -10,8 +11,8 @@ target("Opto")
     set_kind("binary")
     set_languages("cxx20")
     set_runtimes("MT")
-    add_files("src/*.cpp")
-    add_includedirs("src")
+    add_files("src/**.cpp")
+    add_includedirs("src", "src/object", "src/expressions", "src/control_flow", "src/data", "src/procedures", "src/optimize", "src/llvm", "src/run")
     add_packages("raylib", "llvm")
 
     on_load(function(target)
@@ -19,7 +20,7 @@ target("Opto")
         local cfg_exe = is_host("windows") and "llvm-config.exe" or "llvm-config"
         local llvm_config = path.join(llvm_dir, "bin", cfg_exe)
 
-        target:add("includedirs", path.join(llvm_dir, "include"))
+        target:add("sysincludedirs", path.join(llvm_dir, "include"))
         target:add("linkdirs", path.join(llvm_dir, "lib"))
 
         local components = {

@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "vector.h"
 
 ObjectViewBuilder vector_object_view_builder = ObjectViewBuilder{VECTOR, "vector", vector_create_simple, vector_create_sub_object_views, vector_destroy_sub_object_views};

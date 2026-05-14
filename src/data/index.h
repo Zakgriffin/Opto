@@ -3,7 +3,7 @@
 #ifndef OPTO_INDEX_H
 #define OPTO_INDEX_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *array;

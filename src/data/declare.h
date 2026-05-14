@@ -3,7 +3,7 @@
 #ifndef OPTO_DECLARE_H
 #define OPTO_DECLARE_H
 
-#include "object_view.h"
+#include "globals.h"
 
 struct Declare {
 

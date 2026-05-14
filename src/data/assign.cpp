@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "assign.h"
 
 ObjectViewBuilder assign_object_view_builder = ObjectViewBuilder{ASSIGN, "=", assign_create_simple, assign_create_sub_object_views, assign_destroy_sub_object_views};

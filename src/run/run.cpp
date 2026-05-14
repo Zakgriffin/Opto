@@ -1,4 +1,12 @@
+#include "object_view.h"
 #include "run.h"
+#include "expressions.h"
+#include "loop.h"
+#include "while.h"
+#include "repeat.h"
+#include "data.h"
+#include "procedures.h"
+#include "type.h"
 
 unordered_map<Declare*, void**> declare_to_handle;
 

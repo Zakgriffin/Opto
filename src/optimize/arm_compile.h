@@ -1,19 +1,7 @@
 #ifndef OPTO_ARM_COMPILE_H
 #define OPTO_ARM_COMPILE_H
 
-#include "object_view.h"
-#include "compile.h"
-
-typedef struct {
-    void *condition;
-    void *jump;
-} ConditionalJump;
-VIEW_DECLARATIONS(conditional_jump)
-
-typedef struct {
-    void *jump;
-} Jump;
-VIEW_DECLARATIONS(jump)
+#include "globals.h"
 
 // register
 
@@ -74,9 +62,6 @@ typedef struct {
 } ArmBranchLessThanOrEqual;
 VIEW_DECLARATIONS(arm_branch_less_than_or_equal)
 
-void append_do_then(void*** current_handle, void* effect);
-
-void* removed_scope_flow(void* flow);
 void* stackify_variables(void* flow);
 void* expand_expressions(void* flow);
 

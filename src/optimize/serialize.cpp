@@ -1,4 +1,9 @@
+#include "object.h"
 #include "serialize.h"
+#include "expressions.h"
+#include "control_flow.h"
+#include "data.h"
+#include "procedures.h"
 
 template <typename T>
 void write_raw(std::vector<char>& buffer, T value) {

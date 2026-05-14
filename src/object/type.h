@@ -3,7 +3,7 @@
 #ifndef OPTO_TYPE_H
 #define OPTO_TYPE_H
 
-#include "object_view.h"
+#include "object.h"
 
 void type_check(void *obj, map<void*, ObjectType> *env);
 

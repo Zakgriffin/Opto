@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "less_than.h"
 
 ObjectViewBuilder less_than_object_view_builder = ObjectViewBuilder{LESS_THAN, "lt", less_than_create_simple, less_than_create_sub_object_views, less_than_destroy_sub_object_views};

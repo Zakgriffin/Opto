@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "sub.h"
 
 ObjectViewBuilder sub_object_view_builder = ObjectViewBuilder{SUB, "sub", sub_create_simple, sub_create_sub_object_views, sub_destroy_sub_object_views};

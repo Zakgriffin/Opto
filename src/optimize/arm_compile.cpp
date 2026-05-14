@@ -1,4 +1,8 @@
+#include "object_view.h"
 #include "arm_compile.h"
+#include "compile.h"
+#include "expressions.h"
+#include "data.h"
 
 VIEW_DEFINITIONS_SIMPLE(conditional_jump, CONDITIONAL_JUMP, ConditionalJump, "conditional-jump", &ConditionalJump::condition, &ConditionalJump::jump)
 VIEW_DEFINITIONS_SIMPLE(jump, JUMP, Jump, "jump", &Jump::jump)
@@ -19,18 +23,6 @@ VIEW_DEFINITIONS_SIMPLE(arm_branch, ARM_BRANCH, ArmBranch, "B", &ArmBranch::labe
 VIEW_DEFINITIONS_SIMPLE(arm_branch_less_than_or_equal, ARM_BRANCH_LESS_THAN_OR_EQUAL, ArmBranchLessThanOrEqual, "BLE", &ArmBranchLessThanOrEqual::label)
 
 // rest
-
-void append(void** root_handle, void* effect) {
-    *root_handle = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
-}
-
-void append_do_then(void*** current_handle, void* effect) {
-    if (effect == nullptr) return;
-
-    auto k = typed(DO_THEN, new DoThen{.effect = effect, .next = nullptr});
-    **current_handle = k;
-    *current_handle = &k->next;
-}
 
 void* stackify_variables(void* flow) {
     void* current;

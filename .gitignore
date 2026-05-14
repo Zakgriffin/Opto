@@ -1,2 +1,6 @@
 build/
 .xmake/
+compile_commands.json
+
+graph_includes.py
+includes_graph.dot

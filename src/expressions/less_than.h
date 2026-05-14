@@ -3,7 +3,7 @@
 #ifndef OPTO_LESS_THAN_H
 #define OPTO_LESS_THAN_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *left;

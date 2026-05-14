@@ -3,7 +3,7 @@
 #ifndef OPTO_LLVM_MODULE_H
 #define OPTO_LLVM_MODULE_H
 
-#include "object_view.h"
+#include "globals.h"
 
 VIEW_DECLARATIONS(llvm_module)
 

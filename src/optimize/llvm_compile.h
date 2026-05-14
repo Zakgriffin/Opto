@@ -5,6 +5,7 @@
 
 #include "test_flows.h"
 #include "compile.h"
+#include "declare.h"
 
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"

@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "while.h"
 
 ObjectViewBuilder while_object_view_builder = ObjectViewBuilder{WHILE, "while", while_create_simple, while_create_sub_object_views, while_destroy_sub_object_views};

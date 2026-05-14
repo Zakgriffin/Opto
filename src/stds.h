@@ -15,12 +15,14 @@ namespace ray {
 #undef CYAN
 #undef WHITE
 
+#include <algorithm>
 #include <functional>
 #include <string>
 #include <unordered_set>
 #include <set>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <stack>
 #include <utility>
 #include <chrono>

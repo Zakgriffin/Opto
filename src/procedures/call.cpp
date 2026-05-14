@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "call.h"
 
 ObjectViewBuilder call_object_view_builder = ObjectViewBuilder{CALL, "call", call_create_simple, call_create_sub_object_views, call_destroy_sub_object_views};

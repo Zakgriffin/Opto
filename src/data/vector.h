@@ -3,7 +3,7 @@
 #ifndef OPTO_VECTOR_H
 #define OPTO_VECTOR_H
 
-#include "object_view.h"
+#include "globals.h"
 
 VIEW_DECLARATIONS(vector)
 

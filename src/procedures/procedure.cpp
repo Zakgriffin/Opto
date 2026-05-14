@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "procedure.h"
 
 ObjectViewBuilder procedure_object_view_builder = ObjectViewBuilder{PROCEDURE, "procedure", procedure_create_simple, procedure_create_sub_object_views, procedure_destroy_sub_object_views};

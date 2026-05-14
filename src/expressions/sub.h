@@ -3,7 +3,7 @@
 #ifndef OPTO_SUB_H
 #define OPTO_SUB_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *minuend;

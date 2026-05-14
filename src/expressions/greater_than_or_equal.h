@@ -3,7 +3,7 @@
 #ifndef OPTO_GREATER_THAN_OR_EQUAL_H
 #define OPTO_GREATER_THAN_OR_EQUAL_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *left;

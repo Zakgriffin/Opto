@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "do_then.h"
 
 ObjectViewBuilder do_then_object_view_builder = ObjectViewBuilder{DO_THEN, ",", do_then_create_simple, do_then_create_sub_object_views, do_then_destroy_sub_object_views};

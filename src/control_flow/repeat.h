@@ -3,10 +3,7 @@
 #ifndef OPTO_REPEAT_H
 #define OPTO_REPEAT_H
 
-#include "stds.h"
-#include "object_view.h"
-
-typedef struct ObjectView ObjectView;
+#include "globals.h"
 
 struct Repeat {
     void *then;

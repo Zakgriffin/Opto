@@ -3,8 +3,7 @@
 #ifndef OPTO_LOOP_H
 #define OPTO_LOOP_H
 
-#include "stds.h"
-#include "object_view.h"
+#include "globals.h"
 
 struct Loop {
     void *body;

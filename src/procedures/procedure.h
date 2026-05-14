@@ -3,7 +3,7 @@
 #ifndef OPTO_PROCEDURE_H
 #define OPTO_PROCEDURE_H
 
-#include "object_view.h"
+#include "globals.h"
 
 typedef struct {
     void *param;

@@ -3,15 +3,12 @@
 #ifndef OPTO_IF_H
 #define OPTO_IF_H
 
-#include "stds.h"
-#include "object_view.h"
-
-typedef struct ObjectView ObjectView;
+#include "globals.h"
 
 struct If {
     void *condition;
     void *then;
-    DoThen *finally;
+    void *finally;
 };
 
 VIEW_DECLARATIONS(if)

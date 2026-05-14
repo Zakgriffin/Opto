@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "add.h"
 
 ObjectViewBuilder add_object_view_builder = ObjectViewBuilder{ADD, "add", add_create_simple, add_create_sub_object_views, add_destroy_sub_object_views};

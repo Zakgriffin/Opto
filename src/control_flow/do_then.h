@@ -3,10 +3,7 @@
 #ifndef OPTO_DO_THEN_H
 #define OPTO_DO_THEN_H
 
-#include "stds.h"
-#include "object_view.h"
-
-typedef struct ObjectView ObjectView;
+#include "globals.h"
 
 struct DoThen {
     void *effect;

@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "repeat.h"
 
 ObjectViewBuilder repeat_object_view_builder = ObjectViewBuilder{REPEAT, "repeat", repeat_create_simple, repeat_create_sub_object_views, repeat_destroy_sub_object_views};

@@ -1,3 +1,4 @@
+#include "object_view.h"
 #include "and.h"
 
 ObjectViewBuilder and_object_view_builder = ObjectViewBuilder{AND, "and", and_create_simple, and_create_sub_object_views, and_destroy_sub_object_views};

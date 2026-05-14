@@ -3,10 +3,7 @@
 #ifndef OPTO_WHILE_H
 #define OPTO_WHILE_H
 
-#include "stds.h"
-#include "object_view.h"
-
-typedef struct ObjectView ObjectView;
+#include "globals.h"
 
 struct While {
     void *condition;

@@ -3,8 +3,7 @@
 #ifndef OPTO_RUN_H
 #define OPTO_RUN_H
 
-#include "stds.h"
-#include "object_view.h"
+#include "globals.h"
 #include "do_then.h"
 
 typedef struct DoThen DoThen;
