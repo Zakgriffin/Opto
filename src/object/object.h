@@ -16,7 +16,7 @@ typedef enum {
     RUN,
     INTEGER,
     STRING,
-    DECLARE,
+    VARIABLE,
     IF,
     LOOP,
     WHILE,
@@ -28,7 +28,7 @@ typedef enum {
     CALL,
     VECTOR,
     INDEX,
-    OPTIMIZE,
+    COMPILE,
 
     CONDITIONAL_JUMP,
     JUMP,

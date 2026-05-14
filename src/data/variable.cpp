@@ -1,18 +1,18 @@
 #include "object_view.h"
-#include "declare.h"
+#include "variable.h"
 
-ObjectViewBuilder declare_object_view_builder = ObjectViewBuilder{DECLARE, "var", declare_create_simple, declare_create_sub_object_views, declare_destroy_sub_object_views};
+ObjectViewBuilder variable_object_view_builder = ObjectViewBuilder{VARIABLE, "var", variable_create_simple, variable_create_sub_object_views, variable_destroy_sub_object_views};
 
-void *declare_create_simple() {
-    auto declare = new Declare;
-    object_to_type.insert({declare, DECLARE});
-    return declare;
+void *variable_create_simple() {
+    auto variable = new Variable;
+    object_to_type.insert({variable, VARIABLE});
+    return variable;
 }
 
-void declare_create_sub_object_views(ObjectView *declare_view) {
-    // generic_linear_create_views(declare_view);
+void variable_create_sub_object_views(ObjectView *variable_view) {
+    // generic_linear_create_views(variable_view);
 }
 
-void declare_destroy_sub_object_views(ObjectView *declare_view) {
-    // generic_destroy_sub_object_views(declare_view);
+void variable_destroy_sub_object_views(ObjectView *variable_view) {
+    // generic_destroy_sub_object_views(variable_view);
 }

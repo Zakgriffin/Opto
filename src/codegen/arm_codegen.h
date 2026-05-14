@@ -1,5 +1,5 @@
-#ifndef OPTO_ARM_COMPILE_H
-#define OPTO_ARM_COMPILE_H
+#ifndef OPTO_ARM_CODEGEN_H
+#define OPTO_ARM_CODEGEN_H
 
 #include "globals.h"
 
@@ -65,4 +65,4 @@ VIEW_DECLARATIONS(arm_branch_less_than_or_equal)
 void* stackify_variables(void* flow);
 void* expand_expressions(void* flow);
 
-#endif //OPTO_ARM_COMPILE_H
+#endif //OPTO_ARM_CODEGEN_H

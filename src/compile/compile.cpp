@@ -1,60 +1,60 @@
 #include "object_view.h"
-#include "optimize.h"
-#include "llvm_compile.h"
+#include "compile.h"
+#include "llvm_codegen.h"
 
-ObjectViewBuilder optimize_object_view_builder = ObjectViewBuilder{OPTIMIZE, "compile", optimize_create_simple, optimize_create_sub_object_views, optimize_destroy_sub_object_views};
+ObjectViewBuilder compile_object_view_builder = ObjectViewBuilder{COMPILE, "compile", compile_create_simple, compile_create_sub_object_views, compile_destroy_sub_object_views};
 
-struct OptimizeObjectViewContext {
-    Box optimize_button_box;
+struct CompileObjectViewContext {
+    Box compile_button_box;
 };
 
-void *optimize_create_simple() {
-    auto optimize = new Optimize{.source = nullptr, .passes = nullptr, .stages = nullptr};
-    object_to_type.insert({optimize, OPTIMIZE});
-    return optimize;
+void *compile_create_simple() {
+    auto compile = new Compile{.source = nullptr, .passes = nullptr, .stages = nullptr};
+    object_to_type.insert({compile, COMPILE});
+    return compile;
 }
 
-void optimize_create_sub_object_views(ObjectView *optimize_view) {
-    auto optimize_handle = (Optimize **) optimize_view->object_handle;
-    auto optimize = *optimize_handle;
+void compile_create_sub_object_views(ObjectView *compile_view) {
+    auto compile_handle = (Compile **) compile_view->object_handle;
+    auto compile = *compile_handle;
 
-    auto context = new OptimizeObjectViewContext;
-    optimize_view->context = context;
+    auto context = new CompileObjectViewContext;
+    compile_view->context = context;
 
-    optimize_view->internal_constraints.push_back(create_listener({&optimize_view->editable_text.box_sig}, new function<void(void)>([=]() {
-        context->optimize_button_box.x_min = optimize_view->editable_text.box.x_min;
-        context->optimize_button_box.x_max = optimize_view->editable_text.box.x_min + 30;
-        context->optimize_button_box.y_min = optimize_view->editable_text.box.y_min - 30;
-        context->optimize_button_box.y_max = optimize_view->editable_text.box.y_max - 30;
+    compile_view->internal_constraints.push_back(create_listener({&compile_view->editable_text.box_sig}, new function<void(void)>([=]() {
+        context->compile_button_box.x_min = compile_view->editable_text.box.x_min;
+        context->compile_button_box.x_max = compile_view->editable_text.box.x_min + 30;
+        context->compile_button_box.y_min = compile_view->editable_text.box.y_min - 30;
+        context->compile_button_box.y_max = compile_view->editable_text.box.y_max - 30;
     })));
 
-    generic_linear_under_create_views(optimize_view, &Optimize::source, &Optimize::passes);
+    generic_linear_under_create_views(compile_view, &Compile::source, &Compile::passes);
 
-    optimize_view->internal_constraints.push_back(create_listener({&input_listeners}, new function<void(void)>([=]() {
+    compile_view->internal_constraints.push_back(create_listener({&input_listeners}, new function<void(void)>([=]() {
         auto mouse = ray::GetMousePosition();
-        if (is_within_box(mouse, context->optimize_button_box)) {
+        if (is_within_box(mouse, context->compile_button_box)) {
             mouse_cursor = ray::MOUSE_CURSOR_POINTING_HAND;
             if (ray::IsMouseButtonPressed(0)) {
                 llvm::Module *module = nullptr;
 
                 auto stages = typed(VECTOR, new vector<void*>);
 
-                if (object_to_type.at(optimize->source) == PROCEDURE) {
-                    module = build_llvm(optimize->source);
+                if (object_to_type.at(compile->source) == PROCEDURE) {
+                    module = build_llvm(compile->source);
                     stages->push_back(module);
 
                     std::vector<char> buffer;
-                    serialize_ast(optimize->source, buffer);
+                    serialize_ast(compile->source, buffer);
 
                     cout << "BUFFER LEN: " << buffer.size() << endl;
-                } else if (object_to_type.at(optimize->source) == LLVM_MODULE) {
-                    module = (llvm::Module*) optimize->source;
+                } else if (object_to_type.at(compile->source) == LLVM_MODULE) {
+                    module = (llvm::Module*) compile->source;
                 }
 
                 if (!module) return;
 
-                if (object_to_type.at(optimize->passes) != VECTOR) return;
-                auto passes_temp = (vector<void*>*) optimize->passes;
+                if (object_to_type.at(compile->passes) != VECTOR) return;
+                auto passes_temp = (vector<void*>*) compile->passes;
 
                 int offset = 0;
                 for (auto pass_untyped : *passes_temp) {
@@ -73,23 +73,23 @@ void optimize_create_sub_object_views(ObjectView *optimize_view) {
                     *stages_root = stage;
                     auto object_view = new_object_view(stages_root);
 
-                    move_box_x(&object_view->editable_text.box, optimize_view->box.x_min + offset);
-                    move_box_y(&object_view->editable_text.box, optimize_view->box.y_max + 30);
+                    move_box_x(&object_view->editable_text.box, compile_view->box.x_min + offset);
+                    move_box_y(&object_view->editable_text.box, compile_view->box.y_max + 30);
                     signal_update(&object_view->editable_text.box_sig);
 
                     offset += 120;
                 }
 
-                // optimize->stages = stages;
+                // compile->stages = stages;
             }
         }
     })));
 
-    optimize_view->internal_constraints.push_back(create_listener({&draw_visuals}, new function<void(void)>([=]() {
-        DrawRectangleRec(box_to_rectangle(context->optimize_button_box), ray::ORANGE);
+    compile_view->internal_constraints.push_back(create_listener({&draw_visuals}, new function<void(void)>([=]() {
+        DrawRectangleRec(box_to_rectangle(context->compile_button_box), ray::ORANGE);
     })));
 }
 
-void optimize_destroy_sub_object_views(ObjectView *optimize_view) {
-    generic_destroy_sub_object_views(optimize_view);
+void compile_destroy_sub_object_views(ObjectView *compile_view) {
+    generic_destroy_sub_object_views(compile_view);
 }

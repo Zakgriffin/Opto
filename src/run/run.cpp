@@ -1,14 +1,12 @@
 #include "object_view.h"
 #include "run.h"
 #include "expressions.h"
-#include "loop.h"
-#include "while.h"
-#include "repeat.h"
+#include "control_flow.h"
 #include "data.h"
 #include "procedures.h"
 #include "type.h"
 
-unordered_map<Declare*, void**> declare_to_handle;
+unordered_map<Variable*, void**> variable_to_handle;
 
 int evaluate_num_expression(void* expression) {
     auto type = object_to_type.at(expression);
@@ -40,9 +38,9 @@ int evaluate_num_expression(void* expression) {
         auto greater_than_or_equal = (GreaterThanOrEqual*) expression;
         return evaluate_num_expression(greater_than_or_equal->left) >= evaluate_num_expression(greater_than_or_equal->right);
     }
-    if (type == DECLARE) {
-        auto declare = (Declare*) expression;
-        auto handle = declare_to_handle.at(declare);
+    if (type == VARIABLE) {
+        auto variable = (Variable*) expression;
+        auto handle = variable_to_handle.at(variable);
         return evaluate_num_expression(*handle);
     }
     if (type == INDEX) {
@@ -59,9 +57,9 @@ int evaluate_num_expression(void* expression) {
 
 void* evaluate_expression(void* expression) {
     auto type = object_to_type.at(expression);
-    if (type == DECLARE) {
-        auto declare = (Declare*) expression;
-        auto handle = declare_to_handle.at(declare);
+    if (type == VARIABLE) {
+        auto variable = (Variable*) expression;
+        auto handle = variable_to_handle.at(variable);
         return *handle;
     }
     if (type == VECTOR) {
@@ -129,14 +127,14 @@ void click_step(Run* run) {
     auto effect = run->current->effect;
 
     auto type = object_to_type.at(effect);
-    if (type == DECLARE) {
-        auto declare = (Declare*) effect;
+    if (type == VARIABLE) {
+        auto variable = (Variable*) effect;
 
-        if (!declare_to_handle.contains(declare)) {
+        if (!variable_to_handle.contains(variable)) {
             auto recent_root = new void *;
             *recent_root = nullptr;
             auto object_view = new_object_view(recent_root);
-            declare_to_handle.insert({declare, object_view->object_handle});
+            variable_to_handle.insert({variable, object_view->object_handle});
 
             if (object_to_view.contains(run->current)) {
                 auto view = object_to_view.at(run->current);
@@ -159,7 +157,7 @@ void click_step(Run* run) {
             auto grantor_evaluated = evaluate_expression(grantor);
             v->at(at) = grantor_evaluated;
         } else {
-            auto grantee_var = (Declare*) grantee;
+            auto grantee_var = (Variable*) grantee;
 
             // ZZZZ this is ugly
             if (run->vars.contains(grantee_var)) {
@@ -167,7 +165,7 @@ void click_step(Run* run) {
                 grantee_var = run->vars.at(grantee_var);
             }
 
-            auto object_handle = declare_to_handle.at(grantee_var);
+            auto object_handle = variable_to_handle.at(grantee_var);
             auto grantor_evaluated = evaluate_expression(grantor);
             *object_handle = grantor_evaluated;
             signal_update(&object_to_signal.at(object_handle)->o);
@@ -182,10 +180,10 @@ void click_step(Run* run) {
         auto procedure = (Procedure*) call->procedure;
         auto return_instruction = run->current->next;
 
-        run->vars.insert({(Declare*) procedure->param, (Declare*) call->param});
+        run->vars.insert({(Variable*) procedure->param, (Variable*) call->param});
 
         auto call_end_scope = [=]{
-            run->vars.erase((Declare*) procedure->param);
+            run->vars.erase((Variable*) procedure->param);
             onto_next(run, return_instruction);
         };
 

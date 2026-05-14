@@ -4,5 +4,5 @@
 #include "string_.h"
 #include "vector.h"
 #include "index.h"
-#include "declare.h"
+#include "variable.h"
 #include "assign.h"

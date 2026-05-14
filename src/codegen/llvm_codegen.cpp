@@ -1,8 +1,7 @@
 #include "object_view.h"
-#include "llvm_compile.h"
+#include "llvm_codegen.h"
 #include "expressions.h"
-#include "while.h"
-#include "repeat.h"
+#include "control_flow.h"
 #include "data.h"
 #include "procedures.h"
 #include "type.h"
@@ -448,7 +447,7 @@ void include_print_int(llvm::LLVMContext &context, llvm::Module &module) {
     builder.CreateRetVoid();
 }
 
-llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, llvm::LLVMContext *context, map<Declare*, llvm::AllocaInst*> *variable_map) {
+llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, llvm::LLVMContext *context, map<Variable*, llvm::AllocaInst*> *variable_map) {
     auto type = object_to_type.at(expression);
     auto i32 = llvm::Type::getInt32Ty(*context);
     auto ptr_type = llvm::PointerType::get(*context, 0);
@@ -456,8 +455,8 @@ llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, ll
     if (type == INTEGER) {
         return llvm::ConstantInt::get(i32, *(int*)expression);
     }
-    if (type == DECLARE) {
-        return builder->CreateLoad(i32, variable_map->at((Declare*)expression));
+    if (type == VARIABLE) {
+        return builder->CreateLoad(i32, variable_map->at((Variable*)expression));
     }
     if (type == ADD) {
         auto add = (Add*)expression;
@@ -506,7 +505,7 @@ llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, ll
     }
     if (type == INDEX) {
         auto index = (Index*)expression;
-        llvm::Value* array_ptr = builder->CreateLoad(ptr_type, variable_map->at((Declare*)index->array));
+        llvm::Value* array_ptr = builder->CreateLoad(ptr_type, variable_map->at((Variable*)index->array));
         llvm::Value* index_val = codegen_expression(index->at, builder, context, variable_map);
         llvm::Value* element_ptr = builder->CreateGEP(i32, array_ptr, index_val);
         return builder->CreateLoad(i32, element_ptr);
@@ -552,14 +551,14 @@ llvm::Module *build_llvm(void* proc_) {
     llvm::BasicBlock* entry = llvm::BasicBlock::Create(*context, "entry", func);
     builder.SetInsertPoint(entry);
 
-    std::map<Declare*, llvm::AllocaInst*> variable_map;
+    std::map<Variable*, llvm::AllocaInst*> variable_map;
     map<void*, ObjectType> env;
 
     void* flow = proc->body;
     type_check(flow, &env);
 
     if (proc->param) {
-        auto* param_decl = (Declare*)proc->param;
+        auto* param_decl = (Variable*)proc->param;
         string pName = object_to_name.contains(param_decl) ? object_to_name.at(param_decl) : "param";
         llvm::AllocaInst* pAlloca = builder.CreateAlloca(i32, nullptr, pName);
         builder.CreateStore(func->arg_begin(), pAlloca);
@@ -567,15 +566,15 @@ llvm::Module *build_llvm(void* proc_) {
     }
 
     traverse_over_scopes(flow, [&](DoThen* each){
-        if (object_to_type.at(each->effect) == DECLARE) {
-            auto declare = (Declare*)each->effect;
-            if (declare == (Declare*)proc->param) return;
+        if (object_to_type.at(each->effect) == VARIABLE) {
+            auto variable = (Variable*)each->effect;
+            if (variable == (Variable*)proc->param) return;
 
-            auto name = object_to_name.contains(declare) ? object_to_name.at(declare) : "var";
-            if (env_type(declare, &env) == VECTOR) {
-                variable_map[declare] = builder.CreateAlloca(ptr_type, nullptr, name + "_ptr");
+            auto name = object_to_name.contains(variable) ? object_to_name.at(variable) : "var";
+            if (env_type(variable, &env) == VECTOR) {
+                variable_map[variable] = builder.CreateAlloca(ptr_type, nullptr, name + "_ptr");
             } else {
-                variable_map[declare] = builder.CreateAlloca(i32, nullptr, name);
+                variable_map[variable] = builder.CreateAlloca(i32, nullptr, name);
             }
         }
     }, [](void*, ObjectType){}, [](void*, ObjectType){});
@@ -589,15 +588,15 @@ llvm::Module *build_llvm(void* proc_) {
             llvm::Value* val = codegen_expression(assign->grantor, &builder, context, &variable_map);
             if (object_to_type.at(assign->grantee) == INDEX) {
                 auto idx = (Index*)assign->grantee;
-                llvm::Value* arr = builder.CreateLoad(ptr_type, variable_map.at((Declare*)idx->array));
+                llvm::Value* arr = builder.CreateLoad(ptr_type, variable_map.at((Variable*)idx->array));
                 llvm::Value* i = codegen_expression(idx->at, &builder, context, &variable_map);
                 builder.CreateStore(val, builder.CreateGEP(i32, arr, i));
             } else {
-                builder.CreateStore(val, variable_map[(Declare*)assign->grantee]);
+                builder.CreateStore(val, variable_map[(Variable*)assign->grantee]);
             }
         } else if (type == CALL) {
             auto call = (Call*)each->effect;
-            llvm::Value* arg = builder.CreateLoad(i32, variable_map[(Declare*)call->param]);
+            llvm::Value* arg = builder.CreateLoad(i32, variable_map[(Variable*)call->param]);
 
             // ZZZZ garbag
             llvm::Function *print_func = module->getFunction("print_int");

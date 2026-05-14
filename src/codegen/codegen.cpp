@@ -1,5 +1,5 @@
 #include "object.h"
-#include "compile.h"
+#include "codegen.h"
 #include "control_flow.h"
 
 // void traverse_over_scopes(void* flow, function<void(void*, ObjectType)> on_open, function<void(void*, ObjectType)> on_close) {

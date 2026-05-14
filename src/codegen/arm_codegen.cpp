@@ -1,6 +1,6 @@
 #include "object_view.h"
-#include "arm_compile.h"
-#include "compile.h"
+#include "arm_codegen.h"
+#include "codegen.h"
 #include "expressions.h"
 #include "data.h"
 
@@ -29,16 +29,16 @@ void* stackify_variables(void* flow) {
     void** current_handle = &current;
     auto result = &current;
 
-    vector<Declare*> variables;
+    vector<Variable*> variables;
     traverse_over_flat(flow, [&](DoThen* each){
         auto type = object_to_type.at(each->effect);
-        if (type == DECLARE) {
-            auto declare = (Declare*) each->effect;
-            variables.push_back(declare);
+        if (type == VARIABLE) {
+            auto variable = (Variable*) each->effect;
+            variables.push_back(variable);
         }
     });
 
-    unordered_map<Declare*, int> stack_offsets;
+    unordered_map<Variable*, int> stack_offsets;
     for (int i = 0; i < variables.size(); i++) {
         auto variable = variables.at(i);
         stack_offsets.insert({variable, (variables.size()-i)*4});
@@ -69,8 +69,8 @@ void* stackify_variables(void* flow) {
     };
 
 
-    auto build_load_register = [&](void* reg_stored, Declare* declare){
-        auto offset = typed(INTEGER, new int(stack_offsets.at(declare)));
+    auto build_load_register = [&](void* reg_stored, Variable* variable){
+        auto offset = typed(INTEGER, new int(stack_offsets.at(variable)));
         return typed(ARM_LOAD_REGISTER, new ArmLoadRegister{.reg_stored = reg_stored, .reg_address = r7, .offset = offset});
     };
 
@@ -91,7 +91,7 @@ void* stackify_variables(void* flow) {
         auto type = object_to_type.at(each->effect);
         if (type == ASSIGN) {
             auto assign = (Assign*) each->effect;
-            auto grantee = (Declare*) assign->grantee;
+            auto grantee = (Variable*) assign->grantee;
 
             auto reg = grab_register();
 
@@ -102,16 +102,16 @@ void* stackify_variables(void* flow) {
                 auto integer = (int*) grantor;
                 auto arm_move_status = typed(ARM_MOVE_STATUS, new ArmMoveStatus{.reg_moved = reg, .immediate =  integer});
                 append_do_then(&current_handle, arm_move_status);
-            } else if (grantor_type == DECLARE){
-                auto declare = (Declare*) grantor;
-                append_do_then(&current_handle, build_load_register(reg, declare));
+            } else if (grantor_type == VARIABLE){
+                auto variable = (Variable*) grantor;
+                append_do_then(&current_handle, build_load_register(reg, variable));
             } else if (grantor_type == ADD){
                 auto add = (Add*) grantor;
 
                 auto reg_2 = grab_register();
 
-                append_do_then(&current_handle, build_load_register(reg, (Declare*) add->augend));
-                append_do_then(&current_handle, build_load_register(reg_2, (Declare*) add->addend));
+                append_do_then(&current_handle, build_load_register(reg, (Variable*) add->augend));
+                append_do_then(&current_handle, build_load_register(reg_2, (Variable*) add->addend));
 
                 auto offset = typed(INTEGER, new int(0));
                 auto arm_add = typed(ARM_ADD, new ArmAdd{.reg_augend = reg, .reg_addend = reg_2, .immediate = offset});
@@ -142,7 +142,7 @@ void* stackify_variables(void* flow) {
 
                 // ZZZZ bad assumed expression stuff
                 auto constant_compared = (int*) greater_than->left; // ZZZZ this-1, whatever
-                auto var = (Declare*) greater_than->right;
+                auto var = (Variable*) greater_than->right;
 
                 auto offset =  typed(INTEGER, new int(stack_offsets.at(var)));
                 auto arm_load_register = typed(ARM_LOAD_REGISTER, new ArmLoadRegister{.reg_stored = reg, .reg_address = r7, .offset = offset});
@@ -164,20 +164,20 @@ void* stackify_variables(void* flow) {
     return *result;
 }
 
-void expand_expression(void*** current_handle, Declare* variable, void* expression) {
+void expand_expression(void*** current_handle, Variable* variable, void* expression) {
     auto type = object_to_type.at(expression);
 
     if (type == ADD) {
         auto add = (Add*) expression;
 
-        if (object_to_type.at(add->augend) == DECLARE && object_to_type.at(add->addend) == DECLARE) {
+        if (object_to_type.at(add->augend) == VARIABLE && object_to_type.at(add->addend) == VARIABLE) {
             goto yeah_whatever_jump; // ZZZZ bad on purpose so i fix
         }
 
-        auto left = typed(DECLARE, new Declare);
+        auto left = typed(VARIABLE, new Variable);
         expand_expression(current_handle, left, add->augend);
 
-        auto right = typed(DECLARE, new Declare);
+        auto right = typed(VARIABLE, new Variable);
         expand_expression(current_handle, right, add->addend);
 
         append_do_then(current_handle, typed(ASSIGN, new Assign{
@@ -201,7 +201,7 @@ void* expand_expressions(void* flow) {
         auto type = object_to_type.at(each->effect);
         if (type == ASSIGN) {
             auto assign = (Assign*) each->effect;
-            expand_expression(&current_handle, (Declare*)assign->grantee, assign->grantor);
+            expand_expression(&current_handle, (Variable*)assign->grantee, assign->grantor);
         } else {
             append_do_then(&current_handle, each->effect);
         }

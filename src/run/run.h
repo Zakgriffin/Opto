@@ -4,16 +4,16 @@
 #define OPTO_RUN_H
 
 #include "globals.h"
-#include "do_then.h"
+#include "control_flow.h"
 
 typedef struct DoThen DoThen;
-typedef struct Declare Declare;
+typedef struct Variable Variable;
 
 typedef struct {
     void *start;
     DoThen *current;
     stack<function<void()>> scope_stack;
-    unordered_map<Declare*, Declare*> vars;
+    unordered_map<Variable*, Variable*> vars;
 } Run;
 
 void* evaluate_expression(void* expression);

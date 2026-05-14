@@ -1,6 +1,5 @@
 #include "object_view.h"
 #include "test_flows.h"
-#include "arm_compile.h"
 #include "expressions.h"
 #include "control_flow.h"
 #include "data.h"
@@ -32,14 +31,14 @@ void* sequence(std::vector<void*> statements) {
 }
 
 void* create_fib() {
-    auto limit = typed(DECLARE, new Declare);
+    auto limit = typed(VARIABLE, new Variable);
     object_to_name.insert({limit, "limit"});
 
-    auto x = typed(DECLARE, new Declare);
+    auto x = typed(VARIABLE, new Variable);
     object_to_name.insert({x, "x"});
-    auto y = typed(DECLARE, new Declare);
+    auto y = typed(VARIABLE, new Variable);
     object_to_name.insert({y, "y"});
-    auto z = typed(DECLARE, new Declare);
+    auto z = typed(VARIABLE, new Variable);
     object_to_name.insert({z, "z"});
 
     auto print = typed(PROCEDURE, new Procedure{.param = nullptr, .body = nullptr});
@@ -94,13 +93,13 @@ void* create_fib() {
 }
 
 void* create_insertion_sort() {
-    auto i = typed(DECLARE, new Declare);
+    auto i = typed(VARIABLE, new Variable);
     object_to_name.insert({i, "i"});
-    auto j = typed(DECLARE, new Declare);
+    auto j = typed(VARIABLE, new Variable);
     object_to_name.insert({j, "j"});
-    auto key = typed(DECLARE, new Declare);
+    auto key = typed(VARIABLE, new Variable);
     object_to_name.insert({key, "key"});
-    auto arr = typed(DECLARE, new Declare);
+    auto arr = typed(VARIABLE, new Variable);
     object_to_name.insert({arr, "arr"});
 
     auto print = typed(PROCEDURE, new Procedure{.param = nullptr, .body = nullptr});
@@ -186,24 +185,24 @@ void* create_insertion_sort() {
 
 void* create_matrix_multiplication() {
     // Variable Declarations
-    auto a = typed(DECLARE, new Declare);
+    auto a = typed(VARIABLE, new Variable);
     object_to_name.insert({a, "a"});
-    auto b = typed(DECLARE, new Declare);
+    auto b = typed(VARIABLE, new Variable);
     object_to_name.insert({b, "b"});
-    auto c = typed(DECLARE, new Declare);
+    auto c = typed(VARIABLE, new Variable);
     object_to_name.insert({c, "c"});
 
-    auto i = typed(DECLARE, new Declare);
+    auto i = typed(VARIABLE, new Variable);
     object_to_name.insert({i, "i"});
-    auto j = typed(DECLARE, new Declare);
+    auto j = typed(VARIABLE, new Variable);
     object_to_name.insert({j, "j"});
-    auto k = typed(DECLARE, new Declare);
+    auto k = typed(VARIABLE, new Variable);
     object_to_name.insert({k, "k"});
 
-    auto sum = typed(DECLARE, new Declare);
+    auto sum = typed(VARIABLE, new Variable);
     object_to_name.insert({sum, "sum"});
 
-    auto size = typed(DECLARE, new Declare);
+    auto size = typed(VARIABLE, new Variable);
     object_to_name.insert({size, "size"});
 
     // --- Inner Dot Product Loop (k) ---
@@ -332,8 +331,8 @@ void* create_big_expression() {
     void** current_handle = &current;
     auto result = &current;
 
-    auto x = typed(DECLARE, new Declare);
-    auto a= typed(DECLARE, new Declare);
+    auto x = typed(VARIABLE, new Variable);
+    auto a= typed(VARIABLE, new Variable);
 
     append_do_then(&current_handle, typed(INTEGER, new int(0)));
     append_do_then(&current_handle, typed(ASSIGN, new Assign{

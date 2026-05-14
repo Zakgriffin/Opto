@@ -26,8 +26,8 @@ void serialize_ast(void* node, std::vector<char>& buffer) {
             write_raw(buffer, *(int*)node);
             break;
         }
-        case DECLARE: {
-            // Assuming Declare structures are identified by name/ID elsewhere,
+        case VARIABLE: {
+            // Assuming Variable structures are identified by name/ID elsewhere,
             // or we serialize the name if available in object_to_name.
             if (object_to_name.contains(node)) {
                 std::string name = object_to_name.at(node);
@@ -175,8 +175,8 @@ void* deserialize_ast(const char*& ptr) {
             node = val;
             break;
         }
-        case DECLARE: {
-            Declare* decl = new Declare();
+        case VARIABLE: {
+            Variable* decl = new Variable();
             std::string name = read_string(ptr);
             object_to_name[decl] = name; // Restore name mapping
             node = decl;

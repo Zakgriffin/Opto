@@ -48,7 +48,7 @@ void k(void* parent_obj, int sub_index, bool good) {
 bool is_effect(ObjectType type) {
     auto effects = unordered_set {
         ASSIGN,
-        DECLARE,
+        VARIABLE,
         CALL,
     };
     return effects.contains(type);
@@ -72,7 +72,7 @@ void type_check(void *obj, map<void*, ObjectType> *env) {
 
     if (type == NONE) {
 
-    } else if (type == DECLARE) {
+    } else if (type == VARIABLE) {
 
     } else if (type == LOOP) {
         auto loop = (Loop*) obj;
@@ -116,7 +116,7 @@ void type_check(void *obj, map<void*, ObjectType> *env) {
         }
 
         auto grantee_type = t(assign->grantee);
-        k(assign, 0, grantee_type == DECLARE || grantee_type == INDEX);
+        k(assign, 0, grantee_type == VARIABLE || grantee_type == INDEX);
         k(assign, 1, grantor_good);
     } else if (type == INTEGER) {
         auto integer = (int*) obj;

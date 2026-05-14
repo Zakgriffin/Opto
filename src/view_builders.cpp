@@ -5,9 +5,9 @@
 #include "run.h"
 #include "data.h"
 #include "procedures.h"
-#include "optimize.h"
 #include "compile.h"
-#include "arm_compile.h"
+#include "codegen.h"
+#include "arm_codegen.h"
 #include "llvm.h"
 #include "test_flows.h"
 
@@ -22,7 +22,7 @@ void init_object_view_builders() {
     object_view_builders.push_back(run_object_view_builder);
     object_view_builders.push_back(integer_object_view_builder);
     object_view_builders.push_back(string_object_view_builder);
-    object_view_builders.push_back(declare_object_view_builder);
+    object_view_builders.push_back(variable_object_view_builder);
     object_view_builders.push_back(if_object_view_builder);
     object_view_builders.push_back(loop_object_view_builder);
     object_view_builders.push_back(while_object_view_builder);
@@ -34,7 +34,7 @@ void init_object_view_builders() {
     object_view_builders.push_back(call_object_view_builder);
     object_view_builders.push_back(vector_object_view_builder);
     object_view_builders.push_back(index_object_view_builder);
-    object_view_builders.push_back(optimize_object_view_builder);
+    object_view_builders.push_back(compile_object_view_builder);
 
     object_view_builders.push_back(conditional_jump_object_view_builder);
     object_view_builders.push_back(jump_object_view_builder);

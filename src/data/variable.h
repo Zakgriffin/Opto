@@ -1,14 +1,14 @@
 #pragma once
 
-#ifndef OPTO_DECLARE_H
-#define OPTO_DECLARE_H
+#ifndef OPTO_VARIABLE_H
+#define OPTO_VARIABLE_H
 
 #include "globals.h"
 
-struct Declare {
+struct Variable {
 
 };
 
-VIEW_DECLARATIONS(declare)
+VIEW_DECLARATIONS(variable)
 
-#endif //OPTO_DECLARE_H
+#endif //OPTO_VARIABLE_H

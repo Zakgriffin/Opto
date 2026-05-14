@@ -1,8 +1,8 @@
-#ifndef OPTO_COMPILE_H
-#define OPTO_COMPILE_H
+#ifndef OPTO_CODEGEN_H
+#define OPTO_CODEGEN_H
 
 #include "object.h"
-#include "do_then.h"
+#include "control_flow.h"
 
 typedef struct {
     void *condition;
@@ -21,4 +21,4 @@ void traverse_over_scopes(void* current, function<void(DoThen*)> on_each, functi
 void* removed_scope_flow(void* flow);
 void traverse_over_flat(void* flow, function<void(DoThen*)> on_each);
 
-#endif //OPTO_COMPILE_H
+#endif //OPTO_CODEGEN_H
