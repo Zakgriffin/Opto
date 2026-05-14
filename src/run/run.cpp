@@ -1,9 +1,8 @@
-#include "object_view.h"
-#include "run.h"
-#include "expressions.h"
-#include "control_flow.h"
 #include "data.h"
+#include "expressions.h"
+#include "object_view.h"
 #include "procedures.h"
+#include "run.h"
 #include "type.h"
 
 unordered_map<Variable*, void**> variable_to_handle;
@@ -232,7 +231,6 @@ void run_create_sub_object_views(ObjectView *run_view) {
         context->type_check_button_box.y_max = run_view->editable_text.box.y_max - 60;
     })));
 
-
     auto start_view = new_object_view((void **) &run->start);
     quick_layout_right(run_view, start_view, &run_view->editable_text.box, &run_view->editable_text.box_sig, &start_view->editable_text.box, &start_view->editable_text.box_sig);
 
@@ -251,7 +249,7 @@ void run_create_sub_object_views(ObjectView *run_view) {
         } else if (is_within_box(mouse, context->type_check_button_box)) {
             mouse_cursor = ray::MOUSE_CURSOR_POINTING_HAND;
             if (ray::IsMouseButtonPressed(0)) {
-                map<void*, ObjectType> env;
+                unordered_map<void*, ObjectType> env;
                 type_check(run->start, &env);
             }
         }
@@ -270,7 +268,6 @@ void run_create_sub_object_views(ObjectView *run_view) {
         //     DrawRectangleRec(box_to_rectangle(object_to_view->next_box), Color{255,0,0,50});
         // }
     })));
-
 
 }
 

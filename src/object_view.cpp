@@ -1,12 +1,12 @@
-#include "object_view.h"
 #include "none.h"
+#include "object_view.h"
 
 ObjectView *selected_object_view = nullptr;
 
 vector<ObjectViewBuilder> object_view_builders;
 
-map<void *, ObjectType> object_to_type;
-map<void *, Shared<Signal> *> object_to_signal;
+unordered_map<void *, ObjectType> object_to_type;
+unordered_map<void *, Shared<Signal> *> object_to_signal;
 
 unordered_set<ObjectView *> object_views;
 unordered_map<void*, string> object_to_name;

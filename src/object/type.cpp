@@ -1,9 +1,9 @@
-#include "object_view.h"
-#include "type.h"
-#include "expressions.h"
 #include "control_flow.h"
 #include "data.h"
+#include "expressions.h"
+#include "object_view.h"
 #include "procedures.h"
+#include "type.h"
 
 bool is_num_exp(ObjectType type) {
     auto exps = unordered_set {
@@ -54,12 +54,12 @@ bool is_effect(ObjectType type) {
     return effects.contains(type);
 }
 
-ObjectType env_type(void* obj, map<void*, ObjectType> *env) {
+ObjectType env_type(void* obj, unordered_map<void*, ObjectType> *env) {
     if (!env->contains(obj)) return NONE;
     return env->at(obj);
 }
 
-void type_check_binary_int(void* parent, void* left, void* right, map<void*, ObjectType>* env) {
+void type_check_binary_int(void* parent, void* left, void* right, unordered_map<void*, ObjectType>* env) {
     type_check(left, env);
     k(parent, 0, env_type(left, env) == INTEGER);
     type_check(right, env);
@@ -67,7 +67,7 @@ void type_check_binary_int(void* parent, void* left, void* right, map<void*, Obj
     env->insert({parent, INTEGER});
 }
 
-void type_check(void *obj, map<void*, ObjectType> *env) {
+void type_check(void *obj, unordered_map<void*, ObjectType> *env) {
     auto type = t(obj);
 
     if (type == NONE) {

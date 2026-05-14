@@ -1,6 +1,7 @@
-#include "object_view.h"
 #include "compile.h"
 #include "llvm_codegen.h"
+#include "object_view.h"
+#include "serialize.h"
 
 ObjectViewBuilder compile_object_view_builder = ObjectViewBuilder{COMPILE, "compile", compile_create_simple, compile_create_sub_object_views, compile_destroy_sub_object_views};
 

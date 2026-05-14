@@ -1,4 +1,5 @@
-#include "main.h"
+#include "object_view.h"
+#include "user_input.h"
 #include "view_builders.h"
 
 

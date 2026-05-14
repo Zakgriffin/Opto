@@ -1,6 +1,6 @@
-#include "object_view.h"
-#include "llvm_headers.h"
 #include "llvm_function.h"
+#include "llvm_headers.h"
+#include "object_view.h"
 
 ObjectViewBuilder llvm_function_object_view_builder = ObjectViewBuilder{LLVM_FUNCTION, "function", llvm_function_create_simple, llvm_function_create_sub_object_views, llvm_function_destroy_sub_object_views};
 

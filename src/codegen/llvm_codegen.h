@@ -1,15 +1,7 @@
 #pragma once
 
-#ifndef OPTO_LLVM_CODEGEN_H
-#define OPTO_LLVM_CODEGEN_H
-
-#include "codegen.h"
-#include "variable.h"
-
 #include "llvm_headers.h"
-
-
-VIEW_DECLARATIONS(llvm_module)
+#include "variable.h"
 
 VIEW_DECLARATIONS(llvm_store)
 VIEW_DECLARATIONS(llvm_load)
@@ -32,6 +24,4 @@ void perform_pass(
     std::function<void(llvm::Function&, llvm::FunctionAnalysisManager&)> pass
 );
 
-llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, llvm::LLVMContext *context, map<Variable*, llvm::AllocaInst*> *variable_map);
-
-#endif //OPTO_LLVM_CODEGEN_H
+llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, llvm::LLVMContext *context, unordered_map<Variable*, llvm::AllocaInst*> *variable_map);

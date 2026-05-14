@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OPTO_CALL_H
-#define OPTO_CALL_H
-
 #include "globals.h"
 
 typedef struct {
@@ -12,4 +9,3 @@ typedef struct {
 
 VIEW_DECLARATIONS(call)
 
-#endif //OPTO_CALL_H

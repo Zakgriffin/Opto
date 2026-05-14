@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OPTO_OBJECT_H
-#define OPTO_OBJECT_H
-
 #include "stds.h"
 
 typedef enum {
@@ -66,7 +63,7 @@ typedef enum {
     LLVM_VALUE
 } ObjectType;
 
-extern map<void *, ObjectType> object_to_type;
+extern unordered_map<void *, ObjectType> object_to_type;
 extern unordered_map<void *, string> object_to_name;
 
 template<typename T>
@@ -77,4 +74,3 @@ T *typed(ObjectType type, T *object) {
 
 void create_object(ObjectType type, ray::Vector2 position);
 
-#endif //OPTO_OBJECT_H

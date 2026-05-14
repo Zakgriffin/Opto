@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OPTO_IF_H
-#define OPTO_IF_H
-
 #include "globals.h"
 
 struct If {
@@ -13,4 +10,3 @@ struct If {
 
 VIEW_DECLARATIONS(if)
 
-#endif //OPTO_IF_H

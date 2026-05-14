@@ -1,5 +1,5 @@
-#include "object_view.h"
 #include "mul.h"
+#include "object_view.h"
 
 ObjectViewBuilder mul_object_view_builder = ObjectViewBuilder{MUL, "mul", mul_create_simple, mul_create_sub_object_views, mul_destroy_sub_object_views};
 

@@ -1,8 +1,8 @@
-#include "object_view.h"
 #include "arm_codegen.h"
 #include "codegen.h"
-#include "expressions.h"
 #include "data.h"
+#include "expressions.h"
+#include "object_view.h"
 
 VIEW_DEFINITIONS_SIMPLE(conditional_jump, CONDITIONAL_JUMP, ConditionalJump, "conditional-jump", &ConditionalJump::condition, &ConditionalJump::jump)
 VIEW_DEFINITIONS_SIMPLE(jump, JUMP, Jump, "jump", &Jump::jump)

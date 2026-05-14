@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OPTO_GLOBALS_H
-#define OPTO_GLOBALS_H
-
 #include "stds.h"
 
 typedef enum {
@@ -65,4 +62,3 @@ T map_range(T n, T start1, T stop1, T start2, T stop2) {
     return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
 }
 
-#endif //OPTO_GLOBALS_H

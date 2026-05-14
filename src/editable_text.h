@@ -1,12 +1,7 @@
 #pragma once
 
-#ifndef OPTO_EDITABLE_TEXT_H
-#define OPTO_EDITABLE_TEXT_H
-
-#include "stds.h"
-#include "globals.h"
 #include "event.h"
-#include "user_input.h"
+#include "globals.h"
 
 typedef struct EditableText {
     string text;
@@ -30,5 +25,3 @@ extern EditableText *selected_editable_text;
 
 void initialize_editable_text(EditableText *e);
 void finalize_editable_text(EditableText *e);
-
-#endif //OPTO_EDITABLE_TEXT_H

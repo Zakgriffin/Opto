@@ -1,8 +1,9 @@
-#include "object_view.h"
-#include "llvm_codegen.h"
-#include "expressions.h"
+#include "codegen.h"
 #include "control_flow.h"
 #include "data.h"
+#include "expressions.h"
+#include "llvm_codegen.h"
+#include "object_view.h"
 #include "procedures.h"
 #include "type.h"
 
@@ -447,7 +448,7 @@ void include_print_int(llvm::LLVMContext &context, llvm::Module &module) {
     builder.CreateRetVoid();
 }
 
-llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, llvm::LLVMContext *context, map<Variable*, llvm::AllocaInst*> *variable_map) {
+llvm::Value* codegen_expression(void* expression, llvm::IRBuilder<> *builder, llvm::LLVMContext *context, unordered_map<Variable*, llvm::AllocaInst*> *variable_map) {
     auto type = object_to_type.at(expression);
     auto i32 = llvm::Type::getInt32Ty(*context);
     auto ptr_type = llvm::PointerType::get(*context, 0);
@@ -551,8 +552,8 @@ llvm::Module *build_llvm(void* proc_) {
     llvm::BasicBlock* entry = llvm::BasicBlock::Create(*context, "entry", func);
     builder.SetInsertPoint(entry);
 
-    std::map<Variable*, llvm::AllocaInst*> variable_map;
-    map<void*, ObjectType> env;
+    unordered_map<Variable*, llvm::AllocaInst*> variable_map;
+    unordered_map<void*, ObjectType> env;
 
     void* flow = proc->body;
     type_check(flow, &env);
@@ -579,7 +580,7 @@ llvm::Module *build_llvm(void* proc_) {
         }
     }, [](void*, ObjectType){}, [](void*, ObjectType){});
 
-    map<void*, llvm::BasicBlock*> flow_to_basic_block;
+    unordered_map<void*, llvm::BasicBlock*> flow_to_basic_block;
 
     traverse_over_scopes(flow, [&](DoThen* each){
         auto type = object_to_type.at(each->effect);

@@ -1,5 +1,5 @@
-#include "object_view.h"
 #include "loop.h"
+#include "object_view.h"
 
 ObjectViewBuilder loop_object_view_builder = ObjectViewBuilder{LOOP, "loop", loop_create_simple, loop_create_sub_object_views, loop_destroy_sub_object_views};
 

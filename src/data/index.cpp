@@ -1,5 +1,5 @@
-#include "object_view.h"
 #include "index.h"
+#include "object_view.h"
 
 ObjectViewBuilder index_object_view_builder = ObjectViewBuilder{INDEX, "[", index_create_simple, index_create_sub_object_views, index_destroy_sub_object_views};
 

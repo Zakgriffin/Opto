@@ -1,13 +1,10 @@
 #pragma once
 
-#ifndef OPTO_OBJECT_VIEW_H
-#define OPTO_OBJECT_VIEW_H
-
-#include "stds.h"
+#include "editable_text.h"
+#include "event.h"
 #include "globals.h"
 #include "object.h"
-#include "event.h"
-#include "editable_text.h"
+#include "user_input.h"
 
 extern unordered_map<void *, ObjectView *> object_to_view;
 
@@ -38,11 +35,8 @@ typedef struct ObjectView {
 typedef struct ObjectViewBuilder {
     ObjectType object_type;
     string s;
-
     void *(*create_simple)();
-
     void (*create_sub_object_views)(ObjectView *object_view);
-
     void (*destroy_sub_object_views)(ObjectView *object_view);
 } ObjectViewBuilder;
 
@@ -55,7 +49,7 @@ struct Shared {
     int count;
 };
 
-extern map<void *, Shared<Signal> *> object_to_signal;
+extern unordered_map<void *, Shared<Signal> *> object_to_signal;
 
 ObjectView *new_object_view(void **object_handle);
 
@@ -75,18 +69,6 @@ void include_sub_box(ObjectView *o, Box* sub_box, Signal *sub_box_sig);
 Signal *lift_reference(void *object);
 
 void drop_reference(void *object);
-
-// template<typename T, typename Field1Type, typename Field2Type>
-// void generic_binode_create_sub_object_views(ObjectView *view, Field1Type T::*x1_ptr, Field2Type T::*x2_ptr) {
-//     auto handle = (T **) view->object_handle;
-//     auto obj = *handle;
-//
-//     auto x1_view = new_object_view(&(obj->*x1_ptr));
-//     quick_layout_right(view, x1_view, &view->editable_text.box, &view->editable_text.box_sig, &x1_view->editable_text.box, &x1_view->editable_text.box_sig);
-//
-//     auto x2_view = new_object_view(&(obj->*x2_ptr));
-//     quick_layout_right(view, x2_view, &x1_view->box, &x1_view->box_sig, &x2_view->editable_text.box, &x2_view->editable_text.box_sig);
-// }
 
 template<typename T, typename... FieldTypes>
 void generic_linear_create_views(ObjectView *view, FieldTypes T::*... fields) {
@@ -211,5 +193,3 @@ void create_sub_object_views_getter_list(ObjectView *view, vector<function<void*
     void name_snake##_destroy_sub_object_views(ObjectView *view) { \
         generic_destroy_sub_object_views(view); \
     }
-
-#endif //OPTO_OBJECT_VIEW_H

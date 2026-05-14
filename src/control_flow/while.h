@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OPTO_WHILE_H
-#define OPTO_WHILE_H
-
 #include "globals.h"
 
 struct While {
@@ -13,4 +10,3 @@ struct While {
 
 VIEW_DECLARATIONS(while)
 
-#endif //OPTO_WHILE_H

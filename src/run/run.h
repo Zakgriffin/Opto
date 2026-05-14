@@ -1,12 +1,8 @@
 #pragma once
 
-#ifndef OPTO_RUN_H
-#define OPTO_RUN_H
-
-#include "globals.h"
 #include "control_flow.h"
+#include "globals.h"
 
-typedef struct DoThen DoThen;
 typedef struct Variable Variable;
 
 typedef struct {
@@ -19,5 +15,3 @@ typedef struct {
 void* evaluate_expression(void* expression);
 
 VIEW_DECLARATIONS(run)
-
-#endif //OPTO_RUN_H

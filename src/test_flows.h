@@ -1,10 +1,7 @@
-#ifndef OPTO_TEST_FLOWS_H
-#define OPTO_TEST_FLOWS_H
+#pragma once
 
 #include "globals.h"
 
 void* create_fib();
 void* create_insertion_sort();
 void* create_matrix_multiplication();
-
-#endif //OPTO_TEST_FLOWS_H

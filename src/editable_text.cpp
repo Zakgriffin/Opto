@@ -13,7 +13,7 @@ float b(EditableText *e, int character_index) {
 void draw_editable_text(EditableText *e) {
     ray::Rectangle rect = box_to_rectangle(e->box);
     DrawRectangleRec(rect, e->color);
-    DrawTextEx(font, e->text.c_str(), ray::Vector2{e->box.x_min + PAD_X, e->box.y_min + PAD_Y}, (float) font.baseSize / 2, 0, ray::Color{ 255, 255, 255, 255 });
+    DrawTextEx(font, e->text.c_str(), ray::Vector2{e->box.x_min + PAD_X, e->box.y_min + PAD_Y}, (float) font.baseSize / 2, 0, ray::WHITE);
     if (selected_editable_text == e) {
         float k = b(e, e->character_index);
         ray::DrawLine(k, e->box.y_min+1, k, e->box.y_max, ray::Color{ 255, 255, 255, 255 });

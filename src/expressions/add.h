@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef OPTO_ADD_H
-#define OPTO_ADD_H
-
 #include "globals.h"
 
 typedef struct {
@@ -12,4 +9,3 @@ typedef struct {
 
 VIEW_DECLARATIONS(add)
 
-#endif //OPTO_ADD_H

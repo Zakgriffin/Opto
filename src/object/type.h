@@ -1,14 +1,10 @@
 #pragma once
 
-#ifndef OPTO_TYPE_H
-#define OPTO_TYPE_H
-
 #include "object.h"
 
-void type_check(void *obj, map<void*, ObjectType> *env);
+void type_check(void *obj, unordered_map<void*, ObjectType> *env);
 
-ObjectType env_type(void* obj, map<void*, ObjectType> *env);
+ObjectType env_type(void* obj, unordered_map<void*, ObjectType> *env);
 
 bool is_control_flow(ObjectType type);
 
-#endif //OPTO_TYPE_H
