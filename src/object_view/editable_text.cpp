@@ -1,4 +1,5 @@
 #include "editable_text.h"
+#include "globals.h"
 
 EditableText *selected_editable_text = nullptr;
 unordered_set<EditableText*> editable_texts;
@@ -80,7 +81,7 @@ void initialize_editable_text(EditableText *e) {
     })));
 
     e->internal_listeners.push_back(create_listener({&e->key_pressed_sig}, new function<void(void)>([=]() {
-        if (edit_mode != EDITABLE_TEXT) return;
+        if (edit_mode != TEXT_MODE) return;
 
         ray::Vector2 mouse = ray::GetMousePosition();
         if (is_within_box(mouse, e->box)) {
@@ -118,7 +119,7 @@ void initialize_editable_text(EditableText *e) {
                 jump_editable_text(e, &Box::x_min, &Box::x_max, 1);
             } else if (key_pressed == ray::KEY_ESCAPE)
             {
-                edit_mode = OBJECT_VIEW;
+                edit_mode = ASSEMBLE_MODE;
                 selected_editable_text = nullptr;
             } else if (key_pressed == ray::KEY_LEFT_ALT) {
                 // its all over

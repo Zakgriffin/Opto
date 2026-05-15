@@ -1,6 +1,53 @@
 #include "globals.h"
 
+InputContext input_ctx;
+
+void update_input_context(InputContext* ctx) {
+    ctx->key = ray::GetKeyPressed();
+    ctx->ch = ray::GetCharPressed();
+    ctx->click_absorbed = false;
+
+
+    auto now = duration_cast<milliseconds>(high_resolution_clock::now().time_since_epoch()).count();
+    if (ray::IsMouseButtonPressed(0)) {
+        if (ctx->click_streak > 0 && now - ctx->last_click_millis < 250LL)
+            ctx->click_streak++;
+        else
+            ctx->click_streak = 1;
+        ctx->last_click_millis = now;
+    } else if (ctx->click_streak > 0 && now - ctx->last_click_millis >= 250LL) {
+        ctx->click_streak = 0;
+    }
+}
+
 float CHARACTER_WIDTH = 8;
+
+bool consume(int* field, int value) {
+    if (*field != value) return false;
+    *field = 0;
+    return true;
+}
+
+bool consume_if(int* field, int value, bool condition) {
+    if (!condition) return false;
+    return consume(field, value);
+}
+
+bool consume_click_streak(InputContext* ctx, int value) {
+    return consume(&ctx->click_streak, value);
+}
+
+bool consume_click_streak_if(InputContext* ctx, int value, bool condition) {
+    return consume_if(&ctx->click_streak, value, condition);
+}
+
+bool any_click(InputContext* ctx, Box box) {
+    if (ctx->click_streak == 0) return false;
+    if (ctx->click_absorbed) return false;
+    if (!is_within_box(ray::GetMousePosition(), box)) return false;
+    ctx->click_absorbed = true;
+    return true;
+}
 
 ray::Rectangle box_to_rectangle(Box box) {
     return ray::Rectangle{
@@ -98,6 +145,16 @@ void move_box_x(Box* box, float x_min) {
     auto size_x = box->x_max - box->x_min;
     box->x_min = x_min;
     box->x_max = box->x_min + size_x;
+}
+
+void nudged_down_right(Box* child, Box* parent, int nudge) {
+    child->x_min = parent->x_min + nudge;
+    child->y_min = parent->y_min + nudge;
+}
+
+void touch_x_align_top(Box* last, Box* next) {
+    next->x_min = last->x_max;
+    next->y_min = last->y_min;
 }
 
 void move_box_y(Box* box, float y_min) {

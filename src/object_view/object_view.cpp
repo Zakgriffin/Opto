@@ -1,3 +1,4 @@
+#include "globals.h"
 #include "none.h"
 #include "object_view.h"
 
@@ -208,7 +209,7 @@ ObjectView *new_object_view(void **object_handle) {
     })));
 
     o->internal_constraints.push_back(create_listener({&input_listeners}, new function<void(void)>([=]() {
-        if (edit_mode != OBJECT_VIEW) return;
+        if (edit_mode != ASSEMBLE_MODE) return;
 
         auto mouse = ray::GetMousePosition();
         if (is_within_box(mouse, o->box)) {
@@ -229,7 +230,7 @@ ObjectView *new_object_view(void **object_handle) {
                     selected_editable_text = &o->editable_text;
                     o->editable_text.character_index = 0;
                     selected_object_view = nullptr;
-                    edit_mode = EDITABLE_TEXT;
+                    edit_mode = TEXT_MODE;
                 }
                 if (click_streak >= 1) mouse_clicked_during_input = true;
             }

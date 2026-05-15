@@ -7,12 +7,15 @@ add_requires("raylib 5.5", {configs = {runtimes = "MT"}})
 
 set_toolchains("llvm@llvm")
 
+add_cxflags("-w", {files = "src/codegen/llvm_codegen.cpp"})
+-- ZZZZ silence these warnings for now
+
 target("Opto")
     set_kind("binary")
     set_languages("cxx20")
     set_runtimes("MT")
     add_files("src/**.cpp")
-    add_includedirs("src", "src/object", "src/expressions", "src/control_flow", "src/data", "src/procedures", "src/compile", "src/llvm", "src/run", "src/codegen")
+    add_includedirs("src", "src/object", "src/object_view", "src/expressions", "src/control_flow", "src/data", "src/procedures", "src/compile", "src/llvm", "src/run", "src/codegen")
     add_packages("raylib", "llvm")
 
     on_load(function(target)
