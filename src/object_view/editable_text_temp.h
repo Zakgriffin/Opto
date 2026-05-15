@@ -10,6 +10,8 @@ typedef struct EditableTextTemp {
 
     bool selected;
 
+    int text_signaled;
+
     unordered_map<char, function<bool()>> on_keys;
 
     EditableTextTemp();

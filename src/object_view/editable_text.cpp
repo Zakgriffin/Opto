@@ -64,7 +64,7 @@ void initialize_editable_text(EditableText *e) {
     e->text = "";
     e->character_index = 0;
     e->box = Box{};
-    e->color = BOX_COLOR;
+    e->color = STRUCTURE_VIEW_COLOR;
 
     e->internal_listeners.push_back(create_listener({&e->text_sig}, new function<void(void)>([=]() {
         e->box.x_max = e->box.x_min + CHARACTER_WIDTH * e->text.size() + 2 * PAD_X;

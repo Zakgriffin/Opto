@@ -26,8 +26,8 @@ typedef struct ObjectViewBuilder ObjectViewBuilder;
     void* obj##_create_simple();
 
 extern ray::Color BACKGROUND_COLOR;
-extern ray::Color BOX_COLOR;
-extern ray::Color COLLAPSED_COLOR;
+extern ray::Color STRUCTURE_VIEW_COLOR;
+extern ray::Color REFERENCE_VIEW_COLOR;
 
 extern ray::Font font;
 extern float CHARACTER_WIDTH;

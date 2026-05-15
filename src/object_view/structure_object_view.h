@@ -9,6 +9,8 @@ struct StructureObjectView : ObjectViewTemp {
     EditableTextTemp structure_text_box;
     vector<ObjectViewTemp*> field_views;
 
+    void (*do_layout)(StructureObjectView* view);
+
     StructureObjectView(void* object);
     ~StructureObjectView() = default;
 
@@ -18,9 +20,10 @@ struct StructureObjectView : ObjectViewTemp {
     ObjectViewTemp* wants_replace() override;
 };
 
-struct AddStructureObjectView : StructureObjectView {
-    AddStructureObjectView(void* add);
+static void layout_at(StructureObjectView* s, int label_pos);
+// struct AddStructureObjectView : StructureObjectView {
+//     AddStructureObjectView(void* add);
 
-    void layout() override;
-    ObjectViewTemp* wants_replace() override;
-};
+//     void layout() override;
+//     // ObjectViewTemp* wants_replace() override;
+// };

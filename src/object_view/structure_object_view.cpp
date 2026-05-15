@@ -3,40 +3,106 @@
 
 
 #include "add.h"
+#include "object.h"
 #include "globals.h"
 #include "object_view_temp.h"
 #include "raylib.h"
 #include "reference_object_view.h"
+#include <cstring>
+
 
 int ZZZZ_nudge = 5;
 
+// "+", Add, [fields], layout
+typedef struct StructureObjectViewBuilder {
+    string lookup_string;
+    ObjectType type;
+    void* (*create_simple)();
+    vector<void*> (*get_fields)(void* obj);
+    void (*do_layout)(StructureObjectView* view);
+} StructureObjectViewBuilder;
+
+vector<StructureObjectViewBuilder> structure_object_view_builders = {
+    {
+        .lookup_string = "",
+        .type = NONE,
+        .create_simple = []() -> void* {
+            return nullptr;
+        },
+        .get_fields = [](void* obj) -> vector<void*> {
+            return {};
+        },
+        .do_layout = [](StructureObjectView* view) -> void {
+            layout_single_text_box(view, &view->structure_text_box, ZZZZ_nudge);
+        }
+    },
+{
+        .lookup_string = "+",
+        .type = ADD,
+        .create_simple = []() -> void* {
+            auto add = typed(ADD, new Add);
+            memset(add, 0, sizeof(Add));
+            return add;
+        },
+        .get_fields = [](void* obj) -> vector<void*> {
+            auto add = (Add*) obj;
+            return {add->addend, add->augend};
+        },
+        .do_layout = [](StructureObjectView* view) -> void {
+            layout_at(view, 1);
+        }
+    }
+};
+
 StructureObjectView::StructureObjectView(void* object) : ObjectViewTemp(object){
     this->structure_text_box = EditableTextTemp();
+    this->structure_text_box.color = STRUCTURE_VIEW_COLOR;
+
+    if(!object_to_type.contains(this->object)) {
+        cout << "ZZZZ no type for object" << endl;
+        abort();
+    }
+
+    auto try_builder = find_if(structure_object_view_builders.begin(), structure_object_view_builders.end(), [=](StructureObjectViewBuilder b) {
+        return b.type == object_to_type[this->object];
+    });
+    if (try_builder == structure_object_view_builders.end()) {
+        cout << "ZZZZ no builder found for type " << object_to_type[this->object] << endl;
+        abort();
+    }
+    auto builder = *try_builder;
+    this->do_layout = builder.do_layout;
+    this->structure_text_box.text = builder.lookup_string;
+    for(auto field : builder.get_fields(object)) {
+        this->field_views.push_back(new StructureObjectView(field)); // ZZZZ this second one hints at better signaled appraoch, with consume?
+    }
+
 }
 
 void StructureObjectView::accept_input(InputContext* ctx) {
     this->structure_text_box.accept_input(ctx);
 
-    for (auto &view : this->field_views) {
-        if(consume_if(&ctx->key, ray::KEY_DOWN, selected_object_view_temp == view)) {
-            auto object = view->object;
-            delete view;
-            view = new ReferenceObjectView(object);
+    for (auto &field_view : this->field_views) {
+        if(consume_if(&ctx->key, ray::KEY_DOWN, selected_object_view_temp == field_view) && ray::IsKeyDown(ray::KEY_LEFT_CONTROL)) {
+            auto object = field_view->object;
+            delete field_view;
+            field_view = new ReferenceObjectView(object);
+        }
+        if(consume_if(&ctx->key, ray::KEY_UP, selected_object_view_temp == field_view) && ray::IsKeyDown(ray::KEY_LEFT_CONTROL)) {
+            auto object = field_view->object;
+            delete field_view;
+            field_view = new StructureObjectView(object);
         }
 
-        view->accept_input(ctx);
+        field_view->accept_input(ctx);
 
-        if (auto replacement = view->wants_replace()) {
-            delete view;
-            view = replacement;
+        if (auto replacement = field_view->wants_replace()) {
+            delete field_view;
+            field_view = replacement;
         }
     }
 
-    if (any_click(ctx, this->box)) {
-        if(consume_click_streak(ctx, 1)) {
-            selected_object_view_temp = this;
-        }
-    }
+    accept_click_select(ctx, this);
 
     // ZZZZ maybe not here
     if(consume_if(&ctx->key, ray::KEY_ESCAPE, edit_mode == ASSEMBLE_MODE)) {
@@ -45,48 +111,40 @@ void StructureObjectView::accept_input(InputContext* ctx) {
 }
 
 
-static void close_layout(StructureObjectView* s) {
+static void layout_at(StructureObjectView* s, int label_pos) {
+    int total = (int)s->field_views.size() + 1;
+    Box* last_box = nullptr;
+    int field_i = 0;
+
+    for (int i = 0; i < total; i++) {
+        Box* current_box;
+        if (i == label_pos) {
+            current_box = &s->structure_text_box.box;
+            if (last_box) touch_x_align_top(last_box, current_box);
+            else nudged_down_right(current_box, &s->box, ZZZZ_nudge);
+            s->structure_text_box.layout();
+        } else {
+            auto field_view = s->field_views[field_i++];
+            current_box = &field_view->box;
+            if (last_box) touch_x_align_top(last_box, current_box);
+            else nudged_down_right(current_box, &s->box, ZZZZ_nudge);
+            field_view->layout();
+        }
+        last_box = current_box;
+    }
+
     auto inner = s->structure_text_box.box;
     for (auto fv : s->field_views) inner = enclosing_box(inner, fv->box);
     s->box.x_max = inner.x_max + ZZZZ_nudge;
     s->box.y_max = inner.y_max + ZZZZ_nudge;
 }
 
-static void layout_at(StructureObjectView* s, int label_pos) {
-    int total = (int)s->field_views.size() + 1;
-    Box* last = nullptr;
-    int fi = 0;
-
-    for (int i = 0; i < total; i++) {
-        Box* cur;
-        if (i == label_pos) {
-            cur = &s->structure_text_box.box;
-            if (last) touch_x_align_top(last, cur); else nudged_down_right(cur, &s->box, ZZZZ_nudge);
-            s->structure_text_box.layout();
-        } else {
-            auto fv = s->field_views[fi++];
-            cur = &fv->box;
-            if (last) touch_x_align_top(last, cur); else nudged_down_right(cur, &s->box, ZZZZ_nudge);
-            fv->layout();
-        }
-        last = cur;
-    }
-
-    close_layout(s);
-}
-
 void StructureObjectView::layout() {
-    layout_at(this, 0);
+    this->do_layout(this);
 }
 
 void StructureObjectView::draw() {
-    ray::Rectangle rect = box_to_rectangle(this->box);
-    uintptr_t h = (uintptr_t)this * 2654435761u;
-    ray::Color color = { (unsigned char)(h >> 16), (unsigned char)(h >> 8), (unsigned char)h, 255 };
-    if(selected_object_view_temp == this) {
-        color = ray::WHITE;
-    }
-    DrawRectangleRec(rect, color);
+    draw_view_box(this);
 
     this->structure_text_box.draw();
 
@@ -96,30 +154,25 @@ void StructureObjectView::draw() {
 }
 
 ObjectViewTemp* StructureObjectView::wants_replace() {
-    if(this->structure_text_box.text == "+") {
-        auto add = new Add;
-        auto v = new AddStructureObjectView(add);
+    if(consume(&this->structure_text_box.text_signaled, 1)) {
+        for(auto builder : structure_object_view_builders) {
+            if(this->structure_text_box.text == builder.lookup_string) {
+                auto obj = builder.create_simple();
+                auto v = new StructureObjectView(obj);
 
-        v->structure_text_box.selected = this->structure_text_box.selected;
-        v->structure_text_box.text = this->structure_text_box.text;
-        v->structure_text_box.character_index = this->structure_text_box.character_index;
 
-        return v;
+                // v->do_layout = builder.do_layout;
+                // for(auto field : builder.get_fields(obj)) {
+                //     v->field_views.push_back(new StructureObjectView(field)); // ZZZZ this second one hints at better signaled appraoch, with consume?
+                // }
+        
+                v->structure_text_box.selected = this->structure_text_box.selected;
+                v->structure_text_box.character_index = this->structure_text_box.character_index;
+                // v->structure_text_box.text = this->structure_text_box.text;
+        
+                return v;
+            }
+        }
     }
     return nullptr;
-}
-
-
-
-AddStructureObjectView::AddStructureObjectView(void* add) : StructureObjectView(add) {
-    this->field_views.push_back(new StructureObjectView(nullptr));
-    this->field_views.push_back(new StructureObjectView(nullptr));
-}
-
-ObjectViewTemp* AddStructureObjectView::wants_replace() {
-    return nullptr;
-}
-
-void AddStructureObjectView::layout() {
-    layout_at(this, 1);
 }

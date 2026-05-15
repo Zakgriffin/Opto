@@ -19,3 +19,9 @@ typedef struct ObjectViewTemp {
 } ObjectViewTemp; 
 
 extern ObjectViewTemp *selected_object_view_temp;
+
+struct EditableTextTemp;
+
+void draw_view_box(ObjectViewTemp* v);
+void accept_click_select(InputContext* ctx, ObjectViewTemp* v);
+void layout_single_text_box(ObjectViewTemp* parent, EditableTextTemp* text_box, int nudge);

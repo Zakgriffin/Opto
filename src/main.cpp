@@ -13,8 +13,8 @@ ray::Font font;
 int FONT_HEIGHT = 18;
 
 ray::Color BACKGROUND_COLOR = ray::GetColor(0x111111FF);
-ray::Color BOX_COLOR = ray::GetColor(0x222222FF);
-ray::Color COLLAPSED_COLOR = ray::GetColor(0x332233FF);
+ray::Color STRUCTURE_VIEW_COLOR = ray::GetColor(0x222222FF);
+ray::Color REFERENCE_VIEW_COLOR = ray::GetColor(0x332233FF);
 
 Signal draw_visuals;
 Signal input_listeners;

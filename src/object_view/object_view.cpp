@@ -86,7 +86,7 @@ void collapse_sub_objects(ObjectView *o) {
 
     auto text = object_to_name.contains(*o->object_handle) ? object_to_name.at(*o->object_handle) : "?";
     o->editable_text.text = text;
-    o->editable_text.color = COLLAPSED_COLOR;
+    o->editable_text.color = REFERENCE_VIEW_COLOR;
 
     signal_update(&o->editable_text.text_sig);
 
@@ -98,7 +98,7 @@ void expand_sub_objects(ObjectView *o) {
     o->destroy_sub_object_views_previous = object_view_builder.destroy_sub_object_views;
 
     o->editable_text.text = object_view_builder.s;
-    o->editable_text.color = BOX_COLOR;
+    o->editable_text.color = STRUCTURE_VIEW_COLOR;
     signal_update(&o->editable_text.text_sig);
 
     object_view_builder.create_sub_object_views(o);

@@ -8,10 +8,10 @@ static constexpr int PAD_Y = 3;
 unordered_set<EditableTextTemp*> editable_texts;
 
 EditableTextTemp::EditableTextTemp() {
-    this->box = {.x_min = 30, .x_max = 70, .y_min = 30, .y_max = 70,};
-    this->color = BOX_COLOR;
+    this->box = {.x_min = 30, .x_max = 70, .y_min = 30, .y_max = 70};
     this->character_index = 0;
     this->selected = false;
+    this->text_signaled = false;
 
     editable_texts.insert(this);
 }
@@ -86,12 +86,7 @@ void EditableTextTemp::accept_input(InputContext* ctx) {
     }
 
     if (edit_mode == TEXT_MODE && this->selected) {
-        if (consume(&ctx->key, ray::KEY_BACKSPACE)) {
-            if (this->text.length() > 0 && this->character_index > 0) {
-                this->character_index--;
-                this->text.erase(this->character_index, 1);
-            }
-        } else if (consume(&ctx->key, ray::KEY_LEFT)) {
+        if (consume(&ctx->key, ray::KEY_LEFT)) {
             if (this->character_index > 0) this->character_index--;
             else jump_editable_text(this, LEFT);
         } else if (consume(&ctx->key, ray::KEY_RIGHT)) {
@@ -105,10 +100,20 @@ void EditableTextTemp::accept_input(InputContext* ctx) {
             jump_editable_text(this, RIGHT);
         } else if (consume(&ctx->key, ray::KEY_ESCAPE)) {
             enter_assemble_mode();
+        } else if (consume(&ctx->key, ray::KEY_BACKSPACE)) {
+            if (this->text.length() > 0 && this->character_index > 0) {
+                this->character_index--;
+                this->text.erase(this->character_index, 1);
+                
+                this->text_signaled = true;
+            } 
         } else if (ctx->ch > 0) {
             this->text.insert(this->character_index, 1, (char)ctx->ch);
             this->character_index++;
             ctx->ch = 0;
+            // ZZZZZ use proper consume
+
+            this->text_signaled = true;
         }
     }
 }
