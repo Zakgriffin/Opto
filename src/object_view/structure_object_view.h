@@ -8,6 +8,7 @@
 struct StructureObjectView : ObjectViewTemp {
     EditableTextTemp structure_text_box;
     vector<ObjectViewTemp*> field_views;
+    vector<void**> field_slots;
 
     void (*do_layout)(StructureObjectView* view);
 

@@ -18,7 +18,7 @@ typedef struct StructureObjectViewBuilder {
     string lookup_string;
     ObjectType type;
     void* (*create_simple)();
-    vector<void*> (*get_fields)(void* obj);
+    vector<void**> (*get_field_slots)(void* obj);
     void (*do_layout)(StructureObjectView* view);
 } StructureObjectViewBuilder;
 
@@ -29,7 +29,7 @@ vector<StructureObjectViewBuilder> structure_object_view_builders = {
         .create_simple = []() -> void* {
             return nullptr;
         },
-        .get_fields = [](void* obj) -> vector<void*> {
+        .get_field_slots = [](void* obj) -> vector<void**> {
             return {};
         },
         .do_layout = [](StructureObjectView* view) -> void {
@@ -44,9 +44,9 @@ vector<StructureObjectViewBuilder> structure_object_view_builders = {
             memset(add, 0, sizeof(Add));
             return add;
         },
-        .get_fields = [](void* obj) -> vector<void*> {
+        .get_field_slots = [](void* obj) -> vector<void**> {
             auto add = (Add*) obj;
-            return {add->addend, add->augend};
+            return {&add->addend, &add->augend};
         },
         .do_layout = [](StructureObjectView* view) -> void {
             layout_at(view, 1);
@@ -72,8 +72,9 @@ StructureObjectView::StructureObjectView(void* object) : ObjectViewTemp(object){
     auto builder = *try_builder;
     this->do_layout = builder.do_layout;
     this->structure_text_box.text = builder.lookup_string;
-    for(auto field : builder.get_fields(object)) {
-        this->field_views.push_back(new StructureObjectView(field)); // ZZZZ this second one hints at better signaled appraoch, with consume?
+    for (auto slot : builder.get_field_slots(object)) {
+        this->field_slots.push_back(slot);
+        this->field_views.push_back(new StructureObjectView(*slot));
     }
 
 }
@@ -85,7 +86,9 @@ StructureObjectView::~StructureObjectView() {
 void StructureObjectView::accept_input(InputContext* ctx) {
     this->structure_text_box.accept_input(ctx);
 
-    for (auto &field_view : this->field_views) {
+    for (int i = 0; i < (int)this->field_views.size(); i++) {
+        auto &field_view = this->field_views[i];
+
         if(consume_if(&ctx->key, ray::KEY_DOWN, selected_object_view_temp == field_view) && ray::IsKeyDown(ray::KEY_LEFT_CONTROL)) {
             auto object = field_view->object;
             delete field_view;
@@ -100,6 +103,7 @@ void StructureObjectView::accept_input(InputContext* ctx) {
         field_view->accept_input(ctx);
 
         if (auto replacement = field_view->wants_replace()) {
+            *this->field_slots[i] = replacement->object;
             delete field_view;
             field_view = replacement;
         }
