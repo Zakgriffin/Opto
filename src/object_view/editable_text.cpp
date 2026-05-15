@@ -1,7 +1,7 @@
 #include "editable_text.h"
 
 EditableText *selected_editable_text = nullptr;
-unordered_set<EditableText*> editable_texts;
+static unordered_set<EditableText*> editable_texts;
 
 int PAD_X = 5;
 int PAD_Y = 3;

@@ -4,7 +4,7 @@
 static constexpr int PAD_X = 5;
 static constexpr int PAD_Y = 3;
 
-unordered_set<EditableTextTemp*> editable_texts;
+static unordered_set<EditableTextTemp*> editable_texts;
 
 EditableTextTemp::EditableTextTemp() {
     this->character_index = 0;
