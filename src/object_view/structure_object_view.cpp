@@ -55,7 +55,6 @@ vector<StructureObjectViewBuilder> structure_object_view_builders = {
 };
 
 StructureObjectView::StructureObjectView(void* object) : ObjectViewTemp(object){
-    this->structure_text_box = EditableTextTemp();
     this->structure_text_box.color = STRUCTURE_VIEW_COLOR;
 
     if(!object_to_type.contains(this->object)) {
@@ -77,6 +76,10 @@ StructureObjectView::StructureObjectView(void* object) : ObjectViewTemp(object){
         this->field_views.push_back(new StructureObjectView(field)); // ZZZZ this second one hints at better signaled appraoch, with consume?
     }
 
+}
+
+StructureObjectView::~StructureObjectView() {
+    for (auto field_view : field_views) delete field_view;
 }
 
 void StructureObjectView::accept_input(InputContext* ctx) {

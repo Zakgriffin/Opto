@@ -8,7 +8,6 @@ static constexpr int PAD_Y = 3;
 unordered_set<EditableTextTemp*> editable_texts;
 
 EditableTextTemp::EditableTextTemp() {
-    this->box = {.x_min = 30, .x_max = 70, .y_min = 30, .y_max = 70};
     this->character_index = 0;
     this->selected = false;
     this->text_signaled = false;

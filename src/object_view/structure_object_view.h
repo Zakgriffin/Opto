@@ -12,7 +12,7 @@ struct StructureObjectView : ObjectViewTemp {
     void (*do_layout)(StructureObjectView* view);
 
     StructureObjectView(void* object);
-    ~StructureObjectView() = default;
+    ~StructureObjectView();
 
     void accept_input(InputContext* ctx) override;
     void layout() override;

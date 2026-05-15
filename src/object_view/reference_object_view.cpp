@@ -4,7 +4,6 @@
 static constexpr int NUDGE = 5;
 
 ReferenceObjectView::ReferenceObjectView(void* obj) : ObjectViewTemp(obj) {
-    this->reference_text_box = EditableTextTemp();
     this->reference_text_box.color = REFERENCE_VIEW_COLOR;
 }
 
