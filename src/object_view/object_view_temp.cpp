@@ -1,5 +1,5 @@
-#include "object_view_temp.h"
 #include "editable_text_temp.h"
+#include "object_view_temp.h"
 #include "raylib.h"
 
 ObjectViewTemp *selected_object_view_temp = nullptr;

@@ -1,6 +1,5 @@
-#include "scatter_object_view.h"
-#include "structure_object_view.h"
 #include "add.h"
+#include "scatter_object_view.h"
 
 ScatterObjectView::ScatterObjectView(void* object) : ObjectViewTemp(object) {}
 

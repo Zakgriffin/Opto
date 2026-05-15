@@ -1,15 +1,10 @@
-#include "structure_object_view.h"
-#include "editable_text_temp.h"
-
-
 #include "add.h"
+
 #include "object.h"
-#include "globals.h"
-#include "object_view_temp.h"
 #include "raylib.h"
 #include "reference_object_view.h"
+#include "structure_object_view.h"
 #include <cstring>
-
 
 int ZZZZ_nudge = 5;
 
@@ -117,7 +112,6 @@ void StructureObjectView::accept_input(InputContext* ctx) {
     }
 }
 
-
 static void layout_at(StructureObjectView* s, int label_pos) {
     int total = (int)s->field_views.size() + 1;
     Box* last_box = nullptr;
@@ -166,7 +160,6 @@ ObjectViewTemp* StructureObjectView::wants_replace() {
             if(this->structure_text_box.text == builder.lookup_string) {
                 auto obj = builder.create_simple();
                 auto v = new StructureObjectView(obj);
-
 
                 // v->do_layout = builder.do_layout;
                 // for(auto field : builder.get_fields(obj)) {

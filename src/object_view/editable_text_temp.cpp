@@ -1,5 +1,4 @@
 #include "editable_text_temp.h"
-#include "globals.h"
 #include "raylib.h"
 
 static constexpr int PAD_X = 5;

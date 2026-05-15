@@ -1,5 +1,4 @@
 #include "reference_object_view.h"
-#include "object_view_temp.h"
 
 static constexpr int NUDGE = 5;
 

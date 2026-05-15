@@ -1,8 +1,8 @@
 #pragma once
 
+#include "editable_text_temp.h"
 #include "globals.h"
 #include "object_view_temp.h"
-#include "editable_text_temp.h"
 
 struct ReferenceObjectView : ObjectViewTemp {
     EditableTextTemp reference_text_box;

@@ -1,5 +1,5 @@
-#include "sync.h"
 #include "object_view.h"
+#include "sync.h"
 
 unordered_map<void*, int> reference_counts;
 

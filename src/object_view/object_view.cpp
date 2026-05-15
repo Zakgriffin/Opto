@@ -1,4 +1,3 @@
-#include "globals.h"
 #include "none.h"
 #include "object_view.h"
 
